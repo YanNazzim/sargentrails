@@ -18,9 +18,14 @@ const App = () => {
     lexan: ['Yes', 'No'],
     prefixes: [
       { code: '12', name: 'Fire Rated (No Dogging)' },
+      { code: '53', name: 'Latchbolt Monitoring Switch' },
       { code: '55', name: 'Request to Exit' },
       { code: '56', name: 'Elecrtic Latch Retraction' },
       { code: '56-HK', name: 'Elecrtic Latch Retraction W/ Hex-Key Dogging' },
+      { code: '58', name: 'Elecrtic Dogging' },
+      { code: '59', name: 'Electroguard® Delayed Egress' },
+      { code: 'BC-59', name: 'Electroguard® Boca Code Delayed Egress' },
+      { code: 'AL', name: 'Alarm' },
     ],
     sizes: ['E', 'F', 'J', 'G'],
     finishes: ['26D', '30B', '30C'],
@@ -55,7 +60,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1 className="Heading">Sargent Exit Device <br></br>Rail Part Number Lookup</h1>
+      <h1 className="Heading">Sargent <br></br>80 Series Exit Device <br></br>Rail Part Number Lookup</h1>
 
       <form onSubmit={handleSubmit} className="part-form">
         {/* Stile Type */}
@@ -108,7 +113,7 @@ const App = () => {
                     setFormData({ ...formData, prefixes: newPrefixes });
                   }}
                 />
-                {prefix.name} ({prefix.code})
+                ({prefix.code}){prefix.name} 
               </label>
             ))}
           </div>

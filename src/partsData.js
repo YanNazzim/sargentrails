@@ -1,6 +1,9 @@
 export const partsData = {
     wideRails: {
-      'Wide-No-12-E-26D': '68-2500',
+      'Wide-No-12-E-26D': '68-2702',
+      'Wide-No-12-F-26D': '68-2703',
+      'Wide-No-12-J-26D': '68-2705',
+      'Wide-No-12-G-26D': '68-2704',
       'Wide-No-55-E-26D': '68-5543',
       'Wide-No-55-56-E-26D': '68-5544',
       'Wide-Yes-12-F-30B': '68-2501',
