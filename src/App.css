@@ -149,6 +149,7 @@ button:focus {
   font-size: 2em;
   color: white;
   font-weight: 500;
+  user-select: none;
 }
 
 .toggle-switch input {
