@@ -313,7 +313,7 @@ export const partsData = {
     "Wide-No-12-FM-G": "68-5469",
 
     /* 
-    19- Wide Rails With no lexan pad
+    19- Wide Rails With no lexan pad 
     */
 
     // 12-19-59
