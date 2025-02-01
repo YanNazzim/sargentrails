@@ -3,16 +3,18 @@ import { partsData } from "../partsData";
 import "../App.css";
 
 const RailsForm = () => {
+  const [disabledPrefixes, setDisabledPrefixes] = useState([]);
   const [formData, setFormData] = useState({
     stile: "",
     lexan: "No",
     prefixes: [],
     size: "",
     finish: "",
-    handing: "", // New state for handing
+    handing: "",
   });
   const [partNumber, setPartNumber] = useState("");
-  const [showHandingDropdown, setShowHandingDropdown] = useState(false); // State to control handing dropdown visibility
+  const [note, setNote] = useState("");
+  const [showHandingDropdown, setShowHandingDropdown] = useState(false);
 
   const options = {
     stile: [
@@ -21,17 +23,20 @@ const RailsForm = () => {
     ],
     lexan: ["Yes", "No"],
     prefixes: [
-      { code: "12", name: "Fire Rated (No Dogging)" },
-      { code: "53", name: "Latchbolt Monitoring Switch" },
-      { code: "55", name: "Request to Exit" },
-      { code: "56", name: "Elecrtic Latch Retraction" },
-      { code: "56-HK", name: "Elecrtic Latch Retraction W/ Hex-Key Dogging" },
-      { code: "58", name: "Elecrtic Dogging" },
-      { code: "59", name: "Electroguard® Delayed Egress" },
-      { code: "BC-59", name: "Electroguard® Boca Code Delayed Egress" },
+      { code: "12", name: "Fire Rated (No Dogging)", conflicts: ["16", "56-HK"]},
+      { code: "16", name: "Keyed Cylinder Dogging", conflicts: ["12", "59", "AL"] },
+      { code: "53", name: "Latchbolt Monitoring Switch", conflicts: ["59"] },
+      { code: "55", name: "Request to Exit", conflicts: ["59"]  },
+      { code: "56", name: "Elecrtic Latch Retraction", conflicts: ["58","59", "AL"]  },
+      { code: "56-HK", name: "Elecrtic Latch Retraction W/ Hex-Key Dogging", conflicts: ["12","58","59", "AL"]  },
+      { code: "58", name: "Elecrtic Dogging" , conflicts: ["56","59"]  },
+      {
+        code: "59",
+        name: "Electroguard® Delayed Egress",
+        conflicts: ["16", "53", "55", "56", "58", "AL", "59"],
+      },
       { code: "AL", name: "Alarm" },
       { code: "PL", name: "Photo-Luminescent (Non Electrified)" },
-      { code: "FM", name: "For FEMA Rated Hardware" },
     ],
     sizes: [
       { code: "E", display: 'E - For openings 24" to 32"' },
@@ -57,57 +62,98 @@ const RailsForm = () => {
       "BSP",
       "WSP",
     ],
-    handing: ["Left Hand", "Right Hand"], // Options for handing
+    handing: ["Left Hand", "Right Hand"],
   };
 
-  // Handle prefix selection
   const handlePrefixChange = (e) => {
     const prefixCode = e.target.value;
     const isChecked = e.target.checked;
+
+    // Get the selected prefix object
+    const selectedPrefix = options.prefixes.find((p) => p.code === prefixCode);
 
     // Update prefixes array
     const newPrefixes = isChecked
       ? [...formData.prefixes, prefixCode]
       : formData.prefixes.filter((p) => p !== prefixCode);
 
-    // Show/hide handing dropdown based on PL selection
+    // Handle conflicts
+    let newDisabledPrefixes = [...disabledPrefixes];
+
+    if (selectedPrefix?.conflicts) {
+      // Disable conflicting prefixes if the current prefix is selected
+      if (isChecked) {
+        newDisabledPrefixes = [
+          ...newDisabledPrefixes,
+          ...selectedPrefix.conflicts,
+        ];
+      } else {
+        newDisabledPrefixes = newDisabledPrefixes.filter(
+          (code) => !selectedPrefix.conflicts.includes(code)
+        );
+      }
+    } else if (prefixCode === "59") {
+      // Disable conflicting prefixes if "59" is selected
+      const conflictingPrefix = options.prefixes.find((p) => p.code === "59");
+      if (conflictingPrefix?.conflicts) {
+        if (isChecked) {
+          newDisabledPrefixes = [
+            ...newDisabledPrefixes,
+            ...conflictingPrefix.conflicts,
+          ];
+        } else {
+          newDisabledPrefixes = newDisabledPrefixes.filter(
+            (code) => !conflictingPrefix.conflicts.includes(code)
+          );
+        }
+      }
+    }
+
+    // Update disabled prefixes state
+    setDisabledPrefixes(newDisabledPrefixes);
+
+    // Update form data
+    setFormData({ ...formData, prefixes: newPrefixes });
+
+    // Handle PL prefix and handing dropdown
     if (prefixCode === "PL") {
       setShowHandingDropdown(isChecked);
       if (!isChecked) {
-        setFormData({ ...formData, prefixes: newPrefixes, handing: "" }); // Reset handing if PL is deselected
-      } else {
-        setFormData({ ...formData, prefixes: newPrefixes });
+        setFormData({ ...formData, prefixes: newPrefixes, handing: "" });
       }
-    } else {
-      setFormData({ ...formData, prefixes: newPrefixes });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Generate the key for lookup
     const prefixKey = formData.prefixes.sort().join("-");
     let key = `${formData.stile}-${formData.lexan}-${prefixKey}-${formData.size}`;
 
-    // Include handing in the key if PL is selected
     if (formData.prefixes.includes("PL") && formData.handing) {
       const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
       key += `-${handingCode}`;
     }
 
-    // Look up the part number
     const partNumbers =
       formData.stile === "Wide" ? partsData.wideRails : partsData.narrowRails;
-    const basePartNumber = partNumbers[key] || "Not Found";
+    const partNumberEntry = partNumbers[key] || "Not Found";
 
-    // Append the finish to the part number
+    const [basePartNumber, note] = partNumberEntry.split(" - ");
+
+    if (basePartNumber === "Not Available") {
+      setPartNumber("Not Available");
+      setNote("This size is not available. Please try the next size up.");
+      return;
+    }
+
     const generatedNumber =
       basePartNumber !== "Not Found"
         ? `${basePartNumber}-${formData.finish}`
         : "Not Found";
 
     setPartNumber(generatedNumber);
+    setNote(note || "");
   };
 
   const handleReset = () => {
@@ -120,7 +166,11 @@ const RailsForm = () => {
       handing: "",
     });
     setPartNumber("");
+    setNote("");
     setShowHandingDropdown(false);
+
+    // Reset disabled prefixes
+    setDisabledPrefixes([]);
   };
 
   return (
@@ -180,6 +230,7 @@ const RailsForm = () => {
                   value={prefix.code}
                   checked={formData.prefixes.includes(prefix.code)}
                   onChange={handlePrefixChange}
+                  disabled={disabledPrefixes.includes(prefix.code)} // Disable if in disabledPrefixes
                 />
                 ({prefix.code}) -- {prefix.name}
               </label>
@@ -259,7 +310,15 @@ const RailsForm = () => {
       {partNumber && (
         <div className="result-container">
           <h2>Found Part Number:</h2>
-          <div className="part-number">{partNumber}</div>
+          <div className="part-number">
+            {partNumber}
+            {note && <span className="note"> ({note})</span>}
+          </div>
+          {partNumber === "Not Available" && (
+            <div className="note">
+              This size is not available. Please try the next size up.
+            </div>
+          )}
         </div>
       )}
     </div>

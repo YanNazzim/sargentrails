@@ -215,3 +215,17 @@ button:focus {
 .Tooltip {
   text-align: center;
 }
+
+/* Note styling */
+.note {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+/* Special note for "Not Available" */
+.result-container .note {
+  margin-top: 10px;
+  color: #d9534f; /* Red color for emphasis */
+}
