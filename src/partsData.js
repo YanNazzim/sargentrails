@@ -1,5 +1,7 @@
 export const partsData = {
   wideRails: {
+    // Stile-Remove Lexan?-Prefixes-Size
+
     // No Prefixes (Standard Rail)
     "Wide-No--E": "68-2694",
     "Wide-No--F": "68-2695",
@@ -11,6 +13,22 @@ export const partsData = {
     "Wide-No-12-F": "68-2703",
     "Wide-No-12-J": "68-2705",
     "Wide-No-12-G": "68-2704",
+
+    // 12-5CH
+    "Wide-No-12-5CH-E": "68-7524",
+    "Wide-No-12-5CH-F": "68-7525",
+    "Wide-No-12-5CH-J": "68-7527",
+    "Wide-No-12-5CH-G": "68-7526",
+
+    // 12-56-5CH
+    "Wide-No-12-56-5CH-E": "Not Available",
+    "Wide-No-12-56-5CH-F": "68-8326",
+    "Wide-No-12-56-5CH-J": "68-8325",
+    "Wide-No-12-56-5CH-G": "68-8227",
+    "Wide-No-56-5CH-E": "Not Available",
+    "Wide-No-56-5CH-F": "68-8326",
+    "Wide-No-56-5CH-J": "68-8325",
+    "Wide-No-56-5CH-G": "68-8227",
 
     // 12-53-
     "Wide-No-12-53-E": "68-4595",
@@ -54,23 +72,11 @@ export const partsData = {
     "Wide-No-12-55-J": "68-2800",
     "Wide-No-12-55-G": "68-2799",
 
-    // 12-55-57
-    "Wide-No-12-55-57-E": "68-6213",
-    "Wide-No-12-55-57-F": "68-4942",
-    "Wide-No-12-55-57-J": "68-4944",
-    "Wide-No-12-55-57-G": "68-4943",
-
     // 12-55-AL
     "Wide-No-12-55-AL-E": "Not Available",
     "Wide-No-12-55-AL-F": '68-4980 - Only for 36" Door',
     "Wide-No-12-55-AL-J": "68-4944",
     "Wide-No-12-55-AL-G": "68-4943",
-
-    // 12-57
-    "Wide-No-12-57-E": '68-6177 - Only for 32" Door',
-    "Wide-No-12-57-F": "68-2823",
-    "Wide-No-12-57-J": "68-2826",
-    "Wide-No-12-57-G": "68-2825",
 
     // 12-58
     "Wide-No-12-58-E": "68-3044",
@@ -95,6 +101,12 @@ export const partsData = {
     "Wide-No-16-F": "68-2699",
     "Wide-No-16-J": "68-2701",
     "Wide-No-16-G": "68-2700",
+
+    // 16-5CH
+    "Wide-No-16-5CH-E": "68-7528",
+    "Wide-No-16-5CH-F": "68-7529",
+    "Wide-No-16-5CH-J": "68-7531",
+    "Wide-No-16-5CH-G": "68-7530",
 
     // 16-53
     "Wide-No-16-53-E": "68-4599",
@@ -239,6 +251,10 @@ export const partsData = {
     "Wide-No-56-F": "68-3212",
     "Wide-No-56-J": "68-3213",
     "Wide-No-56-G": "68-3211",
+    "Wide-No-12-56-E": "68-5542",
+    "Wide-No-12-56-F": "68-3212",
+    "Wide-No-12-56-J": "68-3213",
+    "Wide-No-12-56-G": "68-3211",
 
     // 58- only
     "Wide-No-58-E": "68-3036",
@@ -329,11 +345,552 @@ export const partsData = {
     "Wide-Yes-59-G": "68-3799",
   },
   narrowRails: {
-    "Narrow-No-12-E": "68-2600",
-    "Narrow-No-55-E": "68-5579",
-    "Narrow-No-55-56-E": "68-5580",
-    "Narrow-Yes-12-F": "68-2601",
-    "Narrow-Yes-55-F": "68-5577",
-    "Narrow-Yes-55-56-F": "68-5578",
+    // Standard Rails
+    "Narrow-No--E": "68-2716",
+    "Narrow-No--F": "68-2717",
+    "Narrow-No--J": "68-2719",
+    "Narrow-No--G": "68-2718",
+
+    // 12- Only
+    "Narrow-No-12-E": "68-2724",
+    "Narrow-No-12-F": "68-2725",
+    "Narrow-No-12-J": "68-2727",
+    "Narrow-No-12-G": "68-2726",
+
+    // 12-5CH
+    "Narrow-No-12-5CH-E": "68-8021",
+    "Narrow-No-12-5CH-F": "68-8117",
+    "Narrow-No-12-5CH-J": "68-8309",
+    "Narrow-No-12-5CH-G": "68-8213",
+
+    // 12-56-5CH
+    "Narrow-No-12-56-5CH-E": "Not Available",
+    "Narrow-No-12-56-5CH-F": "68-8329",
+    "Narrow-No-12-56-5CH-J": "68-8328",
+    "Narrow-No-12-56-5CH-G": "68-8230",
+    "Narrow-No-56-5CH-E": "Not Available",
+    "Narrow-No-56-5CH-F": "68-8329",
+    "Narrow-No-56-5CH-J": "68-8328",
+    "Narrow-No-56-5CH-G": "68-8230",
+
+    // 12-53
+    "Narrow-No-12-53-E": "68-4607",
+    "Narrow-No-12-53-F": "68-4608",
+    "Narrow-No-12-53-J": "68-4609",
+    "Narrow-No-12-53-G": "68-4610",
+
+    // 12-53-55
+    "Narrow-No-12-53-55-E": "68-4635",
+    "Narrow-No-12-53-55-F": "68-4636",
+    "Narrow-No-12-53-55-J": "68-4637",
+    "Narrow-No-12-53-55-G": "68-4638",
+
+    // 12-53-55-58
+    "Narrow-No-12-53-55-58-E": "68-4683",
+    "Narrow-No-12-53-55-58-F": "68-4684",
+    "Narrow-No-12-53-55-58-J": "68-4685",
+    "Narrow-No-12-53-55-58-G": "68-4686",
+
+    // 12-53-55-AL
+    "Narrow-No-12-53-55-AL-E": "68-4936",
+    "Narrow-No-12-53-55-AL-F": "68-4933",
+    "Narrow-No-12-53-55-AL-J": "68-4934",
+    "Narrow-No-12-53-55-AL-G": "68-4935",
+
+    // 12-53-58
+    "Narrow-No-12-53-58-E": "68-4659",
+    "Narrow-No-12-53-58-F": "68-4660",
+    "Narrow-No-12-53-58-J": "68-4661",
+    "Narrow-No-12-53-58-G": "68-4662",
+
+    // 12-53-AL
+    "Narrow-No-12-53-AL-E": "68-4730",
+    "Narrow-No-12-53-AL-F": "68-4727",
+    "Narrow-No-12-53-AL-J": "68-4728",
+    "Narrow-No-12-53-AL-G": "68-4729",
+
+    // 12-55
+    "Narrow-No-12-55-E": "68-2809",
+    "Narrow-No-12-55-F": "68-2810",
+    "Narrow-No-12-55-J": "68-2812",
+    "Narrow-No-12-55-G": "68-2811",
+
+    // 12-55-58
+    "Narrow-No-12-55-58-E": "68-3081",
+    "Narrow-No-12-55-58-F": "68-3082",
+    "Narrow-No-12-55-58-J": "68-3084",
+    "Narrow-No-12-55-58-G": "68-3083",
+
+    // 12-55-AL
+    "Narrow-No-12-55-AL-E": "68-4990",
+    "Narrow-No-12-55-AL-F": "68-4987",
+    "Narrow-No-12-55-AL-J": "68-4988",
+    "Narrow-No-12-55-AL-G": "68-4989",
+
+    // 12-58
+    "Narrow-No-12-58-E": "68-3056",
+    "Narrow-No-12-58-F": "68-3057",
+    "Narrow-No-12-58-J": "68-3059",
+    "Narrow-No-12-58-G": "68-3058",
+
+    // 12-59
+    "Narrow-No-12-59-E": "68-6101",
+    "Narrow-No-12-59-F": "68-3792",
+    "Narrow-No-12-59-J": "68-3793",
+    "Narrow-No-12-59-G": "68-3794",
+
+    // 12-AL
+    "Narrow-No-12-AL-E": "68-4033",
+    "Narrow-No-12-AL-F": "68-4030",
+    "Narrow-No-12-AL-J": "68-4031",
+    "Narrow-No-12-AL-G": "68-4032",
+
+    // 16 Only
+    "Narrow-No-16-E": "68-2720",
+    "Narrow-No-16-F": "68-2721",
+    "Narrow-No-16-J": "68-2723",
+    "Narrow-No-16-G": "68-2722",
+
+    // 16-5CH
+    "Narrow-No-16-5CH-E": "68-8007",
+    "Narrow-No-16-5CH-F": "68-8103",
+    "Narrow-No-16-5CH-J": "68-8295",
+    "Narrow-No-16-5CH-G": "68-8199",
+
+    // 16-53
+    "Narrow-No-16-53-E": "68-4611",
+    "Narrow-No-16-53-F": "68-4612",
+    "Narrow-No-16-53-J": "68-4613",
+    "Narrow-No-16-53-G": "68-4614",
+
+    // 16-53-55
+    "Narrow-No-16-53-55-E": "68-4631",
+    "Narrow-No-16-53-55-F": "68-4632",
+    "Narrow-No-16-53-55-J": "68-4633",
+    "Narrow-No-16-53-55-G": "68-4634",
+
+    // 16-53-55-56
+    "Narrow-No-16-53-55-56-E": "68-5630",
+    "Narrow-No-16-53-55-56-F": "68-5631",
+    "Narrow-No-16-53-55-56-J": "68-5632",
+    "Narrow-No-16-53-55-56-G": "68-5633",
+
+    // 16-53-55-58
+    "Narrow-No-16-53-55-58-E": "68-4679",
+    "Narrow-No-16-53-55-58-F": "68-4680",
+    "Narrow-No-16-53-55-58-J": "68-4681",
+    "Narrow-No-16-53-55-58-G": "68-4682",
+
+    // 16-53-56
+    "Narrow-No-16-53-56-E": "68-5626",
+    "Narrow-No-16-53-56-F": "68-5627",
+    "Narrow-No-16-53-56-J": "68-5628",
+    "Narrow-No-16-53-56-G": "68-5629",
+
+    // 16-53-58
+    "Narrow-No-16-53-58-E": "68-4655",
+    "Narrow-No-16-53-58-F": "68-4656",
+    "Narrow-No-16-53-58-J": "68-4657",
+    "Narrow-No-16-53-58-G": "68-4658",
+
+    // 16-55
+    "Narrow-No-16-55-E": "68-2805",
+    "Narrow-No-16-55-F": "68-2806",
+    "Narrow-No-16-55-J": "68-2808",
+    "Narrow-No-16-55-G": "68-2807",
+
+    // 16-55-56
+    "Narrow-No-16-55-56-E": "68-5622",
+    "Narrow-No-16-55-56-F": "68-5623",
+    "Narrow-No-16-55-56-J": "68-5624",
+    "Narrow-No-16-55-56-G": "68-5625",
+
+    // 16-55-58
+    "Narrow-No-16-55-58-E": "68-3077",
+    "Narrow-No-16-55-58-F": "68-3078",
+    "Narrow-No-16-55-58-J": "68-3080",
+    "Narrow-No-16-55-58-G": "68-3079",
+
+    // 16-56
+    "Narrow-No-16-56-E": "68-5618",
+    "Narrow-No-16-56-F": "68-5619",
+    "Narrow-No-16-56-J": "68-5620",
+    "Narrow-No-16-56-G": "68-5621",
+
+    // 16-58
+    "Narrow-No-16-58-E": "68-3052",
+    "Narrow-No-16-58-F": "68-3053",
+    "Narrow-No-16-58-J": "68-3055",
+    "Narrow-No-16-58-G": "68-3054",
+
+    // 53- Only
+    "Narrow-No-53-E": "68-4603",
+    "Narrow-No-53-F": "68-4604",
+    "Narrow-No-53-J": "68-4605",
+    "Narrow-No-53-G": "68-4606",
+
+    // 53-55
+    "Narrow-No-53-55-E": "68-4627",
+    "Narrow-No-53-55-F": "68-4628",
+    "Narrow-No-53-55-J": "68-4629",
+    "Narrow-No-53-55-G": "68-4630",
+
+    // 53-55-56
+    "Narrow-No-53-55-56-E": "68-5581",
+    "Narrow-No-53-55-56-F": "68-4696",
+    "Narrow-No-53-55-56-J": "68-4697",
+    "Narrow-No-53-55-56-G": "68-4698",
+
+    // 53-55-58
+    "Narrow-No-53-55-58-E": "68-4675",
+    "Narrow-No-53-55-58-F": "68-4676",
+    "Narrow-No-53-55-58-J": "68-4677",
+    "Narrow-No-53-55-58-G": "68-4678",
+
+    // 53-55-AL
+    "Narrow-No-53-55-AL-E": '68-4932 - Only for 32" Door',
+    "Narrow-No-53-55-AL-F": '68-4929 - Only for 36" Door',
+    "Narrow-No-53-55-AL-J": "68-4930",
+    "Narrow-No-53-55-AL-G": "68-4931",
+
+    // 55- Only
+    "Narrow-No-55-E": "68-2801",
+    "Narrow-No-55-F": "68-2802",
+    "Narrow-No-55-J": "68-2804",
+    "Narrow-No-55-G": "68-2803",
+
+    // 55-56
+    "Narrow-No-55-56-E": "68-5579",
+    "Narrow-No-55-56-F": "68-3304",
+    "Narrow-No-55-56-J": "68-3305",
+    "Narrow-No-55-56-G": "68-3303",
+
+    // 55-58
+    "Narrow-No-55-58-E": "68-3073",
+    "Narrow-No-55-58-F": "68-3074",
+    "Narrow-No-55-58-J": "68-3076",
+    "Narrow-No-55-58-G": "68-3075",
+
+    // 55-AL
+    "Narrow-No-55-AL-E": "68-4986",
+    "Narrow-No-55-AL-F": "68-4983",
+    "Narrow-No-55-AL-J": "68-4984",
+    "Narrow-No-55-AL-G": "68-4985",
+
+    // 56- Only
+    "Narrow-No-56-E": "68-5578",
+    "Narrow-No-56-F": "68-3217",
+    "Narrow-No-56-J": "68-3218",
+    "Narrow-No-56-G": "68-3216",
+
+    // 58- Only
+    "Narrow-No-58-E": "68-3048",
+    "Narrow-No-58-F": "68-3049",
+    "Narrow-No-58-J": "68-3051",
+    "Narrow-No-58-G": "68-3050",
+
+    // 59- Only
+    "Narrow-No-59-E": '68-6100 - Only for 32" Door',
+    "Narrow-No-59-F": '68-3788 - Only for 36" Door',
+    "Narrow-No-59-J": "68-3789",
+    "Narrow-No-59-G": "68-3790",
+
+    // AL- Only
+    "Narrow-No-AL-E": '68-4025 - Only for 32" Door',
+    "Narrow-No-AL-F": "68-4022",
+    "Narrow-No-AL-J": "68-4023",
+    "Narrow-No-AL-G": "68-4024",
+
+    // 56-HK
+    "Narrow-No-56-HK-E": "68-5586",
+    "Narrow-No-56-HK-F": "68-5587",
+    "Narrow-No-56-HK-J": "68-5588",
+    "Narrow-No-56-HK-G": "68-5589",
+
+    // 55-56-HK
+    "Narrow-No-55-56-HK-E": "68-5590",
+    "Narrow-No-55-56-HK-F": "68-5591",
+    "Narrow-No-55-56-HK-J": "68-5592",
+    "Narrow-No-55-56-HK-G": "68-5593",
+
+    // 53-56-HK
+    "Narrow-No-53-56-HK-E": "68-5598",
+    "Narrow-No-53-56-HK-F": "68-5599",
+    "Narrow-No-53-56-HK-J": "68-5600",
+    "Narrow-No-53-56-HK-G": "68-5601",
+
+    /* 
+    Narrow 19- Rails
+    */
+
+    // 19- Only
+    "Narrow-Yes-E": "68-2905",
+    "Narrow-Yes-F": "68-2906",
+    "Narrow-Yes-J": "68-2908",
+    "Narrow-Yes-G": "68-2907",
+
+    // 19-53
+    "Narrow-Yes-53-E": "68-4743",
+    "Narrow-Yes-53-F": "68-4744",
+    "Narrow-Yes-53-J": "68-4745",
+    "Narrow-Yes-53-G": "68-4746",
+
+    // 19-53-56
+    "Narrow-Yes-53-56-E": "68-5584",
+    "Narrow-Yes-53-56-F": "68-4829",
+    "Narrow-Yes-53-56-J": "68-4830",
+    "Narrow-Yes-53-56-G": "68-4831",
+
+    // 19-53-58
+    "Narrow-Yes-53-58-E": "68-4790",
+    "Narrow-Yes-53-58-F": "68-4791",
+    "Narrow-Yes-53-58-J": "68-4792",
+    "Narrow-Yes-53-58-G": "68-4793",
+
+    // 19-53-AL
+    "Narrow-Yes-53-AL-E": '68-4852 - Only for 32" Door',
+    "Narrow-Yes-53-AL-F": "68-4849",
+    "Narrow-Yes-53-AL-J": "68-4850",
+    "Narrow-Yes-53-AL-G": "68-4851",
+
+    // 19-55
+    "Narrow-Yes-55-E": "68-2943",
+    "Narrow-Yes-55-F": "68-2944",
+    "Narrow-Yes-55-J": "68-2946",
+    "Narrow-Yes-55-G": "68-2945",
+
+    // 19-55-56
+    "Narrow-Yes-55-56-E": "68-5583",
+    "Narrow-Yes-55-56-F": "68-3315",
+    "Narrow-Yes-55-56-J": "68-3316",
+    "Narrow-Yes-55-56-G": "68-3314",
+
+    // 19-55-58
+    "Narrow-Yes-55-58-E": "68-3123",
+    "Narrow-Yes-55-58-F": "68-3124",
+    "Narrow-Yes-55-58-J": "68-3126",
+    "Narrow-Yes-55-58-G": "68-3125",
+
+    // 19-55-AL
+    "Narrow-Yes-55-AL-E": "68-5002",
+    "Narrow-Yes-55-AL-F": "68-4999",
+    "Narrow-Yes-55-AL-J": "68-5000",
+    "Narrow-Yes-55-AL-G": "68-5001",
+
+    // 19-53-55
+    "Narrow-Yes-53-55-E": "68-7123",
+    "Narrow-Yes-53-55-F": "68-7124",
+    "Narrow-Yes-53-55-J": "68-7125",
+    "Narrow-Yes-53-55-G": "68-7126",
+
+    // 19-53-56-HK
+    "Narrow-Yes-53-56-HK-E": "68-5610",
+    "Narrow-Yes-53-56-HK-F": "68-5611",
+    "Narrow-Yes-53-56-HK-J": "68-5612",
+    "Narrow-Yes-53-56-HK-G": "68-5613",
+
+    // 19-53-55-56-HK
+    "Narrow-Yes-53-55-56-HK-E": "68-5614",
+    "Narrow-Yes-53-55-56-HK-F": "68-5615",
+    "Narrow-Yes-53-55-56-HK-J": "68-5616",
+    "Narrow-Yes-53-55-56-HK-G": "68-5617",
+
+    // 19-55-56-HK
+    "Narrow-Yes-55-56-HK-E": "68-5606",
+    "Narrow-Yes-55-56-HK-F": "68-5607",
+    "Narrow-Yes-55-56-HK-J": "68-5608",
+    "Narrow-Yes-55-56-HK-G": "68-5609",
+
+    // 19-56
+    "Narrow-Yes-56-E": "68-5582",
+    "Narrow-Yes-56-F": "68-3230",
+    "Narrow-Yes-56-J": "68-3231",
+    "Narrow-Yes-56-G": "68-3229",
+
+    // 19-56-HK
+    "Narrow-Yes-56-HK-E": "68-5602",
+    "Narrow-Yes-56-HK-F": "68-5603",
+    "Narrow-Yes-56-HK-J": "68-5604",
+    "Narrow-Yes-56-HK-G": "68-5605",
+
+    // 19-59
+    "Narrow-Yes-59-E": "68-6113",
+    "Narrow-Yes-59-F": "68-3805",
+    "Narrow-Yes-59-J": "68-3806",
+    "Narrow-Yes-59-G": "68-3807",
+
+    // 19-AL
+    "Narrow-Yes-AL-E": "68-4050",
+    "Narrow-Yes-AL-F": "68-4047",
+    "Narrow-Yes-AL-J": "68-4048",
+    "Narrow-Yes-AL-G": "68-4049",
+
+    // 19-53-55-56
+    "Narrow-Yes-53-55-56-E": "68-5585",
+    "Narrow-Yes-53-55-56-F": "68-4956",
+    "Narrow-Yes-53-55-56-J": "68-4957",
+    "Narrow-Yes-53-55-56-G": "68-4958",
+
+        // 19-53-55-58
+        "Narrow-Yes-53-55-58-E": "68-7147",
+        "Narrow-Yes-53-55-58-F": "68-7148",
+        "Narrow-Yes-53-55-58-J": "68-7149",
+        "Narrow-Yes-53-55-58-G": "68-7150",
+
+                // 19-53-55-AL
+                "Narrow-Yes-53-55-AL-E": "68-7168",
+                "Narrow-Yes-53-55-AL-F": "68-7165",
+                "Narrow-Yes-53-55-AL-J": "68-7166",
+                "Narrow-Yes-53-55-AL-G": "68-7167",
+
+                // 16-19-53-55-58
+                "Narrow-Yes-16-53-55-58-E": "68-7151",
+                "Narrow-Yes-16-53-55-58-F": "68-7152",
+                "Narrow-Yes-16-53-55-58-J": "68-7153",
+                "Narrow-Yes-16-53-55-58-G": "68-7154",
+
+    // 12-19
+    "Narrow-Yes-12-E": "68-2913",
+    "Narrow-Yes-12-F": "68-2914",
+    "Narrow-Yes-12-J": "68-2916",
+    "Narrow-Yes-12-G": "68-2915",
+
+    // 12-19-53
+    "Narrow-Yes-12-53-E": "68-4747",
+    "Narrow-Yes-12-53-F": "68-4748",
+    "Narrow-Yes-12-53-J": "68-4749",
+    "Narrow-Yes-12-53-G": "68-4750",
+
+            // 12-19-53-55
+            "Narrow-Yes-12-53-55-E": "68-7131",
+            "Narrow-Yes-12-53-55-F": "68-7132",
+            "Narrow-Yes-12-53-55-J": "68-7133",
+            "Narrow-Yes-12-53-55-G": "68-7134",
+
+    // 12-19-53-58
+    "Narrow-Yes-12-53-58-E": "68-4798",
+    "Narrow-Yes-12-53-58-F": "68-4799",
+    "Narrow-Yes-12-53-58-J": "68-4800",
+    "Narrow-Yes-12-53-58-G": "68-4801",
+
+        // 12-19-53-55-58
+        "Narrow-Yes-12-53-55-58-E": "68-7155",
+        "Narrow-Yes-12-53-55-58-F": "68-7156",
+        "Narrow-Yes-12-53-55-58-J": "68-7157",
+        "Narrow-Yes-12-53-55-58-G": "68-7158",
+
+                // 12-19-53-55-AL
+                "Narrow-Yes-12-53-55-AL-E": "68-7172",
+                "Narrow-Yes-12-53-55-AL-F": "68-7169",
+                "Narrow-Yes-12-53-55-AL-J": "68-7170",
+                "Narrow-Yes-12-53-55-AL-G": "68-7",
+
+    // 12-19-53-AL
+    "Narrow-Yes-12-53-AL-E": '68-4856 - Only for 32" Door',
+    "Narrow-Yes-12-53-AL-F": '68-4853 - Only for 36" Door',
+    "Narrow-Yes-12-53-AL-J": "68-4854",
+    "Narrow-Yes-12-53-AL-G": "68-4855",
+
+    // 12-19-55
+    "Narrow-Yes-12-55-E": "68-2951",
+    "Narrow-Yes-12-55-F": "68-2952",
+    "Narrow-Yes-12-55-J": "68-2954",
+    "Narrow-Yes-12-55-G": "68-2953",
+
+    // 12-19-55-58
+    "Narrow-Yes-12-55-58-E": "68-3131",
+    "Narrow-Yes-12-55-58-F": "68-3132",
+    "Narrow-Yes-12-55-58-J": "68-3134",
+    "Narrow-Yes-12-55-58-G": "68-3133",
+
+    // 12-19-55-AL
+    "Narrow-Yes-12-55-AL-E": "68-5006",
+    "Narrow-Yes-12-55-AL-F": "68-5003",
+    "Narrow-Yes-12-55-AL-J": "68-5004",
+    "Narrow-Yes-12-55-AL-G": "68-5005",
+
+    // 12-19-58
+    "Narrow-Yes-12-58-E": "68-3106",
+    "Narrow-Yes-12-58-F": "68-3107",
+    "Narrow-Yes-12-58-J": "68-3109",
+    "Narrow-Yes-12-58-G": "68-3108",
+
+    // 12-19-59
+    "Narrow-Yes-12-59-E": "68-6114",
+    "Narrow-Yes-12-59-F": "68-3809",
+    "Narrow-Yes-12-59-J": "68-3810",
+    "Narrow-Yes-12-59-G": "68-3811",
+
+    // 12-19-AL
+    "Narrow-Yes-12-AL-E": "68-4058",
+    "Narrow-Yes-12-AL-F": "68-4055",
+    "Narrow-Yes-12-AL-J": "68-4056",
+    "Narrow-Yes-12-AL-G": "68-4057",
+
+    // 16-19
+    "Narrow-Yes-16-E": "68-2909",
+    "Narrow-Yes-16-F": "68-2910",
+    "Narrow-Yes-16-J": "68-2912",
+    "Narrow-Yes-16-G": "68-2911",
+
+    // 16-19-53
+    "Narrow-Yes-16-53-E": "68-4751",
+    "Narrow-Yes-16-53-F": "68-4752",
+    "Narrow-Yes-16-53-J": "68-4753",
+    "Narrow-Yes-16-53-G": "68-4754",
+
+    // 16-19-53-55-56
+    "Narrow-Yes-16-53-55-56-E": "68-5646",
+    "Narrow-Yes-16-53-55-56-F": "68-5647",
+    "Narrow-Yes-16-53-55-56-J": "68-5648",
+    "Narrow-Yes-16-53-55-56-G": "68-5649",
+
+        // 16-19-53-55
+        "Narrow-Yes-16-53-55-E": "68-7127",
+        "Narrow-Yes-16-53-55-F": "68-7128",
+        "Narrow-Yes-16-53-55-J": "68-7129",
+        "Narrow-Yes-16-53-55-G": "68-7130",
+
+    // 16-19-53-56
+    "Narrow-Yes-16-53-56-E": "68-5642",
+    "Narrow-Yes-16-53-56-F": "68-5643",
+    "Narrow-Yes-16-53-56-J": "68-5644",
+    "Narrow-Yes-16-53-56-G": "68-5645",
+
+    // 16-19-53-58
+    "Narrow-Yes-16-53-58-E": "68-4794",
+    "Narrow-Yes-16-53-58-F": "68-4795",
+    "Narrow-Yes-16-53-58-J": "68-4796",
+    "Narrow-Yes-16-53-58-G": "68-4797",
+
+    // 16-19-55-56
+    "Narrow-Yes-16-55-56-E": "68-5638",
+    "Narrow-Yes-16-55-56-F": "68-5639",
+    "Narrow-Yes-16-55-56-J": "68-5640",
+    "Narrow-Yes-16-55-56-G": "68-5641",
+
+    // 16-19-55
+    "Narrow-Yes-16-55-E": "68-2947",
+    "Narrow-Yes-16-55-F": "68-2948",
+    "Narrow-Yes-16-55-J": "68-2950",
+    "Narrow-Yes-16-55-G": "68-2949",
+
+    // 16-19-55-58
+    "Narrow-Yes-16-55-58-E": "68-3127",
+    "Narrow-Yes-16-55-58-F": "68-3128",
+    "Narrow-Yes-16-55-58-J": "68-3130",
+    "Narrow-Yes-16-55-58-G": "68-3129",
+
+    // 16-19-56
+    "Narrow-Yes-16-56-E": "68-5634",
+    "Narrow-Yes-16-56-F": "68-5635",
+    "Narrow-Yes-16-56-J": "68-5636",
+    "Narrow-Yes-16-56-G": "68-5637",
+
+    // 16-19-58
+    "Narrow-Yes-16-58-E": "68-3102",
+    "Narrow-Yes-16-58-F": "68-3103",
+    "Narrow-Yes-16-58-J": "68-3105",
+    "Narrow-Yes-16-58-G": "68-3104",
   },
 };
