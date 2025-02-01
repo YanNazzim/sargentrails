@@ -1,29 +1,40 @@
 /* General Styles */
+body {
+  background-color: #f8f9fa; /* Slightly darker background for better contrast */
+  color: #222; /* Darker text for readability */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* App Container */
 .app-container {
-  max-width: 800px;
+  max-width: 850px;
   margin: 2rem auto;
   padding: 2rem;
-  font-family: 'Arial', sans-serif;
   background-color: #ffffff;
-  color: #222222;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Heading */
 .Heading {
-  margin-top: -40px;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
+  color: #004a99; /* Sargent blue, slightly darker */
   font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
-/* Form Container */
+/* Form Styles */
 .part-form {
-  background: #f8f9fa; /* Lighter background for better contrast */
+  background-color: #ffffff;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Form Labels */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -31,201 +42,250 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #222222;
+  font-weight: 700;
+  color: #222;
   font-size: 1.1rem;
 }
 
 /* Input Fields */
-select, input[type="text"], input[type="email"] {
+select,
+input[type="checkbox"] {
   width: 100%;
   padding: 0.9rem;
-  border: 2px solid #666;
+  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
-  background-color: #ffffff;
-  color: #222222;
+  background-color: #fff;
+  color: #222;
+  transition: border-color 0.2s ease-in-out;
 }
 
-select:focus, input:focus {
-  outline: 3px solid #ffbf47;
-  outline-offset: 2px;
+select:focus,
+input[type="checkbox"]:focus {
+  outline: 3px solid #ffbf47; /* High-contrast focus indicator */
+  outline-offset: 3px;
+  border-color: #ffbf47;
 }
 
-/* Checkbox & Radio Buttons */
+/* Checkbox Group */
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .checkbox-group label {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  font-weight: normal;
-  font-size: 1.1rem;
-  cursor: pointer;
+  gap: 0.6rem;
+  font-size: 1rem;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+.checkbox-group input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  cursor: pointer;
-}
-
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
-  outline: 2px solid #ffbf47;
 }
 
 /* Buttons */
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
   margin-top: 2rem;
 }
 
 button {
-  padding: 1rem 1.8rem;
-  border: 2px solid transparent;
-  border-radius: 6px;
+  padding: 0.9rem 1.7rem;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 1.1rem;
-  font-weight: bold;
-  transition: all 0.3s;
-  text-transform: uppercase;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .generate-button {
-  background-color: #0056b3;
+  background-color: #007bff;
   color: white;
+  font-weight: bold;
 }
 
-.generate-button:hover {
-  background-color: #003d82;
+.generate-button:hover,
+.generate-button:focus {
+  background-color: #0056b3;
 }
 
 .reset-button {
   background-color: #6c757d;
   color: white;
+  font-weight: bold;
 }
 
-.reset-button:hover {
-  background-color: #545b62;
+.reset-button:hover,
+.reset-button:focus {
+  background-color: #5a6268;
 }
 
-button:focus {
-  outline: 3px solid #ffbf47;
-  outline-offset: 2px;
-}
-
-/* Results Section */
+/* Result Container */
 .result-container {
   margin-top: 2rem;
-  padding: 1.5rem;
-  background: #d4edda;
+  padding: 1.8rem;
+  background-color: #e9f5ff;
   border-radius: 6px;
-  border-left: 6px solid #155724;
 }
 
 .part-number {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #155724;
+  color: #003366;
   padding: 1rem;
-  background: white;
-  border-radius: 6px;
+  background-color: #ffffff;
+  border-radius: 5px;
   margin-top: 1rem;
+  text-align: center;
+}
+
+.note {
+  font-size: 1rem;
+  color: #666;
+  margin-left: 12px;
+  font-style: italic;
+}
+
+/* Accessibility & Contrast Enhancements */
+a:focus,
+button:focus,
+select:focus,
+input:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.5rem;
+  }
+
+  .Heading {
+    font-size: 1.7rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 0.6rem;
+  }
+}
+/* Toggle Container */
+.toggle-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Center the container horizontally */
+  gap: 1rem; /* Add space between text and toggle */
+  margin: 1.5rem 0; /* Add some margin for spacing */
 }
 
 /* Toggle Switch */
 .toggle-switch {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 40px 0;
-  font-size: 2em;
-  color: white;
-  font-weight: 500;
-  user-select: none;
-}
-
-.toggle-switch input {
-  position: absolute;
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
-
-.toggle-switch .slider {
-  width: 240px;
-  height: 40px;
-  background-color: #0056b3;
-  border-radius: 20px;
   position: relative;
-  transition: background-color 0.3s;
+  width: 120px; /* Wider toggle for better usability */
+  height: 40px; /* Taller toggle for better visibility */
+}
+
+/* Hide default checkbox */
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider (Track) */
+.slider {
+  position: absolute;
   cursor: pointer;
+  background-color: #bbb;
+  border-radius: 34px;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.3s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  color: white;
+  font-size: 14px;
 }
 
-.toggle-switch .slider::before {
-  content: '';
+/* Moving Circle (Toggle Knob) */
+.slider::before {
+  content: "";
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  height: 32px; /* Larger knob */
+  width: 32px; /* Larger knob */
+  left: 4px;
+  bottom: 4px;
   background-color: white;
-  top: 5px;
-  left: 5px;
-  transition: transform 0.5s;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-switch input:checked + .slider {
-  background-color: #218838;
+/* Toggle On (Rails Active) */
+input:checked + .slider {
+  background-color: #007bff; /* Blue for active state */
 }
 
-.toggle-switch input:checked + .slider::before {
-  transform: translateX(200px);
+input:checked + .slider::before {
+  transform: translateX(80px); /* Adjusted for wider toggle */
 }
 
-/* Toggle Switch Focus */
-.toggle-switch input:focus + .slider {
-  outline: 3px solid #ffbf47;
+/* Text inside toggle */
+.slider-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Focus Accessibility */
+input:focus + .slider {
+  outline: 3px solid #ffbf47; /* High-contrast focus indicator */
   outline-offset: 2px;
 }
 
-/* Screen Reader Accessibility */
+/* Responsive */
+@media (max-width: 768px) {
+  .toggle-switch {
+    width: 80px; /* Slightly smaller for mobile */
+    height: 36px; /* Slightly smaller for mobile */
+  }
+
+  .slider::before {
+    height: 28px; /* Smaller knob for mobile */
+    width: 28px; /* Smaller knob for mobile */
+    left: 4px;
+    bottom: 4px;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(44px); /* Adjusted for smaller toggle */
+  }
+
+  .slider-text {
+    font-size: 0.8rem; /* Smaller text for mobile */
+  }
+}
+
+
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-}
-
-.Tooltip {
   text-align: center;
-}
-
-/* Note styling */
-.note {
-  font-size: 0.9em;
-  color: #666;
-  margin-left: 10px;
-  font-style: italic;
-}
-
-/* Special note for "Not Available" */
-.result-container .note {
-  margin-top: 10px;
-  color: #d9534f; /* Red color for emphasis */
 }

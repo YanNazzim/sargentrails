@@ -36,7 +36,7 @@ const RailsForm = () => {
         name: "Electroguard® Delayed Egress",
         conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL"],
       },
-      { code: "AL", name: "Alarm" },
+      { code: "AL", name: "Alarm", conflicts: ["16", "56", "59"] },
       { code: "PL", name: "Photo-Luminescent Rail (Non Electrified)" },
     ],
     sizes: [
