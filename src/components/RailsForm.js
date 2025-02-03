@@ -60,12 +60,20 @@ const RailsForm = () => {
   // Create a ref for the result container (for auto-scrolling)
   const resultRef = useRef(null);
 
-  // Scroll into view when partNumber is updated
+  // Auto-scroll to the result container when partNumber is updated
   useEffect(() => {
     if (partNumber && resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [partNumber]);
+
+  // Optional Reset UseEffect:
+  // When the selected style is "JellyFish", automatically set lexan to "No"
+  useEffect(() => {
+    if (formData.stile === "JellyFish") {
+      setFormData((prev) => ({ ...prev, lexan: "No" }));
+    }
+  }, [formData.stile]);
 
   const options = {
     stile: [
@@ -82,57 +90,66 @@ const RailsForm = () => {
         code: "12",
         name: "Fire Rated (No Dogging)",
         conflicts: ["16", "56-HK"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "5CH",
         name: "5LB Maximum Force",
         conflicts: ["58", "59"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "16",
         name: "Keyed Cylinder Dogging",
         conflicts: ["12", "59", "AL"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "53",
         name: "Latchbolt Monitoring Switch",
         conflicts: ["59"],
-        conflictsWithStile: ["LowProfile"],
+        conflictsWithStile: ["LowProfile", "JellyFish", "DummyRailInActive"],
       },
       {
         code: "55",
         name: "Request to Exit",
         conflicts: ["59"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "56",
         name: "Electric Latch Retraction",
         conflicts: ["56-HK", "58", "59", "AL"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "56-HK",
         name: "Electric Latch Retraction W/ Hex-Key Dogging",
         conflicts: ["56", "12", "58", "59", "AL"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "58",
         name: "Elecrtic Dogging",
         conflicts: ["56", "59"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "59",
         name: "Electroguard® Delayed Egress",
         conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL"],
-        conflictsWithStile: ["LowProfile"],
+        conflictsWithStile: ["LowProfile", "JellyFish", "DummyRailInActive"],
       },
       {
         code: "AL",
         name: "Alarm",
         conflicts: ["16", "56", "59"],
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "PL",
         name: "Photo-Luminescent Rail (Non Electrified)",
+        conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
     ],
     sizes: {
@@ -178,11 +195,7 @@ const RailsForm = () => {
       { value: "09", label: "09 - Matte Black", image: images.finish09 },
       { value: "10", label: "10 - Satin Bronze", image: images.finish10 },
       { value: "10B", label: "10B - Antique Bronze", image: images.finish10B },
-      {
-        value: "10BE",
-        label: "10BE - Oil-Rubbed Bronze",
-        image: images.finish10BE,
-      },
+      { value: "10BE", label: "10BE - Oil-Rubbed Bronze", image: images.finish10BE },
       { value: "10BL", label: "10BL - Black", image: images.finish10BL },
       { value: "14", label: "14 - Bright Brass", image: images.finish14 },
       { value: "15", label: "15 - Satin Gold", image: images.finish15 },
@@ -191,11 +204,7 @@ const RailsForm = () => {
       { value: "26D", label: "26D - Dark Nickel", image: images.finish26D },
       { value: "32", label: "32 - Custom Finish", image: images.finish32 },
       { value: "32D", label: "32D - Stainless Steel", image: images.finish32D },
-      {
-        value: "BSP",
-        label: "BSP - Brushed Stainless",
-        image: images.finishBSP,
-      },
+      { value: "BSP", label: "BSP - Brushed Stainless", image: images.finishBSP },
       { value: "WSP", label: "WSP - White Stainless", image: images.finishWSP },
     ],
     handing: ["Left Hand", "Right Hand"],
@@ -278,7 +287,6 @@ const RailsForm = () => {
   }, [formData, formData.stile, options.prefixes]);
 
   // ─── Compute Effective Disabled Prefixes ─────────────────────────────────────
-  // Combine those disabled due to prefix conflicts with those conflicting with the current style.
   const styleConflictPrefixes = options.prefixes
     .filter(
       (prefix) =>
@@ -293,18 +301,18 @@ const RailsForm = () => {
   // ─── Handle Form Submission ───────────────────────────────────────────────────
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     // Create the prefix key. If no prefixes are selected, this becomes an empty string.
     const prefixKey = formData.prefixes.sort().join("-"); // will be "" if no prefix is selected
-  
+
     // Key pattern: {stile}-{lexan}-{prefixKey}-{size}
     let key = `${formData.stile}-${formData.lexan}-${prefixKey}-${formData.size}`;
-  
+
     if (formData.prefixes.includes("PL") && formData.handing) {
       const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
       key += `-${handingCode}`;
     }
-  
+
     // Choose the correct part numbers category based on the selected style.
     const partNumbers =
       formData.stile === "DummyRailInActive"
@@ -318,25 +326,25 @@ const RailsForm = () => {
         : formData.stile === "JellyFish"
         ? partsData.JellyFishRails
         : partsData.narrowRails;
-  
+
     const partNumberEntry = partNumbers[key] || "Not Found";
     const [basePartNumber, note] = partNumberEntry.split(" - ");
-  
+
     if (basePartNumber === "Not Available") {
       setPartNumber("Not Available");
       setNote("This size is not available. Please try the next size up.");
       return;
     }
-  
+
     const generatedNumber =
       basePartNumber !== "Not Found"
         ? `${basePartNumber}-${formData.finish}`
         : "Not Found";
-  
+
     setPartNumber(generatedNumber);
     setNote(note || "");
   };
-  
+
   // ─── Reset Handler ───────────────────────────────────────────────────────────
   const handleReset = () => {
     setFormData({
@@ -412,6 +420,7 @@ const RailsForm = () => {
               setFormData({ ...formData, lexan: e.target.value })
             }
             required
+            disabled={formData.stile === "JellyFish"}
           >
             {options.lexan.map((opt) => (
               <option key={opt} value={opt}>
@@ -466,7 +475,9 @@ const RailsForm = () => {
           <label>Size:</label>
           <select
             value={formData.size}
-            onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, size: e.target.value })
+            }
             required
           >
             <option value="">Select Size</option>
