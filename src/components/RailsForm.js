@@ -72,6 +72,9 @@ const RailsForm = () => {
       { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500, 8600" },
       { code: "Wide", display: "Wide Stile - 8600, 8700, NB-8700, 8800, 8900" },
       { code: "LowProfile", display: "Low Profile - LP8600, LR8600, LS8600" },
+      { code: "DummyRailInActive", display: "8893 In-Active Dummy Rail" },
+      { code: "DummyRailActive", display: "8895 Active Dummy Rail" },
+      { code: "JellyFish", display: 'Vingcard "Jellyfish" Rail' },
     ],
     lexan: ["Yes", "No"],
     prefixes: [
@@ -149,6 +152,24 @@ const RailsForm = () => {
         { code: "L", display: 'L - For openings 36"' },
         { code: "N", display: 'N - For openings 42" to 44"' },
         { code: "M", display: 'M - For openings 46" to 48"' },
+      ],
+      DummyRailActive: [
+        { code: "E", display: 'E - For openings 24" to 32"' },
+        { code: "F", display: 'F - For openings 33" to 36"' },
+        { code: "J", display: 'J - For openings 37" to 42"' },
+        { code: "G", display: 'G - For openings 43" to 48"' },
+      ],
+      DummyRailInActive: [
+        { code: "E", display: 'E - For openings 24" to 32"' },
+        { code: "F", display: 'F - For openings 33" to 36"' },
+        { code: "J", display: 'J - For openings 37" to 42"' },
+        { code: "G", display: 'G - For openings 43" to 48"' },
+      ],
+      JellyFish: [
+        { code: "E", display: 'E - For openings 24" to 32"' },
+        { code: "F", display: 'F - For openings 33" to 36"' },
+        { code: "J", display: 'J - For openings 37" to 42"' },
+        { code: "G", display: 'G - For openings 43" to 48"' },
       ],
     },
     finishes: [
@@ -273,7 +294,10 @@ const RailsForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    const prefixKey = formData.prefixes.sort().join("-");
+    // Create the prefix key. If no prefixes are selected, this becomes an empty string.
+    const prefixKey = formData.prefixes.sort().join("-"); // will be "" if no prefix is selected
+  
+    // Key pattern: {stile}-{lexan}-{prefixKey}-{size}
     let key = `${formData.stile}-${formData.lexan}-${prefixKey}-${formData.size}`;
   
     if (formData.prefixes.includes("PL") && formData.handing) {
@@ -281,12 +305,18 @@ const RailsForm = () => {
       key += `-${handingCode}`;
     }
   
-    // Use the correct category from partsData based on the selected style.
+    // Choose the correct part numbers category based on the selected style.
     const partNumbers =
-      formData.stile === "LowProfile"
-        ? partsData.LowProfileRails
+      formData.stile === "DummyRailInActive"
+        ? partsData.DummyRailInActive
+        : formData.stile === "DummyRailActive"
+        ? partsData.DummyRailActive
         : formData.stile === "Wide"
         ? partsData.wideRails
+        : formData.stile === "LowProfile"
+        ? partsData.LowProfileRails
+        : formData.stile === "JellyFish"
+        ? partsData.JellyFishRails
         : partsData.narrowRails;
   
     const partNumberEntry = partNumbers[key] || "Not Found";
@@ -307,7 +337,6 @@ const RailsForm = () => {
     setNote(note || "");
   };
   
-
   // ─── Reset Handler ───────────────────────────────────────────────────────────
   const handleReset = () => {
     setFormData({

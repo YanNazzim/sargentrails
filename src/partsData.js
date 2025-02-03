@@ -1291,15 +1291,15 @@ export const partsData = {
     "LowProfile-Yes-56-M": "68-4336",
     "LowProfile-Yes-56-N": "68-4337",
 
-        // 19-56-HK
-        "LowProfile-Yes-56-HK-L": "68-5784",
-        "LowProfile-Yes-56-HK-M": "68-5785",
-        "LowProfile-Yes-56-HK-N": "68-5786",
+    // 19-56-HK
+    "LowProfile-Yes-56-HK-L": "68-5784",
+    "LowProfile-Yes-56-HK-M": "68-5785",
+    "LowProfile-Yes-56-HK-N": "68-5786",
 
-                // 19-55-56-HK
-                "LowProfile-Yes-55-56-HK-L": "68-5787",
-                "LowProfile-Yes-55-56-HK-M": "68-5788",
-                "LowProfile-Yes-55-56-HK-N": "68-5789",
+    // 19-55-56-HK
+    "LowProfile-Yes-55-56-HK-L": "68-5787",
+    "LowProfile-Yes-55-56-HK-M": "68-5788",
+    "LowProfile-Yes-55-56-HK-N": "68-5789",
 
     // 19-58
     "LowProfile-Yes-58-L": "68-4348",
@@ -1366,4 +1366,51 @@ export const partsData = {
     "LowProfile-No-55-56-HK-M": "68-5782",
     "LowProfile-No-55-56-HK-N": "68-5783",
   },
+  DummyRailInActive: {
+    // Standard with no prefixes
+    "DummyRailInActive-No--E": "68-2706",
+    "DummyRailInActive-No--F": "68-2707",
+    "DummyRailInActive-No--J": "68-2709",
+    "DummyRailInActive-No--G": "68-2708",
+
+    // 19-8893
+    "DummyRailInActive-Yes--E": "68-2610",
+    "DummyRailInActive-Yes--F": "68-2611",
+    "DummyRailInActive-Yes--J": "Not Available",
+    "DummyRailInActive-Yes--G": "68-2613",
+  },
+  DummyRailActive: {
+    // Standard with no prefixes
+    "DummyRailActive-No--E": "68-3277",
+    "DummyRailActive-No--F": "68-3278",
+    "DummyRailActive-No--J": "68-4579",
+    "DummyRailActive-No--G": "68-3279",
+
+    // 55-8895
+    "DummyRailActive-No-55-E": "68-3281",
+    "DummyRailActive-No-55-F": "68-3282",
+    "DummyRailActive-No-55-J": "68-4580",
+    "DummyRailActive-No-55-G": "68-3283",
+
+    // 19-8895
+    "DummyRailActive-Yes--E": "68-3289",
+    "DummyRailActive-Yes--F": "68-3290",
+    "DummyRailActive-Yes--J": "68-4582",
+    "DummyRailActive-Yes--G": "68-3291",
+
+    // 19-55-8895
+    "DummyRailActive-Yes-55-E": "68-3285",
+    "DummyRailActive-Yes-55-F": "68-3286",
+    "DummyRailActive-Yes-55-J": "68-4589",
+    "DummyRailActive-Yes-55-G": "68-3287",
+  },
+
+  JellyFishRails: {
+    // Example entry:
+    "JellyFish-No--E": "68-4152",
+    "JellyFish-No--F": "68-4149",
+    "JellyFish-No--J": "68-4150",
+    "JellyFish-No--G": "68-4151",
+    // Add more keys as needed
+  }
 };
