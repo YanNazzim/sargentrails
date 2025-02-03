@@ -1,6 +1,47 @@
-import React, { useState } from "react";
+// RailsForm.js
+import React, { useState, useEffect, useRef } from "react";
 import { partsData } from "../partsData";
 import "../App.css";
+import images from "../images"; // Adjust the path as needed
+import Select, { components } from "react-select";
+
+// Custom Option to render finish image and label in the dropdown list
+const FinishOption = (props) => {
+  return (
+    <components.Option {...props}>
+      <img
+        src={props.data.image}
+        alt={props.data.label}
+        style={{
+          width: "30px",
+          height: "auto",
+          marginRight: "10px",
+          verticalAlign: "middle",
+        }}
+      />
+      <span>{props.data.label}</span>
+    </components.Option>
+  );
+};
+
+// Custom SingleValue to render the selected finish with its image
+const FinishSingleValue = (props) => {
+  return (
+    <components.SingleValue {...props}>
+      <img
+        src={props.data.image}
+        alt={props.data.label}
+        style={{
+          width: "30px",
+          height: "auto",
+          marginRight: "10px",
+          verticalAlign: "middle",
+        }}
+      />
+      <span>{props.data.label}</span>
+    </components.SingleValue>
+  );
+};
 
 const RailsForm = () => {
   const [disabledPrefixes, setDisabledPrefixes] = useState([]);
@@ -16,6 +57,16 @@ const RailsForm = () => {
   const [note, setNote] = useState("");
   const [showHandingDropdown, setShowHandingDropdown] = useState(false);
 
+  // Create a ref for the result container
+  const resultRef = useRef(null);
+
+  // Scroll into view when partNumber is updated
+  useEffect(() => {
+    if (partNumber && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [partNumber]);
+
   const options = {
     stile: [
       { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500, 8600" },
@@ -23,14 +74,14 @@ const RailsForm = () => {
     ],
     lexan: ["Yes", "No"],
     prefixes: [
-      { code: "12", name: "Fire Rated (No Dogging)", conflicts: ["16", "56-HK"]},
-      { code: "5CH", name: "5LB Maximum Force", conflicts: ["58", "59"]},
+      { code: "12", name: "Fire Rated (No Dogging)", conflicts: ["16", "56-HK"] },
+      { code: "5CH", name: "5LB Maximum Force", conflicts: ["58", "59"] },
       { code: "16", name: "Keyed Cylinder Dogging", conflicts: ["12", "59", "AL"] },
       { code: "53", name: "Latchbolt Monitoring Switch", conflicts: ["59"] },
-      { code: "55", name: "Request to Exit", conflicts: ["59"]  },
-      { code: "56", name: "Electric Latch Retraction", conflicts: ["56-HK","58","59", "AL"]  },
-      { code: "56-HK", name: "Electric Latch Retraction W/ Hex-Key Dogging", conflicts: ["56","12","58","59", "AL"]  },
-      { code: "58", name: "Elecrtic Dogging" , conflicts: ["56","59"]  },
+      { code: "55", name: "Request to Exit", conflicts: ["59"] },
+      { code: "56", name: "Electric Latch Retraction", conflicts: ["56-HK", "58", "59", "AL"] },
+      { code: "56-HK", name: "Electric Latch Retraction W/ Hex-Key Dogging", conflicts: ["56", "12", "58", "59", "AL"] },
+      { code: "58", name: "Elecrtic Dogging", conflicts: ["56", "59"] },
       {
         code: "59",
         name: "Electroguard® Delayed Egress",
@@ -46,22 +97,22 @@ const RailsForm = () => {
       { code: "G", display: 'G - For openings 43" to 48"' },
     ],
     finishes: [
-      "03",
-      "04",
-      "09",
-      "10",
-      "10B",
-      "10BE",
-      "10BL",
-      "14",
-      "15",
-      "20D",
-      "26",
-      "26D",
-      "32",
-      "32D",
-      "BSP",
-      "WSP",
+      { value: "03", label: "03 - Brushed Nickel", image: images.finish03 },
+      { value: "04", label: "04 - Polished Chrome", image: images.finish04 },
+      { value: "09", label: "09 - Matte Black", image: images.finish09 },
+      { value: "10", label: "10 - Satin Bronze", image: images.finish10 },
+      { value: "10B", label: "10B - Antique Bronze", image: images.finish10B },
+      { value: "10BE", label: "10BE - Oil-Rubbed Bronze", image: images.finish10BE },
+      { value: "10BL", label: "10BL - Black", image: images.finish10BL },
+      { value: "14", label: "14 - Bright Brass", image: images.finish14 },
+      { value: "15", label: "15 - Satin Gold", image: images.finish15 },
+      { value: "20D", label: "20D - Dark Bronze", image: images.finish20D },
+      { value: "26", label: "26 - Light Chrome", image: images.finish26 },
+      { value: "26D", label: "26D - Dark Nickel", image: images.finish26D },
+      { value: "32", label: "32 - Custom Finish", image: images.finish32 },
+      { value: "32D", label: "32D - Stainless Steel", image: images.finish32D },
+      { value: "BSP", label: "BSP - Brushed Stainless", image: images.finishBSP },
+      { value: "WSP", label: "WSP - White Stainless", image: images.finishWSP },
     ],
     handing: ["Left Hand", "Right Hand"],
   };
@@ -82,26 +133,18 @@ const RailsForm = () => {
     let newDisabledPrefixes = [...disabledPrefixes];
 
     if (selectedPrefix?.conflicts) {
-      // Disable conflicting prefixes if the current prefix is selected
       if (isChecked) {
-        newDisabledPrefixes = [
-          ...newDisabledPrefixes,
-          ...selectedPrefix.conflicts,
-        ];
+        newDisabledPrefixes = [...newDisabledPrefixes, ...selectedPrefix.conflicts];
       } else {
         newDisabledPrefixes = newDisabledPrefixes.filter(
           (code) => !selectedPrefix.conflicts.includes(code)
         );
       }
     } else if (prefixCode === "59") {
-      // Disable conflicting prefixes if "59" is selected
       const conflictingPrefix = options.prefixes.find((p) => p.code === "59");
       if (conflictingPrefix?.conflicts) {
         if (isChecked) {
-          newDisabledPrefixes = [
-            ...newDisabledPrefixes,
-            ...conflictingPrefix.conflicts,
-          ];
+          newDisabledPrefixes = [...newDisabledPrefixes, ...conflictingPrefix.conflicts];
         } else {
           newDisabledPrefixes = newDisabledPrefixes.filter(
             (code) => !conflictingPrefix.conflicts.includes(code)
@@ -110,13 +153,9 @@ const RailsForm = () => {
       }
     }
 
-    // Update disabled prefixes state
     setDisabledPrefixes(newDisabledPrefixes);
-
-    // Update form data
     setFormData({ ...formData, prefixes: newPrefixes });
 
-    // Handle PL prefix and handing dropdown
     if (prefixCode === "PL") {
       setShowHandingDropdown(isChecked);
       if (!isChecked) {
@@ -169,15 +208,33 @@ const RailsForm = () => {
     setPartNumber("");
     setNote("");
     setShowHandingDropdown(false);
-
-    // Reset disabled prefixes
     setDisabledPrefixes([]);
+  };
+
+  // Optional custom styles for react-select
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      minHeight: "40px",
+    }),
+    option: (provided) => ({
+      ...provided,
+      display: "flex",
+      alignItems: "center",
+    }),
+  };
+
+  // Handler for react-select finish dropdown
+  const handleFinishChange = (selectedOption) => {
+    setFormData({ ...formData, finish: selectedOption ? selectedOption.value : "" });
   };
 
   return (
     <div className="app-container">
       <h1 className="Heading">
-        Sargent <br></br>80 Series Exit Device <br></br>Rail Part Number Lookup
+        Sargent <br />
+        80 Series Exit Device <br />
+        Rail Part Number Lookup
       </h1>
 
       <form onSubmit={handleSubmit} className="part-form">
@@ -231,7 +288,7 @@ const RailsForm = () => {
                   value={prefix.code}
                   checked={formData.prefixes.includes(prefix.code)}
                   onChange={handlePrefixChange}
-                  disabled={disabledPrefixes.includes(prefix.code)} // Disable if in disabledPrefixes
+                  disabled={disabledPrefixes.includes(prefix.code)}
                 />
                 ({prefix.code}) -- {prefix.name}
               </label>
@@ -277,23 +334,19 @@ const RailsForm = () => {
           </select>
         </div>
 
-        {/* Finish */}
+        {/* Finish using react-select */}
         <div className="form-group">
           <label>Finish:</label>
-          <select
-            value={formData.finish}
-            onChange={(e) =>
-              setFormData({ ...formData, finish: e.target.value })
+          <Select
+            options={options.finishes}
+            onChange={handleFinishChange}
+            value={
+              options.finishes.find((f) => f.value === formData.finish) || null
             }
-            required
-          >
-            <option value="">Select Finish</option>
-            {options.finishes.map((finish) => (
-              <option key={finish} value={finish}>
-                {finish}
-              </option>
-            ))}
-          </select>
+            placeholder="Select Finish"
+            components={{ Option: FinishOption, SingleValue: FinishSingleValue }}
+            styles={customStyles}
+          />
         </div>
 
         {/* Form Actions */}
@@ -309,7 +362,7 @@ const RailsForm = () => {
 
       {/* Display Generated Part Number */}
       {partNumber && (
-        <div className="result-container">
+        <div ref={resultRef} className="result-container">
           <h2>Found Part Number:</h2>
           <div className="part-number">
             {partNumber}

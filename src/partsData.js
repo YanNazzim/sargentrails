@@ -317,16 +317,16 @@ export const partsData = {
     "Wide-No-12-59-PL-G-RHR": "68-6151",
 
     // 59-PL-LHR
-    "Wide-No-59-PL-HK-E-LHR": '68-6128 - Only for 32" Door',
-    "Wide-No-59-PL-HK-F-LHR": "68-6129",
-    "Wide-No-59-PL-HK-J-LHR": "68-6130",
-    "Wide-No-59-PL-HK-G-LHR": "68-6131",
+    "Wide-No-59-PL-E-LHR": '68-6128 - Only for 32" Door',
+    "Wide-No-59-PL-F-LHR": "68-6129",
+    "Wide-No-59-PL-J-LHR": "68-6130",
+    "Wide-No-59-PL-G-LHR": "68-6131",
 
     // 59-PL-RHR
-    "Wide-No-59-PL-HK-E-RHR": '68-6132 - Only for 32" Door',
-    "Wide-No-59-PL-HK-F-RHR": "68-6133",
-    "Wide-No-59-PL-HK-J-RHR": "68-6134",
-    "Wide-No-59-PL-HK-G-RHR": "68-6135",
+    "Wide-No-59-PL-E-RHR": '68-6132 - Only for 32" Door',
+    "Wide-No-59-PL-F-RHR": "68-6133",
+    "Wide-No-59-PL-J-RHR": "68-6134",
+    "Wide-No-59-PL-G-RHR": "68-6135",
 
     // FM Only
     "Wide-No-FM-E": "68-5462",
@@ -927,28 +927,28 @@ export const partsData = {
     "Narrow-No-5CH-53-56-HK-J": "68-8476",
     "Narrow-No-5CH-53-56-HK-G": "68-8477",
 
-        // 59-PL-LHR
-        "Narrow-No-59-PL-E-LHR": "68-6131",
-        "Narrow-No-59-PL-F-LHR": "68-6160",
-        "Narrow-No-59-PL-J-LHR": "68-6161",
-        "Narrow-No-59-PL-G-LHR": "68-6162",
+    // 59-PL-LHR
+    "Narrow-No-59-PL-E-LHR": "68-6131",
+    "Narrow-No-59-PL-F-LHR": "68-6160",
+    "Narrow-No-59-PL-J-LHR": "68-6161",
+    "Narrow-No-59-PL-G-LHR": "68-6162",
 
-                // 59-PL-RHR
-                "Narrow-No-59-PL-E-RHR": "68-6835",
-                "Narrow-No-59-PL-F-RHR": "68-6164",
-                "Narrow-No-59-PL-J-RHR": "68-6165",
-                "Narrow-No-59-PL-G-RHR": "68-6166",
+    // 59-PL-RHR
+    "Narrow-No-59-PL-E-RHR": "68-6835",
+    "Narrow-No-59-PL-F-RHR": "68-6164",
+    "Narrow-No-59-PL-J-RHR": "68-6165",
+    "Narrow-No-59-PL-G-RHR": "68-6166",
 
-                        // 12-59-PL-LHR
-        "Narrow-No-12-59-PL-E-LHR": "68-6147",
-        "Narrow-No-12-59-PL-F-LHR": "68-6168",
-        "Narrow-No-12-59-PL-J-LHR": "68-6169",
-        "Narrow-No-12-59-PL-G-LHR": "68-6170",
+    // 12-59-PL-LHR
+    "Narrow-No-12-59-PL-E-LHR": "68-6147",
+    "Narrow-No-12-59-PL-F-LHR": "68-6168",
+    "Narrow-No-12-59-PL-J-LHR": "68-6169",
+    "Narrow-No-12-59-PL-G-LHR": "68-6170",
 
-                // 12-59-PL-RHR
-                "Narrow-No-12-59-PL-E-RHR": "68-6151",
-                "Narrow-No-12-59-PL-F-RHR": "68-6172",
-                "Narrow-No-12-59-PL-J-RHR": "68-6173",
-                "Narrow-No-12-59-PL-G-RHR": "68-6174",
+    // 12-59-PL-RHR
+    "Narrow-No-12-59-PL-E-RHR": "68-6151",
+    "Narrow-No-12-59-PL-F-RHR": "68-6172",
+    "Narrow-No-12-59-PL-J-RHR": "68-6173",
+    "Narrow-No-12-59-PL-G-RHR": "68-6174",
   },
 };

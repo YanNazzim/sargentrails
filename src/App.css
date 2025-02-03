@@ -13,14 +13,18 @@ body {
   max-width: 850px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: #aaaaaa;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Heading */
 .Heading {
+  margin: auto;
   text-align: center;
+  width: 55%;
+  border-radius: 25px;
+  background-color: #ffffff;
   font-size: 2.2rem;
   color: #004a99; /* Sargent blue, slightly darker */
   font-weight: bold;
@@ -183,11 +187,19 @@ input:focus {
 /* Toggle Container */
 .toggle-container {
   display: flex;
-  align-items: center; /* Align items vertically in the center */
-  justify-content: center; /* Center the container horizontally */
-  gap: 1rem; /* Add space between text and toggle */
-  margin: 1.5rem 0; /* Add some margin for spacing */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;    /* Center align items */
+  gap: 1rem;              /* Space between the text and toggle */
+  margin: 1.5rem 0;       /* Margin for overall spacing */
 }
+
+/* Optional: Style the heading within the toggle container */
+.toggle-container h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
 
 /* Toggle Switch */
 .toggle-switch {
@@ -196,6 +208,7 @@ input:focus {
   position: relative;
   width: 120px; /* Wider toggle for better usability */
   height: 40px; /* Taller toggle for better visibility */
+  user-select: none;
 }
 
 /* Hide default checkbox */
@@ -288,4 +301,16 @@ input:focus + .slider {
 
 .sr-only {
   text-align: center;
+}
+
+.finish-swatch {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.finish-swatch img {
+  width: 50px;      /* Adjust as needed */
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

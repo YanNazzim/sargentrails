@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Rails from "./components/RailsForm";
 import Trims from "./components/TrimsForm";
-import ToggleSwitch from "./components/ToggleButton";
+import ToggleButton from "./components/ToggleButton";
 import "./App.css";
 
 const App = () => {
@@ -15,8 +15,9 @@ const App = () => {
   return (
     <div className="app">
       <div className="toggle-container" aria-live="polite">
-        <h2 className="sr-only">Switch between Rails and Trims</h2>
-        <ToggleSwitch isRails={isRails} onToggle={handleToggle} />
+        {/* Remove the sr-only class to display the text */}
+        <h2>Switch between Rails and Trims</h2>
+        <ToggleButton isRails={isRails} onToggle={handleToggle} />
       </div>
       {isRails ? <Rails /> : <Trims />}
     </div>
