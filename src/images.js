@@ -1,5 +1,6 @@
 // images.js
 const images = {
+  // Finish Swatches
     finish03: require('./images/03.png'),
     finish04: require('./images/04.png'),
     finish09: require('./images/09.png'),
@@ -16,6 +17,12 @@ const images = {
     finish32D: require('./images/32D.png'),
     finishBSP: require('./images/BSP.png'),
     finishWSP: require('./images/WSP.png'),
+
+    // levers
+    LeverA: require('./images/LeverA.png'),
+    LeverB: require('./images/LeverB.png'),
+    LeverE: require('./images/LeverE.png'),
+    LeverF: require('./images/LeverF.png'),
   };
   
   export default images;
