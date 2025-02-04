@@ -316,6 +316,7 @@ const TrimsForm = () => {
     { value: "FLW", label: "FLW - FL Pull Plate with W Pull" },
     { value: "FSW", label: "FSW - FS Pull Plate with W Pull" },
     { value: "MAL", label: "MAL - MA Pull Plate with L Pull" },
+    { value: "MSL", label: "MSL - MS Pull Plate with L Pull" },
     { value: "STS", label: "STS - STS Pull (No Plate)" },
     { value: "PTB", label: "PTB - PT Pull Plate with B Pull" },
     { value: "PSB", label: "PSB - PS Pull Plate with B Pull" },
@@ -456,23 +457,33 @@ const TrimsForm = () => {
     });
   };
 
+  // Add this with your other conflict mappings
+const trimConflicts = {
+  // Format: "device-function": [allowed trims]
+  "8800-04": ["FSL", "FSW", "MAL", "PSB", "STS"], // Trims with S as 2nd letter
+  // Add more device-function pairs as needed
+};
+
   // Compute available trim options based on selected function codes.
   const pullOnlyFunctions = ["28", "62", "63", "66"];
   const availableTrimOptions = (() => {
-    if (formData.series === "7000") {
-      if (
-        pullOnlyFunctions.includes(formData.outsideFunctionCode) ||
-        pullOnlyFunctions.includes(formData.insideFunctionCode)
-      ) {
-        return trimOptions.filter((opt) => opt.value !== "ET");
-      }
-      return trimOptions;
-    } else {
-      if (pullOnlyFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter((opt) => opt.value !== "ET");
-      }
-      return trimOptions;
+    // Existing pull trim logic
+    let options = trimOptions;
+    if (pullOnlyFunctions) {
+      options = options.filter(opt => opt.value !== "ET");
     }
+  
+    // NEW: Trim conflicts check
+    if (formData.series !== "7000") {
+      const conflictKey = `${formData.device}-${formData.functionCode}`;
+      if (trimConflicts[conflictKey]) {
+        options = options.filter(opt => 
+          trimConflicts[conflictKey].includes(opt.value)
+        );
+      }
+    }
+    
+    return options;
   })();
 
   // Handle form submission
@@ -501,8 +512,7 @@ const TrimsForm = () => {
       setPartNumber(`Inside: ${insideTrim} | Outside: ${outsideTrim}`);
       setNote("");
     } else {
-      // For non-7000 series:
-      // If the chosen trim is not ET (i.e. a pull trim), then use a custom mapping.
+      // For non-7000 series devices when using pull trims (trim !== "ET")
       if (formData.trim !== "ET") {
         const pullMapping = {
           "04": "814",
@@ -513,8 +523,10 @@ const TrimsForm = () => {
         };
         const mappedBase = pullMapping[formData.functionCode];
         if (mappedBase) {
-          const finalNumber =
-            mappedBase + (formData.finish ? "-" + formData.finish : "");
+          // Include the trim and finish with appropriate separators
+          const trimPart = formData.trim ? ` ${formData.trim}` : "";
+          const finishPart = formData.finish ? ` ${formData.finish}` : "";
+          const finalNumber = `${mappedBase}${trimPart}${finishPart}`;
           setPartNumber(finalNumber);
           setNote("");
           return;
