@@ -1,9 +1,45 @@
 // TrimsForm.js
 import React, { useState, useEffect, useRef } from "react";
-import { partsData } from "../partsData"; // For non-7000 series, ensure partsData.trimsParts exists
-import "../App.css";
+import { trimsData } from "../trimsData"; // Import trimsData instead of partsDataimport "../App.css";
 import images from "../images"; // Adjust path as needed
 import Select, { components } from "react-select";
+
+const customTrimStyles = {
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 10, // Ensures dropdown is not hidden behind other elements
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    maxHeight: "250px", // Scrollable menu
+    overflowY: "auto",
+    padding: "10px",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    minHeight: "50px",
+    borderRadius: "10px",
+    border: state.isFocused ? "2px solid #007bff" : "1px solid #ccc",
+    boxShadow: state.isFocused ? "0 0 5px rgba(0, 123, 255, 0.5)" : "none",
+    "&:hover": {
+      border: "2px solid #007bff",
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    display: "flex",
+    alignItems: "center",
+    padding: "12px",
+    backgroundColor: state.isFocused ? "#007bff20" : "white",
+    borderRadius: "10px",
+    transition: "background-color 0.2s",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    display: "flex",
+    alignItems: "center",
+  }),
+};
 
 // Custom Option for finish dropdown
 const FinishOption = (props) => {
@@ -51,14 +87,21 @@ const CustomLeverOption = (props) => {
         src={props.data.image}
         alt={props.data.label}
         style={{
-          width: "200px", // Increased width for bigger image
+          width: "180px", // Increased width for bigger image
           height: "auto",
           marginRight: "10px",
           verticalAlign: "middle",
           borderRadius: "25px",
         }}
       />
-      <span>{props.data.label}</span>
+      <span
+        style={{
+          fontSize: "2em",
+          textAlign: "center",
+        }}
+      >
+        {props.data.label}
+      </span>
     </components.Option>
   );
 };
@@ -77,6 +120,50 @@ const CustomLeverSingleValue = (props) => {
         }}
       />
       <span>{props.data.label}</span>
+    </components.SingleValue>
+  );
+};
+
+const CustomTrimOption = (props) => {
+  return (
+    <components.Option {...props}>
+      <div style={{ display: "flex", alignItems: "center", padding: "5px" }}>
+        <img
+          src={props.data.image}
+          alt={props.data.label}
+          style={{
+            width: "auto",
+            height: "200px",
+            borderRadius: "10px",
+            boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
+          }}
+        />
+        <span style={{ marginLeft: "15px", fontWeight: "bold" }}>
+          {props.data.label}
+        </span>
+      </div>
+    </components.Option>
+  );
+};
+
+const CustomTrimSingleValue = (props) => {
+  return (
+    <components.SingleValue {...props}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={props.data.image}
+          alt={props.data.label}
+          style={{
+            width: "auto",
+            height: "120px",
+            borderRadius: "8px",
+            boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+          }}
+        />
+        <span style={{ marginLeft: "10px", fontWeight: "bold" }}>
+          {props.data.label}
+        </span>
+      </div>
     </components.SingleValue>
   );
 };
@@ -135,7 +222,7 @@ const TrimsForm = () => {
         formData.electricalPrefixes.length > 0
       ) {
         setWarning(
-          "If your 7000 series device has an ELR (Electric latch retraction) then you cannot pair it with this electrified trim function. Please choose a mechanical function."
+          "If your 7000 series device has an ELR (Electric latch retraction) then you cannot pair it with this electrified trim function (73/74 function). Please choose a mechanical function."
         );
       } else {
         setWarning("");
@@ -171,40 +258,119 @@ const TrimsForm = () => {
       { value: "PE8900", display: "PE8900" },
     ],
     90: [
-      { value: "9400", display: "9400" },
       { value: "9700", display: "9700" },
       { value: "9800", display: "9800" },
       { value: "9900", display: "9900" },
     ],
     7000: [{ value: "7000", display: "7000" }],
-    20: [
-      { value: "2100", display: "2100" },
-      { value: "2200", display: "2200" },
-      { value: "2300", display: "2300" },
-    ],
-    30: [
-      { value: "3100", display: "3100" },
-      { value: "3200", display: "3200" },
-      { value: "3300", display: "3300" },
-    ],
   };
+
+  // Define functions that do NOT require a cylinder
+  const noCylinderFunctions = ["10", "40", "15", "73", "74"];
+
+  // Check if cylinder dropdown should be shown
+  const shouldShowCylinderDropdown =
+    formData.series !== "7000" && // Exclude 7000 series
+    formData.series !== "20" && // Exclude 20 series
+    formData.series !== "30" && // Exclude 30 series
+    !noCylinderFunctions.includes(formData.functionCode); // Hide if function is in noCylinderFunctions
 
   // Lever style options (NEW)
   const leverStyleOptions = [
+    // Standard Levers
     { value: "A", label: "A Lever (Handed)", image: images.LeverA },
     { value: "B", label: "B Lever", image: images.LeverB },
     { value: "E", label: "E Lever", image: images.LeverE },
     { value: "F", label: "F Lever", image: images.LeverF },
+    { value: "J", label: "J Lever", image: images.LeverJ },
+    { value: "L", label: "L Lever", image: images.LeverL },
+    { value: "P", label: "P Lever", image: images.LeverP },
+    { value: "W", label: "W Lever", image: images.LeverW },
+
+    // Coastal Series
+    { value: "R", label: "R - Rockport Lever", image: images.LeverR },
+    { value: "S", label: "S - Sanibel Lever (Handed)", image: images.LeverS },
+    { value: "Y", label: "Y - Yarmouth Lever (Handed)", image: images.LeverY },
+    { value: "G", label: "G - Gulfport Lever (Handed)", image: images.LeverG },
+
+    // Centro Series
+    { value: "MD", label: "MD Lever", image: images.LeverMD },
+    { value: "MJ", label: "MJ Lever", image: images.LeverMJ },
+    { value: "MP", label: "MP Lever", image: images.LeverMP },
+    { value: "ND", label: "ND Lever", image: images.LeverND },
+    { value: "NJ", label: "NJ Lever", image: images.LeverNJ },
+
+    // Notting Hill Series
+    { value: "MA", label: "MA Lever", image: images.LeverMA },
+    { value: "MQ", label: "MQ Lever (Handed)", image: images.LeverMQ },
+    { value: "MT", label: "MT Lever (Handed)", image: images.LeverMT },
+    { value: "MO", label: "MO Lever ", image: images.LeverMO },
+    { value: "MZ", label: "MZ Lever (Handed)", image: images.LeverMZ },
+    { value: "GT", label: "GT Lever (Handed)", image: images.LeverGT },
+
+    // Aventura Series
+    { value: "MB", label: "MB Lever", image: images.LeverMB },
+    { value: "ME", label: "ME Lever", image: images.LeverME },
+    { value: "MF", label: "MF Lever", image: images.LeverMF },
+    { value: "NF", label: "NF Lever", image: images.LeverNF },
+    { value: "MG", label: "MG Lever", image: images.LeverMG },
+    { value: "MI", label: "MI Lever", image: images.LeverMI },
+    { value: "MW", label: "MW Lever", image: images.LeverMW },
+
+    // Odeon Series
+    { value: "MN", label: "MN Lever (Handed)", image: images.LeverMN },
+    { value: "MH", label: "MH Lever (Handed)", image: images.LeverMH },
+    { value: "MS", label: "MS Lever (Handed)", image: images.LeverMS },
+    { value: "MU", label: "MU Lever (Handed)", image: images.LeverMU },
+    { value: "MV", label: "MV Lever (Handed)", image: images.LeverMV },
+    { value: "NU", label: "NU Lever (Handed)", image: images.LeverNU },
+    { value: "WG", label: "WG Lever (Handed)", image: images.LeverWG },
+
+    // Gramercy Series
+    { value: "RCM", label: "RCM Lever", image: images.LeverRCM },
+    { value: "RAL", label: "RAL Lever", image: images.LeverRAL },
+    { value: "REM", label: "REM Lever", image: images.LeverREM },
+    { value: "RAM", label: "RAM Lever", image: images.LeverRAM },
+    { value: "RAS", label: "RAS Lever", image: images.LeverRAS },
+    { value: "RAG", label: "RAG Lever", image: images.LeverRAG },
+    { value: "RGM", label: "RGM Lever", image: images.LeverRGM },
+    { value: "H015", label: "H015 Lever", image: images.LeverH015 },
+    { value: "H016", label: "H016 Lever", image: images.LeverH016 },
+    { value: "H017", label: "H017 Lever", image: images.LeverH017 },
+    { value: "H018", label: "H018 Lever", image: images.LeverH018 },
+
+    // Wooster Square
+    { value: "H001", label: "H001 Lever", image: images.LeverH001 },
+    { value: "H002", label: "H002 Lever", image: images.LeverH002 },
+    { value: "H003", label: "H003 Lever", image: images.LeverH003 },
+    { value: "H004", label: "H004 Lever", image: images.LeverH004 },
+    { value: "H005", label: "H005 Lever", image: images.LeverH005 },
+    { value: "H006", label: "H006 Lever", image: images.LeverH006 },
+    { value: "H007", label: "H007 Lever", image: images.LeverH007 },
+    { value: "H008", label: "H008 Lever", image: images.LeverH008 },
+    { value: "H011", label: "H011 Lever", image: images.LeverH011 },
   ];
 
   // Function options (same for all series)
   const functionOptions = [
-    { value: "04", label: "04 - Night Latch" },
-    { value: "06", label: "06 - Store Room" },
-    { value: "10", label: "10 - Dummy Trim" },
-    { value: "13", label: "13 - Classroom" },
-    { value: "15", label: "15 - Passage" },
-    { value: "16", label: "16 - Classroom Intruder" },
+    { value: "04", label: "04 - Night Latch - Key Retracts Latch" },
+    {
+      value: "06",
+      label:
+        "06 - Store Room - Key unlocks Trim, Trim retracts latch/Trim relocks when key is removed",
+    },
+    {
+      value: "10",
+      label:
+        "10 - Dummy Trim - No outside operation (No Cylinder) - ET Control is used as Pull Only",
+    },
+    { value: "13", label: "13 - Classroom - Key Outside Unlocks/locks Trim" },
+    { value: "15", label: "15 - Passage - (No cylinder)" },
+    {
+      value: "16",
+      label:
+        "16 - Classroom Intruder - Key Outside Retracts Latch; Key Inside Unlocks/Locks O/S Trim",
+    },
     { value: "28", label: "28 - Passage Only (No cylinder) With Pull" },
     { value: "40", label: "40 - Freewheeling Dummy" },
     { value: "43", label: "43 - Freewheeling Classroom" },
@@ -217,7 +383,8 @@ const TrimsForm = () => {
     { value: "63", label: "63 - Key Outside Unlocks/Locks Thumbpiece" },
     {
       value: "66",
-      label: "66 - Key Outside Retracts Latch; Key Inside Unlocks/Lock",
+      label:
+        "66 - Key Outside Retracts Latch; Key Inside Unlocks/Lock Outside Trim",
     },
     { value: "73", label: "73 - Electrified ET Trim (Fail Safe)" },
     { value: "74", label: "74 - Electrified ET Trim (Fail Secure)" },
@@ -233,14 +400,26 @@ const TrimsForm = () => {
 
   // Define conflict mapping for non-7000 series devices.
   const functionConflicts = {
-    "NB-8700": ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
+    7000: ["04", "28", "44", "62", "63", "66", "75", "76"],
+    8300: ["06", "16", "46", "62", "66"],
+    8400: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
+    8500: ["75", "16", "76", "28", "62", "63", "66"],
+    8600: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
     8700: ["04", "16", "44", "75", "76", "66"],
+    "NB-8700": ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
     8800: ["62"],
     8900: ["62"],
-    8500: ["75", "16", "76"],
-    8400: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
-    8300: ["06", "16", "46", "62", "66"],
-    8600: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
+    "PENB-8700": ["04", "16", "44", "75", "76", "66"],
+    PE8700: ["04", "16", "44", "75", "76", "66"],
+    PE8800: ["62"],
+    PE8900: ["62"],
+    PE8500: ["75", "16", "76", "28", "62", "63", "66"],
+    PE8400: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
+    PE8300: ["06", "16", "46", "62", "66"],
+    PE8600: ["04", "16", "44", "75", "76", "28", "62", "63", "66"],
+    9700: ["04", "16", "40", "43", "44", "46", "62", "63", "66", "75", "76"],
+    9800: ["06", "16", "40", "43", "44", "46", "62", "66"],
+    9900: ["06", "16", "40", "43", "44", "46", "62", "66"],
   };
 
   // Electrical prefixes (checkboxes)
@@ -257,23 +436,46 @@ const TrimsForm = () => {
 
   // Cylinder prefixes (for multi-select)
   const cylinderPrefixes = [
-    { code: "DG1", name: "DG1 — Degree Level 1 (Fixed Core)" },
-    { code: "DG2", name: "DG2 — Degree Level 2 (Fixed Core)" },
-    { code: "DG3", name: "DG3 — Degree Level 3 (Fixed Core)" },
-    { code: "10", name: "10 — SARGENT Signature Key System" },
-    { code: "11", name: "11 — XC Key System" },
-    { code: "21", name: "21 — SARGENT Lost Ball Construction" },
-    { code: "51", name: "51 — Removable Core Cylinder (Old Style)" },
-    { code: "52", name: "52 — Removable Construction Core (Old Style)" },
-    { code: "60", name: "60 — Large Format Interchangeable Core (Disposable)" },
-    { code: "63", name: "63 — Large Format Interchangeable Core Cylinder" },
-    { code: "64", name: "64 — Keyed Construction Core for LFIC" },
-    { code: "65", name: "65 — Unassembled/Uncombined Core" },
-    { code: "70", name: "70 — Accept 6/7-Pin SFIC Permanent Cores" },
-    { code: "72", name: "72 — Accept 6/7-Pin SFIC (Keyed Construction Core)" },
-    { code: "73", name: "73 — 6-Pin SFIC (Includes masterkeying)" },
+    { code: "LC", name: "Less Cylinder" },
+    {
+      code: "BR",
+      name: "Bump Resistant Cylinder (Available with Conventional & Conventional XC Cylinders Only)",
+    },
+    {
+      code: "SC",
+      name: "Schlage C keyway cylinder, 0 bitted (not available with: 8904, 8916, 8944, 8975, 8976, 8866, 8304, 8344, 8375 & 8376)",
+    },
+    {
+      code: "SE",
+      name: "Schlage E keyway cylinder, 0 bitted (not available with: 8904, 8916, 8944, 8975, 8976, 8866, 8304, 8344, 8375 & 8376)",
+    },
+    {
+      code: "SF",
+      name: "L Lever to accept Schlage® large format interchangable core (supplied less core, tailpiece included)",
+    },
+    { code: "DG1", name: "Degree Level 1" },
+    { code: "DG2", name: "Degree Level 2" },
+    { code: "DG3", name: "Degree Level 3" },
+    { code: "10", name: "SARGENT Signature Key System" },
+    { code: "11", name: "XC Key System" },
+    { code: "21", name: "SARGENT Lost Ball Construction" },
+    { code: "51", name: "Removable Core Cylinder (Old Style)" },
+    { code: "52", name: "Removable Construction Core (Old Style)" },
+    { code: "60", name: "Large Format Interchangeable Core (Disposable)" },
+    { code: "63", name: "Large Format Interchangeable Core Cylinder" },
+    { code: "64", name: "Keyed Construction Core for LFIC" },
+    { code: "65", name: "Unassembled/Uncombined Core" },
+    { code: "70", name: "Accept 6/7-Pin SFIC Permanent Cores" },
+    { code: "72", name: "Accept 6/7-Pin SFIC (Keyed Construction Core)" },
+    {
+      code: "73",
+      name: "6-Pin SFIC (Includes masterkeying, grand masterkeying)",
+    },
+    {
+      code: "73-7P",
+      name: "7-Pin SFIC (Includes masterkeying, grand masterkeying)",
+    },
   ];
-
   // Map cylinder prefixes to react‑select options.
   const cylinderPrefixOptions = cylinderPrefixes.map((prefix) => ({
     value: prefix.code,
@@ -281,70 +483,198 @@ const TrimsForm = () => {
   }));
 
   // Conflict logic for cylinder multi-select:
-  // If "65" is selected, allow only options that are in allowedFor65.
-  const allowedFor65 = (val) => {
-    return ["DG1", "DG2", "DG3"].includes(val) || val.startsWith("70");
+  const cylinderDependencies = {
+    DG1: ["21", "60", "63", "64", "65"],
+    DG2: ["21", "60", "63", "64", "65"],
+    DG3: ["21", "60", "63", "64", "65"],
+    65: ["DG1", "DG2", "DG3", "70", "72", "73", "73-7P"],
+    10: ["21", "63"],
+    11: ["21", "60", "63", "64", "65", "70", "72", "73", "73-7P"],
+    // Add more dependencies here as needed
   };
 
   const isCylinderOptionDisabled = (option) => {
     const selected = formData.cylinderPrefixes;
-    if (selected.includes("65") && option.value !== "65") {
-      return !allowedFor65(option.value);
-    }
-    if (option.value === "65") {
-      if (selected.some((val) => val !== "65" && !allowedFor65(val))) {
-        return true;
+
+    // Check each dependency in the mapping
+    for (const [dependency, allowedValues] of Object.entries(
+      cylinderDependencies
+    )) {
+      if (selected.includes(dependency) && option.value !== dependency) {
+        // If the dependency is selected, disable options not in its allowed values
+        if (!allowedValues.includes(option.value)) {
+          return true;
+        }
+      }
+      if (option.value === dependency) {
+        // If the option is the dependency itself, disable it if any selected value conflicts
+        if (
+          selected.some(
+            (val) => val !== dependency && !allowedValues.includes(val)
+          )
+        ) {
+          return true;
+        }
       }
     }
+
+    // If no conflicts, the option is not disabled
     return false;
   };
 
   // Define door thickness options.
   const doorThicknessOptions = [
     { value: "1-3/4", label: '1-3/4"' },
-    { value: "1-7/8", label: '1-7/8"' },
     { value: "2", label: '2"' },
-    { value: "2-1/8", label: '2-1/8"' },
     { value: "2-1/4", label: '2-1/4"' },
+    { value: "QSPAR", label: 'QSPAR for anything over 2-1/4"' },
   ];
 
   // Define trim options.
   const trimOptions = [
-    { value: "ET", label: "ET - 700 ET Trim W/ Lever" },
-    { value: "FLL", label: "FLL - FL Pull Plate with L Pull" },
-    { value: "FSL", label: "FSL - FS Pull Plate with L Pull" },
-    { value: "FLW", label: "FLW - FL Pull Plate with W Pull" },
-    { value: "FSW", label: "FSW - FS Pull Plate with W Pull" },
-    { value: "MAL", label: "MAL - MA Pull Plate with L Pull" },
-    { value: "MSL", label: "MSL - MS Pull Plate with L Pull" },
-    { value: "STS", label: "STS - STS Pull (No Plate)" },
-    { value: "PTB", label: "PTB - PT Pull Plate with B Pull" },
-    { value: "PSB", label: "PSB - PS Pull Plate with B Pull" },
-    { value: "862", label: '862 - 10" CTC | 4" Wide | 1" diameter' },
-    { value: "863", label: '863 - 18" CTC | 4" Wide | 1" diameter' },
-    { value: "864", label: '864 - 10" CTC | 3-1/2" Wide | 3/4" diameter' },
+    { value: "WE", label: "WE - Wide Escutcheon", image: images.P700WE },
+    { value: "NE", label: "NE - Narrow Escutcheon", image: images.P700NE },
+    { value: "ET", label: "ET - ET Trim", image: images.ET700 },
+    {
+      value: "ER",
+      label: "ER - ET Trim + Rectangular Plate",
+      image: images.ER700,
+    },
+    {
+      value: "ES",
+      label: "ES - ET Trim + Sculpted Plate",
+      image: images.ES700,
+    },
+    {
+      value: "FLL",
+      label: "FLL - FL Pull Plate with L Pull",
+      image: images.PullFLL,
+    },
+    {
+      value: "FSL",
+      label: "FSL - FS Pull Plate with L Pull",
+      image: images.PullFLL,
+    },
+    {
+      value: "FLW",
+      label: "FLW - FL Pull Plate with W Pull",
+      image: images.PullFLW,
+    },
+    {
+      value: "FSW",
+      label: "FSW - FS Pull Plate with W Pull",
+      image: images.PullFLW,
+    },
+    {
+      value: "MAL",
+      label: "MAL - MA Pull Plate with L Pull",
+      image: images.PullMAL,
+    },
+    {
+      value: "MSL",
+      label: "MSL - MS Pull Plate with L Pull",
+      image: images.PullMAL,
+    },
+    { value: "STS", label: "STS - STS Pull (No Plate)", image: images.PullSTS },
+    {
+      value: "PTB",
+      label: "PTB - PT Pull Plate with B Pull",
+      image: images.PullPTB,
+    },
+    {
+      value: "PSB",
+      label: "PSB - PS Pull Plate with B Pull",
+      image: images.PullPTB,
+    },
+    {
+      value: "862",
+      label: '862 - 10" CTC | 4" Wide | 1" diameter',
+      image: images.Pull862,
+    },
+    {
+      value: "863",
+      label: '863 - 18" CTC | 4" Wide | 1" diameter',
+      image: images.Pull863,
+    },
+    {
+      value: "864",
+      label: '864 - 10" CTC | 3-1/2" Wide | 3/4" diameter',
+      image: images.Pull864,
+    },
   ];
 
   // Finish options using react‑select with images.
   const finishOptions = [
-    { value: "03", label: "03 - Brushed Nickel", image: images.finish03 },
-    { value: "04", label: "04 - Polished Chrome", image: images.finish04 },
-    { value: "09", label: "09 - Matte Black", image: images.finish09 },
-    { value: "10", label: "10 - Satin Bronze", image: images.finish10 },
-    { value: "10B", label: "10B - Antique Bronze", image: images.finish10B },
+    {
+      value: "03",
+      label: "03 - Bright brass, clear coated",
+      image: images.finish03,
+    },
+    {
+      value: "04",
+      label: "04 - Satin brass, clear coated",
+      image: images.finish04,
+    },
+    {
+      value: "09",
+      label: "09 - Bright bronze, clear coated",
+      image: images.finish09,
+    },
+    {
+      value: "10",
+      label: "10 - Satin bronze, clear coated",
+      image: images.finish10,
+    },
+    {
+      value: "10B",
+      label: "10B - Dark oxidized satin bronze, oil rubbed",
+      image: images.finish10B,
+    },
     {
       value: "10BE",
-      label: "10BE - Oil-Rubbed Bronze",
+      label: "10BE - Dark oxidized satin bronze-equivalent",
       image: images.finish10BE,
     },
-    { value: "10BL", label: "10BL - Black", image: images.finish10BL },
-    { value: "14", label: "14 - Bright Brass", image: images.finish14 },
-    { value: "15", label: "15 - Satin Gold", image: images.finish15 },
-    { value: "20D", label: "20D - Dark Bronze", image: images.finish20D },
-    { value: "26", label: "26 - Light Chrome", image: images.finish26 },
-    { value: "26D", label: "26D - Dark Nickel", image: images.finish26D },
-    { value: "BSP", label: "BSP - Brushed Stainless", image: images.finishBSP },
-    { value: "WSP", label: "WSP - White Stainless", image: images.finishWSP },
+    {
+      value: "10BL",
+      label: "10BL - Dark oxidized satin bronze, clear coated",
+      image: images.finish10BL,
+    },
+    {
+      value: "14",
+      label: "14 - Bright nickel plated, clear coated",
+      image: images.finish14,
+    },
+    {
+      value: "15",
+      label: "15 - Satin nickel plated, clear coated",
+      image: images.finish15,
+    },
+    {
+      value: "20D",
+      label: "20D - Dark oxidized statuary bronze, clear coated",
+      image: images.finish20D,
+    },
+    {
+      value: "26",
+      label: "26 - Bright chromium plated over nickel",
+      image: images.finish26,
+    },
+    {
+      value: "26D",
+      label: "26D - Satin chromium plated over nickel",
+      image: images.finish26D,
+    },
+    {
+      value: "BSP",
+      label: "BSP - Black suede powder coat, sprayed",
+      image: images.finishBSP,
+    },
+    {
+      value: "WSP",
+      label: "WSP - White suede powder coat, sprayed",
+      image: images.finishWSP,
+    },
   ];
 
   // Handlers for field changes
@@ -393,17 +723,39 @@ const TrimsForm = () => {
   };
 
   const handleOutsideFunctionChange = (e) => {
+    const selectedFunction = e.target.value;
+    const conflicts = functionConflicts[formData.device] || [];
+
+    if (formData.series === "7000" && conflicts.includes(selectedFunction)) {
+      setWarning(
+        `Function ${selectedFunction} is not available for the 7000 series.`
+      );
+      return;
+    }
+
     setFormData({
       ...formData,
-      outsideFunctionCode: e.target.value,
+      outsideFunctionCode: selectedFunction,
     });
+    setWarning("");
   };
 
   const handleInsideFunctionChange = (e) => {
+    const selectedFunction = e.target.value;
+    const conflicts = functionConflicts[formData.device] || [];
+
+    if (formData.series === "7000" && conflicts.includes(selectedFunction)) {
+      setWarning(
+        `Function ${selectedFunction} is not available for the 7000 series.`
+      );
+      return;
+    }
+
     setFormData({
       ...formData,
-      insideFunctionCode: e.target.value,
+      insideFunctionCode: selectedFunction,
     });
+    setWarning("");
   };
 
   const handleElectricalPrefixChange = (e) => {
@@ -457,117 +809,189 @@ const TrimsForm = () => {
     });
   };
 
-  // Add this with your other conflict mappings
-const trimConflicts = {
-  // Format: "device-function": [allowed trims]
-  "8800-04": ["FSL", "FSW", "MAL", "PSB", "STS"], // Trims with S as 2nd letter
-  // Add more device-function pairs as needed
-};
-
-  // Compute available trim options based on selected function codes.
-  const pullOnlyFunctions = ["28", "62", "63", "66"];
   const availableTrimOptions = (() => {
-    // Existing pull trim logic
-    let options = trimOptions;
-    if (pullOnlyFunctions) {
-      options = options.filter(opt => opt.value !== "ET");
+    const pullFunctions = ["28", "62", "63", "66"];
+
+    // 🔹 Special rule for 7000 series: Only ET, ER, and ES are allowed
+    if (formData.series === "7000") {
+      return trimOptions.filter((opt) =>
+        ["ET", "ER", "ES"].includes(opt.value)
+      );
     }
-  
-    // NEW: Trim conflicts check
-    if (formData.series !== "7000") {
-      const conflictKey = `${formData.device}-${formData.functionCode}`;
-      if (trimConflicts[conflictKey]) {
-        options = options.filter(opt => 
-          trimConflicts[conflictKey].includes(opt.value)
+
+    // 🔹 Special handling for 80 & PE80 series
+    if (["PE80"].includes(formData.series)) {
+      if (formData.functionCode === "04") {
+        return trimOptions.filter((opt) =>
+          [
+            "WE",
+            "NE",
+            "PSB",
+            "MSL",
+            "FSW",
+            "FSL",
+            "862",
+            "863",
+            "864",
+          ].includes(opt.value)
         );
       }
+      if (pullFunctions.includes(formData.functionCode)) {
+        return trimOptions.filter(
+          (opt) => !["PSB", "MSL", "ET", "WE", "NE"].includes(opt.value)
+        );
+      }
+      return trimOptions.filter((opt) =>
+        formData.series === "80"
+          ? opt.value === "ET"
+          : ["WE", "NE"].includes(opt.value)
+      );
     }
-    
-    return options;
+    if (["80"].includes(formData.series)) {
+      if (formData.functionCode === "04") {
+        return trimOptions.filter((opt) =>
+          ["ET", "PSB", "MSL", "FSW", "FSL", "862", "863", "864"].includes(
+            opt.value
+          )
+        );
+      }
+      if (pullFunctions.includes(formData.functionCode)) {
+        return trimOptions.filter(
+          (opt) => !["PSB", "MSL", "ET", "WE", "NE"].includes(opt.value)
+        );
+      }
+      return trimOptions.filter((opt) =>
+        formData.series === "80"
+          ? opt.value === "ET"
+          : ["WE", "NE"].includes(opt.value)
+      );
+    }
+
+    // 🔹 Special handling for 90 series
+    if (formData.series === "90") {
+      if (pullFunctions.includes(formData.functionCode)) {
+        return trimOptions.filter((opt) =>
+          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        );
+      }
+      if (formData.functionCode === "04") {
+        return trimOptions.filter((opt) =>
+          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        );
+      }
+      return trimOptions.filter((opt) => opt.value === "ET");
+    }
+
+    // 🔹 Default handling for other series
+    return trimOptions.filter((opt) => !["ER", "ES"].includes(opt.value));
   })();
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.series === "7000") {
-      const finishSuffix = formData.finish ? "-" + formData.finish : "";
-      // For 7000 series, if trim is "ET", use leverStyle; otherwise use the selected trim.
-      const trimText =
-        formData.trim === "ET"
-          ? formData.leverStyle
-            ? formData.leverStyle
-            : "ETL"
-          : formData.trim
-          ? formData.trim
-          : "ETL";
-      let outsideBase = formData.outsideFunctionCode.startsWith("0")
-        ? "70" + Number(formData.outsideFunctionCode).toString()
-        : "7" + formData.outsideFunctionCode;
-      let insideBase = formData.insideFunctionCode.startsWith("0")
-        ? "70" + Number(formData.insideFunctionCode).toString()
-        : "7" + formData.insideFunctionCode;
-      const insideTrim =
-        "MP-" + insideBase + "-2 " + trimText + " LH" + finishSuffix;
-      const outsideTrim = outsideBase + "-2 " + trimText + " RH" + finishSuffix;
-      setPartNumber(`Inside: ${insideTrim} | Outside: ${outsideTrim}`);
+
+    // 🔹 Handle 862, 863, 864 trims (Direct mapping)
+    if (["862", "863", "864"].includes(formData.trim)) {
+      setPartNumber(`${formData.trim} ${formData.finish}`);
       setNote("");
-    } else {
-      // For non-7000 series devices when using pull trims (trim !== "ET")
-      if (formData.trim !== "ET") {
-        const pullMapping = {
-          "04": "814",
-          10: "810",
-          28: "828",
-          63: "866",
-          66: "866",
-        };
-        const mappedBase = pullMapping[formData.functionCode];
-        if (mappedBase) {
-          // Include the trim and finish with appropriate separators
-          const trimPart = formData.trim ? ` ${formData.trim}` : "";
-          const finishPart = formData.finish ? ` ${formData.finish}` : "";
-          const finalNumber = `${mappedBase}${trimPart}${finishPart}`;
-          setPartNumber(finalNumber);
-          setNote("");
-          return;
-        }
-      }
-      // Otherwise, use partsData lookup.
-      const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
-      const partEntry = partsData.trimsParts[lookupKey] || "Not Found";
-      if (partEntry === "Not Found" || partEntry === "Not Available") {
-        setPartNumber("Not Available");
-        setNote("This configuration is not available. Please try another.");
+      return;
+    }
+
+    // 🔹 Special handling for 7000 series
+    if (formData.series === "7000") {
+      if (["ET", "ER", "ES"].includes(formData.trim)) {
+        // Generate prefixes but omit "55-" for non-7000 series
+        const prefix =
+          formData.electricalPrefixes.length > 0
+            ? formData.electricalPrefixes.filter((p) => p !== "55").join("-") +
+              "-"
+            : "";
+
+        // Ensure required fields are not undefined
+        const insideFunction = formData.insideFunctionCode || "";
+        const outsideFunction = formData.outsideFunctionCode || "";
+        const trim = formData.trim || "";
+        const lever = formData.leverStyle || "";
+        const handing = formData.handing || "";
+        const finish = formData.finish || "";
+        const thickness = formData.doorThickness || "";
+
+        const insidePartNumber = `MP-${prefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const outsidePartNumber = `${prefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+
+        // Display inside and outside part numbers correctly
+        setPartNumber(
+          <>
+            <strong>Outside:</strong> {outsidePartNumber} <br />
+            <strong>Inside:</strong> {insidePartNumber}
+          </>
+        );
+        setNote("");
         return;
       }
-      let generatedNumber = partEntry;
-      if (generatedNumber.includes("[handing]")) {
-        generatedNumber = generatedNumber.replace(
-          "[handing]",
-          formData.handing
-        );
-      }
-      if (generatedNumber.includes("[finish]")) {
-        generatedNumber = generatedNumber.replace("[finish]", formData.finish);
-      }
-      if (generatedNumber.includes("[thickness]")) {
-        generatedNumber = generatedNumber.replace(
-          "[thickness]",
-          formData.doorThickness
-        );
-      }
-      if (generatedNumber.includes("[trim]")) {
-        generatedNumber = generatedNumber.replace("[trim]", formData.trim);
-      }
-      if (generatedNumber.includes("[lever style]")) {
-        generatedNumber = generatedNumber.replace(
-          "[lever style]",
-          formData.leverStyle
-        );
-      }
-      setPartNumber(generatedNumber);
-      setNote("");
     }
+
+    // 🔹 Handling for 04 and 10 functions (ET, WE, or NE)
+    if (["04", "10"].includes(formData.functionCode)) {
+      if (["ET", "WE", "NE"].includes(formData.trim)) {
+        const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+        const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
+
+        if (partEntry === "Not Found" || partEntry === "Not Available") {
+          setPartNumber("Not Available");
+          setNote("This configuration is not available. Please try another.");
+          return;
+        }
+
+        let generatedNumber = partEntry
+          .replace("[handing]", formData.handing)
+          .replace("[finish]", formData.finish)
+          .replace("[thickness]", formData.doorThickness)
+          .replace("[trim]", formData.trim)
+          .replace("[lever style]", formData.leverStyle);
+
+        setPartNumber(generatedNumber);
+        setNote("");
+        return;
+      }
+    }
+
+    // 🔹 Handle pull functions (28, 62, 63, 66)
+    const pullMapping = {
+      "04": "814",
+      10: "810",
+      28: "828",
+      62: "866",
+      63: "866",
+      66: "866",
+    };
+
+    const mappedBase = pullMapping[formData.functionCode];
+    if (mappedBase) {
+      setPartNumber(`${mappedBase} ${formData.trim} ${formData.finish}`);
+      setNote("");
+      return;
+    }
+
+    // 🔹 Default lookup in trimsData
+    const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+    const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
+
+    if (partEntry === "Not Found" || partEntry === "Not Available") {
+      setPartNumber("Not Available");
+      setNote("This configuration is not available. Please try another.");
+      return;
+    }
+
+    let generatedNumber = partEntry
+      .replace("[handing]", formData.handing)
+      .replace("[finish]", formData.finish)
+      .replace("[thickness]", formData.doorThickness)
+      .replace("[trim]", formData.trim)
+      .replace("[lever style]", formData.leverStyle);
+
+    setPartNumber(generatedNumber);
+    setNote("");
   };
 
   // Reset handler
@@ -612,11 +1036,8 @@ const trimConflicts = {
   return (
     <div className="app-container">
       <h1 className="Heading">
-        Trims Part Number Lookup
+         Sargent <br />Trims Part Number Lookup <br />700 ET/WE/NE & Pull Trims
         <br />
-        🚧Under Construction🚧
-        <br />
-        🛑 Do Not Use Yet 🛑
       </h1>
       <form onSubmit={handleSubmit} className="part-form">
         {/* Device Series */}
@@ -632,8 +1053,6 @@ const trimConflicts = {
             <option value="PE80">PE80</option>
             <option value="90">90</option>
             <option value="7000">7000</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
           </select>
         </div>
 
@@ -695,11 +1114,21 @@ const trimConflicts = {
                 required
               >
                 <option value="">Select Outside Function</option>
-                {functionOptions.map((func) => (
-                  <option key={func.value} value={func.value}>
-                    {func.label}
-                  </option>
-                ))}
+                {functionOptions.map((func) => {
+                  const isDisabled =
+                    functionConflicts[formData.device] &&
+                    functionConflicts[formData.device].includes(func.value);
+                  return (
+                    <option
+                      key={func.value}
+                      value={func.value}
+                      disabled={isDisabled}
+                    >
+                      {isDisabled ? "(Not available) " : ""}
+                      {func.label}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div className="form-group">
@@ -710,14 +1139,45 @@ const trimConflicts = {
                 required
               >
                 <option value="">Select Inside Function</option>
-                {functionOptions.map((func) => (
-                  <option key={func.value} value={func.value}>
-                    {func.label}
-                  </option>
-                ))}
+                {functionOptions.map((func) => {
+                  const isDisabled =
+                    functionConflicts[formData.device] &&
+                    functionConflicts[formData.device].includes(func.value);
+                  return (
+                    <option
+                      key={func.value}
+                      value={func.value}
+                      disabled={isDisabled}
+                    >
+                      {isDisabled ? "(Not available) " : ""}
+                      {func.label}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </>
+        )}
+
+        {formData.series === "7000" && (
+          <div className="form-group">
+            <label>Handing:</label>
+            <select
+              value={formData.handing}
+              onChange={(e) =>
+                setFormData({ ...formData, handing: e.target.value })
+              }
+              required
+            >
+              <option value="">Select Handing</option>
+              <option value="LHR">
+                Left Hand Reverse (LHR) | Outside Trim = LH | Inside Trim = RH
+              </option>
+              <option value="RHR">
+                Right Hand Reverse (RHR) Outside RH/Inside LH
+              </option>
+            </select>
+          </div>
         )}
 
         {/* Handing (only for non-7000 series) */}
@@ -743,17 +1203,23 @@ const trimConflicts = {
           <div className="form-group">
             <label>Mechanical/Electrical Prefixes:</label>
             <div className="checkbox-group">
-              {electricalPrefixes.map((prefix) => (
-                <label key={prefix.code}>
-                  <input
-                    type="checkbox"
-                    value={prefix.code}
-                    checked={formData.electricalPrefixes.includes(prefix.code)}
-                    onChange={handleElectricalPrefixChange}
-                  />
-                  {prefix.code} — {prefix.name}
-                </label>
-              ))}
+              {electricalPrefixes
+                .filter(
+                  (prefix) => formData.series === "7000" || prefix.code !== "55"
+                ) // 👈 Hides '55' unless series is 7000
+                .map((prefix) => (
+                  <label key={prefix.code}>
+                    <input
+                      type="checkbox"
+                      value={prefix.code}
+                      checked={formData.electricalPrefixes.includes(
+                        prefix.code
+                      )}
+                      onChange={handleElectricalPrefixChange}
+                    />
+                    {prefix.code} — {prefix.name}
+                  </label>
+                ))}
             </div>
           </div>
         )}
@@ -778,7 +1244,7 @@ const trimConflicts = {
         )}
 
         {/* Cylinder Prefixes as a multi-select */}
-        {formData.series && (
+        {shouldShowCylinderDropdown && (
           <div className="form-group">
             <label>Cylinder Prefixes:</label>
             <Select
@@ -789,7 +1255,7 @@ const trimConflicts = {
               )}
               onChange={handleCylinderPrefixChange}
               placeholder="Select Cylinder Prefixes"
-              isOptionDisabled={isCylinderOptionDisabled}
+              isOptionDisabled={isCylinderOptionDisabled} // Use the generic function here
               styles={customStyles}
             />
           </div>
@@ -797,7 +1263,15 @@ const trimConflicts = {
 
         {/* Trim Selection */}
         <div className="form-group">
-          <label>Trim:</label>
+          <label
+            style={{
+              fontWeight: "bold",
+              fontSize: "2em",
+              marginBottom: "8px",
+            }}
+          >
+            Trim:
+          </label>
           <Select
             options={availableTrimOptions}
             onChange={handleTrimChange}
@@ -805,12 +1279,22 @@ const trimConflicts = {
               trimOptions.find((opt) => opt.value === formData.trim) || null
             }
             placeholder="Select Trim"
-            styles={customStyles}
+            components={{
+              Option: CustomTrimOption,
+              SingleValue: CustomTrimSingleValue,
+            }}
+            styles={customTrimStyles} // New styling applied
           />
         </div>
 
-        {/* NEW: Lever Style Selection for ET trim */}
-        {formData.trim === "ET" && (
+        {((formData.series === "7000" &&
+          (formData.trim === "ET" ||
+            formData.trim === "ER" ||
+            formData.trim === "ES")) ||
+          (formData.series !== "7000" &&
+            (formData.trim === "ET" ||
+              formData.trim === "WE" ||
+              formData.trim === "NE"))) && (
           <div className="form-group">
             <label>Lever Style:</label>
             <Select
@@ -865,19 +1349,14 @@ const trimConflicts = {
         <div ref={resultRef} className="result-container">
           <h2>Found Part Number:</h2>
           <div className="part-number">
-            {selectedPrefixesDisplay} {partNumber}
+            {formData.series === "7000"
+              ? partNumber
+              : `${selectedPrefixesDisplay} ${partNumber}`}
           </div>
           {note && <div className="note">{note}</div>}
           {warning && (
             <div className="note" style={{ color: "red" }}>
               {warning}
-            </div>
-          )}
-          {selectedPrefixesDisplay.length > 0 && (
-            <div
-              style={{ fontSize: "0.8em", color: "#666", marginTop: "0.5rem" }}
-            >
-              Selected Prefixes: {selectedPrefixesDisplay}
             </div>
           )}
         </div>
