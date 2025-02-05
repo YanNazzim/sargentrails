@@ -909,12 +909,20 @@ const TrimsForm = () => {
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
       if (["ET", "ER", "ES"].includes(formData.trim)) {
-        // Generate prefixes but omit "55-" for non-7000 series
-        const prefix =
-          formData.electricalPrefixes.length > 0
-            ? formData.electricalPrefixes.filter((p) => p !== "55").join("-") +
-              "-"
-            : "";
+        // Separate "55-" for inside and "54-" for outside
+        const insidePrefix = formData.electricalPrefixes.includes("55")
+          ? "55-"
+          : "";
+        const outsidePrefix = formData.electricalPrefixes.includes("54")
+          ? "54-"
+          : "";
+
+        // Filter out "55" and "54" when generating general prefixes
+        const generalPrefixes = formData.electricalPrefixes.filter(
+          (p) => p !== "55" && p !== "54"
+        );
+        const generalPrefix =
+          generalPrefixes.length > 0 ? generalPrefixes.join("-") + "-" : "";
 
         // Ensure required fields are not undefined
         const insideFunction = formData.insideFunctionCode || "";
@@ -925,8 +933,9 @@ const TrimsForm = () => {
         const finish = formData.finish || "";
         const thickness = formData.doorThickness || "";
 
-        const insidePartNumber = `MP-${prefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
-        const outsidePartNumber = `${prefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        // Construct full part numbers with correct prefixes
+        const insidePartNumber = `MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const outsidePartNumber = `${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
 
         // Display inside and outside part numbers correctly
         setPartNumber(
