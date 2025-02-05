@@ -819,8 +819,35 @@ const TrimsForm = () => {
       );
     }
 
-    // 🔹 Special handling for 80 & PE80 series
+    // 🔹 Special handling for 80 series (No WE/NE)
+    if (["80"].includes(formData.series)) {
+      if (formData.functionCode === "10") {
+        return trimOptions.filter((opt) =>
+          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        ); // Show ET + Pull trims
+      }
+      if (formData.functionCode === "04") {
+        return trimOptions.filter((opt) =>
+          ["ET", "PSB", "MSL", "FSW", "FSL", "862", "863", "864"].includes(
+            opt.value
+          )
+        );
+      }
+      if (pullFunctions.includes(formData.functionCode)) {
+        return trimOptions.filter((opt) =>
+          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        );
+      }
+      return trimOptions.filter((opt) => opt.value === "ET"); // ❌ Remove WE/NE
+    }
+
+    // 🔹 Special handling for PE80 series (No ET)
     if (["PE80"].includes(formData.series)) {
+      if (formData.functionCode === "10") {
+        return trimOptions.filter((opt) =>
+          ["WE", "NE", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        ); // Show WE/NE + Pull trims
+      }
       if (formData.functionCode === "04") {
         return trimOptions.filter((opt) =>
           [
@@ -837,38 +864,20 @@ const TrimsForm = () => {
         );
       }
       if (pullFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter(
-          (opt) => !["PSB", "MSL", "ET", "WE", "NE"].includes(opt.value)
-        );
-      }
-      return trimOptions.filter((opt) =>
-        formData.series === "80"
-          ? opt.value === "ET"
-          : ["WE", "NE"].includes(opt.value)
-      );
-    }
-    if (["80"].includes(formData.series)) {
-      if (formData.functionCode === "04") {
         return trimOptions.filter((opt) =>
-          ["ET", "PSB", "MSL", "FSW", "FSL", "862", "863", "864"].includes(
-            opt.value
-          )
+          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
         );
       }
-      if (pullFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter(
-          (opt) => !["PSB", "MSL", "ET", "WE", "NE"].includes(opt.value)
-        );
-      }
-      return trimOptions.filter((opt) =>
-        formData.series === "80"
-          ? opt.value === "ET"
-          : ["WE", "NE"].includes(opt.value)
-      );
+      return trimOptions.filter((opt) => ["WE", "NE"].includes(opt.value)); // ❌ Remove ET
     }
 
-    // 🔹 Special handling for 90 series
+    // 🔹 Special handling for 90 series (No WE/NE)
     if (formData.series === "90") {
+      if (formData.functionCode === "10") {
+        return trimOptions.filter((opt) =>
+          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
+        ); // Show ET + Pull trims
+      }
       if (pullFunctions.includes(formData.functionCode)) {
         return trimOptions.filter((opt) =>
           ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
@@ -879,7 +888,7 @@ const TrimsForm = () => {
           ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
         );
       }
-      return trimOptions.filter((opt) => opt.value === "ET");
+      return trimOptions.filter((opt) => opt.value === "ET"); // ❌ Remove WE/NE
     }
 
     // 🔹 Default handling for other series
@@ -1036,7 +1045,9 @@ const TrimsForm = () => {
   return (
     <div className="app-container">
       <h1 className="Heading">
-         Sargent <br />Trims Part Number Lookup <br />700 ET/WE/NE & Pull Trims
+        Sargent <br />
+        Trims Part Number Lookup <br />
+        700 ET/WE/NE & Pull Trims
         <br />
       </h1>
       <form onSubmit={handleSubmit} className="part-form">
