@@ -273,4 +273,10 @@ export const trimsData = {
     "90-9900-75": "775 [trim][lever style] [handing] [finish] [thickness]",
     "90-9900-76": "776 [trim][lever style] [handing] [finish] [thickness]",
   },
+
+  cylinders: {
+    "80-8800-04": { "1-3/4": "#34", "2": "#35", "2-1/4": "#36" },
+    "80-8900-04": { "1-3/4": "#46", "2": "#47", "2-1/4": "#48" },
+  },
+  
 };

@@ -898,14 +898,28 @@ const TrimsForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
+    const thickness = formData.doorThickness || "1-3/4"; // Default to 1-3/4"
+  
+    
     // 🔹 Handle 862, 863, 864 trims (Direct mapping)
     if (["862", "863", "864"].includes(formData.trim)) {
       setPartNumber(`${formData.trim} ${formData.finish}`);
       setNote("");
       return;
     }
-
+  
+    // Helper function to lookup cylinder based on series-device-function and door thickness.
+    const getCylinderUsed = (lookupKey) => {
+      const cylinderData = trimsData.cylinders && trimsData.cylinders[lookupKey];
+      // If a matching cylinder object exists and a value for the selected door thickness exists,
+      // return that value; otherwise, return a default message.
+      return cylinderData && thickness in cylinderData
+      ? cylinderData[thickness]
+      : "This device doesn’t use a cylinder or it may not be set up yet";
+    
+    };
+  
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
       if (["ET", "ER", "ES"].includes(formData.trim)) {
@@ -916,14 +930,14 @@ const TrimsForm = () => {
         const outsidePrefix = formData.electricalPrefixes.includes("54")
           ? "54-"
           : "";
-
+  
         // Filter out "55" and "54" when generating general prefixes
         const generalPrefixes = formData.electricalPrefixes.filter(
           (p) => p !== "55" && p !== "54"
         );
         const generalPrefix =
           generalPrefixes.length > 0 ? generalPrefixes.join("-") + "-" : "";
-
+  
         // Ensure required fields are not undefined
         const insideFunction = formData.insideFunctionCode || "";
         const outsideFunction = formData.outsideFunctionCode || "";
@@ -931,49 +945,55 @@ const TrimsForm = () => {
         const lever = formData.leverStyle || "";
         const handing = formData.handing || "";
         const finish = formData.finish || "";
-        const thickness = formData.doorThickness || "";
-
-        // Construct full part numbers with correct prefixes
+  
+        // Build the inside and outside part numbers
         const insidePartNumber = `MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
         const outsidePartNumber = `${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
-
-        // Display inside and outside part numbers correctly
-        setPartNumber(
-          <>
-            <strong>Outside:</strong> {outsidePartNumber} <br />
-            <strong>Inside:</strong> {insidePartNumber}
-          </>
-        );
+  
+        // Use a lookup key based on series-device-function for the cylinder data.
+        const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+        const cylinderUsed = getCylinderUsed(cylinderKey);
+  
+        // Construct the final output as a string with newline characters.
+        const finalPartNumber = 
+        `Outside: ${outsidePartNumber}<br />
+         Inside: ${insidePartNumber}<br />
+         Cylinder Used: ${cylinderUsed}`;
+      setPartNumber(finalPartNumber);
+      
         setNote("");
         return;
       }
     }
-
+  
     // 🔹 Handling for 04 and 10 functions (ET, WE, or NE)
     if (["04", "10"].includes(formData.functionCode)) {
       if (["ET", "WE", "NE"].includes(formData.trim)) {
         const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
         const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
-
+  
         if (partEntry === "Not Found" || partEntry === "Not Available") {
           setPartNumber("Not Available");
           setNote("This configuration is not available. Please try another.");
           return;
         }
-
+  
         let generatedNumber = partEntry
           .replace("[handing]", formData.handing)
           .replace("[finish]", formData.finish)
-          .replace("[thickness]", formData.doorThickness)
+          .replace("[thickness]", thickness)
           .replace("[trim]", formData.trim)
           .replace("[lever style]", formData.leverStyle);
-
-        setPartNumber(generatedNumber);
+  
+        const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+        const cylinderUsed = getCylinderUsed(cylinderKey);
+  
+        setPartNumber(`${generatedNumber}<br />Cylinder Used: ${cylinderUsed}`);
         setNote("");
         return;
       }
     }
-
+  
     // 🔹 Handle pull functions (28, 62, 63, 66)
     const pullMapping = {
       "04": "814",
@@ -983,34 +1003,37 @@ const TrimsForm = () => {
       63: "866",
       66: "866",
     };
-
     const mappedBase = pullMapping[formData.functionCode];
     if (mappedBase) {
-      setPartNumber(`${mappedBase} ${formData.trim} ${formData.finish}`);
+      // For pull functions, assume no cylinder is used.
+      setPartNumber(
+        `${mappedBase} ${formData.trim} ${formData.finish}\nCylinder Used: This device doesn’t use a cylinder`
+      );
       setNote("");
       return;
     }
-
+  
     // 🔹 Default lookup in trimsData
     const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
     const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
-
     if (partEntry === "Not Found" || partEntry === "Not Available") {
       setPartNumber("Not Available");
       setNote("This configuration is not available. Please try another.");
       return;
     }
-
     let generatedNumber = partEntry
       .replace("[handing]", formData.handing)
       .replace("[finish]", formData.finish)
       .replace("[thickness]", formData.doorThickness)
       .replace("[trim]", formData.trim)
       .replace("[lever style]", formData.leverStyle);
-
-    setPartNumber(generatedNumber);
+  
+    const cylinderUsed = getCylinderUsed(lookupKey);
+    setPartNumber(`${generatedNumber}\nCylinder Used: ${cylinderUsed}`);
     setNote("");
   };
+  
+  
 
   // Reset handler
   const handleReset = () => {
@@ -1368,11 +1391,8 @@ const TrimsForm = () => {
       {partNumber && (
         <div ref={resultRef} className="result-container">
           <h2>Found Part Number:</h2>
-          <div className="part-number">
-            {formData.series === "7000"
-              ? partNumber
-              : `${selectedPrefixesDisplay} ${partNumber}`}
-          </div>
+          <div className="part-number" dangerouslySetInnerHTML={{ __html: formData.series === "7000" ? partNumber : `${selectedPrefixesDisplay} ${partNumber}` }} />
+
           {note && <div className="note">{note}</div>}
           {warning && (
             <div className="note" style={{ color: "red" }}>
