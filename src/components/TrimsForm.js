@@ -916,7 +916,7 @@ const TrimsForm = () => {
       // return that value; otherwise, return a default message.
       return cylinderData && thickness in cylinderData
       ? cylinderData[thickness]
-      : "This device doesn’t use a cylinder or it may not be set up yet";
+      : "This device doesn’t use a cylinder or it may not be set up yet (Contact TPS)";
     
     };
   
