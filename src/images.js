@@ -97,6 +97,7 @@ const images = {
     PullPTB: require('./images/PullPTB.png'),
     PullFLW: require('./images/PullFLW.png'),
     PullMAL: require('./images/PullMAL.png'),
+    PullSTS: require('./images/PullSTS.png'),
     Pull862: require('./images/Pull862.png'),
     Pull863: require('./images/Pull863.png'),
     Pull864: require('./images/Pull864.png'),

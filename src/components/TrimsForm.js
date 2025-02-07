@@ -706,22 +706,22 @@ const TrimsForm = () => {
   };
 
   const handleFunctionChange = (e) => {
-    setFormData({
-      ...formData,
-      functionCode: e.target.value,
-    });
-    if (
-      (e.target.value === "73" || e.target.value === "74") &&
-      formData.electricalPrefixes.length > 0
-    ) {
-      setWarning(
-        "If your 7000 series device has an ELR (Electric latch retraction) then you cannot pair it with this electrified trim function. Please choose a mechanical function."
+    const newFunction = e.target.value;
+    setFormData((prev) => {
+      const validTrims = getAvailableTrims(
+        prev.series,
+        prev.device,
+        newFunction
       );
-    } else {
-      setWarning("");
-    }
+      return {
+        ...prev,
+        functionCode: newFunction,
+        trim: validTrims.includes(prev.trim) ? prev.trim : validTrims[0], // Auto-adjust trim
+      };
+    });
   };
 
+  // Update handleOutsideFunctionChange in 7000 series section
   const handleOutsideFunctionChange = (e) => {
     const selectedFunction = e.target.value;
     const conflicts = functionConflicts[formData.device] || [];
@@ -733,9 +733,14 @@ const TrimsForm = () => {
       return;
     }
 
+    // NEW: Auto-set inside function to 16 when outside is 16
+    const newInsideFunction =
+      selectedFunction === "16" ? "16" : formData.insideFunctionCode;
+
     setFormData({
       ...formData,
       outsideFunctionCode: selectedFunction,
+      insideFunctionCode: newInsideFunction,
     });
     setWarning("");
   };
@@ -809,117 +814,83 @@ const TrimsForm = () => {
     });
   };
 
-  const availableTrimOptions = (() => {
-    const pullFunctions = ["28", "62", "63", "66"];
-
-    // 🔹 Special rule for 7000 series: Only ET, ER, and ES are allowed
-    if (formData.series === "7000") {
-      return trimOptions.filter((opt) =>
-        ["ET", "ER", "ES"].includes(opt.value)
-      );
+  const getAvailableTrims = (series, device, functionCode) => {
+    // 🔹 Function 04 on 8800/PE8800 (Special FS/MS/PS Pulls + ET/WE/NE)
+    if (functionCode === "04" && (device === "8800" || device === "PE8800")) {
+      return [
+        "FSW",
+        "FSL",
+        "PSB",
+        "MSL",
+        "STS",
+        "862",
+        "863",
+        "864",
+        ...(series === "PE80" ? ["WE", "NE"] : ["ET"]), // PE80 → WE/NE | 80/90/7000 → ET
+      ];
     }
 
-    // 🔹 Special handling for 80 series (No WE/NE)
-    if (["80"].includes(formData.series)) {
-      if (formData.functionCode === "10") {
-        return trimOptions.filter((opt) =>
-          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        ); // Show ET + Pull trims
-      }
-      if (formData.functionCode === "04") {
-        return trimOptions.filter((opt) =>
-          ["ET", "PSB", "MSL", "FSW", "FSL", "862", "863", "864"].includes(
-            opt.value
-          )
-        );
-      }
-      if (pullFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter((opt) =>
-          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        );
-      }
-      return trimOptions.filter((opt) => opt.value === "ET"); // ❌ Remove WE/NE
+    // 🔹 Function 04 on any other device (Regular FL/MA/PTB Pulls + ET/WE/NE)
+    if (functionCode === "04" || functionCode === "10") {
+      return [
+        "FLL",
+        "FLW",
+        "MAL",
+        "PTB",
+        "STS",
+        "862",
+        "863",
+        "864",
+        ...(series === "PE80" ? ["WE", "NE"] : ["ET"]), // PE80 → WE/NE | 80/90/7000 → ET
+      ];
     }
 
-    // 🔹 Special handling for PE80 series (No ET)
-    if (["PE80"].includes(formData.series)) {
-      if (formData.functionCode === "10") {
-        return trimOptions.filter((opt) =>
-          ["WE", "NE", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        ); // Show WE/NE + Pull trims
-      }
-      if (formData.functionCode === "04") {
-        return trimOptions.filter((opt) =>
-          [
-            "WE",
-            "NE",
-            "PSB",
-            "MSL",
-            "FSW",
-            "FSL",
-            "862",
-            "863",
-            "864",
-          ].includes(opt.value)
-        );
-      }
-      if (pullFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter((opt) =>
-          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        );
-      }
-      return trimOptions.filter((opt) => ["WE", "NE"].includes(opt.value)); // ❌ Remove ET
+    // 🔹 Pull functions (28, 62, 63, 66)
+    if (["28", "62", "63", "66"].includes(functionCode)) {
+      return ["FLL", "FLW", "MAL", "PTB", "STS"];
     }
 
-    // 🔹 Special handling for 90 series (No WE/NE)
-    if (formData.series === "90") {
-      if (formData.functionCode === "10") {
-        return trimOptions.filter((opt) =>
-          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        ); // Show ET + Pull trims
-      }
-      if (pullFunctions.includes(formData.functionCode)) {
-        return trimOptions.filter((opt) =>
-          ["MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        );
-      }
-      if (formData.functionCode === "04") {
-        return trimOptions.filter((opt) =>
-          ["ET", "MAL", "FLL", "FLW", "PTB"].includes(opt.value)
-        );
-      }
-      return trimOptions.filter((opt) => opt.value === "ET"); // ❌ Remove WE/NE
+    if (series === "7000") {
+      return ["ET", "ER", "ES"];
     }
 
-    // 🔹 Default handling for other series
-    return trimOptions.filter((opt) => !["ER", "ES"].includes(opt.value));
-  })();
+    // 🔹 Trim-only functions
+    return series === "PE80" ? ["WE", "NE"] : ["ET"];
+  };
+
+  // Get the list of valid trims
+  const availableTrimOptions = trimOptions.filter((opt) =>
+    getAvailableTrims(
+      formData.series,
+      formData.device,
+      formData.functionCode
+    ).includes(opt.value)
+  );
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const thickness = formData.doorThickness || "1-3/4"; // Default to 1-3/4"
-  
-    
+
     // 🔹 Handle 862, 863, 864 trims (Direct mapping)
     if (["862", "863", "864"].includes(formData.trim)) {
       setPartNumber(`${formData.trim} ${formData.finish}`);
       setNote("");
       return;
     }
-  
+
     // Helper function to lookup cylinder based on series-device-function and door thickness.
     const getCylinderUsed = (lookupKey) => {
-      const cylinderData = trimsData.cylinders && trimsData.cylinders[lookupKey];
+      const cylinderData =
+        trimsData.cylinders && trimsData.cylinders[lookupKey];
       // If a matching cylinder object exists and a value for the selected door thickness exists,
       // return that value; otherwise, return a default message.
       return cylinderData && thickness in cylinderData
-      ? cylinderData[thickness]
-      : "This device doesn’t use a cylinder or it may not be set up yet (Contact TPS)";
-    
+        ? cylinderData[thickness]
+        : "This device doesn’t use a cylinder or it may not be set up yet (Contact TPS)";
     };
-  
+
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
       if (["ET", "ER", "ES"].includes(formData.trim)) {
@@ -930,14 +901,14 @@ const TrimsForm = () => {
         const outsidePrefix = formData.electricalPrefixes.includes("54")
           ? "54-"
           : "";
-  
+
         // Filter out "55" and "54" when generating general prefixes
         const generalPrefixes = formData.electricalPrefixes.filter(
           (p) => p !== "55" && p !== "54"
         );
         const generalPrefix =
           generalPrefixes.length > 0 ? generalPrefixes.join("-") + "-" : "";
-  
+
         // Ensure required fields are not undefined
         const insideFunction = formData.insideFunctionCode || "";
         const outsideFunction = formData.outsideFunctionCode || "";
@@ -945,55 +916,57 @@ const TrimsForm = () => {
         const lever = formData.leverStyle || "";
         const handing = formData.handing || "";
         const finish = formData.finish || "";
-  
+
         // Build the inside and outside part numbers
         const insidePartNumber = `MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
         const outsidePartNumber = `${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
-  
+
         // Use a lookup key based on series-device-function for the cylinder data.
         const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
         const cylinderUsed = getCylinderUsed(cylinderKey);
-  
+
         // Construct the final output as a string with newline characters.
-        const finalPartNumber = 
-        `Outside: ${outsidePartNumber}<br />
+        const finalPartNumber = `Outside: ${outsidePartNumber}<br />
          Inside: ${insidePartNumber}<br />
          Cylinder Used: ${cylinderUsed}`;
-      setPartNumber(finalPartNumber);
-      
+        setPartNumber(finalPartNumber);
+
         setNote("");
         return;
       }
     }
-  
+
     // 🔹 Handling for 04 and 10 functions (ET, WE, or NE)
     if (["04", "10"].includes(formData.functionCode)) {
       if (["ET", "WE", "NE"].includes(formData.trim)) {
         const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
         const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
-  
+
         if (partEntry === "Not Found" || partEntry === "Not Available") {
           setPartNumber("Not Available");
           setNote("This configuration is not available. Please try another.");
           return;
         }
-  
+
         let generatedNumber = partEntry
           .replace("[handing]", formData.handing)
           .replace("[finish]", formData.finish)
           .replace("[thickness]", thickness)
           .replace("[trim]", formData.trim)
           .replace("[lever style]", formData.leverStyle);
-  
+
         const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
         const cylinderUsed = getCylinderUsed(cylinderKey);
-  
-        setPartNumber(`${generatedNumber}<br />Cylinder Used: ${cylinderUsed}`);
+
+        const partNumber1 = `${generatedNumber}<br />
+          Cylinder Used: ${cylinderUsed}`;
+
+        setPartNumber(partNumber1);
         setNote("");
         return;
       }
     }
-  
+
     // 🔹 Handle pull functions (28, 62, 63, 66)
     const pullMapping = {
       "04": "814",
@@ -1007,12 +980,12 @@ const TrimsForm = () => {
     if (mappedBase) {
       // For pull functions, assume no cylinder is used.
       setPartNumber(
-        `${mappedBase} ${formData.trim} ${formData.finish}\nCylinder Used: This device doesn’t use a cylinder`
+        `${mappedBase} ${formData.trim} ${formData.finish}\nCylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS)`
       );
       setNote("");
       return;
     }
-  
+
     // 🔹 Default lookup in trimsData
     const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
     const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
@@ -1027,13 +1000,11 @@ const TrimsForm = () => {
       .replace("[thickness]", formData.doorThickness)
       .replace("[trim]", formData.trim)
       .replace("[lever style]", formData.leverStyle);
-  
+
     const cylinderUsed = getCylinderUsed(lookupKey);
-    setPartNumber(`${generatedNumber}\nCylinder Used: ${cylinderUsed}`);
+    setPartNumber(`${generatedNumber} <br /> Cylinder Used: ${cylinderUsed}`);
     setNote("");
   };
-  
-  
 
   // Reset handler
   const handleReset = () => {
@@ -1180,12 +1151,14 @@ const TrimsForm = () => {
                 value={formData.insideFunctionCode}
                 onChange={handleInsideFunctionChange}
                 required
+                disabled={formData.outsideFunctionCode === "16"}
               >
                 <option value="">Select Inside Function</option>
                 {functionOptions.map((func) => {
                   const isDisabled =
-                    functionConflicts[formData.device] &&
-                    functionConflicts[formData.device].includes(func.value);
+                    (formData.outsideFunctionCode === "16" &&
+                      func.value !== "16") ||
+                    functionConflicts[formData.device]?.includes(func.value);
                   return (
                     <option
                       key={func.value}
@@ -1391,7 +1364,15 @@ const TrimsForm = () => {
       {partNumber && (
         <div ref={resultRef} className="result-container">
           <h2>Found Part Number:</h2>
-          <div className="part-number" dangerouslySetInnerHTML={{ __html: formData.series === "7000" ? partNumber : `${selectedPrefixesDisplay} ${partNumber}` }} />
+          <div
+            className="part-number"
+            dangerouslySetInnerHTML={{
+              __html:
+                formData.series === "7000"
+                  ? partNumber
+                  : `${selectedPrefixesDisplay} ${partNumber}`,
+            }}
+          />
 
           {note && <div className="note">{note}</div>}
           {warning && (
