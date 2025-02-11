@@ -1,3 +1,5 @@
+/* App.css if needed */
+
 /* General Styles */
 body {
   background-color: #f8f9fa; /* Slightly darker background for better contrast */
@@ -133,27 +135,64 @@ button {
 /* Result Container */
 .result-container {
   margin-top: 2rem;
-  padding: 1.8rem;
-  background-color: #e9f5ff;
-  border-radius: 6px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
 .part-number {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #003366;
-  padding: 1rem;
-  background-color: #ffffff;
-  border-radius: 5px;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #2d3748;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
   text-align: center;
+  line-height: 1.8;
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+
+.output-line {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+}
+
+.output-line:last-child {
+  border-bottom: none;
+}
+
+/* Add this to your CSS */
+.output-line strong {
+  min-width: 140px;
+  color: #4a5568;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.output-line span {
+  color: #1a365d;
+  font-weight: 500;
+  margin-left: 1rem;
 }
 
 .note {
-  font-size: 1rem;
-  color: #666;
-  margin-left: 12px;
-  font-style: italic;
+  font-size: 0.95rem;
+  color: #718096;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff9db;
+  border-radius: 6px;
+  border-left: 4px solid #ffd700;
+}
+
+/* Warning message */
+.note[style*="color: red"] {
+  background-color: #fff5f5;
+  border-left-color: #fc8181;
+  color: #c53030 !important;
 }
 
 /* Accessibility & Contrast Enhancements */
