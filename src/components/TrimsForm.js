@@ -930,16 +930,16 @@ const TrimsForm = () => {
         // Construct the final output with trim and cylinder details.
         if (typeof cylinderData === "object") {
           setPartNumber(`
+            <strong>Outside:</strong> ${outsidePartNumber} <br />
+            <strong>Inside:</strong> ${insidePartNumber} <br />
             <strong>Outside Cylinder:</strong> ${cylinderData.outside} <br />
             <strong>Inside Cylinder:</strong> ${cylinderData.inside} <br />
-            <strong>Outside:</strong> ${outsidePartNumber} <br />
-            <strong>Inside:</strong> ${insidePartNumber}
           `);
         } else {
           setPartNumber(`
-            ${cylinderData} <br />
             <strong>Outside:</strong> ${outsidePartNumber} <br />
-            <strong>Inside:</strong> ${insidePartNumber}
+            <strong>Inside:</strong> ${insidePartNumber} <br />
+            ${cylinderData} <br />
           `);
         }
 
@@ -968,8 +968,8 @@ const TrimsForm = () => {
           .replace("[lever style]", formData.leverStyle);
 
         setPartNumber(`
+          ${needs31Prefix ? "31 " : ""}${selectedPrefixesDisplay} ${generatedNumber}<br />
           <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
-          ${needs31Prefix ? "31 " : ""}${selectedPrefixesDisplay} ${generatedNumber}
         `);
 
         setNote("");
@@ -1015,8 +1015,8 @@ const TrimsForm = () => {
       .replace("[lever style]", formData.leverStyle);
 
     setPartNumber(`
-      <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
       ${generatedNumber}
+      <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
     `);
     setNote("");
   };
