@@ -77,7 +77,7 @@ const RailsForm = () => {
 
   const options = {
     stile: [
-      { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500, 8600" },
+      { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500" },
       { code: "Wide", display: "Wide Stile - 8600, 8700, NB-8700, 8800, 8900" },
       { code: "LowProfile", display: "Low Profile - LP8600, LR8600, LS8600" },
       { code: "DummyRailInActive", display: "8893 In-Active Dummy Rail" },
