@@ -1015,7 +1015,7 @@ const TrimsForm = () => {
       .replace("[lever style]", formData.leverStyle);
 
     setPartNumber(`
-      ${generatedNumber}
+      ${generatedNumber} <br />
       <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
     `);
     setNote("");
