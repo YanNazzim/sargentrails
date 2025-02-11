@@ -277,6 +277,15 @@ export const trimsData = {
   cylinders: {
     "80-8800-04": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
     "80-8900-04": { "1-3/4": "#46", "2": "#48", "2-1/4": "#50" },
-  },
+    "80-8600-06": { "1-3/4": "#40", "2": "#42", "2-1/4": "#44" },
+    "80-8700-10": { "1-3/4": "#55", "2": "#56", "2-1/4": "#58" },
+
+    "PE80-PE8300-04": { "1-3/4": "#60", "2": "#61", "2-1/4": "#62" },
+
+  // 7000 Series (7000-OutsideFunction-InsideFunction)
+  "7000-06-15": { "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" }, "2": { outside: "Non-Cylinder Function", inside: "#41" }, "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" } },
+  "7000-04-40": { "1-3/4": { outside: "#55", inside: "#60" }, "2": { outside: "#56", inside: "#61" }, "2-1/4": { outside: "#57", inside: "#62" } },
+  "7000-73-74": { "1-3/4": { outside: "#20", inside: "#25" }, "2": { outside: "#21", inside: "#26" }, "2-1/4": { outside: "#22", inside: "#27" } },
+}
   
 };

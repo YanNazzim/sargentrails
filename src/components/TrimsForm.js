@@ -522,14 +522,6 @@ const TrimsForm = () => {
     return false;
   };
 
-  // Define door thickness options.
-  const doorThicknessOptions = [
-    { value: "1-3/4", label: '1-3/4"' },
-    { value: "2", label: '2"' },
-    { value: "2-1/4", label: '2-1/4"' },
-    { value: "QSPAR", label: 'QSPAR for anything over 2-1/4"' },
-  ];
-
   // Define trim options.
   const trimOptions = [
     { value: "WE", label: "WE - Wide Escutcheon", image: images.P700WE },
@@ -792,13 +784,6 @@ const TrimsForm = () => {
     });
   };
 
-  const handleDoorThicknessChange = (e) => {
-    setFormData({
-      ...formData,
-      doorThickness: e.target.value,
-    });
-  };
-
   const handleTrimChange = (selectedOption) => {
     setFormData({
       ...formData,
@@ -871,8 +856,13 @@ const TrimsForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const thickness = formData.doorThickness || "1-3/4"; // Default to 1-3/4"
+    // 🔹 Prevent Submission if Door Thickness is Not Selected
+    if (!formData.doorThickness) {
+      setNote("⚠ Please select a door thickness before proceeding.");
+      return;
+    }
 
+    const thickness = formData.doorThickness; // Now always required
     // 🔹 Handle 862, 863, 864 trims (Direct mapping)
     if (["862", "863", "864"].includes(formData.trim)) {
       setPartNumber(`${formData.trim} ${formData.finish}`);
@@ -884,12 +874,22 @@ const TrimsForm = () => {
     const getCylinderUsed = (lookupKey) => {
       const cylinderData =
         trimsData.cylinders && trimsData.cylinders[lookupKey];
-      // If a matching cylinder object exists and a value for the selected door thickness exists,
-      // return that value; otherwise, return a default message.
+
       return cylinderData && thickness in cylinderData
         ? cylinderData[thickness]
         : "This device doesn’t use a cylinder or it may not be set up yet (Contact TPS)";
     };
+
+    // 🔹 Construct lookup key for both standard and 7000 series
+    let lookupKey;
+
+    if (formData.series === "7000") {
+      lookupKey = `7000-${formData.outsideFunctionCode}-${formData.insideFunctionCode}`;
+    } else {
+      lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+    }
+
+    const cylinderUsed = getCylinderUsed(lookupKey);
 
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
@@ -921,15 +921,24 @@ const TrimsForm = () => {
         const insidePartNumber = `MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
         const outsidePartNumber = `${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
 
-        // Use a lookup key based on series-device-function for the cylinder data.
-        const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
-        const cylinderUsed = getCylinderUsed(cylinderKey);
+        // Use new lookup format
+        const cylinderData = getCylinderUsed(lookupKey);
 
-        // Construct the final output as a string with newline characters.
-        const finalPartNumber = `Outside: ${outsidePartNumber}<br />
-         Inside: ${insidePartNumber}<br />
-         Cylinder Used: ${cylinderUsed}`;
-        setPartNumber(finalPartNumber);
+        // Construct the final output with trim and cylinder details.
+        if (typeof cylinderData === "object") {
+          setPartNumber(`
+            <strong>Outside Cylinder:</strong> ${cylinderData.outside} <br />
+            <strong>Inside Cylinder:</strong> ${cylinderData.inside} <br />
+            <strong>Outside:</strong> ${outsidePartNumber} <br />
+            <strong>Inside:</strong> ${insidePartNumber}
+          `);
+        } else {
+          setPartNumber(`
+            ${cylinderData} <br />
+            <strong>Outside:</strong> ${outsidePartNumber} <br />
+            <strong>Inside:</strong> ${insidePartNumber}
+          `);
+        }
 
         setNote("");
         return;
@@ -955,13 +964,11 @@ const TrimsForm = () => {
           .replace("[trim]", formData.trim)
           .replace("[lever style]", formData.leverStyle);
 
-        const cylinderKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
-        const cylinderUsed = getCylinderUsed(cylinderKey);
+        setPartNumber(`
+          <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
+          ${generatedNumber}
+        `);
 
-        const partNumber1 = `${generatedNumber}<br />
-          Cylinder Used: ${cylinderUsed}`;
-
-        setPartNumber(partNumber1);
         setNote("");
         return;
       }
@@ -976,24 +983,27 @@ const TrimsForm = () => {
       63: "866",
       66: "866",
     };
-    const mappedBase = pullMapping[formData.functionCode];
-    if (mappedBase) {
-      // For pull functions, assume no cylinder is used.
-      setPartNumber(
-        `${mappedBase} ${formData.trim} ${formData.finish}\nCylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS)`
-      );
+
+    if (pullMapping[formData.functionCode]) {
+      setPartNumber(`
+        ${pullMapping[formData.functionCode]} ${formData.trim} ${
+        formData.finish
+      } <br />
+        Cylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS)
+      `);
       setNote("");
       return;
     }
 
     // 🔹 Default lookup in trimsData
-    const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
     const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
+
     if (partEntry === "Not Found" || partEntry === "Not Available") {
       setPartNumber("Not Available");
       setNote("This configuration is not available. Please try another.");
       return;
     }
+
     let generatedNumber = partEntry
       .replace("[handing]", formData.handing)
       .replace("[finish]", formData.finish)
@@ -1001,8 +1011,10 @@ const TrimsForm = () => {
       .replace("[trim]", formData.trim)
       .replace("[lever style]", formData.leverStyle);
 
-    const cylinderUsed = getCylinderUsed(lookupKey);
-    setPartNumber(`${generatedNumber} <br /> Cylinder Used: ${cylinderUsed}`);
+    setPartNumber(`
+      <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
+      ${generatedNumber}
+    `);
     setNote("");
   };
 
@@ -1240,24 +1252,23 @@ const TrimsForm = () => {
           </div>
         )}
 
-        {/* Door Thickness (if electrical prefix "31" is selected) */}
-        {formData.electricalPrefixes.includes("31") && (
-          <div className="form-group">
-            <label>Door Thickness:</label>
-            <select
-              value={formData.doorThickness}
-              onChange={handleDoorThicknessChange}
-              required
-            >
-              <option value="">Select Thickness</option>
-              {doorThicknessOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+        {/* Door Thickness (Always Required) */}
+        <div className="form-group">
+          <label>Door Thickness:</label>
+          <select
+            value={formData.doorThickness}
+            onChange={(e) =>
+              setFormData({ ...formData, doorThickness: e.target.value })
+            }
+            required
+          >
+            <option value="">Select Thickness</option>
+            <option value="1-3/4">1-3/4"</option>
+            <option value="2">2"</option>
+            <option value="2-1/4">2-1/4"</option>
+            <option value="QSPAR">QSPAR for anything over 2-1/4"</option>
+          </select>
+        </div>
 
         {/* Cylinder Prefixes as a multi-select */}
         {shouldShowCylinderDropdown && (
