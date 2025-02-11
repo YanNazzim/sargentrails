@@ -424,7 +424,6 @@ const TrimsForm = () => {
 
   // Electrical prefixes (checkboxes)
   const electricalPrefixes = [
-    { code: "31", name: "Door Thickness Selector" },
     { code: "54", name: "Outside Lever Monitor micro switch" },
     {
       code: "55",
