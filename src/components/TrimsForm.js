@@ -890,6 +890,10 @@ const TrimsForm = () => {
 
     const cylinderUsed = getCylinderUsed(lookupKey);
 
+      // 🔹 Apply "31-" prefix if thickness is over 1-3/4"
+  const needs31Prefix = thickness !== "1-3/4"; // Applies for "2", "2-1/4", "QSPAR"
+
+
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
       if (["ET", "ER", "ES"].includes(formData.trim)) {
@@ -917,8 +921,8 @@ const TrimsForm = () => {
         const finish = formData.finish || "";
 
         // Build the inside and outside part numbers
-        const insidePartNumber = `MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
-        const outsidePartNumber = `${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const insidePartNumber = `${needs31Prefix ? "31-" : ""}MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const outsidePartNumber = `${needs31Prefix ? "31-" : ""}${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
 
         // Use new lookup format
         const cylinderData = getCylinderUsed(lookupKey);
@@ -965,7 +969,7 @@ const TrimsForm = () => {
 
         setPartNumber(`
           <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
-          ${generatedNumber}
+          ${needs31Prefix ? "31 " : ""}${selectedPrefixesDisplay} ${generatedNumber}
         `);
 
         setNote("");
@@ -1380,7 +1384,7 @@ const TrimsForm = () => {
               __html:
                 formData.series === "7000"
                   ? partNumber
-                  : `${selectedPrefixesDisplay} ${partNumber}`,
+                  : `${partNumber}`,
             }}
           />
 
