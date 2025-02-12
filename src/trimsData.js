@@ -545,7 +545,7 @@ export const trimsData = {
     "80-8900-75": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
     "80-8900-76": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
 
-    // 8300 Trims
+    // PE8300 Trims
     "PE80-PE8300-04": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
     "PE80-PE8300-10": {
       "1-3/4": "Non-Cylinder Function",
@@ -579,7 +579,7 @@ export const trimsData = {
     "PE80-PE8300-75": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
     "PE80-PE8300-76": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
 
-    // 8400 Trims
+    // PE8400 Trims
     "PE80-PE8400-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8400-10": {
       "1-3/4": "Non-Cylinder Function",
@@ -610,7 +610,7 @@ export const trimsData = {
       "2-1/4": "Non-Cylinder Function",
     },
 
-    // 8500 Trims
+    // PE8500 Trims
     "PE80-PE8500-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
     "PE80-PE8500-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8500-10": {
@@ -643,7 +643,7 @@ export const trimsData = {
       "2-1/4": "Non-Cylinder Function",
     },
 
-    // 8600 Trims
+    // PE8600 Trims
     "PE80-PE8600-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8600-10": {
       "1-3/4": "Non-Cylinder Function",
@@ -674,7 +674,7 @@ export const trimsData = {
       "2-1/4": "Non-Cylinder Function",
     },
 
-    // 8700 Trims
+    // PE8700 Trims
     "PE80-PE8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8700-10": {
       "1-3/4": "Non-Cylinder Function",
@@ -705,7 +705,7 @@ export const trimsData = {
       "2-1/4": "Non-Cylinder Function",
     },
 
-    // NB-8700 Trims
+    // PENB-8700 Trims
     "PE80-PENB-8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PENB-8700-10": {
       "1-3/4": "Non-Cylinder Function",
@@ -736,7 +736,7 @@ export const trimsData = {
       "2-1/4": "Non-Cylinder Function",
     },
 
-    // 8800 Trims
+    // PE8800 Trims
     "PE80-PE8800-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
     "PE80-PE8800-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8800-10": {
@@ -776,7 +776,7 @@ export const trimsData = {
     "PE80-PE8800-75": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
     "PE80-PE8800-76": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
 
-    // 8900 Trims
+    // PE8900 Trims
     "PE80-PE8900-04": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
     "PE80-PE8900-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
     "PE80-PE8900-10": {
@@ -900,15 +900,342 @@ export const trimsData = {
     "90-9900-76": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
 
     // 7000 Series (7000-OutsideFunction-InsideFunction)
-    "7000-06-15": {
+
+    // 01 Outside Function
+    "7000-01-06": {
       "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
       2: { outside: "Non-Cylinder Function", inside: "#41" },
       "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
     },
-    "7000-73-74": {
-      "1-3/4": { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
-      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
-      "2-1/4": { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+    "7000-01-13": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
     },
+    "7000-01-15": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-01-43": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-01-46": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-01-73": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-01-74": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+
+    // 06 Outside Function
+    "7000-06-06": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+    "7000-06-13": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+    "7000-06-15": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-06-73": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-06-74": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+
+    // 10 Outside Function
+    "7000-10-06": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-10-13": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-10-15": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-10-73": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-10-74": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+
+    // 13 Outside Function
+    "7000-13-06": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+
+    "7000-13-13": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+    "7000-13-15": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+
+    // 15 Outside Function
+    "7000-15-06": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-15-13": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-15-15": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-15-43": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-15-46": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+
+    // 16 function on both
+    "7000-16-16": {
+      "1-3/4": { outside: "#41", inside: "#34" },
+      2: { outside: "#41", inside: "#34" },
+      "2-1/4": { outside: "#41", inside: "#34" },
+    },
+
+    // 40 function outside
+    "7000-40-43": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-40-46": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+
+    // 43 function outside
+    "7000-43-15": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-43-40": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-43-43": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+    "7000-43-46": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+
+    // 43 function outside
+    "7000-46-15": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-46-40": {
+      "1-3/4": { outside: "#41", inside: "Non-Cylinder Function" },
+      2: { outside: "#41", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "#41", inside: "Non-Cylinder Function" },
+    },
+    "7000-46-43": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+    "7000-46-46": {
+      "1-3/4": { outside: "#41", inside: "#41" },
+      2: { outside: "#41", inside: "#41" },
+      "2-1/4": { outside: "#41", inside: "#41" },
+    },
+
+    // 73 function outside
+    "7000-73-06": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-73-13": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-73-15": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-73-73": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+    "7000-73-74": {
+      "1-3/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": {
+        outside: "Non-Cylinder Function",
+        inside: "Non-Cylinder Function",
+      },
+    },
+
+        // 73 function outside
+        "7000-74-06": {
+          "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+          2: { outside: "Non-Cylinder Function", inside: "#41" },
+          "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+        },
+        "7000-74-13": {
+          "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+          2: { outside: "Non-Cylinder Function", inside: "#41" },
+          "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+        },
+        "7000-74-15": {
+          "1-3/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+          2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+          "2-1/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+        },
+        "7000-74-73": {
+          "1-3/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+          2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+          "2-1/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+        },
+        "7000-74-74": {
+          "1-3/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+          2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+          "2-1/4": {
+            outside: "Non-Cylinder Function",
+            inside: "Non-Cylinder Function",
+          },
+        },
   },
 };
