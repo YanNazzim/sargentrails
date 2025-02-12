@@ -275,115 +275,640 @@ export const trimsData = {
   },
 
   cylinders: {
-    "80-8300-04": "704 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-10": "710 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-13": "713 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-15": "715 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-40": "740 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-43": "743 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-44": "744 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-73": "773 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-74": "774 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-75": "775 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8300-76": "776 [trim][lever style] [handing] [finish] [thickness]",
+    // 8300 Trims
+    "80-8300-04": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "80-8300-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8300-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8300-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8300-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8300-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8300-44": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "80-8300-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8300-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8300-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8300-75": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "80-8300-76": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
 
     // 8400 Trims
-    "80-8400-06": "706-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-10": "710-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-13": "713-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-15": "715-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-40": "740-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-43": "743-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-46": "746-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-73": "773-4 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8400-74": "774-4 [trim][lever style] [handing] [finish] [thickness]",
+    "80-8400-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8400-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8400-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8400-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8400-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8400-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8400-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8400-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8400-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
     // 8500 Trims
-    "80-8500-04": "704 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-06": "706-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-10": "710 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-13": "713-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-15": "715-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-40": "740 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-43": "743-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-44": "744 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-46": "746-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-73": "773-8 [trim][lever style] [handing] [finish] [thickness]",
-    "80-8500-74": "774-8 [trim][lever style] [handing] [finish] [thickness]",
+    "80-8500-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "80-8500-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8500-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8500-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8500-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8500-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8500-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8500-44": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "80-8500-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8500-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8500-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
     // 8600 Trims
-    "80-8600-06": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8600-10": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8600-13": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8600-15": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8600-40": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8600-43": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8600-46": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8600-73": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8600-74": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
+    "80-8600-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8600-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8600-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8600-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8600-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8600-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8600-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8600-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8600-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
     // 8700 Trims
-    "80-8700-06": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8700-10": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8700-13": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8700-15": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8700-40": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8700-43": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8700-46": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8700-73": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8700-74": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
+    "80-8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8700-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8700-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8700-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8700-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8700-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8700-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8700-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8700-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
     // NB-8700 Trims
-    "80-NB-8700-06": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-NB-8700-10": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-NB-8700-13": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-NB-8700-15": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-NB-8700-40": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-NB-8700-43": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-NB-8700-46": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-NB-8700-73": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-NB-8700-74": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
+    "80-NB-8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-NB-8700-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-NB-8700-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-NB-8700-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-NB-8700-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-NB-8700-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-NB-8700-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-NB-8700-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-NB-8700-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
     // 8800 Trims
-    "80-8800-04": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
-    "80-8800-06": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8800-10": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8800-13": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8800-15": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8800-16": { "1-3/4": "<br />Outside: #34 <br /> Inside: #44", "2": "<br />Outside: #48 <br /> Inside: #34", "2-1/4": "<br />Outside: #50 <br /> Inside: #34" },
-    "80-8800-40": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8800-43": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8800-44": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
-    "80-8800-46": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8800-73": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8800-74": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8800-75": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
-    "80-8800-76": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
+    "80-8800-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "80-8800-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8800-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8800-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8800-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8800-16": {
+      "1-3/4": "<br />Outside: #34 <br /> Inside: #44",
+      2: "<br />Outside: #48 <br /> Inside: #34",
+      "2-1/4": "<br />Outside: #50 <br /> Inside: #34",
+    },
+    "80-8800-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8800-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8800-44": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "80-8800-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8800-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8800-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8800-75": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "80-8800-76": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
 
     // 8900 Trims
-    "80-8900-04": { "1-3/4": "#46", "2": "#48", "2-1/4": "#50" },
-    "80-8900-06": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8900-10": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8900-13": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8900-15": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8900-16": { "1-3/4": "<br />Outside: #46 <br /> Inside: #34", "2": "<br />Outside: #48 <br /> Inside: #34", "2-1/4": "<br />Outside: #50 <br /> Inside: #34" },
-    "80-8900-40": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8900-43": { "1-3/4": "#41", "2": "#41", "2-1/4": "#41" },
-    "80-8900-44": { "1-3/4": "#46", "2": "#48", "2-1/4": "#50" },
-    "80-8900-73": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8900-74": { "1-3/4": "Non-Cylinder Function", "2": "Non-Cylinder Function", "2-1/4": "Non-Cylinder Function" },
-    "80-8900-75": { "1-3/4": "#46", "2": "#48", "2-1/4": "#50" },
-    "80-8900-76": { "1-3/4": "#46", "2": "#48", "2-1/4": "#50" },
+    "80-8900-04": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "80-8900-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8900-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8900-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8900-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8900-16": {
+      "1-3/4": "<br />Outside: #46 <br /> Inside: #34",
+      2: "<br />Outside: #48 <br /> Inside: #34",
+      "2-1/4": "<br />Outside: #50 <br /> Inside: #34",
+    },
+    "80-8900-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8900-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "80-8900-44": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "80-8900-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8900-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "80-8900-75": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "80-8900-76": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
 
+    // 8300 Trims
+    "PE80-PE8300-04": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "PE80-PE8300-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8300-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8300-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8300-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8300-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8300-44": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "PE80-PE8300-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8300-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8300-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8300-75": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "PE80-PE8300-76": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
 
-    
+    // 8400 Trims
+    "PE80-PE8400-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8400-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8400-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8400-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8400-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8400-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8400-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8400-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8400-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
-    "PE80-PE8300-04": { "1-3/4": "#34", "2": "#34", "2-1/4": "#34" },
+    // 8500 Trims
+    "PE80-PE8500-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "PE80-PE8500-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8500-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8500-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8500-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8500-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8500-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8500-44": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "PE80-PE8500-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8500-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8500-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
 
-  // 7000 Series (7000-OutsideFunction-InsideFunction)
-  "7000-06-15": { "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" }, "2": { outside: "Non-Cylinder Function", inside: "#41" }, "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" } },
-  "7000-04-40": { "1-3/4": { outside: "#55", inside: "#60" }, "2": { outside: "#56", inside: "#61" }, "2-1/4": { outside: "#57", inside: "#62" } },
-  "7000-73-74": { "1-3/4": { outside: "#20", inside: "#25" }, "2": { outside: "#21", inside: "#26" }, "2-1/4": { outside: "#22", inside: "#27" } },
-}
-  
+    // 8600 Trims
+    "PE80-PE8600-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8600-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8600-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8600-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8600-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8600-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8600-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8600-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8600-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+
+    // 8700 Trims
+    "PE80-PE8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8700-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8700-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8700-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8700-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8700-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8700-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8700-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8700-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+
+    // NB-8700 Trims
+    "PE80-PENB-8700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PENB-8700-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PENB-8700-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PENB-8700-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PENB-8700-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PENB-8700-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PENB-8700-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PENB-8700-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PENB-8700-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+
+    // 8800 Trims
+    "PE80-PE8800-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "PE80-PE8800-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8800-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8800-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8800-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8800-16": {
+      "1-3/4": "<br />Outside: #34 <br /> Inside: #44",
+      2: "<br />Outside: #48 <br /> Inside: #34",
+      "2-1/4": "<br />Outside: #50 <br /> Inside: #34",
+    },
+    "PE80-PE8800-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8800-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8800-44": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "PE80-PE8800-46": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8800-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8800-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8800-75": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "PE80-PE8800-76": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+
+    // 8900 Trims
+    "PE80-PE8900-04": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "PE80-PE8900-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8900-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8900-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8900-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8900-16": {
+      "1-3/4": "<br />Outside: #46 <br /> Inside: #34",
+      2: "<br />Outside: #48 <br /> Inside: #34",
+      "2-1/4": "<br />Outside: #50 <br /> Inside: #34",
+    },
+    "PE80-PE8900-40": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8900-43": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "PE80-PE8900-44": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "PE80-PE8900-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8900-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "PE80-PE8900-75": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+    "PE80-PE8900-76": { "1-3/4": "#46", 2: "#48", "2-1/4": "#50" },
+
+    // 9400 Trims
+    "90-9400-04": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "90-9400-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+
+    // 9700 Trims
+    "90-9700-06": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "90-9700-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9700-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "90-9700-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9700-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9700-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+
+    // 9800 Trims
+    "90-9800-04": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "90-9800-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9800-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "90-9800-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9800-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9800-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9800-75": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+    "90-9800-76": { "1-3/4": "#34", 2: "#34", "2-1/4": "#34" },
+
+    // 9900 Trims
+    "90-9900-04": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "90-9900-10": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9900-13": { "1-3/4": "#41", 2: "#41", "2-1/4": "#41" },
+    "90-9900-15": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9900-73": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9900-74": {
+      "1-3/4": "Non-Cylinder Function",
+      2: "Non-Cylinder Function",
+      "2-1/4": "Non-Cylinder Function",
+    },
+    "90-9900-75": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+    "90-9900-76": { "1-3/4": "#46", 2: "#46", "2-1/4": "#46" },
+
+    // 7000 Series (7000-OutsideFunction-InsideFunction)
+    "7000-06-15": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "#41" },
+      2: { outside: "Non-Cylinder Function", inside: "#41" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "#41" },
+    },
+    "7000-73-74": {
+      "1-3/4": { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      2: { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+      "2-1/4": { outside: "Non-Cylinder Function", inside: "Non-Cylinder Function" },
+    },
+  },
 };

@@ -864,7 +864,7 @@ const TrimsForm = () => {
     const thickness = formData.doorThickness; // Now always required
     // 🔹 Handle 862, 863, 864 trims (Direct mapping)
     if (["862", "863", "864"].includes(formData.trim)) {
-      setPartNumber(`${formData.trim} ${formData.finish}`);
+      setPartNumber(`${formData.trim} ${formData.finish} ${formData.thickness}`);
       setNote("");
       return;
     }
@@ -991,7 +991,7 @@ const TrimsForm = () => {
       setPartNumber(`
         ${pullMapping[formData.functionCode]} ${formData.trim} ${
         formData.finish
-      } <br />
+      } ${thickness} <br />
         Cylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS)
       `);
       setNote("");
