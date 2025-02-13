@@ -418,7 +418,20 @@ const TrimsForm = () => {
     PE8400: ["01", "04", "16", "44", "75", "76", "28", "62", "63", "66"],
     PE8300: ["01", "06", "16", "46", "62", "66"],
     PE8600: ["01", "04", "16", "44", "75", "76", "28", "62", "63", "66"],
-    9700: ["01", "04", "16", "40", "43", "44", "46", "62", "63", "66", "75", "76"],
+    9700: [
+      "01",
+      "04",
+      "16",
+      "40",
+      "43",
+      "44",
+      "46",
+      "62",
+      "63",
+      "66",
+      "75",
+      "76",
+    ],
     9800: ["01", "06", "16", "40", "43", "44", "46", "62", "66"],
     9900: ["01", "06", "16", "40", "43", "44", "46", "62", "66"],
   };
@@ -852,9 +865,41 @@ const TrimsForm = () => {
     ).includes(opt.value)
   );
 
+// UPDATED: getTrimHardware now returns an object instead of a string.
+const getTrimHardware = (series, thickness, basePartNumber) => {
+  if (!basePartNumber)
+    return { screws: ["Unknown Screws"], spindle: "Unknown Spindle" };
+
+  const category = series.startsWith("7000") ? "7000" : "standard";
+  // Extract suffix (e.g., "-4" from "706-4")
+  const suffixMatch = basePartNumber.match(/-(8|4|2)$/);
+  const suffix = suffixMatch ? suffixMatch[0] : "";
+  const screws =
+    trimsData.trimHardware[category]?.[thickness]?.screws || ["Unknown Screws"];
+  const spindle =
+    trimsData.trimHardware[category]?.[thickness]?.spindles?.[suffix] ||
+    "Unknown Spindle";
+
+  return { screws, spindle };
+};
+
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.doorThickness) {
+      setNote("⚠ Please select a door thickness before proceeding.");
+      return;
+    }
+
+    if (!formData.trim) {
+      setNote("⚠ Please select a trim before proceeding.");
+      return;
+    }
+
+    const thickness = formData.doorThickness;
+    const series = formData.series;
 
     // 🔹 Prevent Submission if Door Thickness is Not Selected
     if (!formData.doorThickness) {
@@ -862,10 +907,55 @@ const TrimsForm = () => {
       return;
     }
 
-    const thickness = formData.doorThickness; // Now always required
+    let lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
+    const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
+// Extract the basePartNumber from partEntry
+const basePartNumber = partEntry.split(" ")[0]; // e.g., "706-4"
+
+// Use the updated lookup function (pass basePartNumber as third argument)
+let hardwareDetails = getTrimHardware(series, thickness, basePartNumber);
+
+let hardwareText = "";
+
+// Ensure hardwareDetails.screws is an array before processing
+if (!Array.isArray(hardwareDetails.screws)) {
+  console.error("hardwareDetails.screws is not an array:", hardwareDetails);
+  hardwareText = "Hardware details not available";
+} else {
+  if (formData.functionCode === "04") {
+    // For function 04: use the first two screw texts and ignore spindle.
+    hardwareText = hardwareDetails.screws.slice(0, 2).join(", ");
+  } else if (formData.functionCode === "10") {
+    // For function 10: use only the first screw text.
+    hardwareText = hardwareDetails.screws[0] || "";
+  } else {
+    // For all other functions: include both screws and spindle.
+    hardwareText =
+    hardwareDetails.screws[0] +
+      `<br />` +
+      (hardwareDetails.spindle || "");
+  }
+}
+
+
+    // 🔹 Construct the FULL trim part number (e.g., "713-8 ETA")
+    const trimType = `${formData.functionCode}${formData.trim}`;
+
+    console.log(
+      "Submitting with Trim Type:",
+      trimType,
+      "Thickness:",
+      thickness,
+      "Series:",
+      series
+    );
+
+    console.log("Hardware Details:", hardwareDetails);
     // 🔹 Handle 862, 863, 864 trims (Direct mapping)
     if (["862", "863", "864"].includes(formData.trim)) {
-      setPartNumber(`${formData.trim} ${formData.finish} ${formData.thickness}`);
+      setPartNumber(
+        `${formData.trim} ${formData.finish} ${formData.thickness} <br /> ${hardwareText}`
+      );
       setNote("");
       return;
     }
@@ -881,7 +971,6 @@ const TrimsForm = () => {
     };
 
     // 🔹 Construct lookup key for both standard and 7000 series
-    let lookupKey;
 
     if (formData.series === "7000") {
       lookupKey = `7000-${formData.outsideFunctionCode}-${formData.insideFunctionCode}`;
@@ -891,9 +980,8 @@ const TrimsForm = () => {
 
     const cylinderUsed = getCylinderUsed(lookupKey);
 
-      // 🔹 Apply "31-" prefix if thickness is over 1-3/4"
-  const needs31Prefix = thickness !== "1-3/4"; // Applies for "2", "2-1/4", "QSPAR"
-
+    // 🔹 Apply "31-" prefix if thickness is over 1-3/4"
+    const needs31Prefix = thickness !== "1-3/4"; // Applies for "2", "2-1/4", "QSPAR"
 
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
@@ -922,8 +1010,12 @@ const TrimsForm = () => {
         const finish = formData.finish || "";
 
         // Build the inside and outside part numbers
-        const insidePartNumber = `${needs31Prefix ? "31-" : ""}MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
-        const outsidePartNumber = `${needs31Prefix ? "31-" : ""}${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const insidePartNumber = `${
+          needs31Prefix ? "31-" : ""
+        }MP-${insidePrefix}${generalPrefix}7${insideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
+        const outsidePartNumber = `${
+          needs31Prefix ? "31-" : ""
+        }${outsidePrefix}${generalPrefix}7${outsideFunction}-2 ${trim}${lever} ${handing} ${finish} ${thickness}`;
 
         // Use new lookup format
         const cylinderData = getCylinderUsed(lookupKey);
@@ -934,13 +1026,14 @@ const TrimsForm = () => {
             <strong>Outside:</strong> ${outsidePartNumber} <br />
             <strong>Inside:</strong> ${insidePartNumber} <br />
             <strong>Outside Cylinder:</strong> ${cylinderData.outside} <br />
-            <strong>Inside Cylinder:</strong> ${cylinderData.inside} <br />
+            <strong>Inside Cylinder:</strong> ${cylinderData.inside} <br /> ${hardwareText}
           `);
         } else {
           setPartNumber(`
             <strong>Outside:</strong> ${outsidePartNumber} <br />
             <strong>Inside:</strong> ${insidePartNumber} <br />
             ${cylinderData} <br />
+            ${hardwareText}
           `);
         }
 
@@ -952,9 +1045,6 @@ const TrimsForm = () => {
     // 🔹 Handling for 04 and 10 functions (ET, WE, or NE)
     if (["04", "10"].includes(formData.functionCode)) {
       if (["ET", "WE", "NE"].includes(formData.trim)) {
-        const lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
-        const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
-
         if (partEntry === "Not Found" || partEntry === "Not Available") {
           setPartNumber("Not Available");
           setNote("This configuration is not available. Please try another.");
@@ -968,10 +1058,14 @@ const TrimsForm = () => {
           .replace("[trim]", formData.trim)
           .replace("[lever style]", formData.leverStyle);
 
+        // Update your part number output with the new hardwareText.
         setPartNumber(`
-          ${needs31Prefix ? "31 " : ""}${selectedPrefixesDisplay} ${generatedNumber}<br />
-          <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
-        `);
+  ${
+    needs31Prefix ? "31 " : ""
+  }${selectedPrefixesDisplay} ${generatedNumber}<br />
+  <strong>Cylinder Used:</strong> ${cylinderUsed}<br />
+  ${hardwareText}
+`);
 
         setNote("");
         return;
@@ -993,14 +1087,13 @@ const TrimsForm = () => {
         ${pullMapping[formData.functionCode]} ${formData.trim} ${
         formData.finish
       } ${thickness} <br />
-        Cylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS)
+        Cylinder Used: This device doesn’t use a cylinder or may not be set up yet (Contact TPS) <br />
       `);
       setNote("");
       return;
     }
 
     // 🔹 Default lookup in trimsData
-    const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
 
     if (partEntry === "Not Found" || partEntry === "Not Available") {
       setPartNumber("Not Available");
@@ -1017,7 +1110,7 @@ const TrimsForm = () => {
 
     setPartNumber(`
       ${generatedNumber} <br />
-      <strong>Cylinder Used:</strong> ${cylinderUsed} <br />
+      <strong>Cylinder Used:</strong> ${cylinderUsed} <br /> ${hardwareText}
     `);
     setNote("");
   };
@@ -1382,10 +1475,7 @@ const TrimsForm = () => {
           <div
             className="part-number"
             dangerouslySetInnerHTML={{
-              __html:
-                formData.series === "7000"
-                  ? partNumber
-                  : `${partNumber}`,
+              __html: formData.series === "7000" ? partNumber : `${partNumber}`,
             }}
           />
 

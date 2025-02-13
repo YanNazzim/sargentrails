@@ -1,4 +1,9 @@
+
+
+
 export const trimsData = {
+
+  
   trimsParts: {
     // 8300 Trims
     "80-8300-04": "704 [trim][lever style] [handing] [finish] [thickness]",
@@ -1238,4 +1243,70 @@ export const trimsData = {
           },
         },
   },
-};
+  
+  trimHardware: {
+  "standard": {  // All non-7000 series trims
+    "1-3/4": {
+      screws: ["Trim Thru Bolts: 01-4451", `<br />Rim Cyl Connecting Screws: 13-0074`],
+      spindles: {
+        "": "Spindle: 730-1",   // No dash
+        "-4": "Spindle: 730-4",
+        "-8": "Spindle: 730-7"
+      }
+    },
+    "2": {
+      screws: ["Trim Thru Bolts: 01-4372", "<br />Rim Cyl Connecting Screws: 13-0074"],
+      spindles: {
+        "": "Spindle: 730-2",
+        "-4": "Spindle: 730-5",
+        "-8": "Spindle: 730-8"
+      }
+    },
+    "2-1/4": {
+      screws: ["Trim Thru Bolts: 01-4373", "<br />Rim Cyl Connecting Screws: 13-0074"],
+      spindles: {
+        "": "Spindle: 730-3",
+        "-4": "Spindle: 730-6",
+        "-8": "Spindle: 730-9"
+      }
+    },
+    "QSPAR": {
+      screws: ["Trim Thru Bolts: Contact TPS", "<br />Rim Cyl Connecting Screws: Contact TPS"],
+      spindles: {
+        "": "Spindle: Contact TPS",
+        "-2": "Spindle: Contact TPS",
+        "-4": "Spindle: Contact TPS",
+        "-8": "Spindle: Contact TPS"
+      }
+    }
+  },
+  "7000": {  // All 7000 series trims
+    "1-3/4": {
+      screws: ["Trim Thru Bolts: Contact TPS"],
+      spindles: {
+        "": "Spindle: Contact TPS",
+      }
+    },
+    "2": {
+      screws: ["Trim Thru Bolts: Contact TPS"],
+      spindles: {
+        "": "Spindle: Contact TPS",
+      }
+    },
+    "2-1/4": {
+      screws: ["Trim Thru Bolts: Contact TPS"],
+      spindles: {
+        "": "Spindle: Contact TPS",
+      },
+    },
+    "QSPAR": {
+      screws: ["Trim Thru Bolts: Contact TPS", "<br />Rim Cyl Connecting Screws: Contact TPS"],
+      spindles: {
+        "": "Spindle: Contact TPS",
+      }
+    }
+  },
+},
+
+}
+
