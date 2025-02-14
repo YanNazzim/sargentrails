@@ -1284,19 +1284,19 @@ export const trimsData = {
     "1-3/4": {
       screws: ["Trim Thru Bolts: Contact TPS"],
       spindles: {
-        "": "Spindle: Contact TPS",
+        "": "Spindle: 97-0553",
       }
     },
     "2": {
       screws: ["Trim Thru Bolts: Contact TPS"],
       spindles: {
-        "": "Spindle: Contact TPS",
+        "": "Spindle: 97-0554",
       }
     },
     "2-1/4": {
       screws: ["Trim Thru Bolts: Contact TPS"],
       spindles: {
-        "": "Spindle: Contact TPS",
+        "": "Spindle: 97-0555",
       },
     },
     "QSPAR": {
