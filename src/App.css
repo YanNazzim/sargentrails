@@ -171,9 +171,11 @@ button:focus {
 }
 
 .result-container {
+  border-radius: 12px;
   background-color: #001f3f;
   border: 2px solid #2ecc71;
   color: white;
+  padding: 24px;
 }
 
 .part-number {
