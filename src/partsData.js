@@ -21,11 +21,11 @@ export const partsData = {
     "Wide-No-12-5CH-G": "68-7526",
 
     // 12-56-5CH
-    "Wide-No-12-56-5CH-E": "Not Available",
+    "Wide-No-12-56-5CH-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-12-56-5CH-F": "68-8326",
     "Wide-No-12-56-5CH-J": "68-8325",
     "Wide-No-12-56-5CH-G": "68-8227",
-    "Wide-No-56-5CH-E": "Not Available",
+    "Wide-No-56-5CH-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-56-5CH-F": "68-8326",
     "Wide-No-56-5CH-J": "68-8325",
     "Wide-No-56-5CH-G": "68-8227",
@@ -49,7 +49,7 @@ export const partsData = {
     "Wide-No-12-53-55-58-G": "68-4674",
 
     //12-53-55-AL
-    "Wide-No-12-53-55-AL-E": "Not Available",
+    "Wide-No-12-53-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-12-53-55-AL-F": '68-4926 - Only for 36" Door',
     "Wide-No-12-53-55-AL-J": "68-4927",
     "Wide-No-12-53-55-AL-G": "68-4928",
@@ -61,7 +61,7 @@ export const partsData = {
     "Wide-No-12-53-58-G": "68-4650",
 
     // 12-53-AL
-    "Wide-No-12-53-AL-E": "Not Available",
+    "Wide-No-12-53-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-12-53-AL-F": '68-4720 - Only for 36" Door',
     "Wide-No-12-53-AL-J": "68-4721",
     "Wide-No-12-53-AL-G": "68-4722",
@@ -73,7 +73,7 @@ export const partsData = {
     "Wide-No-12-55-G": "68-2799",
 
     // 12-55-AL
-    "Wide-No-12-55-AL-E": "Not Available",
+    "Wide-No-12-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-12-55-AL-F": '68-4980 - Only for 36" Door',
     "Wide-No-12-55-AL-J": "68-4944",
     "Wide-No-12-55-AL-G": "68-4943",
@@ -91,7 +91,7 @@ export const partsData = {
     "Wide-No-12-59-G": "68-3786",
 
     // 12-AL
-    "Wide-No-12-AL-E": "Not Available",
+    "Wide-No-12-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-12-AL-F": '68-4018 - Only for 36" Door',
     "Wide-No-12-AL-J": "68-4019",
     "Wide-No-12-AL-G": "68-4020",
@@ -203,7 +203,7 @@ export const partsData = {
     "Wide-No-53-55-58-G": "68-4666",
 
     // 53-55-AL
-    "Wide-No-53-55-AL-E": "Not Available",
+    "Wide-No-53-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-53-55-AL-F": '68-4922 - Only for 36" Door',
     "Wide-No-53-55-AL-J": "68-4922",
     "Wide-No-53-55-AL-G": "68-4922",
@@ -225,7 +225,7 @@ export const partsData = {
     "Wide-No-53-58-G": "68-4642",
 
     // 53-AL
-    "Wide-No-53-AL-E": "Not Available",
+    "Wide-No-53-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-53-AL-F": '68-4716 - Only for 36" Door',
     "Wide-No-53-AL-J": "68-4717",
     "Wide-No-53-AL-G": "68-4717",
@@ -247,7 +247,7 @@ export const partsData = {
     "Wide-No-12-55-56-G": "68-3298",
 
     // 55-AL
-    "Wide-No-55-AL-E": "Not Available",
+    "Wide-No-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-55-AL-F": '68-4976 - Only for 36" Door',
     "Wide-No-55-AL-J": "68-4977",
     "Wide-No-55-AL-G": "68-4978",
@@ -299,7 +299,7 @@ export const partsData = {
     "Wide-No-55-56-HK-G": "68-5553",
 
     // AL- only
-    "Wide-No-AL-E": "Not Available",
+    "Wide-No-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-No-AL-F": '68-4010 - Only for 36" Door',
     "Wide-No-AL-J": "68-4011",
     "Wide-No-AL-G": "68-4012",
@@ -360,6 +360,12 @@ export const partsData = {
     "Wide-Yes-12-53-55-J": "68-5031",
     "Wide-Yes-12-53-55-G": "68-5032",
 
+        // 12-19-53-55-56
+        "Wide-Yes-12-53-55-56-E": "68-5527",
+        "Wide-Yes-12-53-55-56-F": "68-4953",
+        "Wide-Yes-12-53-55-56-J": "68-4954",
+        "Wide-Yes-12-53-55-56-G": "68-4955",
+
     // 12-19-53-55-58
     "Wide-Yes-12-53-55-58-E": "68-4810",
     "Wide-Yes-12-53-55-58-F": "68-4811",
@@ -373,13 +379,13 @@ export const partsData = {
     "Wide-Yes-12-53-58-G": "68-4789",
 
     // 12-19-53-AL
-    "Wide-Yes-12-53-AL-E": "Not Available",
+    "Wide-Yes-12-53-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-12-53-AL-F": '68-4846 - Only for 36" Door',
     "Wide-Yes-12-53-AL-J": "68-4847",
     "Wide-Yes-12-53-AL-G": "68-4848",
 
     // 12-19-53-55-AL
-    "Wide-Yes-12-53-55-AL-E": "Not Available",
+    "Wide-Yes-12-53-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-12-53-55-AL-F": '68-4894 - Only for 36" Door',
     "Wide-Yes-12-53-55-AL-J": "68-4895",
     "Wide-Yes-12-53-55-AL-G": "68-4896",
@@ -397,7 +403,7 @@ export const partsData = {
     "Wide-Yes-12-55-58-G": "68-3121",
 
     // 12-19-55-AL
-    "Wide-Yes-12-55-AL-E": "Not Available",
+    "Wide-Yes-12-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-12-55-AL-F": '68-4996 - Only for 36" Door',
     "Wide-Yes-12-55-AL-J": "68-4997",
     "Wide-Yes-12-55-AL-G": "68-4998",
@@ -415,7 +421,7 @@ export const partsData = {
     "Wide-Yes-12-59-G": "68-3803",
 
     // 12-19-AL
-    "Wide-Yes-12-AL-E": "Not Available",
+    "Wide-Yes-12-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-12-AL-F": '68-4043 - Only for 36" Door',
     "Wide-Yes-12-AL-J": "68-4044",
     "Wide-Yes-12-AL-G": "68-4045",
@@ -535,13 +541,13 @@ export const partsData = {
     "Wide-Yes-53-58-G": "68-4781",
 
     // 19-53-AL
-    "Wide-Yes-53-AL-E": "Not Available",
+    "Wide-Yes-53-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-53-AL-F": '68-4842 - Only for 36" Door',
     "Wide-Yes-53-AL-J": "68-4843",
     "Wide-Yes-53-AL-G": "68-4844",
 
     // 19-53-55-AL
-    "Wide-Yes-53-55-AL-E": "Not Available",
+    "Wide-Yes-53-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-53-55-AL-F": '68-4890 - Only for 36" Door',
     "Wide-Yes-53-55-AL-J": "68-4891",
     "Wide-Yes-53-55-AL-G": "68-4892",
@@ -565,7 +571,7 @@ export const partsData = {
     "Wide-Yes-55-58-G": "68-3113",
 
     // 19-55-AL
-    "Wide-Yes-55-AL-E": "Not Available",
+    "Wide-Yes-55-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-55-AL-F": '68-4992 - Only for 36" Door',
     "Wide-Yes-55-AL-J": "68-4993",
     "Wide-Yes-55-AL-G": "68-4994",
@@ -589,13 +595,13 @@ export const partsData = {
     "Wide-Yes-59-G": "68-3799",
 
     // 19-AL
-    "Wide-Yes-AL-E": "Not Available",
+    "Wide-Yes-AL-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-AL-F": '68-4035 - Only for 36" Door',
     "Wide-Yes-AL-J": "68-4036",
     "Wide-Yes-AL-G": "68-4037",
 
     // 5CH-19-56-HK
-    "Wide-Yes-5CH-56-HK-E": "Not Available",
+    "Wide-Yes-5CH-56-HK-E": "Not Available (Contact TPS to be sure)",
     "Wide-Yes-5CH-56-HK-F": "68-8358",
     "Wide-Yes-5CH-56-HK-J": "68-8359",
     "Wide-Yes-5CH-56-HK-G": "68-8360",
@@ -645,11 +651,11 @@ export const partsData = {
     "Narrow-No-12-5CH-G": "68-8213",
 
     // 12-56-5CH
-    "Narrow-No-12-56-5CH-E": "Not Available",
+    "Narrow-No-12-56-5CH-E": "Not Available (Contact TPS to be sure)",
     "Narrow-No-12-56-5CH-F": "68-8329",
     "Narrow-No-12-56-5CH-J": "68-8328",
     "Narrow-No-12-56-5CH-G": "68-8230",
-    "Narrow-No-56-5CH-E": "Not Available",
+    "Narrow-No-56-5CH-E": "Not Available (Contact TPS to be sure)",
     "Narrow-No-56-5CH-F": "68-8329",
     "Narrow-No-56-5CH-J": "68-8328",
     "Narrow-No-56-5CH-G": "68-8230",
@@ -1179,13 +1185,13 @@ export const partsData = {
     "Narrow-Yes-16-58-G": "68-3104",
 
     // 5CH-19-56-HK
-    "Narrow-Yes-5CH-19-56-HK-E": "Not Available",
+    "Narrow-Yes-5CH-19-56-HK-E": "Not Available (Contact TPS to be sure)",
     "Narrow-Yes-5CH-19-56-HK-F": "68-8361",
     "Narrow-Yes-5CH-19-56-HK-J": "68-8359",
     "Narrow-Yes-5CH-19-56-HK-G": "68-8363",
 
     // 5CH-53-56-HK
-    "Narrow-No-5CH-53-56-HK-E": "Not Available",
+    "Narrow-No-5CH-53-56-HK-E": "Not Available (Contact TPS to be sure)",
     "Narrow-No-5CH-53-56-HK-F": "68-8481",
     "Narrow-No-5CH-53-56-HK-J": "68-8476",
     "Narrow-No-5CH-53-56-HK-G": "68-8477",
@@ -1376,7 +1382,7 @@ export const partsData = {
     // 19-8893
     "DummyRailInActive-Yes--E": "68-2610",
     "DummyRailInActive-Yes--F": "68-2611",
-    "DummyRailInActive-Yes--J": "Not Available",
+    "DummyRailInActive-Yes--J": "Not Available (Contact TPS to be sure)",
     "DummyRailInActive-Yes--G": "68-2613",
   },
   DummyRailActive: {
