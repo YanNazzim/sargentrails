@@ -5,6 +5,7 @@ import "../App.css";
 import images from "../images"; // Adjust the path as needed
 import Select, { components } from "react-select";
 
+
 // Custom Option to render finish image and label in the dropdown list
 const FinishOption = (props) => {
   return (
@@ -69,11 +70,7 @@ const RailsForm = () => {
 
   // Optional Reset UseEffect:
   // When the selected style is "JellyFish", automatically set lexan to "No"
-  useEffect(() => {
-    if (formData.stile === "JellyFish") {
-      setFormData((prev) => ({ ...prev, lexan: "No" }));
-    }
-  }, [formData.stile]);
+
 
   const options = {
     stile: [
@@ -190,25 +187,98 @@ const RailsForm = () => {
       ],
     },
     finishes: [
-      { value: "03", label: "03 - Bright brass, clear coated", image: images.finish03 },
-      { value: "04", label: "04 - Satin brass, clear coated", image: images.finish04 },
-      { value: "09", label: "09 - Bright bronze, clear coated", image: images.finish09 },
-      { value: "10", label: "10 - Satin bronze, clear coated", image: images.finish10 },
-      { value: "10B", label: "10B - Dark oxidized satin bronze, oil rubbed", image: images.finish10B },
-      { value: "10BE", label: "10BE - Dark oxidized satin bronze-equivalent", image: images.finish10BE },
-      { value: "10BL", label: "10BL - Dark oxidized satin bronze, clear coated", image: images.finish10BL },
-      { value: "14", label: "14 - Bright nickel plated, clear coated", image: images.finish14 },
-      { value: "15", label: "15 - Satin nickel plated, clear coated", image: images.finish15 },
-      { value: "20D", label: "20D - Dark oxidized statuary bronze, clear coated", image: images.finish20D },
-      { value: "26", label: "26 - Bright chromium plated over nickel", image: images.finish26 },
-      { value: "26D", label: "26D - Satin chromium plated over nickel", image: images.finish26D },
-      { value: "32", label: "32 - Bright Stainless Steel", image: images.finish32 },
-      { value: "32D", label: "32D - Satin Stainless Steel", image: images.finish32D },
-      { value: "BSP", label: "BSP - Black suede powder coat, sprayed", image: images.finishBSP },
-      { value: "WSP", label: "WSP - White suede powder coat, sprayed", image: images.finishWSP },
+      {
+        value: "03",
+        label: "03 - Bright brass, clear coated",
+        image: images.finish03,
+      },
+      {
+        value: "04",
+        label: "04 - Satin brass, clear coated",
+        image: images.finish04,
+      },
+      {
+        value: "09",
+        label: "09 - Bright bronze, clear coated",
+        image: images.finish09,
+      },
+      {
+        value: "10",
+        label: "10 - Satin bronze, clear coated",
+        image: images.finish10,
+      },
+      {
+        value: "10B",
+        label: "10B - Dark oxidized satin bronze, oil rubbed",
+        image: images.finish10B,
+      },
+      {
+        value: "10BE",
+        label: "10BE - Dark oxidized satin bronze-equivalent",
+        image: images.finish10BE,
+      },
+      {
+        value: "10BL",
+        label: "10BL - Dark oxidized satin bronze, clear coated",
+        image: images.finish10BL,
+      },
+      {
+        value: "14",
+        label: "14 - Bright nickel plated, clear coated",
+        image: images.finish14,
+      },
+      {
+        value: "15",
+        label: "15 - Satin nickel plated, clear coated",
+        image: images.finish15,
+      },
+      {
+        value: "20D",
+        label: "20D - Dark oxidized statuary bronze, clear coated",
+        image: images.finish20D,
+      },
+      {
+        value: "26",
+        label: "26 - Bright chromium plated over nickel",
+        image: images.finish26,
+      },
+      {
+        value: "26D",
+        label: "26D - Satin chromium plated over nickel",
+        image: images.finish26D,
+      },
+      {
+        value: "32",
+        label: "32 - Bright Stainless Steel",
+        image: images.finish32,
+      },
+      {
+        value: "32D",
+        label: "32D - Satin Stainless Steel",
+        image: images.finish32D,
+      },
+      {
+        value: "BSP",
+        label: "BSP - Black suede powder coat, sprayed",
+        image: images.finishBSP,
+      },
+      {
+        value: "WSP",
+        label: "WSP - White suede powder coat, sprayed",
+        image: images.finishWSP,
+      },
     ],
     handing: ["Left Hand", "Right Hand"],
   };
+
+  useEffect(() => {
+
+    console.log("Current Stile:", formData.stile);
+    console.log("Available Sizes:", options.sizes[formData.stile]);
+    if (formData.stile === "JellyFish") {
+      setFormData((prev) => ({ ...prev, lexan: "No" }));
+    }
+  }, [formData.stile, options.sizes]);
 
   // ─── Handle Prefix Conflicts (when toggling checkboxes) ─────────────────────
   const handlePrefixChange = (e) => {
@@ -371,6 +441,7 @@ const RailsForm = () => {
       ...provided,
       display: "flex",
       alignItems: "center",
+      color: "black"
     }),
   };
 
@@ -382,9 +453,8 @@ const RailsForm = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="content-transition">
       <h1 className="Heading">
-        Sargent <br />
         80 Series Exit Device <br />
         Rail Part Number Lookup
       </h1>
@@ -443,7 +513,10 @@ const RailsForm = () => {
                   onChange={handlePrefixChange}
                   disabled={effectiveDisabledPrefixes.includes(prefix.code)}
                 />
-                ({prefix.code}) -- {prefix.name}
+                <span className="custom-checkbox"></span>
+                <span>
+                  <strong>({prefix.code})</strong> — {prefix.name}
+                </span>
               </label>
             ))}
           </div>
@@ -470,22 +543,22 @@ const RailsForm = () => {
           </div>
         )}
 
+        
         {/* Size Dropdown */}
         <div className="form-group">
           <label>Size:</label>
           <select
             value={formData.size}
-            onChange={(e) =>
-              setFormData({ ...formData, size: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, size: e.target.value })}
             required
           >
             <option value="">Select Size</option>
-            {options.sizes[formData.stile]?.map((size) => (
-              <option key={size.code} value={size.code}>
-                {size.display}
-              </option>
-            ))}
+            {formData.stile &&
+              options.sizes[formData.stile]?.map((size) => (
+                <option key={size.code} value={size.code}>
+                  {size.display}
+                </option>
+              ))}
           </select>
         </div>
 
@@ -512,7 +585,7 @@ const RailsForm = () => {
           <button type="submit" className="generate-button">
             Find Part Number
           </button>
-          <button type="button" onClick={handleReset} className="reset-button">
+          <button type="button" onClick={handleReset} className="generate-button">
             Reset
           </button>
         </div>

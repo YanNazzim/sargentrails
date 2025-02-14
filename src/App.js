@@ -1,25 +1,43 @@
-// src/App.js
 import React, { useState } from "react";
 import Rails from "./components/RailsForm";
 import Trims from "./components/TrimsForm";
-import ToggleButton from "./components/ToggleButton";
+import Rods from "./components/RodsForm"; // You'll need to create this component
+import TabMenu from "./components/TabMenu"; 
 import "./App.css";
+import images from "./images"; // Adjust the path as needed
 
 const App = () => {
-  const [isRails, setIsRails] = useState(true);
+  const [activeTab, setActiveTab] = useState("Rails");
 
-  const handleToggle = () => {
-    setIsRails(!isRails);
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Rails":
+        return <Rails />;
+      case "Trims":
+        return <Trims />;
+      case "Rods":
+        return <Rods />;
+      default:
+        return <Rails />;
+    }
   };
 
   return (
     <div className="app">
-      <div className="toggle-container" aria-live="polite">
-        {/* Remove the sr-only class to display the text */}
-        <h2>Switch between Rails and Trims</h2>
-        <ToggleButton isRails={isRails} onToggle={handleToggle} />
+      {/* Corrected Header Section */}
+      <div className="header">
+        <img src={images.logo} alt="Sargent Logo" className="company-logo" />
+        <h1 className="title">Sargent Exit Device Part Number Lookup Tool <br /> (Bored/Mortise Coming Soon)</h1>
       </div>
-      {isRails ? <Rails /> : <Trims />}
+
+      <div className="tab-container" aria-live="polite">
+        <TabMenu activeTab={activeTab} onTabChange={handleTabChange} />
+      </div>
+      {renderContent()}
     </div>
   );
 };

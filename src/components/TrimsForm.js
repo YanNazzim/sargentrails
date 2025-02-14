@@ -14,10 +14,12 @@ const customTrimStyles = {
     maxHeight: "250px", // Scrollable menu
     overflowY: "auto",
     padding: "10px",
+    color: "black"
   }),
   control: (provided, state) => ({
     ...provided,
     minHeight: "50px",
+    color: "black",
     borderRadius: "10px",
     border: state.isFocused ? "2px solid #007bff" : "1px solid #ccc",
     boxShadow: state.isFocused ? "0 0 5px rgba(0, 123, 255, 0.5)" : "none",
@@ -178,6 +180,7 @@ const customLeverStyles = {
   option: (provided) => ({
     ...provided,
     display: "flex",
+    color: "black",
     alignItems: "center",
   }),
 };
@@ -865,24 +868,24 @@ const TrimsForm = () => {
     ).includes(opt.value)
   );
 
-// UPDATED: getTrimHardware now returns an object instead of a string.
-const getTrimHardware = (series, thickness, basePartNumber) => {
-  if (!basePartNumber)
-    return { screws: ["Unknown Screws"], spindle: "Unknown Spindle" };
+  // UPDATED: getTrimHardware now returns an object instead of a string.
+  const getTrimHardware = (series, thickness, basePartNumber) => {
+    if (!basePartNumber)
+      return { screws: ["Unknown Screws"], spindle: "Unknown Spindle" };
 
-  const category = series.startsWith("7000") ? "7000" : "standard";
-  // Extract suffix (e.g., "-4" from "706-4")
-  const suffixMatch = basePartNumber.match(/-(8|4|2)$/);
-  const suffix = suffixMatch ? suffixMatch[0] : "";
-  const screws =
-    trimsData.trimHardware[category]?.[thickness]?.screws || ["Unknown Screws"];
-  const spindle =
-    trimsData.trimHardware[category]?.[thickness]?.spindles?.[suffix] ||
-    "Unknown Spindle";
+    const category = series.startsWith("7000") ? "7000" : "standard";
+    // Extract suffix (e.g., "-4" from "706-4")
+    const suffixMatch = basePartNumber.match(/-(8|4|2)$/);
+    const suffix = suffixMatch ? suffixMatch[0] : "";
+    const screws = trimsData.trimHardware[category]?.[thickness]?.screws || [
+      "Unknown Screws",
+    ];
+    const spindle =
+      trimsData.trimHardware[category]?.[thickness]?.spindles?.[suffix] ||
+      "Unknown Spindle";
 
-  return { screws, spindle };
-};
-
+    return { screws, spindle };
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -909,34 +912,33 @@ const getTrimHardware = (series, thickness, basePartNumber) => {
 
     let lookupKey = `${formData.series}-${formData.device}-${formData.functionCode}`;
     const partEntry = trimsData.trimsParts[lookupKey] || "Not Found";
-// Extract the basePartNumber from partEntry
-const basePartNumber = partEntry.split(" ")[0]; // e.g., "706-4"
+    // Extract the basePartNumber from partEntry
+    const basePartNumber = partEntry.split(" ")[0]; // e.g., "706-4"
 
-// Use the updated lookup function (pass basePartNumber as third argument)
-let hardwareDetails = getTrimHardware(series, thickness, basePartNumber);
+    // Use the updated lookup function (pass basePartNumber as third argument)
+    let hardwareDetails = getTrimHardware(series, thickness, basePartNumber);
 
-let hardwareText = "";
+    let hardwareText = "";
 
-// Ensure hardwareDetails.screws is an array before processing
-if (!Array.isArray(hardwareDetails.screws)) {
-  console.error("hardwareDetails.screws is not an array:", hardwareDetails);
-  hardwareText = "Hardware details not available";
-} else {
-  if (formData.functionCode === "04") {
-    // For function 04: use the first two screw texts and ignore spindle.
-    hardwareText = hardwareDetails.screws.slice(0, 2).join(", ");
-  } else if (formData.functionCode === "10") {
-    // For function 10: use only the first screw text.
-    hardwareText = hardwareDetails.screws[0] || "";
-  } else {
-    // For all other functions: include both screws and spindle.
-    hardwareText =
-    hardwareDetails.screws[0] +
-      `<br />` +
-      (hardwareDetails.spindle || "");
-  }
-}
-
+    // Ensure hardwareDetails.screws is an array before processing
+    if (!Array.isArray(hardwareDetails.screws)) {
+      console.error("hardwareDetails.screws is not an array:", hardwareDetails);
+      hardwareText = "Hardware details not available";
+    } else {
+      if (formData.functionCode === "04") {
+        // For function 04: use the first two screw texts and ignore spindle.
+        hardwareText = hardwareDetails.screws.slice(0, 2).join(", ");
+      } else if (formData.functionCode === "10") {
+        // For function 10: use only the first screw text.
+        hardwareText = hardwareDetails.screws[0] || "";
+      } else {
+        // For all other functions: include both screws and spindle.
+        hardwareText =
+          hardwareDetails.screws[0] +
+          `<br />` +
+          (hardwareDetails.spindle || "");
+      }
+    }
 
     // 🔹 Construct the FULL trim part number (e.g., "713-8 ETA")
     const trimType = `${formData.functionCode}${formData.trim}`;
@@ -1143,6 +1145,7 @@ if (!Array.isArray(hardwareDetails.screws)) {
       ...provided,
       display: "flex",
       alignItems: "center",
+      color: "black",
     }),
   };
 
@@ -1155,9 +1158,8 @@ if (!Array.isArray(hardwareDetails.screws)) {
     .join("-");
 
   return (
-    <div className="app-container">
+    <div className="content-transition">
       <h1 className="Heading">
-        Sargent <br />
         Trims Part Number Lookup <br />
         700 ET/WE/NE & Pull Trims
         <br />
@@ -1342,7 +1344,10 @@ if (!Array.isArray(hardwareDetails.screws)) {
                       )}
                       onChange={handleElectricalPrefixChange}
                     />
-                    {prefix.code} — {prefix.name}
+                    <span className="custom-checkbox"></span>
+                    <span>
+                      <strong>{prefix.code}</strong> — {prefix.name}
+                    </span>
                   </label>
                 ))}
             </div>
@@ -1462,7 +1467,7 @@ if (!Array.isArray(hardwareDetails.screws)) {
           <button type="submit" className="generate-button">
             Find Part Number
           </button>
-          <button type="button" onClick={handleReset} className="reset-button">
+          <button type="button" onClick={handleReset} className="generate-button">
             Reset
           </button>
         </div>
