@@ -3,6 +3,7 @@ import Rails from "./components/RailsForm";
 import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm"; // You'll need to create this component
 import TabMenu from "./components/TabMenu"; 
+import Chassis from "./components/ChassisForm"
 import "./App.css";
 import images from "./images"; // Adjust the path as needed
 
@@ -19,8 +20,10 @@ const App = () => {
         return <Rails />;
       case "Trims":
         return <Trims />;
-      case "Rods":
+      case "Vertical Rod Device Internals":
         return <Rods />;
+        case "Chassis":
+          return <Chassis />;
       default:
         return <Rails />;
     }
@@ -31,7 +34,7 @@ const App = () => {
       {/* Corrected Header Section */}
       <div className="header">
         <img src={images.logo} alt="Sargent Logo" className="company-logo" />
-        <h1 className="title">Sargent Exit Device Part Number Lookup Tool <br /> (Bored/Mortise Coming Soon)</h1>
+        <h1 className="title">Sargent Part Number Lookup Tool <br /> (Bored/Mortise Coming Soon)</h1>
       </div>
 
       <div className="tab-container" aria-live="polite">

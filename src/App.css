@@ -56,6 +56,183 @@ body {
   margin: 0;
 }
 
+/* Form Group */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #dfe4e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+  border-color: #2ecc71;
+  outline: none;
+}
+
+/* Checkbox */
+.form-group input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: #2ecc71;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.generate-button,
+.reset-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.generate-button {
+  background-color: #2ecc71;
+  color: #001f3f;
+}
+
+.generate-button:hover {
+  background-color: #26af62;
+}
+
+.reset-button {
+  background-color: #001f3f;
+  color: #ffffff;
+  border: 2px solid #2ecc71;
+}
+
+.reset-button:hover {
+  background-color: #2ecc71;
+  color: #001f3f;
+}
+
+/* Result Container */
+.result-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dfe4e9;
+}
+
+.part-number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.result-container h3 {
+  margin-top: 1.5rem;
+  color: white;
+}
+
+.result-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.result-container ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #dfe4e9;
+}
+
+.result-container ul li:last-child {
+  border-bottom: none;
+}
+
+/* Two-Column Layout for Parts */
+.parts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* Container for parts columns */
+.parts-column {
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Inner spacing */
+  margin: 10px; /* Outer spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Heading for parts columns */
+.parts-column h3 {
+  font-size: 1.5rem; /* Larger font size for headings */
+  color: #333; /* Darker text for better readability */
+  margin-bottom: 15px; /* Space below the heading */
+  border-bottom: 2px solid #007bff; /* Blue underline for emphasis */
+  padding-bottom: 10px; /* Spacing between text and underline */
+}
+
+/* Type labels (e.g., Standard, 12-, FM) */
+.type-labels {
+  font-size: 1.2rem; /* Slightly larger font for type labels */
+  color: #007bff; /* Blue color for type labels */
+  margin-top: 15px; /* Space above the type label */
+  margin-bottom: 10px; /* Space below the type label */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+.parts-desc {
+  color: black;
+}
+
+/* List of parts */
+.parts-column ul {
+  list-style-type: none; /* Remove default bullet points */
+  padding-left: 0; /* Remove default padding */
+}
+
+/* Individual part items */
+.parts-column li {
+  background-color: #fff; /* White background for each part */
+  padding: 10px; /* Inner spacing */
+  margin-bottom: 8px; /* Space between parts */
+  border-radius: 4px; /* Rounded corners for each part */
+  border: 1px solid #ddd; /* Light border for separation */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for part items */
+.parts-column li:hover {
+  background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+/* Part code (bold text) */
+.parts-column li strong {
+  color: #333; /* Darker text for emphasis */
+}
+
+/* Part description */
+.parts-column li span {
+  color: #555; /* Slightly lighter text for description */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .title {
@@ -149,11 +326,6 @@ select:focus {
   border-color: transparent;
 }
 
-/* Add focus states for accessibility */
-button:focus {
-  outline: 3px solid #ffbf47;
-  outline-offset: 3px;
-}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -403,7 +575,7 @@ button:focus {
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 0;
   top: 6px;
-  left: 6px;
+  left: 0px;
   box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
 }
 
@@ -475,4 +647,60 @@ button:focus {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Chassis form  TEMPORARY DELETE LATER */
+/* Center the content on the page */
+.chassis-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Gradient background */
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Content styling */
+.chassis-form-content {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Title styling */
+.chassis-form-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Message styling */
+.chassis-form-message {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Suggestion text styling */
+.chassis-form-suggestion {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Email link styling */
+.chassis-form-email {
+  font-size: 1.2rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.chassis-form-email:hover {
+  text-decoration: underline;
 }

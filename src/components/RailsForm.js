@@ -455,8 +455,7 @@ const RailsForm = () => {
   return (
     <div className="content-transition">
       <h1 className="Heading">
-        80 Series Exit Device <br />
-        Rail Part Number Lookup
+        80 Series Exit Device Rails
       </h1>
 
       <form onSubmit={handleSubmit} className="part-form">

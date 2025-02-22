@@ -1,5 +1,5 @@
 const TabMenu = ({ activeTab, onTabChange }) => {
-  const tabs = ['Rails', 'Trims', 'Rods'];
+  const tabs = ['Rails', 'Trims', 'Vertical Rod Device Internals', "Chassis"];
 
   return (
     <div className="tab-menu-container">

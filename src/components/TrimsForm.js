@@ -1160,8 +1160,7 @@ const TrimsForm = () => {
   return (
     <div className="content-transition">
       <h1 className="Heading">
-        Trims Part Number Lookup <br />
-        700 ET/WE/NE & Pull Trims
+        Trims & Pulls <br /> 700 ET | P700 WE/NE
         <br />
       </h1>
       <form onSubmit={handleSubmit} className="part-form">
