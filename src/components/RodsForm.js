@@ -333,6 +333,15 @@ const RodsForm = () => {
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
       ],
+      topCaseParts: [
+        { code: "68-5374", description: "Top Case Assembly", type: "Standard" },
+        { code: "68-5375", description: "Top Case Assembly", type: '1/4" Cladding' },
+        { code: "68-5376", description: "Top Case Assembly", type: '1/2" Cladding' },
+      ],
+      bottomCaseParts: [
+        { code: "68-0888", description: "Bottom Plate", type: "Standard" },
+        { code: "652", description: "Bottom Strike", type: "Standard" },
+      ],
     },
     {
       code: "AD8600",
@@ -351,6 +360,15 @@ const RodsForm = () => {
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
       ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
+        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+      ],
+      bottomCaseParts: [
+        { code: "68-0888", description: "Bottom Plate", type: "Standard" },
+        { code: "652", description: "Bottom Strike", type: "Standard" },
+      ],
     },
     {
       code: "WD8600",
@@ -364,8 +382,16 @@ const RodsForm = () => {
       topRodKitAuxiliary: "WDA691T", // Part number for rods when using 106/113 Auxiliary Control
       topRodPartsAuxiliary: [
         {
+          code: "WD660T",
+          description: "Top Rod Only (Cut to accomodate Aux Extension)",
+        },
+        { code: "01-0696", description: "Coiled Pin" },
+        { code: "68-4840", description: "Latch Bolt Assembly" },
+        { code: "106", description: "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)" },
+        { code: "113", description: "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)" },
+        {
           code: "01-1137",
-          description: "Screw #8-32 x 7/16 (To Attach Extension)",
+          description: "Screw #8-32 x 7/16 (To Attach Auxiliary Extension)",
         },
         {
           code: "68-0918",
@@ -375,13 +401,6 @@ const RodsForm = () => {
           code: "68-0917",
           description: "Auxiliary Control Plate (How Aux Retracts rods)",
         },
-        {
-          code: "WD660T",
-          description: "Top Rod Only (Cut to accomodate Aux Extension)",
-        },
-        { code: "01-0696", description: "Coiled Pin" },
-        { code: "68-4840", description: "Latch Bolt Assembly" },
-        { code: "106-113", description: "Auxiliary Control Kit" },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -390,6 +409,13 @@ const RodsForm = () => {
         { code: "01-4389", description: "Roll Pin" },
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        { code: "650", description: "TopStrike", type: "Standard" },
+        
+      ],
+      bottomCaseParts: [
+        { code: "606", description: "Bottom Strike", type: "Standard" },
       ],
     },
     {

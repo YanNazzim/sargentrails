@@ -1,9 +1,12 @@
+import React from "react";
+import "./style/TabMenu.css"; // Import the new CSS file
+
 const TabMenu = ({ activeTab, onTabChange }) => {
   const tabs = ['Rails', 'Trims', 'Vertical Rod Device Internals', "Chassis"];
 
   return (
     <div className="tab-menu-container">
-      <div className="tab-menu">
+      <div className="tab-menu-grid">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -13,10 +16,6 @@ const TabMenu = ({ activeTab, onTabChange }) => {
             {tab}
           </button>
         ))}
-        <div className="tab-indicator" style={{ 
-          width: `${100 / tabs.length}%`,
-          transform: `translateX(${tabs.indexOf(activeTab) * 100}%)`
-        }} />
       </div>
     </div>
   );
