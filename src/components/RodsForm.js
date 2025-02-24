@@ -364,10 +364,11 @@ const RodsForm = () => {
         { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
         { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
         { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        { code: "650", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
-        { code: "68-0888", description: "Bottom Plate", type: "Standard" },
-        { code: "652", description: "Bottom Strike", type: "Standard" },
+        { code: "68-0888", description: "Bottom Plate", type: "Strike" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
@@ -435,6 +436,18 @@ const RodsForm = () => {
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
       ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
+        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        { code: "650", description: "Top Strike", type: "Strike" },
+          
+        ],
+        bottomCaseParts: [
+          { code: "68-0888", description: "Bottom Plate (U shape inside door)", type: "Strike" },
+          { code: "606", description: "Bottom Strike", type: "Strike" },
+          { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        ],
     },
     {
       code: "AD8400",
@@ -453,6 +466,17 @@ const RodsForm = () => {
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
       ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
+        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        { code: "640", description: "Top/Bottom Strike", type: "Strike" },
+          
+        ],
+        bottomCaseParts: [
+          { code: "68-0037", description: "Bottom Plate (C shape inside door)", type: "Strike" },
+          { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        ],
     },
 
     {
