@@ -178,6 +178,36 @@ const RodsForm = () => {
           description: "Bottom Case Cover",
           type: "(12-)(FM, HC, HC4) ",
         },
+        {
+          code: `68-5420`,
+          description: "Mounting Screws",
+          type: "STD Mounting Screws",
+        },
+        {
+          code: `68-5421`,
+          description: '1-3/4" Mounting Screws',
+          type: "12- Mounting Screws",
+        },
+        {
+          code: `68-5422`,
+          description: '2-1/4" Mounting Screws',
+          type: "12- Mounting Screws",
+        },
+        {
+          code: `68-5423`,
+          description: "Mounting Screws",
+          type: "(12-) NB Mounting Screws",
+        },
+        {
+          code: `68-5424`,
+          description: "Mounting Screws",
+          type: "HC/HC4 Mounting Screws",
+        },
+        {
+          code: `68-5820`,
+          description: "Mounting Screws",
+          type: "FM Mounting Screws",
+        },
       ],
     },
     {
@@ -309,8 +339,38 @@ const RodsForm = () => {
         },
         {
           code: `68-3905 x ${formData.finish}`,
-          description: "Top Case Cover Screws",
+          description: "Bottom Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
+        },
+        {
+          code: `68-5420`,
+          description: "Mounting Screws",
+          type: "STD Mounting Screws",
+        },
+        {
+          code: `68-5421`,
+          description: '1-3/4" Mounting Screws',
+          type: "12- Mounting Screws",
+        },
+        {
+          code: `68-5422`,
+          description: '2-1/4" Mounting Screws',
+          type: "12- Mounting Screws",
+        },
+        {
+          code: `68-5423`,
+          description: "Mounting Screws",
+          type: "(12-) NB Mounting Screws",
+        },
+        {
+          code: `68-5424`,
+          description: "Mounting Screws",
+          type: "HC/HC4 Mounting Screws",
+        },
+        {
+          code: `68-5820`,
+          description: "Mounting Screws",
+          type: "FM Mounting Screws",
         },
       ],
     },
@@ -337,10 +397,12 @@ const RodsForm = () => {
         { code: "68-5374", description: "Top Case Assembly", type: "Standard" },
         { code: "68-5375", description: "Top Case Assembly", type: '1/4" Cladding' },
         { code: "68-5376", description: "Top Case Assembly", type: '1/2" Cladding' },
+        { code: "650", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
-        { code: "68-0888", description: "Bottom Plate", type: "Standard" },
-        { code: "652", description: "Bottom Strike", type: "Standard" },
+        { code: "68-0888", description: "Bottom Plate", type: "Strike" },
+          { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
@@ -368,6 +430,7 @@ const RodsForm = () => {
       ],
       bottomCaseParts: [
         { code: "68-0888", description: "Bottom Plate", type: "Strike" },
+          { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
         { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
@@ -412,11 +475,13 @@ const RodsForm = () => {
         { code: "94-0038", description: "Bottom Bolt" },
       ],
       topCaseParts: [
-        { code: "650", description: "TopStrike", type: "Standard" },
+        { code: "650", description: "Top Strike", type: "Strike" },
         
       ],
       bottomCaseParts: [
-        { code: "606", description: "Bottom Strike", type: "Standard" },
+        { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
+          { code: "68-3577", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
