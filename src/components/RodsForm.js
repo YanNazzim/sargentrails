@@ -384,6 +384,16 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -395,13 +405,21 @@ const RodsForm = () => {
       ],
       topCaseParts: [
         { code: "68-5374", description: "Top Case Assembly", type: "Standard" },
-        { code: "68-5375", description: "Top Case Assembly", type: '1/4" Cladding' },
-        { code: "68-5376", description: "Top Case Assembly", type: '1/2" Cladding' },
+        {
+          code: "68-5375",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-5376",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
         { code: "650", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
         { code: "68-0888", description: "Bottom Plate", type: "Strike" },
-          { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
+        { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
         { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
@@ -413,6 +431,16 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -424,13 +452,21 @@ const RodsForm = () => {
       ],
       topCaseParts: [
         { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
-        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
-        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
         { code: "650", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
         { code: "68-0888", description: "Bottom Plate", type: "Strike" },
-          { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
+        { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
         { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
@@ -451,8 +487,16 @@ const RodsForm = () => {
         },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
-        { code: "106", description: "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)" },
-        { code: "113", description: "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)" },
+        {
+          code: "106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
         {
           code: "01-1137",
           description: "Screw #8-32 x 7/16 (To Attach Auxiliary Extension)",
@@ -476,11 +520,10 @@ const RodsForm = () => {
       ],
       topCaseParts: [
         { code: "650", description: "Top Strike", type: "Strike" },
-        
       ],
       bottomCaseParts: [
         { code: "68-3814", description: "Mounting Screw pack", type: "Screws" },
-          { code: "68-3577", description: "Mounting Screw pack", type: "Screws" },
+        { code: "68-3577", description: "Mounting Screw pack", type: "Screws" },
         { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
@@ -492,6 +535,16 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -503,16 +556,27 @@ const RodsForm = () => {
       ],
       topCaseParts: [
         { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
-        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
-        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
         { code: "650", description: "Top Strike", type: "Strike" },
-          
-        ],
-        bottomCaseParts: [
-          { code: "68-0888", description: "Bottom Plate (U shape inside door)", type: "Strike" },
-          { code: "606", description: "Bottom Strike", type: "Strike" },
-          { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
-        ],
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0888",
+          description: "Bottom Plate (U shape inside door)",
+          type: "Strike",
+        },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+      ],
     },
     {
       code: "AD8400",
@@ -522,6 +586,16 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -533,91 +607,216 @@ const RodsForm = () => {
       ],
       topCaseParts: [
         { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
-        { code: "68-3523", description: "Top Case Assembly", type: '1/4" Cladding' },
-        { code: "68-3524", description: "Top Case Assembly", type: '1/2" Cladding' },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
         { code: "640", description: "Top/Bottom Strike", type: "Strike" },
-          
-        ],
-        bottomCaseParts: [
-          { code: "68-0037", description: "Bottom Plate (C shape inside door)", type: "Strike" },
-          { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
-        ],
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+      ],
     },
 
     {
       code: "MD-PE8600",
       display: "MD-PE8600",
-      topRodKit: "MD691T",
+      topRodKit: "P692T",
       topRodParts: [
-        { code: "MD660T", description: "Top Rod Only" },
-        { code: "01-0696", description: "Coiled Pin" },
-        { code: "68-4840", description: "Latch Bolt Assembly" },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
-      bottomRodKit: "691B",
+      topRodKitAuxiliary: "P692T", // Part number for rods when using 106/113 Auxiliary Control
+      topRodPartsAuxiliary: [
+        {
+          code: "P106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "P113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
+        { code: "PE-2352", description: "Aux Control Link Assembly (MD)" },
+        { code: "PE-0447", description: "Aux Control Link Bracket Retainer" },
+        {
+          code: "01-1154",
+          description: 'Screw For Aux Control Link (#6-32 x 1/4" FHMS)',
+        },
+      ],
+      bottomRodKit: "MD-P692B",
       bottomRodParts: [
-        { code: "660B", description: "Bottom Rod Only" },
-        { code: "94-0039", description: "Bolt Sleeve" },
-        { code: "01-4389", description: "Roll Pin" },
-        { code: "97-0454", description: "Spring (Bottom Bolt)" },
-        { code: "94-0038", description: "Bottom Bolt" },
+        { code: "N/A", description: "Bottom Rod Only" },
+        { code: "N/A", description: "Bolt Sleeve" },
+        { code: "N/A", description: "Roll Pin" },
+        { code: "N/A", description: "Spring (Bottom Bolt)" },
+        { code: "N/A", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
+        { code: "650", description: "Top Strike", type: "Strike" },
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
       code: "AD-PE8600",
       display: "AD-PE8600",
-      topRodKit: "MD691T",
+      topRodKit: "P692T",
       topRodParts: [
-        { code: "MD660T", description: "Top Rod Only" },
-        { code: "01-0696", description: "Coiled Pin" },
-        { code: "68-4840", description: "Latch Bolt Assembly" },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
-      bottomRodKit: "691B",
+      topRodKitAuxiliary: "P692T", // Part number for rods when using 106/113 Auxiliary Control
+      topRodPartsAuxiliary: [
+        {
+          code: "P106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "P113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
+        { code: "PE-2352", description: "Aux Control Link Assembly (MD)" },
+        { code: "PE-0447", description: "Aux Control Link Bracket Retainer" },
+        {
+          code: "01-1154",
+          description: 'Screw For Aux Control Link (#6-32 x 1/4" FHMS)',
+        },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
+      ],
+      bottomRodKit: "AD-P692B",
       bottomRodParts: [
-        { code: "660B", description: "Bottom Rod Only" },
-        { code: "94-0039", description: "Bolt Sleeve" },
-        { code: "01-4389", description: "Roll Pin" },
-        { code: "97-0454", description: "Spring (Bottom Bolt)" },
-        { code: "94-0038", description: "Bottom Bolt" },
+        { code: "N/A", description: "Bottom Rod Only" },
+        { code: "N/A", description: "Bolt Sleeve" },
+        { code: "N/A", description: "Roll Pin" },
+        { code: "N/A", description: "Spring (Bottom Bolt)" },
+        { code: "N/A", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
+        { code: "650", description: "Top Strike", type: "Strike" },
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
       code: "WD-PE8600",
       display: "WD-PE8600",
-      topRodKit: "WD691T",
+      topRodKit: "P692T",
       topRodParts: [
-        { code: "WD660T", description: "Top Rod Only" },
-        { code: "01-0696", description: "Coiled Pin" },
-        { code: "68-4840", description: "Latch Bolt Assembly" },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
-      topRodKitAuxiliary: "WDA691T", // Part number for rods when using 106/113 Auxiliary Control
+      topRodKitAuxiliary: "P692T", // Part number for rods when using 106/113 Auxiliary Control
       topRodPartsAuxiliary: [
         {
-          code: "01-1137",
-          description: "Screw #8-32 x 7/16 (To Attach Extension)",
+          code: "P106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
         },
         {
-          code: "68-0918",
-          description: "Extension Rod (When using Auxiliary)",
+          code: "P113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
         },
+        { code: "PE-2036", description: "Aux Control Link Assembly (WD)" },
+        { code: "PE-0447", description: "Aux Control Link Bracket Retainer" },
         {
-          code: "68-0917",
-          description: "Auxiliary Control Plate (How Aux Retracts rods)",
+          code: "01-1154",
+          description: 'Screw For Aux Control Link (#6-32 x 1/4" FHMS)',
         },
-        {
-          code: "WD660T",
-          description: "Top Rod Only (Cut to accomodate Aux Extension)",
-        },
-        { code: "01-0696", description: "Coiled Pin" },
-        { code: "68-4840", description: "Latch Bolt Assembly" },
-        { code: "106-113", description: "Auxiliary Control Kit" },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
-      bottomRodKit: "691B",
+      bottomRodKit: "WD-P692B",
       bottomRodParts: [
-        { code: "660B", description: "Bottom Rod Only" },
-        { code: "94-0039", description: "Bolt Sleeve" },
-        { code: "01-4389", description: "Roll Pin" },
-        { code: "97-0454", description: "Spring (Bottom Bolt)" },
-        { code: "94-0038", description: "Bottom Bolt" },
+        { code: "N/A", description: "Bottom Rod Only" },
+        { code: "N/A", description: "Bolt Sleeve" },
+        { code: "N/A", description: "Roll Pin" },
+        { code: "N/A", description: "Spring (Bottom Bolt)" },
+        { code: "N/A", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        {
+          code: "68-3522",
+          description: "Top Case and bracket Assembly",
+          type: "Standard",
+        },
+        {
+          code: "68-3523",
+          description: "Top Case and bracket Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case and bracket Assembly",
+          type: '1/2" Cladding',
+        },
+        { code: "650", description: "Top Strike", type: "Strike" },
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
@@ -628,6 +827,28 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "P106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "P113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
+      ],
+      topRodKitAuxiliary: "P692T", // Part number for rods when using 106/113 Auxiliary Control
+      topRodPartsAuxiliary: [
+        { code: "PE-2352", description: "Aux Control Link Assembly (MD)" },
+        { code: "PE-0447", description: "Aux Control Link Bracket Retainer" },
+        {
+          code: "01-1154",
+          description: 'Screw For Aux Control Link (#6-32 x 1/4" FHMS)',
+        },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -636,6 +857,29 @@ const RodsForm = () => {
         { code: "01-4389", description: "Roll Pin" },
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
+        { code: "650", description: "Top Strike", type: "Strike" },
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
     {
@@ -646,6 +890,28 @@ const RodsForm = () => {
         { code: "MD660T", description: "Top Rod Only" },
         { code: "01-0696", description: "Coiled Pin" },
         { code: "68-4840", description: "Latch Bolt Assembly" },
+        {
+          code: "P106",
+          description:
+            "Store Room Function Aux Control Kit (Key Unlocks Thumbturn, Relocks When key removed)",
+        },
+        {
+          code: "P113",
+          description:
+            "Class Room Function Aux Control Kit (Key Unlocks Thumbturn, Can leave unlocked all day, Relocked Manually)",
+        },
+      ],
+      topRodKitAuxiliary: "P692T", // Part number for rods when using 106/113 Auxiliary Control
+      topRodPartsAuxiliary: [
+        { code: "PE-2352", description: "Aux Control Link Assembly (MD)" },
+        { code: "PE-0447", description: "Aux Control Link Bracket Retainer" },
+        {
+          code: "01-1154",
+          description: 'Screw For Aux Control Link (#6-32 x 1/4" FHMS)',
+        },
+        { code: "N/A", description: "Top Rod Only" },
+        { code: "N/A", description: "Coiled Pin" },
+        { code: "N/A", description: "Latch Bolt Assembly" },
       ],
       bottomRodKit: "691B",
       bottomRodParts: [
@@ -654,6 +920,29 @@ const RodsForm = () => {
         { code: "01-4389", description: "Roll Pin" },
         { code: "97-0454", description: "Spring (Bottom Bolt)" },
         { code: "94-0038", description: "Bottom Bolt" },
+      ],
+      topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
+        { code: "650", description: "Top Strike", type: "Strike" },
+      ],
+      bottomCaseParts: [
+        {
+          code: "68-0037",
+          description: "Bottom Plate (C shape inside door)",
+          type: "Strike",
+        },
+        { code: "68-3676", description: "Mounting Screw pack", type: "Screws" },
+        { code: "606", description: "Bottom Strike", type: "Strike" },
       ],
     },
   ];
@@ -912,7 +1201,12 @@ const RodsForm = () => {
         </div>
 
         {/* 106/113 Auxiliary Control Checkbox (Only for WD8600 or WD-PE8600) */}
-        {(formData.device === "WD8600" || formData.device === "WD-PE8600") && (
+        {(formData.device === "WD8600" ||
+          formData.device === "WD-PE8600" ||
+          formData.device === "MD-PE8600" ||
+          formData.device === "AD-PE8600" ||
+          formData.device === "AD-PE8400" ||
+          formData.device === "MD-PE8400") && (
           <div className="form-group">
             <label>
               <input
