@@ -32,6 +32,7 @@ const ChassisForm = () => {
     { code: "AD8600", display: "AD8600 CVR", stile: "Wide" },
     { code: "WD8600", display: "WD8600 CVR", stile: "Wide" },
     { code: "8700", display: "8700 SVR", stile: "Wide" },
+    { code: "NB8700", display: "NB8700 SVR (No Bottom Rod)", stile: "Wide" },
     { code: "8800", display: "8800 Rim", stile: "Wide" },
     { code: "8900", display: "8900 Mortise", stile: "Wide" },
   ];
@@ -50,6 +51,8 @@ const ChassisForm = () => {
     { code: "AL", name: "Alarm" },
     { code: "GL", name: "Guarded Latch" },
     { code: "WS", name: "Windstorm Rated" },
+    { code: "HC", name: "Hurricane Rated" },
+    { code: "HC4", name: "Hurricane Rated (Stronger)" },
     { code: "NB", name: "No Bottom Rod" },
   ];
 
@@ -447,6 +450,34 @@ const ChassisForm = () => {
     "WD8600-Right": {
       base: {
         chassis: "68-4558",
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3580`,
+          },
+          "12-53": {
+            innerChassis: `68-3859`,
+          },
+          "53": {
+            innerChassis: `68-3859`,
+          },
+          "5CH": {
+            innerChassis: `68-7785`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7786`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
+      },
+    },
+    "8700-Left": {
+      base: {
+        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63)`,
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
