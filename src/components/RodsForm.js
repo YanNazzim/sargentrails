@@ -30,7 +30,7 @@ const RodsForm = () => {
       topRodParts: [
         { code: "670T", description: "Top Rod Only", type: "Standard" },
         {
-          code: `97-0020 x ${formData.finish}`,
+          code: `97-0020-${formData.finish}`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -49,7 +49,7 @@ const RodsForm = () => {
       bottomRodParts: [
         { code: "670B", description: "Bottom Rod Only", type: "Standard" },
         {
-          code: `97-0020 x ${formData.finish}`,
+          code: `97-0020-${formData.finish}`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -82,12 +82,12 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018 x ${formData.finish}`,
+          code: `97-0018-${formData.finish}`,
           description: "Top Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
@@ -103,24 +103,24 @@ const RodsForm = () => {
           type: "12-",
         },
         {
-          code: `97-0392 x ${formData.finish}`,
+          code: `97-0392-${formData.finish}`,
           description: "Top Case Cover",
           type: "12-",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "12-",
         },
 
         { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
         {
-          code: `97-0392 x ${formData.finish}`,
+          code: `97-0392-${formData.finish}`,
           description: "Top Case Cover",
           type: "(12-)NB ",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "(12-)NB",
         },
@@ -136,12 +136,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `97-0084 x ${formData.finish}`,
+          code: `97-0084-${formData.finish}`,
           description: "Top Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },
@@ -158,7 +158,7 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018 x ${formData.finish}`,
+          code: `97-0018-${formData.finish}`,
           description: "Bottom Case Cover",
           type: "Standard",
         },
@@ -174,7 +174,7 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4) ",
         },
         {
-          code: `97-0087 x ${formData.finish}`,
+          code: `97-0087-${formData.finish}`,
           description: "Bottom Case Cover",
           type: "(12-)(FM, HC, HC4) ",
         },
@@ -217,7 +217,7 @@ const RodsForm = () => {
       topRodParts: [
         { code: "670T", description: "Top Rod Only", type: "Standard" },
         {
-          code: `97-0020 x ${formData.finish}`,
+          code: `97-0020-${formData.finish}`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -236,7 +236,7 @@ const RodsForm = () => {
       bottomRodParts: [
         { code: "670B", description: "Bottom Rod Only", type: "Standard" },
         {
-          code: `97-0020 x ${formData.finish}`,
+          code: `97-0020-${formData.finish}`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -260,36 +260,36 @@ const RodsForm = () => {
       topCaseParts: [
         { code: "68-4557", description: "Top Case Assembly", type: "Standard" },
         {
-          code: `97-0018 x ${formData.finish}`,
+          code: `97-0018-${formData.finish}`,
           description: "Top Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
 
         { code: "68-4559", description: "Top Case Assembly", type: "12-" },
         {
-          code: `97-0392 x ${formData.finish}`,
+          code: `97-0392-${formData.finish}`,
           description: "Top Case Cover",
           type: "12-",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "12-",
         },
 
         { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
         {
-          code: `97-0392 x ${formData.finish}`,
+          code: `97-0392-${formData.finish}`,
           description: "Top Case Cover",
           type: "(12-)NB ",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "(12-)NB",
         },
@@ -300,12 +300,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4) ",
         },
         {
-          code: `97-0084 x ${formData.finish}`,
+          code: `97-0084-${formData.finish}`,
           description: "Top Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },
@@ -317,12 +317,12 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018 x ${formData.finish}`,
+          code: `97-0018-${formData.finish}`,
           description: "Bottom Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
@@ -333,12 +333,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `97-0087 x ${formData.finish}`,
+          code: `97-0087-${formData.finish}`,
           description: "Bottom Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905 x ${formData.finish}`,
+          code: `68-3905-${formData.finish}`,
           description: "Bottom Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },

@@ -53,7 +53,7 @@ const ChassisForm = () => {
     { code: "WS", name: "Windstorm Rated" },
     { code: "HC", name: "Hurricane Rated" },
     { code: "HC4", name: "Hurricane Rated (Stronger)" },
-    { code: "NB", name: "No Bottom Rod" },
+    { code: "FM", name: "FEMA Rated" },
   ];
 
   // Define the finishes
@@ -248,10 +248,10 @@ const ChassisForm = () => {
           "53-5CH": {
             chassis: `68-8010`,
           },
-          "GL": {
+          GL: {
             chassis: `68-5881`,
           },
-          "59": {
+          59: {
             chassis: `68-5882`,
           },
         },
@@ -272,10 +272,10 @@ const ChassisForm = () => {
           "53-5CH": {
             chassis: `68-8010`,
           },
-          "GL": {
+          GL: {
             chassis: `68-5881`,
           },
-          "59": {
+          59: {
             chassis: `68-5882`,
           },
         },
@@ -289,7 +289,7 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3627`,
           },
           "12-53": {
@@ -301,7 +301,7 @@ const ChassisForm = () => {
           "12-53-5CH": {
             innerChassis: `68-7935`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3854`,
           },
           "5CH": {
@@ -310,7 +310,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7789`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -323,7 +323,7 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3627`,
           },
           "12-53": {
@@ -335,7 +335,7 @@ const ChassisForm = () => {
           "12-53-5CH": {
             innerChassis: `68-7935`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3854`,
           },
           "5CH": {
@@ -344,7 +344,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7789`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -358,7 +358,7 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3627`,
           },
           "12-53": {
@@ -370,7 +370,7 @@ const ChassisForm = () => {
           "12-53-5CH": {
             innerChassis: `68-7935`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3854`,
           },
           "5CH": {
@@ -379,7 +379,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7789`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -392,7 +392,7 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3627`,
           },
           "12-53": {
@@ -404,7 +404,7 @@ const ChassisForm = () => {
           "12-53-5CH": {
             innerChassis: `68-7935`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3854`,
           },
           "5CH": {
@@ -413,7 +413,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7789`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -426,13 +426,13 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3580`,
           },
           "12-53": {
             innerChassis: `68-3859`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3859`,
           },
           "5CH": {
@@ -441,7 +441,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7786`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -454,13 +454,13 @@ const ChassisForm = () => {
         chassisCover: `68-0407`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
+          12: {
             innerChassis: `68-3580`,
           },
           "12-53": {
             innerChassis: `68-3859`,
           },
-          "53": {
+          53: {
             innerChassis: `68-3859`,
           },
           "5CH": {
@@ -469,7 +469,7 @@ const ChassisForm = () => {
           "53-5CH": {
             innerChassis: `68-7786`,
           },
-          "59": {
+          59: {
             chassis: `68-5070`,
           },
         },
@@ -477,28 +477,119 @@ const ChassisForm = () => {
     },
     "8700-Left": {
       base: {
-        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63)`,
-        innerChassis: `94-2008`,
-        chassisCover: `68-0407`,
+        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 <br /> Functions 10 & 40 = 68-2163 <br /> Function 28 = 68-2210 <br /> Functions 62 & 63 = 68-2204`,
+        chassisCover: `68-0405`,
         coverScrews: `68-3905`,
         prefixes: {
-          "12": {
-            innerChassis: `68-3580`,
+          53: {
+            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3714 <br /> Functions 10 & 40 = 68-3823 <br /> Function 28 = 68-3829 <br /> Functions 62 & 63 = 68-3826`,
+          },
+          FM: {
+            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7306 <br /> Functions 10 & 40 = 68-7308 <br />`,
+          },
+          HC4: {
+            chassis: `68-4112`,
+          },
+        },
+      },
+    },
+    "8700-Right": {
+      base: {
+        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 <br /> Functions 10 & 40 = 68-2163 <br /> Function 28 = 68-2210 <br /> Functions 62 & 63 = 68-2204`,
+        chassisCover: `68-0405`,
+        coverScrews: `68-3905`,
+        prefixes: {
+          53: {
+            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3715 <br /> Functions 10 & 40 = 68-3824 <br /> Function 28 = 68-3830 <br /> Functions 62 & 63 = 68-3827`,
+          },
+          FM: {
+            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7307 <br /> Functions 10 & 40 = 68-7309`,
+          },
+          HC4: {
+            chassis: `68-4113`,
+          },
+        },
+      },
+    },
+    "NB8700-Left": {
+      base: {
+        chassis: `68-4568`,
+        chassisCover: `68-0405`,
+        coverScrews: `68-3905`,
+        prefixes: {
+          53: {
+            chassis: "68-5449",
+          },
+        },
+      },
+    },
+    "NB8700-Right": {
+      base: {
+        chassis: `68-4569`,
+        chassisCover: `68-0405`,
+        coverScrews: `68-3905`,
+        prefixes: {
+          53: {
+            chassis: "68-5450",
+          },
+        },
+      },
+    },
+    "8800-Left": {
+      base: {
+        chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4261 <br /> 16 Function (No Indicator) = 68-2425`,
+        chassisCover: `68-0406`,
+        coverScrews: `68-3905`,
+        prefixes: {
+          53: {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-6075 <br /> 16 Function (No Indicator) = 68-3722`,
+            chassisCover: `<br /> All Functions (Except 16, 28, 63, 66) = 68-0406 <br /> 16 Function = 68-1015`,
+          },
+          59: {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-3722`,
+            chassisCover: `<br /> All Functions (Except 16, 28, 63, 66, 28, 63, 66) = 68-0406 <br /> 16 Function (No Indicator) = 68-1015`,
+          },
+          12: {
+            chassis: "68-4263",
           },
           "12-53": {
-            innerChassis: `68-3859`,
+            chassis: "68-6076",
           },
-          "53": {
-            innerChassis: `68-3859`,
+          GL: {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassisCover: "68-1014",
           },
-          "5CH": {
-            innerChassis: `68-7785`,
+          AL: {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassisCover: "68-1014",
           },
-          "53-5CH": {
-            innerChassis: `68-7786`,
+          49: {
+            chassis: `<br /> 16 Function (Includes Indicator) = 68-6265`,
+            chassisCover: "68-1782",
           },
-          "59": {
-            chassis: `68-5070`,
+          "49-AL": {
+            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassisCover: "68-1784",
+          },
+          "49-GL": {
+            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassisCover: "68-1784",
+          },
+          "49-59": {
+            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassisCover: "68-1784",
+          },
+          "12-GL": {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassisCover: "68-1014",
+          },
+          "12-AL": {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassisCover: "68-1014",
+          },
+          "12-AL-GL": {
+            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassisCover: "68-1014",
           },
         },
       },
@@ -508,7 +599,7 @@ const ChassisForm = () => {
   const getPartsForCombination = (device, handing, selectedPrefixes) => {
     const key = `${device}-${handing}`;
     const combination = partCombinations[key];
-  
+
     if (!combination) {
       return {
         chassis: `Part either not found or doesn't exist, Contact TPS`,
@@ -517,17 +608,17 @@ const ChassisForm = () => {
         coverScrews: `Part either not found or doesn't exist, Contact TPS`,
       };
     }
-  
+
     // Start with the base parts
     let parts = { ...combination.base };
-  
+
     // Get the prefix overrides from the base object
     const prefixOverrides = combination.base.prefixes;
     if (prefixOverrides) {
       // Create a sorted composite key from all selected prefixes
       const sortedSelected = [...selectedPrefixes].sort();
       const compositeKey = sortedSelected.join("-");
-  
+
       // If the composite key exists, use that override
       if (prefixOverrides.hasOwnProperty(compositeKey)) {
         parts = { ...parts, ...prefixOverrides[compositeKey] };
@@ -540,10 +631,9 @@ const ChassisForm = () => {
         });
       }
     }
-  
+
     return parts;
   };
-  
 
   // Handle form submission
   const handleSubmit = (e) => {
