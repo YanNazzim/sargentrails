@@ -47,9 +47,10 @@ const ChassisForm = () => {
       name: "Electroguard® Delayed Egress",
       conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL"],
     },
-    { code: "AL", name: "Alarm", conflicts: ["16", "56", "59"] },
-    { code: "GL", name: "Guarded Latch", conflicts: ["16", "56", "59"] },
-    { code: "WS", name: "Windstorm Rated", conflicts: ["16", "56", "59"] },
+    { code: "AL", name: "Alarm" },
+    { code: "GL", name: "Guarded Latch" },
+    { code: "WS", name: "Windstorm Rated" },
+    { code: "NB", name: "No Bottom Rod" },
   ];
 
   // Define the finishes
@@ -194,67 +195,281 @@ const ChassisForm = () => {
     "AD8400-Left": {
       base: {
         chassis: `<br /> Standard Door = 68-5944 <br /> 1/4" Cladding = 68-6013 <br /> 1/2" Cladding = 68-5946`,
-        innerChassis: `<br /> Standard Door = 68-5374 <br /> 1/4" Cladding = 68-5375 <br /> 1/2" Cladding = 68-5376`,
+        innerChassis: `94-2008`,
         chassisCover: `68-0496 x ${formData.finish}`,
         coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          53: {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+        },
       },
     },
     "AD8400-Right": {
       base: {
         chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
-        innerChassis: `<br /> Standard Door = 68-5374 <br /> 1/4" Cladding = 68-5375 <br /> 1/2" Cladding = 68-5376`,
+        innerChassis: `94-2008`,
         chassisCover: `68-0496 x ${formData.finish}`,
         coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          53: {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+        },
+      },
+    },
+    "8500-Left": {
+      base: {
+        chassis: `68-5880`,
+        chassisCover: `68-0495 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          53: {
+            chassis: `68-7411`,
+          },
+          "5CH": {
+            chassis: `68-8009`,
+          },
+          "53-5CH": {
+            chassis: `68-8010`,
+          },
+          "GL": {
+            chassis: `68-5881`,
+          },
+          "59": {
+            chassis: `68-5882`,
+          },
+        },
+      },
+    },
+    "8500-Right": {
+      base: {
+        chassis: `68-5880`,
+        chassisCover: `68-0495 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          53: {
+            chassis: `68-7411`,
+          },
+          "5CH": {
+            chassis: `68-8009`,
+          },
+          "53-5CH": {
+            chassis: `68-8010`,
+          },
+          "GL": {
+            chassis: `68-5881`,
+          },
+          "59": {
+            chassis: `68-5882`,
+          },
+        },
       },
     },
     // Wide Stile
     "MD8600-Left": {
       base: {
         chassis: ` 68-5068`,
-        innerChassis: `<br /> Standard Door = 68-5374 <br /> 1/4" Cladding = 68-5375 <br /> 1/2" Cladding = 68-5376`,
-        chassisCover: `68-0496 x ${formData.finish}`,
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407 x ${formData.finish}`,
         coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3627`,
+          },
+          "12-53": {
+            innerChassis: `68-3855`,
+          },
+          "12-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "12-53-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "53": {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
     "MD8600-Right": {
       base: {
         chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
-        innerChassis: `<br /> Standard Door = 68-5374 <br /> 1/4" Cladding = 68-5375 <br /> 1/2" Cladding = 68-5376`,
-        chassisCover: `68-0496 x ${formData.finish}`,
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407 x ${formData.finish}`,
         coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3627`,
+          },
+          "12-53": {
+            innerChassis: `68-3855`,
+          },
+          "12-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "12-53-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "53": {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
 
     "AD8600-Left": {
       base: {
         chassis: "68-4558",
-        innerChassis: "68-4559", // Added innerChassis
-        chassisCover: "97-0019",
-        coverScrews: "68-3906",
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3627`,
+          },
+          "12-53": {
+            innerChassis: `68-3855`,
+          },
+          "12-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "12-53-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "53": {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
     "AD8600-Right": {
       base: {
         chassis: "68-4558",
-        innerChassis: "68-4559", // Added innerChassis
-        chassisCover: "97-0019",
-        coverScrews: "68-3906",
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3627`,
+          },
+          "12-53": {
+            innerChassis: `68-3855`,
+          },
+          "12-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "12-53-5CH": {
+            innerChassis: `68-7935`,
+          },
+          "53": {
+            innerChassis: `68-3854`,
+          },
+          "5CH": {
+            innerChassis: `68-7936`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7789`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
     "WD8600-Left": {
       base: {
         chassis: "68-4558",
-        innerChassis: "68-4559", // Added innerChassis
-        chassisCover: "97-0019",
-        coverScrews: "68-3906",
+        innerChassis: `68-3580`,
+        chassisCover: `68-0407 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3580`,
+          },
+          "12-53": {
+            innerChassis: `68-3859`,
+          },
+          "53": {
+            innerChassis: `68-3859`,
+          },
+          "5CH": {
+            innerChassis: `68-7785`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7786`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
     "WD8600-Right": {
       base: {
         chassis: "68-4558",
-        innerChassis: "68-4559", // Added innerChassis
-        chassisCover: "97-0019",
-        coverScrews: "68-3906",
+        innerChassis: `94-2008`,
+        chassisCover: `68-0407 x ${formData.finish}`,
+        coverScrews: `68-3905 x ${formData.finish}`,
+        prefixes: {
+          "12": {
+            innerChassis: `68-3580`,
+          },
+          "12-53": {
+            innerChassis: `68-3859`,
+          },
+          "53": {
+            innerChassis: `68-3859`,
+          },
+          "5CH": {
+            innerChassis: `68-7785`,
+          },
+          "53-5CH": {
+            innerChassis: `68-7786`,
+          },
+          "59": {
+            chassis: `68-5070`,
+          },
+        },
       },
     },
   };
@@ -262,7 +477,7 @@ const ChassisForm = () => {
   const getPartsForCombination = (device, handing, selectedPrefixes) => {
     const key = `${device}-${handing}`;
     const combination = partCombinations[key];
-
+  
     if (!combination) {
       return {
         chassis: `Part either not found or doesn't exist, Contact TPS`,
@@ -271,32 +486,33 @@ const ChassisForm = () => {
         coverScrews: `Part either not found or doesn't exist, Contact TPS`,
       };
     }
-
-    // Start with base parts
+  
+    // Start with the base parts
     let parts = { ...combination.base };
-
-    // Use prefix overrides stored inside combination.base
+  
+    // Get the prefix overrides from the base object
     const prefixOverrides = combination.base.prefixes;
-
     if (prefixOverrides) {
-      // Create a sorted key from the selected prefixes
-      const sortedPrefixes = [...selectedPrefixes].sort();
-      const combinedKey = sortedPrefixes.join("-");
-
-      // Check for a combined override first
-      if (prefixOverrides[combinedKey]) {
-        parts = { ...parts, ...prefixOverrides[combinedKey] };
+      // Create a sorted composite key from all selected prefixes
+      const sortedSelected = [...selectedPrefixes].sort();
+      const compositeKey = sortedSelected.join("-");
+  
+      // If the composite key exists, use that override
+      if (prefixOverrides.hasOwnProperty(compositeKey)) {
+        parts = { ...parts, ...prefixOverrides[compositeKey] };
       } else {
-        // Otherwise, check for individual prefix overrides
+        // Otherwise, apply individual overrides
         selectedPrefixes.forEach((prefix) => {
-          const override = prefixOverrides[prefix];
-          if (override) parts = { ...parts, ...override };
+          if (prefixOverrides.hasOwnProperty(prefix)) {
+            parts = { ...parts, ...prefixOverrides[prefix] };
+          }
         });
       }
     }
-
+  
     return parts;
   };
+  
 
   // Handle form submission
   const handleSubmit = (e) => {
