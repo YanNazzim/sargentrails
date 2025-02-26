@@ -143,23 +143,23 @@ const ChassisForm = () => {
     "8300-Left": {
       base: {
         chassis: `<br /> 1-3/4" Door = 68-2481 <br /> 2" to 2-3/4" Door = 68-2483`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
       },
     },
     "8300-Right": {
       base: {
         chassis: `<br /> 1-3/4" Door = 68-2482 <br /> 2" to 2-3/4" Door = 68-2484`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
       },
     },
     "MD8400-Left": {
       base: {
         chassis: `<br /> Standard Door = 68-5944 <br /> 1/4" Cladding = 68-6013 <br /> 1/2" Cladding = 68-5946`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -177,8 +177,8 @@ const ChassisForm = () => {
       base: {
         chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -196,8 +196,8 @@ const ChassisForm = () => {
       base: {
         chassis: `<br /> Standard Door = 68-5944 <br /> 1/4" Cladding = 68-6013 <br /> 1/2" Cladding = 68-5946`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -215,8 +215,8 @@ const ChassisForm = () => {
       base: {
         chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0496 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0496`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -233,8 +233,8 @@ const ChassisForm = () => {
     "8500-Left": {
       base: {
         chassis: `68-5880`,
-        chassisCover: `68-0495 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0495`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: `68-7411`,
@@ -257,8 +257,8 @@ const ChassisForm = () => {
     "8500-Right": {
       base: {
         chassis: `68-5880`,
-        chassisCover: `68-0495 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0495`,
+        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: `68-7411`,
@@ -283,8 +283,8 @@ const ChassisForm = () => {
       base: {
         chassis: ` 68-5068`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3627`,
@@ -317,8 +317,8 @@ const ChassisForm = () => {
       base: {
         chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3627`,
@@ -352,8 +352,8 @@ const ChassisForm = () => {
       base: {
         chassis: "68-4558",
         innerChassis: `94-2008`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3627`,
@@ -386,8 +386,8 @@ const ChassisForm = () => {
       base: {
         chassis: "68-4558",
         innerChassis: `94-2008`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3627`,
@@ -420,8 +420,8 @@ const ChassisForm = () => {
       base: {
         chassis: "68-4558",
         innerChassis: `68-3580`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3580`,
@@ -448,8 +448,8 @@ const ChassisForm = () => {
       base: {
         chassis: "68-4558",
         innerChassis: `94-2008`,
-        chassisCover: `68-0407 x ${formData.finish}`,
-        coverScrews: `68-3905 x ${formData.finish}`,
+        chassisCover: `68-0407`,
+        coverScrews: `68-3905`,
         prefixes: {
           "12": {
             innerChassis: `68-3580`,
