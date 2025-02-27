@@ -39,14 +39,13 @@ const ChassisForm = () => {
 
   // Define the prefixes and their conflicts
   const prefixes = [
-    { code: "12", name: "Fire Rated (No Dogging)", conflicts: ["16", "56-HK"] },
+    { code: "12", name: "Fire Rated (No Dogging)" },
     { code: "49", name: "Inside Visual Indicator for 8816" },
-    { code: "5CH", name: "5LB Maximum Force", conflicts: ["58", "59"] },
-    { code: "53", name: "Latchbolt Monitoring Switch", conflicts: ["59"] },
+    { code: "5CH", name: "5LB Maximum Force" },
+    { code: "53", name: "Latchbolt Monitoring Switch" },
     {
       code: "59",
       name: "Electroguard® Delayed Egress",
-      conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL"],
     },
     { code: "AL", name: "Alarm" },
     { code: "GL", name: "Guarded Latch" },
@@ -145,24 +144,28 @@ const ChassisForm = () => {
     // Narrow Stile
     "8300-Left": {
       base: {
-        chassis: `<br /> 1-3/4" Door = 68-2481 <br /> 2" to 2-3/4" Door = 68-2483`,
+        chassis: `
+        <br /> 1-3/4" Door = 68-2481 
+        <br /> 2" to 2-3/4" Door = 68-2483`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
       },
     },
     "8300-Right": {
       base: {
-        chassis: `<br /> 1-3/4" Door = 68-2482 <br /> 2" to 2-3/4" Door = 68-2484`,
+        chassis: `
+        <br /> 1-3/4" Door = 68-2482 
+        <br /> 2" to 2-3/4" Door = 68-2484`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
       },
     },
     "MD8400-Left": {
       base: {
-        chassis: `<br /> Standard Door = 68-5944 <br /> 1/4" Cladding = 68-6013 <br /> 1/2" Cladding = 68-5946`,
+        chassis: `
+        <br /> Standard Door = 68-5944 
+        <br /> 1/4" Cladding = 68-6013 
+        <br /> 1/2" Cladding = 68-5946`,
         innerChassis: `94-2008`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -178,10 +181,12 @@ const ChassisForm = () => {
     },
     "MD8400-Right": {
       base: {
-        chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
+        chassis: `
+        <br /> Standard Door = 68-5945 
+        <br /> 1/4" Cladding = 68-6014 
+        <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -197,10 +202,12 @@ const ChassisForm = () => {
     },
     "AD8400-Left": {
       base: {
-        chassis: `<br /> Standard Door = 68-5944 <br /> 1/4" Cladding = 68-6013 <br /> 1/2" Cladding = 68-5946`,
+        chassis: `
+        <br /> Standard Door = 68-5944 
+        <br /> 1/4" Cladding = 68-6013 
+        <br /> 1/2" Cladding = 68-5946`,
         innerChassis: `94-2008`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -216,10 +223,12 @@ const ChassisForm = () => {
     },
     "AD8400-Right": {
       base: {
-        chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
+        chassis: `
+        <br /> Standard Door = 68-5945 
+        <br /> 1/4" Cladding = 68-6014 
+        <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
         chassisCover: `68-0496`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             innerChassis: `68-3854`,
@@ -237,7 +246,6 @@ const ChassisForm = () => {
       base: {
         chassis: `68-5880`,
         chassisCover: `68-0495`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: `68-7411`,
@@ -261,7 +269,6 @@ const ChassisForm = () => {
       base: {
         chassis: `68-5880`,
         chassisCover: `68-0495`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: `68-7411`,
@@ -287,7 +294,6 @@ const ChassisForm = () => {
         chassis: ` 68-5068`,
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3627`,
@@ -318,10 +324,12 @@ const ChassisForm = () => {
     },
     "MD8600-Right": {
       base: {
-        chassis: `<br /> Standard Door = 68-5945 <br /> 1/4" Cladding = 68-6014 <br /> 1/2" Cladding = 68-5951`,
+        chassis: `
+        <br /> Standard Door = 68-5945 
+        <br /> 1/4" Cladding = 68-6014 
+        <br /> 1/2" Cladding = 68-5951`,
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3627`,
@@ -356,7 +364,6 @@ const ChassisForm = () => {
         chassis: "68-4558",
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3627`,
@@ -390,7 +397,6 @@ const ChassisForm = () => {
         chassis: "68-4558",
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3627`,
@@ -424,7 +430,6 @@ const ChassisForm = () => {
         chassis: "68-4558",
         innerChassis: `68-3580`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3580`,
@@ -452,7 +457,6 @@ const ChassisForm = () => {
         chassis: "68-4558",
         innerChassis: `94-2008`,
         chassisCover: `68-0407`,
-        coverScrews: `68-3905`,
         prefixes: {
           12: {
             innerChassis: `68-3580`,
@@ -477,15 +481,24 @@ const ChassisForm = () => {
     },
     "8700-Left": {
       base: {
-        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 <br /> Functions 10 & 40 = 68-2163 <br /> Function 28 = 68-2210 <br /> Functions 62 & 63 = 68-2204`,
+        chassis: `
+        <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 
+        <br /> Functions 10 & 40 = 68-2163 
+        <br /> Function 28 = 68-2210 
+        <br /> Functions 62 & 63 = 68-2204`,
         chassisCover: `68-0405`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
-            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3714 <br /> Functions 10 & 40 = 68-3823 <br /> Function 28 = 68-3829 <br /> Functions 62 & 63 = 68-3826`,
+            chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3714 
+            <br /> Functions 10 & 40 = 68-3823 
+            <br /> Function 28 = 68-3829 
+            <br /> Functions 62 & 63 = 68-3826`,
           },
           FM: {
-            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7306 <br /> Functions 10 & 40 = 68-7308 <br />`,
+            chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7306 
+            <br /> Functions 10 & 40 = 68-7308/>`,
           },
           HC4: {
             chassis: `68-4112`,
@@ -495,15 +508,24 @@ const ChassisForm = () => {
     },
     "8700-Right": {
       base: {
-        chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 <br /> Functions 10 & 40 = 68-2163 <br /> Function 28 = 68-2210 <br /> Functions 62 & 63 = 68-2204`,
+        chassis: `
+        <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 
+        <br /> Functions 10 & 40 = 68-2163 
+        <br /> Function 28 = 68-2210 
+        <br /> Functions 62 & 63 = 68-2204`,
         chassisCover: `68-0405`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
-            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3715 <br /> Functions 10 & 40 = 68-3824 <br /> Function 28 = 68-3830 <br /> Functions 62 & 63 = 68-3827`,
+            chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3715 
+            <br /> Functions 10 & 40 = 68-3824 
+            <br /> Function 28 = 68-3830 
+            <br /> Functions 62 & 63 = 68-3827`,
           },
           FM: {
-            chassis: `<br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7307 <br /> Functions 10 & 40 = 68-7309`,
+            chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-7307 
+            <br /> Functions 10 & 40 = 68-7309`,
           },
           HC4: {
             chassis: `68-4113`,
@@ -515,7 +537,6 @@ const ChassisForm = () => {
       base: {
         chassis: `68-4568`,
         chassisCover: `68-0405`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: "68-5449",
@@ -527,7 +548,6 @@ const ChassisForm = () => {
       base: {
         chassis: `68-4569`,
         chassisCover: `68-0405`,
-        coverScrews: `68-3905`,
         prefixes: {
           53: {
             chassis: "68-5450",
@@ -537,17 +557,44 @@ const ChassisForm = () => {
     },
     "8800-Left": {
       base: {
-        chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4261 <br /> 16 Function (No Indicator) = 68-2425`,
-        chassisCover: `68-0406`,
-        coverScrews: `68-3905`,
+        chassis: `
+        <br /> All functions (Except 16, 28, 63, 66) = 68-4261 
+        <br /> 16 Function Only (No Indicator) = 68-2425 
+        <br /> 28 Function Only (Pull Trim) = 68-2329
+        <br /> 63 Function Only (Pull Trim) = 68-2326
+        <br /> 66 Function Only (Pull Trim) = 68-2443
+        `,
+        chassisCover: `
+        <br /> All Functions (Except 16 & 66) = 68-0406
+        <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-0408
+        `,
         prefixes: {
           53: {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-6075 <br /> 16 Function (No Indicator) = 68-3722`,
-            chassisCover: `<br /> All Functions (Except 16, 28, 63, 66) = 68-0406 <br /> 16 Function = 68-1015`,
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-6075 
+            <br /> 16 Function Only (No Indicator) = 68-3722,
+            <br /> 28 Function Only (Pull Trim) = 68-3835
+            <br /> 63 Function Only (Pull Trim) = 68-3727
+            <br /> 66 Function Only (Pull Trim) = 68-3732
+            `,
+
+            chassisCover: `
+            <br /> All Functions (Except 16, 28, 63, 66) = 68-0406 
+            <br /> 16 & 66 Function (No Indicator) = 68-1015 
+            <br /> 28 & 63 Function (Pull Trim) = 68-1014`,
           },
           59: {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-3722`,
-            chassisCover: `<br /> All Functions (Except 16, 28, 63, 66, 28, 63, 66) = 68-0406 <br /> 16 Function (No Indicator) = 68-1015`,
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+            <br /> 16 Function Only (No Indicator) = 68-3722 
+            <br /> 28 Function Only (Pull Trim) = 68-3835
+            <br /> 63 Function Only (Pull Trim) = 68-3727
+            <br /> 66 Function Only (Pull Trim) = 68-3732
+            `,
+            chassisCover: `
+            <br /> All Functions (Except 16, 28, 63, 66) = 68-0406 
+            <br /> 16 & 66 Function (No Indicator) = 68-1015 
+            <br /> 28 & 63 Function (Pull Trim) = 68-1014`,
           },
           12: {
             chassis: "68-4263",
@@ -556,40 +603,110 @@ const ChassisForm = () => {
             chassis: "68-6076",
           },
           GL: {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-4077`,
-            chassisCover: "68-1014",
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+            <br /> 16 Function Only (No Indicator) = 68-4077 
+            <br /> 28 Function Only (Pull Trim) = 68-4082
+            <br /> 63 Function Only (Pull Trim) = 68-4099
+            <br /> 66 Function Only (Pull Trim) = 68-4104
+            `,
+            chassisCover: `
+            <br /> All Functions (Except 16 & 66) = 68-1014
+            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1015
+            `,
           },
           AL: {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4410 <br /> 16 Function (No Indicator) = 68-4077`,
-            chassisCover: "68-1014",
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+            <br /> 16 Function Only (No Indicator) = 68-4077 
+            <br /> 28 Function Only (Pull Trim) = 68-4082
+            <br /> 63 Function Only (Pull Trim) = 68-4099
+            <br /> 66 Function Only (Pull Trim) = 68-4104
+            `,
+            chassisCover: `
+            <br /> All Functions (Except 16 & 66) = 68-1014
+            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1015
+            `,
           },
           49: {
-            chassis: `<br /> 16 Function (Includes Indicator) = 68-6265`,
+            chassis: `
+            <br /> 16 Function (Includes Indicator) = 68-6265
+            <br /> 66 Function (Includes Indicator) = 68-6271
+            `,
             chassisCover: "68-1782",
           },
           "49-AL": {
-            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassis: `
+            <br /> 16 Function Only (Includes Indicator) = 68-6287
+            <br /> 16 Function Only (Includes Indicator) = 68-6283
+            `,
             chassisCover: "68-1784",
           },
           "49-GL": {
-            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassis: `
+            <br /> 16 Function Only (Includes Indicator) = 68-6287`,
             chassisCover: "68-1784",
           },
           "49-59": {
-            chassis: `<br /> 16 Function (Includes Indicator) = 68-6287`,
+            chassis: `
+            <br /> 16 Function Only (Includes Indicator) = 68-6287`,
             chassisCover: "68-1784",
           },
           "12-GL": {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
+            <br /> 16 Function Only (No Indicator) = 68-4077
+            <br /> 28 Function Only (Pull Trim) = 68-4082`,
             chassisCover: "68-1014",
           },
           "12-AL": {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
+            <br /> 16 Function Only (No Indicator) = 68-4077
+            <br /> 28 Function Only (Pull Trim) = 68-4082`,
             chassisCover: "68-1014",
           },
           "12-AL-GL": {
-            chassis: `<br /> All functions (Except 16, 28, 63, 66) = 68-4411 <br /> 16 Function (No Indicator) = 68-4077`,
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
+            <br /> 16 Function Only (No Indicator) = 68-4077
+            <br /> 28 Function Only (Pull Trim) = 68-4082`,
             chassisCover: "68-1014",
+          },
+          "5CH": {
+            chassis: `
+            <br /> All functions (Except 16, 28, 63, 66) = 68-7484
+            <br /> 16 Function Only (No Indicator) = 68-7512  
+            <br /> 28 Function Only (Pull Trim) = 68-7514
+            <br /> 63 Function Only (Pull Trim) = 68-7516
+            <br /> 63 Function Only (Pull Trim) = 68-7518
+            `,
+            chassisCover: `
+            <br /> All Functions (Except 16 & 66) = 68-0406
+            <br /> 16 & 66 Function (No Indicator) = 68-0408
+            `,
+          },
+          "53-5CH": {
+            chassis: `
+            <br /> 16 Function Only (No Indicator) = 68-7965 
+            <br /> 28 Function Only (Pull Trim) = 68-7971
+            <br /> 63 Function Only (Pull Trim) = 68-7967
+            <br /> 66 Function Only (Pull Trim) = 68-7969
+            `,
+            chassisCover: `
+              <br /> 16 & 66 Function (No Indicator) = 68-1015 
+              <br /> 28 & 63 Function (Pull Trim) = 68-1014`,
+          },
+          "59-5CH": {
+            chassis: `
+            <br /> 16 Function Only (No Indicator) = 68-7965 
+            <br /> 28 Function Only (Pull Trim) = 68-7971
+            <br /> 63 Function Only (Pull Trim) = 68-7967
+            <br /> 66 Function Only (Pull Trim) = 68-7969
+            `,
+            chassisCover: `
+              <br /> 16 & 66 Function (No Indicator) 68-1015 
+              <br /> 28 & 63 Function (Pull Trim) = 68-1014`,
           },
         },
       },
@@ -668,8 +785,8 @@ const ChassisForm = () => {
     setRelatedParts({
       chassis: parts.chassis,
       innerChassis: parts.innerChassis, // Added innerChassis
-      chassisCover: `${parts.chassisCover} x ${formData.finish}`,
-      coverScrews: `${parts.coverScrews} x ${formData.finish}`,
+      chassisCover: parts.chassisCover,
+      coverScrews: parts.coverScrews
     });
 
     // Generate part number
@@ -677,7 +794,7 @@ const ChassisForm = () => {
     const key = `${prefixKey}-${formData.device}-${formData.function}${
       formData.handing ? `-${formData.handing}` : ""
     }`;
-    const generatedNumber = `${key}-${formData.finish}`;
+    const generatedNumber = `${key}`;
     setPartNumber(generatedNumber);
   };
 
@@ -883,12 +1000,6 @@ const ChassisForm = () => {
               <strong>Chassis Cover:</strong>{" "}
               <span
                 dangerouslySetInnerHTML={{ __html: relatedParts.chassisCover }}
-              />
-            </p>
-            <p>
-              <strong>Cover Screws:</strong>{" "}
-              <span
-                dangerouslySetInnerHTML={{ __html: relatedParts.coverScrews }}
               />
             </p>
           </div>
