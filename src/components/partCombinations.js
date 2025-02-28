@@ -491,10 +491,13 @@ const partCombinations = {
             <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
         },
         12: {
-          chassis: "68-4263",
-        },
-        "12-53": {
-          chassis: "68-6076",
+          chassis: `
+          <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
+          <br /> 16 Function Only (No Indicator) = 68-2425 
+          <br /> 28 Function Only (Pull Trim) = 68-2329
+          <br /> 63 Function Only (Pull Trim) = 68-2326
+          <br /> 66 Function Only (Pull Trim) = 68-2443
+          `,
         },
         GL: {
           chassis: `
@@ -532,7 +535,7 @@ const partCombinations = {
         "49-AL": {
           chassis: `
             <br /> 16 Function Only (Includes Indicator) = 68-6287
-            <br /> 16 Function Only (Includes Indicator) = 68-6283
+            <br /> 66 Function Only (Includes Indicator) = 68-6283
             `,
           chassisCover: `68-1784-FINISH`,
         },
@@ -647,7 +650,13 @@ const partCombinations = {
             <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
         },
         12: {
-          chassis: "68-4263",
+          chassis: `
+          <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
+          <br /> 16 Function Only (No Indicator) = 68-2425 
+          <br /> 28 Function Only (Pull Trim) = 68-2329
+          <br /> 63 Function Only (Pull Trim) = 68-2326
+          <br /> 66 Function Only (Pull Trim) = 68-2443
+          `,
         },
         "12-53": {
           chassis: "68-6076",
@@ -1363,8 +1372,8 @@ const partCombinations = {
             <br /> 66 Function Only (Pull Trim) = 68-2443
             `,
       chassisCover: `
-            <br /> All Functions (Except 16 & 66) = 68-0406-FINISH
-            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-0408-FINISH
+            <br /> All Functions (Except 16 & 66) = PE-0145-FINISH
+            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0147-FINISH
             `,
       prefixes: {
         53: {
@@ -1377,28 +1386,43 @@ const partCombinations = {
                 `,
 
           chassisCover: `
-                <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
-                <br /> 16 & 66 Function (No Indicator) = 68-1015-FINISH 
-                <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0145-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
+                <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH`,
         },
         59: {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> All functions (Except 16, 28, 63, 66) = PE-2321 
                 <br /> 16 Function Only (No Indicator) = 68-3722 
-                <br /> 28 Function Only (Pull Trim) = 68-3835
+                <br /> 28 Function Only (Pull Trim) = PE-2313
                 <br /> 63 Function Only (Pull Trim) = 68-3727
                 <br /> 66 Function Only (Pull Trim) = 68-3732
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
-                <br /> 16 & 66 Function (No Indicator) = 68-1015-FINISH 
-                <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> All Functions (Except 16 & 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH `,
+        },
+        "12-59": {
+          chassis: `
+                <br /> All functions (Except 16, 28, 63, 66) = PE-2322 
+                <br /> 16 Function Only (No Indicator) = 68-3722 
+                <br /> 28 Function Only (Pull Trim) = PE-2313
+                <br /> 63 Function Only (Pull Trim) = 68-3727
+                <br /> 66 Function Only (Pull Trim) = 68-3732
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
+                `,
         },
         12: {
-          chassis: "68-4263",
-        },
-        "12-53": {
-          chassis: "68-6076",
+          chassis: `
+          <br /> All functions (Except 16, 28, 63, 66) = 68-4261 
+          <br /> 16 Function Only (No Indicator) = 68-2425 
+          <br /> 28 Function Only (Pull Trim) = 68-2329
+          <br /> 63 Function Only (Pull Trim) = 68-2326
+          <br /> 66 Function Only (Pull Trim) = 68-2443
+          `,
         },
         GL: {
           chassis: `
@@ -1409,8 +1433,8 @@ const partCombinations = {
                 <br /> 66 Function Only (Pull Trim) = 68-4104
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-1014-FINISH
-                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1015-FINISH
+                <br /> All Functions (Except 16 & 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
                 `,
         },
         AL: {
@@ -1422,54 +1446,72 @@ const partCombinations = {
                 <br /> 66 Function Only (Pull Trim) = 68-4104
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-1014-FINISH
-                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1015-FINISH
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
                 `,
         },
         49: {
           chassis: `
-                <br /> 16 Function (Includes Indicator) = 68-6265
-                <br /> 66 Function (Includes Indicator) = 68-6271
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function (Includes Indicator) = PE-2613
                 `,
-          chassisCover: `68-1782-FINISH`,
+          chassisCover: `
+                <br /> 16 Function (Includes Indicator) = PE-0412
+                <br /> 66 Function (Includes Indicator) = PE-0151
+                `,
         },
         "49-AL": {
           chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6287
-                <br /> 16 Function Only (Includes Indicator) = 68-6283
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function Only (Includes Indicator) = PE-2611
                 `,
-          chassisCover: `68-1784-FINISH`,
+          chassisCover: `PE-0412-FINISH`,
         },
         "49-GL": {
           chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6287`,
-          chassisCover: `68-1784-FINISH`,
-        },
-        "49-59": {
-          chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6287`,
-          chassisCover: `68-1784-FINISH`,
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function Only (Includes Indicator) = PE-2611
+                `,
+          chassisCover: `PE-0412-FINISH`,
         },
         "12-GL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "12-AL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "12-AL-GL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "5CH": {
           chassis: `
@@ -1480,8 +1522,8 @@ const partCombinations = {
                 <br /> 63 Function Only (Pull Trim) = 68-7518
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-0406-FINISH
-                <br /> 16 & 66 Function (No Indicator) = 68-0408-FINISH
+                <br /> All Functions (Except 16 & 66) = PE-0145-FINISH
+                <br /> 16 & 66 Function (No Indicator) = PE-0147-FINISH
                 `,
         },
         "53-5CH": {
@@ -1492,8 +1534,10 @@ const partCombinations = {
                 <br /> 66 Function Only (Pull Trim) = 68-7969
                 `,
           chassisCover: `
-                  <br /> 16 & 66 Function (No Indicator) = 68-1015-FINISH 
-                  <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                  <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
+                  <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH
+                  <br /> 16 Function Only (No Indicator) = PE-0147-FINISH 
+                  `,
         },
         "59-5CH": {
           chassis: `
@@ -1503,8 +1547,8 @@ const partCombinations = {
                 <br /> 66 Function Only (Pull Trim) = 68-7969
                 `,
           chassisCover: `
-                  <br /> 16 & 66 Function (No Indicator) 68-1015-FINISH 
-                  <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
+                <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH`,
         },
       },
     },
@@ -1519,166 +1563,183 @@ const partCombinations = {
             <br /> 66 Function Only (Pull Trim) = 68-2444
             `,
       chassisCover: `
-            <br /> All Functions (Except 16 & 66) = 68-0406-FINISH
-            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-0409-FINISH
+            <br /> All Functions (Except 16 & 66) = PE-0145-FINISH
+            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0147-FINISH
             `,
       prefixes: {
         53: {
           chassis: `
                 <br /> All functions (Except 16, 28, 63, 66) = 68-6075 
-                <br /> 16 Function Only (No Indicator) = 68-3723
+                <br /> 16 Function Only (No Indicator) = 68-3723,
                 <br /> 28 Function Only (Pull Trim) = 68-3836
                 <br /> 63 Function Only (Pull Trim) = 68-3728
                 <br /> 66 Function Only (Pull Trim) = 68-3733
                 `,
 
           chassisCover: `
-                <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
-                <br /> 16 & 66 Function (No Indicator) = 68-1016-FINISH 
-                <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0145-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0411-FINISH 
+                <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH`,
         },
         59: {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
-                <br /> 16 Function Only (No Indicator) = 68-3723 
-                <br /> 28 Function Only (Pull Trim) = 68-3836
-                <br /> 63 Function Only (Pull Trim) = 68-3728
-                <br /> 66 Function Only (Pull Trim) = 68-3733
+                <br /> All functions (Except 16, 28, 63, 66) = PE-2321 
+                <br /> 16 Function Only (No Indicator) = PE-2320 
+                <br /> 28 Function Only (Pull Trim) = PE-2314
+                <br /> 63 Function Only (Pull Trim) = PE-2318
+                <br /> 66 Function Only (Pull Trim) = PE-2316
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
-                <br /> 16 & 66 Function (No Indicator) = 68-1016-FINISH 
-                <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> All Functions (Except 16 & 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0411-FINISH `,
+        },
+        "12-59": {
+          chassis: `
+                <br /> All functions (Except 16, 28, 63, 66) = PE-2322 
+                <br /> 16 Function Only (No Indicator) = 68-3722 
+                <br /> 28 Function Only (Pull Trim) = PE-2313
+                <br /> 63 Function Only (Pull Trim) = 68-3727
+                <br /> 66 Function Only (Pull Trim) = 68-3732
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (No Indicator) = PE-0411-FINISH 
+                `,
         },
         12: {
-          chassis: "68-4263",
-        },
-        "12-53": {
-          chassis: "68-6076",
+          chassis: `
+          <br /> All functions (Except 16, 28, 63, 66) = 68-4261 
+          <br /> 16 Function Only (No Indicator) = 68-2425 
+          <br /> 28 Function Only (Pull Trim) = 68-2329
+          <br /> 63 Function Only (Pull Trim) = 68-2326
+          <br /> 66 Function Only (Pull Trim) = 68-2443
+          `,
         },
         GL: {
           chassis: `
                 <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
-                <br /> 16 Function Only (No Indicator) = 68-4078 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
                 <br /> 28 Function Only (Pull Trim) = 68-4083
                 <br /> 63 Function Only (Pull Trim) = 68-4100
                 <br /> 66 Function Only (Pull Trim) = 68-4105
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-1014-FINISH
-                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1016-FINISH
+                <br /> All Functions (Except 16 & 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0411-FINISH
                 `,
         },
         AL: {
           chassis: `
                 <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
-                <br /> 16 Function Only (No Indicator) = 68-4078 
-                <br /> 28 Function Only (Pull Trim) = 68-4083
-                <br /> 63 Function Only (Pull Trim) = 68-4100
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
                 <br /> 66 Function Only (Pull Trim) = 68-4105
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-1014-FINISH
-                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1016-FINISH
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0411-FINISH
                 `,
         },
         49: {
           chassis: `
-                <br /> 16 Function (Includes Indicator) = 68-6266
-                <br /> 66 Function (Includes Indicator) = 68-6272
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function (Includes Indicator) = PE-2614
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-1782-FINISH
-                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1783-FINISH
+                <br /> 16 Function (Includes Indicator) = PE-0412
+                <br /> 66 Function (Includes Indicator) = PE-0152
                 `,
         },
         "49-AL": {
           chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6288
-                <br /> 66 Function Only (Includes Indicator) = 68-6284
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function Only (Includes Indicator) = PE-2612
                 `,
-          chassisCover: `68-1785-FINISH`,
+          chassisCover: `PE-0412-FINISH`,
         },
         "49-GL": {
           chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6288
-                <br /> 66 Function Only (Includes Indicator) = 68-6284
+                <br /> 16 Function (Includes Indicator) = PE-2353
+                <br /> 66 Function Only (Includes Indicator) = PE-2612
                 `,
-          chassisCover: `68-1785-FINISH`,
-        },
-        "49-59": {
-          chassis: `
-                <br /> 16 Function Only (Includes Indicator) = 68-6287`,
-          chassisCover: `68-1784-FINISH`,
+          chassisCover: `PE-0412-FINISH`,
         },
         "12-GL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "12-AL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "12-AL-GL": {
           chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-4411 
-                <br /> 16 Function Only (No Indicator) = 68-4077
-                <br /> 28 Function Only (Pull Trim) = 68-4082`,
-          chassisCover: `68-1014-FINISH`,
+                <br /> All functions (Except 16, 28, 63, 66) = 68-4410 
+                <br /> 16 Function Only (No Indicator) = 68-4077 
+                <br /> 28 Function Only (Pull Trim) = 68-4082
+                <br /> 63 Function Only (Pull Trim) = 68-4099
+                <br /> 66 Function Only (Pull Trim) = 68-4104
+                `,
+          chassisCover: `
+                <br /> All Functions (Except 16, 28, 63, 66) = PE-0409-FINISH 
+                <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = PE-0410-FINISH
+                `,
         },
         "5CH": {
           chassis: `
                 <br /> All functions (Except 16, 28, 63, 66) = 68-7484
-                <br /> 16 Function Only (No Indicator) = 68-7513 
-                <br /> 28 Function Only (Pull Trim) = 68-7515
-                <br /> 63 Function Only (Pull Trim) = 68-7517
+                <br /> 16 Function Only (No Indicator) = 68-7512  
+                <br /> 28 Function Only (Pull Trim) = 68-7514
+                <br /> 63 Function Only (Pull Trim) = 68-7516
                 <br /> 63 Function Only (Pull Trim) = 68-7519
                 `,
           chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-0406-FINISH
-                <br /> 16 & 66 Function (No Indicator) = 68-0409-FINISH
-                `,
-        },
-        "12-5CH": {
-          chassis: `
-                <br /> All functions (Except 16, 28, 63, 66) = 68-7485
-                <br /> 16 Function Only (No Indicator) = 68-7513 
-                <br /> 28 Function Only (Pull Trim) = 68-7515
-                <br /> 63 Function Only (Pull Trim) = 68-7517
-                <br /> 63 Function Only (Pull Trim) = 68-7519
-                `,
-          chassisCover: `
-                <br /> All Functions (Except 16 & 66) = 68-0406-FINISH
-                <br /> 16 & 66 Function (No Indicator) = 68-0409-FINISH
+                <br /> All Functions (Except 16 & 66) = PE-0145-FINISH
+                <br /> 16 & 66 Function (No Indicator) = PE-0148-FINISH
                 `,
         },
         "53-5CH": {
           chassis: `
-                <br /> 16 Function Only (No Indicator) = 68-7966 
-                <br /> 28 Function Only (Pull Trim) = 68-7972
-                <br /> 63 Function Only (Pull Trim) = 68-7968
+                <br /> 16 Function Only (No Indicator) = 68-7965 
+                <br /> 28 Function Only (Pull Trim) = 68-7971
+                <br /> 63 Function Only (Pull Trim) = 68-7967
                 <br /> 66 Function Only (Pull Trim) = 68-7970
                 `,
           chassisCover: `
-                  <br /> 16 & 66 Function (No Indicator) = 68-1016-FINISH 
-                  <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                  <br /> 16 Function Only (No Indicator) = PE-0410-FINISH 
+                  <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH
+                  <br /> 66 Function Only (No Indicator) = PE-0148-FINISH 
+                  `,
         },
         "59-5CH": {
           chassis: `
-                <br /> 16 Function Only (No Indicator) = 68-7966 
-                <br /> 28 Function Only (Pull Trim) = 68-7972
-                <br /> 63 Function Only (Pull Trim) = 68-7968
-                <br /> 66 Function Only (Pull Trim) = 68-7970
+                <br /> 16 Function Only (No Indicator) = 68-7965 
+                <br /> 28 Function Only (Pull Trim) = 68-7971
+                <br /> 63 Function Only (Pull Trim) = 68-7967
+                <br /> 66 Function Only (Pull Trim) = 68-7969
                 `,
           chassisCover: `
-                  <br /> 16 & 66 Function (No Indicator) = 68-1016-FINISH 
-                  <br /> 28 & 63 Function (Pull Trim) = 68-1014-FINISH`,
+                <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
+                <br /> 28 & 63 Function (Pull Trim) = PE-0409-FINISH`,
         },
       },
     },
@@ -1690,9 +1751,17 @@ const partCombinations = {
             <br /> 16 & 66 Functions = 68-2213
             `,
       chassisCover: `        
-            <br /> All Functions (Except 16 & 66) = 68-0407-FINISH
-            <br /> 16 & 66 Functions = 68-0410-FINISH
+            <br /> All Functions (Except 16 & 66) = PE-0146-FINISH
+            <br /> 16 & 66 Functions = PE-0149-FINISH
             `,
+      prefixes: {
+        59: {
+          chassis: `        
+            <br /> All Functions (Except 16 & 66) = PE-2344
+            <br /> 16 & 66 Functions = PE-2336
+            `,
+        },
+      },
     },
   },
   "PE8900-Right": {
@@ -1702,9 +1771,17 @@ const partCombinations = {
             <br /> 16 & 66 Functions = 68-2214
             `,
       chassisCover: `        
-            <br /> All Functions (Except 16 & 66) = 68-0407-FINISH
-            <br /> 16 & 66 Functions = 68-0411-FINISH
+            <br /> All Functions (Except 16 & 66) = PE-0146-FINISH
+            <br /> 16 & 66 Functions = PE-0150-FINISH
             `,
+      prefixes: {
+        59: {
+          chassis: `        
+            <br /> All Functions (Except 16 & 66) = PE-2345
+            <br /> 16 & 66 Functions = PE-2337
+            `,
+        },
+      },
     },
   },
 };
