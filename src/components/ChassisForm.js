@@ -165,7 +165,6 @@ const ChassisForm = () => {
     selectedPrefixes,
     finish
   ) => {
-    console.log("Finish value:", finish); // Debug: Check the finish value
 
     const key = `${device}-${handing}`;
     const combination = partCombinations[key];
@@ -224,12 +223,10 @@ const ChassisForm = () => {
       return;
     }
   
-    console.log("formData.finish:", formData.finish); // Debug: Check the finish object
   
     // Extract the finish value (e.g., "03", "04", etc.)
     const finishValue = formData.finish.value; // Access the `value` property
   
-    console.log("Finish value:", finishValue); // Debug: Check the extracted finish value
   
     // Look up related parts
     const parts = getPartsForCombination(

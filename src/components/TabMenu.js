@@ -4,10 +4,10 @@ import "./style/TabMenu.css"; // Import the new CSS file
 const TabMenu = ({ activeTab, onTabChange }) => {
   const tabs = [
     'Rails',
-    'Trims',
-    'Vertical Rod Device Internals',
     'Chassis',
+    'Trims',
     'Levers', // New tab
+    'Vertical Rod Device Internals',
     'Mortise Exit Lockbodies', // New tab
   ];
   return (
