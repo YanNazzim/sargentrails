@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { trimsData } from "../trimsData"; // Import trimsData instead of partsDataimport "../App.css";
 import images from "../images"; // Adjust path as needed
 import Select, { components } from "react-select";
+import leverStyles from "./LeverStyles"
 
 const customTrimStyles = {
   menu: (provided) => ({
@@ -81,49 +82,91 @@ const FinishSingleValue = (props) => {
   );
 };
 
-// NEW: Custom components for lever style selection with larger images
+// Custom Option for Lever Style Dropdown
 const CustomLeverOption = (props) => {
+  const { partNumbers = {} } = props.data; // Default to an empty object if partNumbers is missing
+
   return (
     <components.Option {...props}>
-      <img
-        src={props.data.image}
-        alt={props.data.label}
-        style={{
-          width: "180px", // Increased width for bigger image
-          height: "auto",
-          marginRight: "10px",
-          verticalAlign: "middle",
-          borderRadius: "25px",
-        }}
-      />
-      <span
-        style={{
-          fontSize: "2em",
-          textAlign: "center",
-        }}
-      >
-        {props.data.label}
-      </span>
+      <div style={{ display: "flex", alignItems: "center", padding: "10px" }}>
+        <img
+          src={props.data.image}
+          alt={props.data.label}
+          style={{
+            width: "120px",
+            height: "auto",
+            marginRight: "20px",
+            borderRadius: "15px",
+            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+          }}
+        />
+        <div>
+          <h3 style={{ margin: "0 0 5px 0", color: "#2ecc71" }}>{props.data.label}</h3>
+          <div style={{ color: "#888" }}>
+            {Object.entries(partNumbers).map(([platform, part]) => (
+              <div key={platform}>
+                <strong>{platform}:</strong>{" "}
+                {typeof part === "object"
+                  ? `${part.inside || "N/A"} / ${part.outside || "N/A"}`
+                  : part || "N/A"}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </components.Option>
   );
 };
 
-const CustomLeverSingleValue = (props) => {
-  return (
-    <components.SingleValue {...props}>
+// Custom SingleValue for Lever Style Dropdown
+const CustomLeverSingleValue = (props) => (
+  <components.SingleValue {...props}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <img
         src={props.data.image}
         alt={props.data.label}
         style={{
-          width: "120px", // Increased width for bigger image
+          width: "60px",
           height: "auto",
-          marginRight: "10px",
-          verticalAlign: "middle",
+          marginRight: "15px",
+          borderRadius: "8px",
         }}
       />
       <span>{props.data.label}</span>
-    </components.SingleValue>
-  );
+    </div>
+  </components.SingleValue>
+);
+
+// Custom Styles for Lever Dropdown
+const customLeverStyles = {
+  control: (provided) => ({
+    ...provided,
+    minHeight: "50px",
+    border: "2px solid #2c3e50",
+    borderRadius: "8px",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "#2ecc71",
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#e8f5e9" : "white",
+    color: state.isSelected ? "white" : "#2c3e50",
+    padding: "10px",
+    borderRadius: "8px",
+    transition: "background-color 0.3s ease",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    display: "flex",
+    alignItems: "center",
+  }),
 };
 
 const CustomTrimOption = (props) => {
@@ -168,21 +211,6 @@ const CustomTrimSingleValue = (props) => {
       </div>
     </components.SingleValue>
   );
-};
-
-const customLeverStyles = {
-  menuList: (provided) => ({
-    ...provided,
-    maxHeight: "200px", // scrollable menu height
-    overflowY: "auto",
-  }),
-  control: (provided) => ({ ...provided, minHeight: "50px" }),
-  option: (provided) => ({
-    ...provided,
-    display: "flex",
-    color: "black",
-    alignItems: "center",
-  }),
 };
 
 const TrimsForm = () => {
@@ -279,80 +307,7 @@ const TrimsForm = () => {
     !noCylinderFunctions.includes(formData.functionCode); // Hide if function is in noCylinderFunctions
 
   // Lever style options (NEW)
-  const leverStyleOptions = [
-    // Standard Levers
-    { value: "A", label: "A Lever (Handed)", image: images.LeverA },
-    { value: "B", label: "B Lever", image: images.LeverB },
-    { value: "E", label: "E Lever", image: images.LeverE },
-    { value: "F", label: "F Lever", image: images.LeverF },
-    { value: "J", label: "J Lever", image: images.LeverJ },
-    { value: "L", label: "L Lever", image: images.LeverL },
-    { value: "P", label: "P Lever", image: images.LeverP },
-    { value: "W", label: "W Lever", image: images.LeverW },
 
-    // Coastal Series
-    { value: "R", label: "R - Rockport Lever", image: images.LeverR },
-    { value: "S", label: "S - Sanibel Lever (Handed)", image: images.LeverS },
-    { value: "Y", label: "Y - Yarmouth Lever (Handed)", image: images.LeverY },
-    { value: "G", label: "G - Gulfport Lever (Handed)", image: images.LeverG },
-
-    // Centro Series
-    { value: "MD", label: "MD Lever", image: images.LeverMD },
-    { value: "MJ", label: "MJ Lever", image: images.LeverMJ },
-    { value: "MP", label: "MP Lever", image: images.LeverMP },
-    { value: "ND", label: "ND Lever", image: images.LeverND },
-    { value: "NJ", label: "NJ Lever", image: images.LeverNJ },
-
-    // Notting Hill Series
-    { value: "MA", label: "MA Lever", image: images.LeverMA },
-    { value: "MQ", label: "MQ Lever (Handed)", image: images.LeverMQ },
-    { value: "MT", label: "MT Lever (Handed)", image: images.LeverMT },
-    { value: "MO", label: "MO Lever ", image: images.LeverMO },
-    { value: "MZ", label: "MZ Lever (Handed)", image: images.LeverMZ },
-    { value: "GT", label: "GT Lever (Handed)", image: images.LeverGT },
-
-    // Aventura Series
-    { value: "MB", label: "MB Lever", image: images.LeverMB },
-    { value: "ME", label: "ME Lever", image: images.LeverME },
-    { value: "MF", label: "MF Lever", image: images.LeverMF },
-    { value: "NF", label: "NF Lever", image: images.LeverNF },
-    { value: "MG", label: "MG Lever", image: images.LeverMG },
-    { value: "MI", label: "MI Lever", image: images.LeverMI },
-    { value: "MW", label: "MW Lever", image: images.LeverMW },
-
-    // Odeon Series
-    { value: "MN", label: "MN Lever (Handed)", image: images.LeverMN },
-    { value: "MH", label: "MH Lever (Handed)", image: images.LeverMH },
-    { value: "MS", label: "MS Lever (Handed)", image: images.LeverMS },
-    { value: "MU", label: "MU Lever (Handed)", image: images.LeverMU },
-    { value: "MV", label: "MV Lever (Handed)", image: images.LeverMV },
-    { value: "NU", label: "NU Lever (Handed)", image: images.LeverNU },
-    { value: "WG", label: "WG Lever (Handed)", image: images.LeverWG },
-
-    // Gramercy Series
-    { value: "RCM", label: "RCM Lever", image: images.LeverRCM },
-    { value: "RAL", label: "RAL Lever", image: images.LeverRAL },
-    { value: "REM", label: "REM Lever", image: images.LeverREM },
-    { value: "RAM", label: "RAM Lever", image: images.LeverRAM },
-    { value: "RAS", label: "RAS Lever", image: images.LeverRAS },
-    { value: "RAG", label: "RAG Lever", image: images.LeverRAG },
-    { value: "RGM", label: "RGM Lever", image: images.LeverRGM },
-    { value: "H015", label: "H015 Lever", image: images.LeverH015 },
-    { value: "H016", label: "H016 Lever", image: images.LeverH016 },
-    { value: "H017", label: "H017 Lever", image: images.LeverH017 },
-    { value: "H018", label: "H018 Lever", image: images.LeverH018 },
-
-    // Wooster Square
-    { value: "H001", label: "H001 Lever", image: images.LeverH001 },
-    { value: "H002", label: "H002 Lever", image: images.LeverH002 },
-    { value: "H003", label: "H003 Lever", image: images.LeverH003 },
-    { value: "H004", label: "H004 Lever", image: images.LeverH004 },
-    { value: "H005", label: "H005 Lever", image: images.LeverH005 },
-    { value: "H006", label: "H006 Lever", image: images.LeverH006 },
-    { value: "H007", label: "H007 Lever", image: images.LeverH007 },
-    { value: "H008", label: "H008 Lever", image: images.LeverH008 },
-    { value: "H011", label: "H011 Lever", image: images.LeverH011 },
-  ];
 
   // Function options (same for all series)
   const functionOptions = [
@@ -1416,32 +1371,26 @@ const TrimsForm = () => {
         </div>
 
         {((formData.series === "7000" &&
-          (formData.trim === "ET" ||
-            formData.trim === "ER" ||
-            formData.trim === "ES")) ||
-          (formData.series !== "7000" &&
-            (formData.trim === "ET" ||
-              formData.trim === "WE" ||
-              formData.trim === "NE"))) && (
-          <div className="form-group">
-            <label>Lever Style:</label>
-            <Select
-              options={leverStyleOptions}
-              onChange={handleLeverStyleChange}
-              value={
-                leverStyleOptions.find(
-                  (opt) => opt.value === formData.leverStyle
-                ) || null
-              }
-              placeholder="Select Lever Style"
-              components={{
-                Option: CustomLeverOption,
-                SingleValue: CustomLeverSingleValue,
-              }}
-              styles={customLeverStyles}
-            />
-          </div>
-        )}
+  (formData.trim === "ET" || formData.trim === "ER" || formData.trim === "ES")) ||
+  (formData.series !== "7000" &&
+    (formData.trim === "ET" || formData.trim === "WE" || formData.trim === "NE"))) && (
+  <div className="form-group">
+    <label>Lever Style:</label>
+    <Select
+      options={leverStyles}
+      onChange={handleLeverStyleChange}
+      value={
+        leverStyles.find((opt) => opt.value === formData.leverStyle) || null
+      }
+      placeholder="Select Lever Style"
+      components={{
+        Option: CustomLeverOption,
+        SingleValue: CustomLeverSingleValue,
+      }}
+      styles={customLeverStyles}
+    />
+  </div>
+)}
 
         {/* Finish using react‑select */}
         <div className="form-group">
