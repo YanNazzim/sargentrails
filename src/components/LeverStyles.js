@@ -23,9 +23,9 @@ const leverStyleOptions = [
     label: "B Lever",
     image: images.LeverB,
     partNumbers: {
-      "DL Series": { inside: "B-CYL-INS-001", outside: "B-CYL-OUT-001" },
-      Mortise: { inside: "B-MO-INS-001", outside: "B-MO-OUT-001" },
-      Exits: "B-EX-001",
+      "DL Series": { inside: "DL-0042", outside: "DL-0042" },
+      Mortise: { inside: "DL-0042", outside: "82-0153" },
+      Exits: "82-0153",
     },
   },
   {
@@ -33,9 +33,9 @@ const leverStyleOptions = [
     label: "E Lever",
     image: images.LeverE,
     partNumbers: {
-      "DL Series": { inside: "E-CYL-INS-001", outside: "E-CYL-OUT-001" },
-      Mortise: { inside: "E-MO-INS-001", outside: "E-MO-OUT-001" },
-      Exits: "E-EX-001",
+      "DL Series": { inside: "DL-0043", outside: "DL-0043" },
+      Mortise: { inside: "DL-0043", outside: "82-0154" },
+      Exits: "82-0154",
     },
   },
   {
@@ -43,9 +43,9 @@ const leverStyleOptions = [
     label: "F Lever",
     image: images.LeverF,
     partNumbers: {
-      "DL Series": { inside: "F-CYL-INS-001", outside: "F-CYL-OUT-001" },
-      Mortise: { inside: "F-MO-INS-001", outside: "F-MO-OUT-001" },
-      Exits: "F-EX-001",
+      "DL Series": { inside: "DL-0044", outside: "DL-0044" },
+      Mortise: { inside: "DL-0044", outside: "82-0155" },
+      Exits: "82-0155",
     },
   },
   {
@@ -53,9 +53,9 @@ const leverStyleOptions = [
     label: "J Lever",
     image: images.LeverJ,
     partNumbers: {
-      "DL Series": { inside: "J-CYL-INS-001", outside: "J-CYL-OUT-001" },
-      Mortise: { inside: "J-MO-INS-001", outside: "J-MO-OUT-001" },
-      Exits: "J-EX-001",
+      "DL Series": { inside: "DL-0045", outside: "DL-0045" },
+      Mortise: { inside: "DL-0045", outside: "82-0156" },
+      Exits: "97-0486",
     },
   },
   {
@@ -63,9 +63,9 @@ const leverStyleOptions = [
     label: "L Lever",
     image: images.LeverL,
     partNumbers: {
-      "DL Series": { inside: "L-CYL-INS-001", outside: "L-CYL-OUT-001" },
-      Mortise: { inside: "L-MO-INS-001", outside: "L-MO-OUT-001" },
-      Exits: "L-EX-001",
+      "DL Series": { inside: "DL-0046", outside: "DL-0046" },
+      Mortise: { inside: "DL-0046", outside: "82-0157" },
+      Exits: "97-0485",
     },
   },
   {
@@ -73,9 +73,9 @@ const leverStyleOptions = [
     label: "P Lever",
     image: images.LeverP,
     partNumbers: {
-      "DL Series": { inside: "P-CYL-INS-001", outside: "P-CYL-OUT-001" },
-      Mortise: { inside: "P-MO-INS-001", outside: "P-MO-OUT-001" },
-      Exits: "P-EX-001",
+      "DL Series": { inside: "DL-0047", outside: "DL-0047" },
+      Mortise: { inside: "DL-0047", outside: "82-0158" },
+      Exits: "97-0484",
     },
   },
   {
@@ -83,9 +83,9 @@ const leverStyleOptions = [
     label: "W Lever",
     image: images.LeverW,
     partNumbers: {
-      "DL Series": { inside: "W-CYL-INS-001", outside: "W-CYL-OUT-001" },
-      Mortise: { inside: "W-MO-INS-001", outside: "W-MO-OUT-001" },
-      Exits: "W-EX-001",
+      "DL Series": { inside: "DL-0048", outside: "DL-0048" },
+      Mortise: { inside: "DL-0048", outside: "82-0159" },
+      Exits: "82-0159",
     },
   },
 
@@ -95,9 +95,9 @@ const leverStyleOptions = [
     label: "R - Rockport Lever",
     image: images.LeverR,
     partNumbers: {
-      "DL Series": { inside: "R-CYL-INS-001", outside: "R-CYL-OUT-001" },
-      Mortise: { inside: "R-MO-INS-001", outside: "R-MO-OUT-001" },
-      Exits: "R-EX-001",
+      "DL Series": { inside: "DL-0049", outside: "DL-0049" },
+      Mortise: { inside: "DL-0049", outside: "82-0517" },
+      Exits: "82-0517",
     },
   },
   {
@@ -154,9 +154,9 @@ const leverStyleOptions = [
     label: "MD Lever",
     image: images.LeverMD,
     partNumbers: {
-      "DL Series": { inside: "MD-CYL-INS-001", outside: "MD-CYL-OUT-001" },
-      Mortise: { inside: "MD-MO-INS-001", outside: "MD-MO-OUT-001" },
-      Exits: "MD-EX-001",
+      "DL Series": { inside: "82-0811", outside: "82-0811" },
+      Mortise: { inside: "82-0811", outside: "82-0812" },
+      Exits: "82-0810",
     },
   },
   {
@@ -164,9 +164,9 @@ const leverStyleOptions = [
     label: "MJ Lever",
     image: images.LeverMJ,
     partNumbers: {
-      "DL Series": { inside: "MJ-CYL-INS-001", outside: "MJ-CYL-OUT-001" },
-      Mortise: { inside: "MJ-MO-INS-001", outside: "MJ-MO-OUT-001" },
-      Exits: "MJ-EX-001",
+      "DL Series": { inside: "82-0832", outside: "82-0832" },
+      Mortise: { inside: "82-0832", outside: "82-0833" },
+      Exits: "82-0831",
     },
   },
   {
@@ -174,9 +174,9 @@ const leverStyleOptions = [
     label: "MP Lever",
     image: images.LeverMP,
     partNumbers: {
-      "DL Series": { inside: "MP-CYL-INS-001", outside: "MP-CYL-OUT-001" },
-      Mortise: { inside: "MP-MO-INS-001", outside: "MP-MO-OUT-001" },
-      Exits: "MP-EX-001",
+      "DL Series": { inside: "82-0862", outside: "82-0862" },
+      Mortise: { inside: "82-0862", outside: "82-0863" },
+      Exits: "82-0861",
     },
   },
   {
@@ -184,15 +184,9 @@ const leverStyleOptions = [
     label: "ND Lever",
     image: images.LeverND,
     partNumbers: {
-      "DL Series": {
-        inside: { LH: "ND-CYL-INS-001-LH", RH: "ND-CYL-INS-001-RH" },
-        outside: { LH: "ND-CYL-OUT-001-LH", RH: "ND-CYL-OUT-001-RH" },
-      },
-      Mortise: {
-        inside: { LH: "ND-MO-INS-001-LH", RH: "ND-MO-INS-001-RH" },
-        outside: { LH: "ND-MO-OUT-001-LH", RH: "ND-MO-OUT-001-RH" },
-      },
-      Exits: { LH: "ND-EX-001-LH", RH: "ND-EX-001-RH" },
+      "DL Series": { inside: "82-0908", outside: "82-0908" },
+      Mortise: { inside: "82-0908", outside: "82-0909" },
+      Exits: "82-0907",
     },
   },
   {
@@ -200,15 +194,9 @@ const leverStyleOptions = [
     label: "NJ Lever",
     image: images.LeverNJ,
     partNumbers: {
-      "DL Series": {
-        inside: { LH: "NJ-CYL-INS-001-LH", RH: "NJ-CYL-INS-001-RH" },
-        outside: { LH: "NJ-CYL-OUT-001-LH", RH: "NJ-CYL-OUT-001-RH" },
-      },
-      Mortise: {
-        inside: { LH: "NJ-MO-INS-001-LH", RH: "NJ-MO-INS-001-RH" },
-        outside: { LH: "NJ-MO-OUT-001-LH", RH: "NJ-MO-OUT-001-RH" },
-      },
-      Exits: { LH: "NJ-EX-001-LH", RH: "NJ-EX-001-RH" },
+      "DL Series": { inside: "82-0914", outside: "82-0914" },
+      Mortise: { inside: "82-0914", outside: "82-0915" },
+      Exits: "82-0913",
     },
   },
 
@@ -218,9 +206,9 @@ const leverStyleOptions = [
     label: "MA Lever",
     image: images.LeverMA,
     partNumbers: {
-      "DL Series": { inside: "MA-CYL-INS-001", outside: "MA-CYL-OUT-001" },
-      Mortise: { inside: "MA-MO-INS-001", outside: "MA-MO-OUT-001" },
-      Exits: "MA-EX-001",
+      "DL Series": { inside: "82-0802", outside: "82-0802" },
+      Mortise: { inside: "82-0802", outside: "82-0803" },
+      Exits: "82-0801",
     },
   },
   {
@@ -229,14 +217,14 @@ const leverStyleOptions = [
     image: images.LeverMQ,
     partNumbers: {
       "DL Series": {
-        inside: { LH: "MQ-CYL-INS-001-LH", RH: "MQ-CYL-INS-001-RH" },
-        outside: { LH: "MQ-CYL-OUT-001-LH", RH: "MQ-CYL-OUT-001-RH" },
+        inside: { LH: "82-0868", RH: "82-0865" },
+        outside: { LH: "82-0868", RH: "82-0865" },
       },
       Mortise: {
-        inside: { LH: "MQ-MO-INS-001-LH", RH: "MQ-MO-INS-001-RH" },
-        outside: { LH: "MQ-MO-OUT-001-LH", RH: "MQ-MO-OUT-001-RH" },
+        inside: { LH: "82-0868", RH: "82-0865" },
+        outside: { LH: "82-0869", RH: "82-0866" },
       },
-      Exits: { LH: "MQ-EX-001-LH", RH: "MQ-EX-001-RH" },
+      Exits: { LH: "82-0867", RH: "82-0864" },
     },
   },
   {
@@ -245,14 +233,14 @@ const leverStyleOptions = [
     image: images.LeverMT,
     partNumbers: {
       "DL Series": {
-        inside: { LH: "MT-CYL-INS-001-LH", RH: "MT-CYL-INS-001-RH" },
-        outside: { LH: "MT-CYL-OUT-001-LH", RH: "MT-CYL-OUT-001-RH" },
+        inside: { LH: "82-0883", RH: "82-0880" },
+        outside: { LH: "82-0883", RH: "82-0880" },
       },
       Mortise: {
-        inside: { LH: "MT-MO-INS-001-LH", RH: "MT-MO-INS-001-RH" },
-        outside: { LH: "MT-MO-OUT-001-LH", RH: "MT-MO-OUT-001-RH" },
+        inside: { LH: "82-0883", RH: "82-0880" },
+        outside: { LH: "82-0884", RH: "82-0881" },
       },
-      Exits: { LH: "MT-EX-001-LH", RH: "MT-EX-001-RH" },
+      Exits: { LH: "82-0882", RH: "82-0879" },
     },
   },
   {
@@ -260,9 +248,9 @@ const leverStyleOptions = [
     label: "MO Lever",
     image: images.LeverMO,
     partNumbers: {
-      "DL Series": { inside: "MO-CYL-INS-001", outside: "MO-CYL-OUT-001" },
-      Mortise: { inside: "MO-MO-INS-001", outside: "MO-MO-OUT-001" },
-      Exits: "MO-EX-001",
+      "DL Series": { inside: "82-0859", outside: "82-0859" },
+      Mortise: { inside: "82-0859", outside: "82-0860" },
+      Exits: "82-0858",
     },
   },
   {
@@ -271,14 +259,14 @@ const leverStyleOptions = [
     image: images.LeverMZ,
     partNumbers: {
       "DL Series": {
-        inside: { LH: "MZ-CYL-INS-001-LH", RH: "MZ-CYL-INS-001-RH" },
-        outside: { LH: "MZ-CYL-OUT-001-LH", RH: "MZ-CYL-OUT-001-RH" },
+        inside: { LH: "82-1080", RH: "82-1083" },
+        outside: { LH: "82-1080", RH: "82-1083" },
       },
       Mortise: {
-        inside: { LH: "MZ-MO-INS-001-LH", RH: "MZ-MO-INS-001-RH" },
-        outside: { LH: "MZ-MO-OUT-001-LH", RH: "MZ-MO-OUT-001-RH" },
+        inside: { LH: "82-1080", RH: "82-1083" },
+        outside: { LH: "82-1084", RH: "82-1081" },
       },
-      Exits: { LH: "MZ-EX-001-LH", RH: "MZ-EX-001-RH" },
+      Exits: { LH: "82-1082", RH: "82-1079" },
     },
   },
   {
