@@ -478,9 +478,9 @@ const leverStyleOptions = [
     label: "RCM Lever",
     image: images.LeverRCM,
     partNumbers: {
-      "DL Series": { inside: "RCM-CYL-INS-001", outside: "RCM-CYL-OUT-001" },
-      Mortise: { inside: "RCM-MO-INS-001", outside: "RCM-MO-OUT-001" },
-      Exits: "RCM-EX-001",
+      "DL Series": { inside: "RW-2005", outside: "RW-2005" },
+      Mortise: { inside: "RW-2005", outside: "RW-2006" },
+      Exits: "RW-2004",
     },
   },
   {
@@ -488,9 +488,9 @@ const leverStyleOptions = [
     label: "RAL Lever",
     image: images.LeverRAL,
     partNumbers: {
-      "DL Series": { inside: "RAL-CYL-INS-001", outside: "RAL-CYL-OUT-001" },
-      Mortise: { inside: "RAL-MO-INS-001", outside: "RAL-MO-OUT-001" },
-      Exits: "RAL-EX-001",
+      "DL Series": { inside: "RW-2021", outside: "RW-2021" },
+      Mortise: { inside: "RW-2021", outside: "RW-2022" },
+      Exits: "RW-2020",
     },
   },
   {
@@ -498,9 +498,9 @@ const leverStyleOptions = [
     label: "REM Lever",
     image: images.LeverREM,
     partNumbers: {
-      "DL Series": { inside: "REM-CYL-INS-001", outside: "REM-CYL-OUT-001" },
-      Mortise: { inside: "REM-MO-INS-001", outside: "REM-MO-OUT-001" },
-      Exits: "REM-EX-001",
+      "DL Series": { inside: "RW-2001", outside: "RW-2001" },
+      Mortise: { inside: "RW-2001", outside: "RW-2002" },
+      Exits: "RW-2000",
     },
   },
   {
@@ -508,9 +508,9 @@ const leverStyleOptions = [
     label: "RAM Lever",
     image: images.LeverRAM,
     partNumbers: {
-      "DL Series": { inside: "RAM-CYL-INS-001", outside: "RAM-CYL-OUT-001" },
-      Mortise: { inside: "RAM-MO-INS-001", outside: "RAM-MO-OUT-001" },
-      Exits: "RAM-EX-001",
+      "DL Series": { inside: "RW-2009", outside: "RW-2009" },
+      Mortise: { inside: "RW-2009", outside: "RW-2010" },
+      Exits: "RW-2008",
     },
   },
   {
@@ -518,9 +518,9 @@ const leverStyleOptions = [
     label: "RAS Lever",
     image: images.LeverRAS,
     partNumbers: {
-      "DL Series": { inside: "RAS-CYL-INS-001", outside: "RAS-CYL-OUT-001" },
-      Mortise: { inside: "RAS-MO-INS-001", outside: "RAS-MO-OUT-001" },
-      Exits: "RAS-EX-001",
+      "DL Series": { inside: "RW-2017", outside: "RW-2017" },
+      Mortise: { inside: "RW-2017", outside: "RW-2018" },
+      Exits: "RW-2016",
     },
   },
   {
@@ -528,9 +528,9 @@ const leverStyleOptions = [
     label: "RAG Lever",
     image: images.LeverRAG,
     partNumbers: {
-      "DL Series": { inside: "RAG-CYL-INS-001", outside: "RAG-CYL-OUT-001" },
-      Mortise: { inside: "RAG-MO-INS-001", outside: "RAG-MO-OUT-001" },
-      Exits: "RAG-EX-001",
+      "DL Series": { inside: "RW-2017", outside: "RW-2017" },
+      Mortise: { inside: "RW-2017", outside: "RW-2018" },
+      Exits: "RW-2016",
     },
   },
   {
@@ -538,9 +538,19 @@ const leverStyleOptions = [
     label: "RGM Lever",
     image: images.LeverRGM,
     partNumbers: {
-      "DL Series": { inside: "RGM-CYL-INS-001", outside: "RGM-CYL-OUT-001" },
-      Mortise: { inside: "RGM-MO-INS-001", outside: "RGM-MO-OUT-001" },
-      Exits: "RGM-EX-001",
+      "DL Series": { inside: "RW-2025", outside: "RW-2025" },
+      Mortise: { inside: "RW-2025", outside: "RW-2026" },
+      Exits: "RW-2024",
+    },
+  },
+  {
+    value: "RAW",
+    label: "RAW Lever",
+    image: images.LeverRAW,
+    partNumbers: {
+      "DL Series": { inside: "RW-2013", outside: "RW-2013" },
+      Mortise: { inside: "RW-2013", outside: "RW-2014" },
+      Exits: "RW-2012",
     },
   },
   {

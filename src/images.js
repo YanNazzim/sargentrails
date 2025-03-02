@@ -75,6 +75,7 @@ const images = {
     LeverRAS: require('./images/LeverRAS.png'),
     LeverRAG: require('./images/LeverRAG.png'),
     LeverRGM: require('./images/LeverRGM.png'),
+    LeverRAW: require('./images/LeverRAW.png'),
     LeverH015: require('./images/LeverH015.png'),
     LeverH016: require('./images/LeverH016.png'),
     LeverH017: require('./images/LeverH017.png'),
