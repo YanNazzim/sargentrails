@@ -46,22 +46,17 @@ const MortiseExitLockbodies = () => {
   // Define the prefixes
   const prefixes = [
     { code: "12", name: "Fire Rated (No Dogging)" },
-    { code: "49", name: "Inside Visual Indicator for 8816" },
-    { code: "5CH", name: "5LB Maximum Force" },
+    { code: "31", name: 'Thicker Door than 1-3/4"' },
+    { code: "36", name: "Torx Head Security Screws" },
+    { code: "37", name: "Spanner Head Security Screws" },
     { code: "53", name: "Latchbolt Monitoring Switch" },
     { code: "59", name: "Electroguard® Delayed Egress" },
-    { code: "AL", name: "Alarm" },
-    { code: "GL", name: "Guarded Latch" },
-    { code: "WS", name: "Windstorm Rated" },
-    { code: "HC", name: "Hurricane Rated" },
-    { code: "HC4", name: "Hurricane Rated (Stronger)" },
-    { code: "FM", name: "FEMA Rated" },
   ];
 
   // Define the handing options
   const handingOptions = [
-    { value: "LH", label: "Left Hand" },
-    { value: "RH", label: "Right Hand" },
+    { value: "LHR", label: "Left Hand" },
+    { value: "RHR", label: "Right Hand" },
   ];
 
   // Define the finishes
