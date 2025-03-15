@@ -189,8 +189,16 @@ const radioOptions = [
 const categoryOptions = [
   { value: "Standard", label: "Standard" },
   { value: "Milling", label: "Milling" },
-  { value: "Red/green Indicator Lever (VSLL)", label: "Red/Green Indicator (VSLL)" },
-  { value: "Red/white Indicator Lever (VSLL)", label: "Red/White Indicator (VSLL)" }
+  {
+    value: "Red/Green Indicator Lever (VSLL)",
+    label: "Red/Green Indicator (VSLL)",
+    triggers: "VSLL-GRN"
+  },
+  {
+    value: "Red/white Indicator Lever (VSLL)", // Lowercase 'w' in white
+    label: "Red/White Indicator (VSLL)",
+    triggers: "VSLL-WHT"
+  }
 ];
 
 const handingOptions = [
@@ -224,6 +232,8 @@ const leversRequiringHanding = [
   "NJ",
   "NS",
   "NU",
+  "VSLL-GRN",
+  "VSLL-WHT"
 ];
 
 const Levers = () => {
@@ -235,7 +245,6 @@ const Levers = () => {
   const [selectedRadio, setSelectedRadio] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Reset dependent selections when platform changes
   useEffect(() => {
     if (selectedPlatform?.value !== "10X Series") {
       setSelectedCategory(null);
@@ -268,16 +277,17 @@ const Levers = () => {
       }
     }
 
+    console.log('Selected Lever:', selectedLever);
+    console.log('Platform:', selectedPlatform?.value);
+    console.log('Category:', selectedCategory?.value);
+
     let parts;
     if (selectedPlatform.value === "10X Series") {
       parts = selectedLever.partNumbers?.[selectedPlatform.value]?.categories?.[selectedCategory.value];
+      console.log('10X Series parts:', parts);
     } else {
       parts = selectedLever.partNumbers?.[selectedPlatform.value];
-    }
-
-    if (!parts) {
-      setPartNumber("Part numbers not available for this combination.");
-      return;
+      console.log('Other platform parts:', parts);
     }
 
     let result = "";
@@ -301,6 +311,8 @@ const Levers = () => {
       }
     }
 
+
+
     setPartNumber(result);
   };
 
@@ -315,7 +327,6 @@ const Levers = () => {
       </h1>
 
       <form onSubmit={handleSubmit} className="part-form">
-        {/* Platform Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Platform Type:</label>
           <Select
@@ -327,13 +338,23 @@ const Levers = () => {
           />
         </div>
 
-        {/* Category Selector (10X Series only) */}
         {selectedPlatform?.value === "10X Series" && (
           <div className="form-group">
             <label style={{ color: "black" }}>Category:</label>
             <Select
               options={categoryOptions}
-              onChange={setSelectedCategory}
+              onChange={(selected) => {
+                console.log('Selected Category:', selected);
+                setSelectedCategory(selected);
+                if (selected?.triggers) {
+                  console.log('Looking for lever with value:', selected.triggers);
+                  const vsllLever = leverStyleOptions.find(l => l.value === selected.triggers);
+                  console.log('Found lever:', vsllLever);
+                  setSelectedLever(vsllLever);
+                } else {
+                  setSelectedLever(null);
+                }
+              }}
               value={selectedCategory}
               placeholder="Select Category..."
               styles={customStyles}
@@ -341,7 +362,6 @@ const Levers = () => {
           </div>
         )}
 
-        {/* Radio Options (10X Series only) */}
         {selectedPlatform?.value === "10X Series" && selectedCategory && (
           <div className="form-group">
             <label style={{ color: "black" }}>Select Option:</label>
@@ -361,16 +381,23 @@ const Levers = () => {
           </div>
         )}
 
-        {/* Lever Style Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Lever Style:</label>
-          
           <Select
+            // In the lever Select options filter:
             options={
               selectedPlatform
-                ? leverStyleOptions.filter((lever) =>
-                  lever.partNumbers[selectedPlatform.value]
-                )
+                ? leverStyleOptions.filter(lever => {
+                  console.log('Checking lever:', lever.value);
+                  if (selectedCategory?.triggers) {
+                    console.log('Category trigger:', selectedCategory.triggers);
+                    console.log('Match?', lever.value === selectedCategory.triggers);
+                    return lever.value === selectedCategory.triggers;
+                  }
+                  const hasParts = !!lever.partNumbers[selectedPlatform.value];
+                  console.log('Lever', lever.value, 'has parts for platform?', hasParts);
+                  return hasParts;
+                })
                 : leverStyleOptions
             }
             onChange={(selectedOption) => {
@@ -388,7 +415,6 @@ const Levers = () => {
           />
         </div>
 
-        {/* Handing Selector */}
         {selectedLever && leversRequiringHanding.includes(selectedLever.value) && (
           <div className="form-group">
             <label style={{ color: "black" }}>Handing:</label>
@@ -403,7 +429,6 @@ const Levers = () => {
           </div>
         )}
 
-        {/* Finish Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Finish:</label>
           <Select
@@ -419,7 +444,6 @@ const Levers = () => {
           />
         </div>
 
-        {/* Form Actions */}
         <div className="form-actions">
           <button type="submit" className="generate-button">
             Get Part Numbers
@@ -442,7 +466,6 @@ const Levers = () => {
         </div>
       </form>
 
-      {/* Results Display */}
       {partNumber && (
         <div className="result-container">
           <h2>Part Numbers:</h2>

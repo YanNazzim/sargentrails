@@ -49,20 +49,7 @@ const leverStyleOptions = [
             SFIC: "10-1149",
             KESO: "10-1151",
           },
-          "Red/green Indicator Lever (VSLL)": {
-            Plain: { inside: "10X-B-RG-LFIC-IN", outside: "10X-B-RG-LFIC-OUT" },
-            "Push Button": { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
-            "Thumb Turn": { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
-            "Fixed Core": { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
-            LFIC: { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
-            SFIC: { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
-            // ... other options
-          },
-          "Red/white Indicator Lever (VSLL)": {
-            LFIC: { inside: "10X-B-RW-LFIC-IN", outside: "10X-B-RW-LFIC-OUT" },
-            SFIC: { inside: "10X-B-RW-SFIC-IN", outside: "10X-B-RW-SFIC-OUT" },
-            // ... other options
-          }
+
         }
       },
       "DL Series": { inside: "DL-0042", outside: "DL-0042" },
@@ -726,6 +713,34 @@ const leverStyleOptions = [
       Mortise: { inside: "82-1608", outside: "82-1609" },
       Exits: "82-1607",
     },
+  },
+  {
+    value: "VSLL-GRN",
+    label: "VSLL Red/Green Indicator Lever",
+    image: images.LeverVSLLGreen,
+    partNumbers: {
+      "10X Series": {
+        categories: {
+          "Red/Green Indicator Lever (VSLL)": {
+            "Plain": "VSLL-GRN-10X",
+          }
+        }
+      },
+    }
+  },
+  {
+    value: "VSLL-WHT",
+    label: "VSLL Red/White Indicator Lever",
+    image: images.LeverVSLLWhite,
+    partNumbers: {
+      "10X Series": {
+        categories: {
+          "Red/White Indicator Lever (VSLL)": {
+            "Plain": "VSLL-WHT-10X",
+          }
+        }
+      },
+    }
   },
 ];
 
