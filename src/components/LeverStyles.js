@@ -7,6 +7,7 @@ const leverStyleOptions = [
     label: "A Lever (Handed)",
     image: images.LeverA,
     partNumbers: {
+
       "DL Series": {
         inside: { LH: "DL-0041", RH: "DL-0040" },
         outside: { LH: "DL-0041", RH: "DL-0040" },
@@ -23,6 +24,39 @@ const leverStyleOptions = [
     label: "B Lever",
     image: images.LeverB,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10X-B-STD-PLAIN",
+            "Push Button": "10X-B-STD-PB",
+            "Thumbturn": "10X-B-STD-PB",
+            "Fixed Core": "10X-B-STD-PB",
+            LFIC: "10X-B-STD-LFIC",
+            SF: "10X-B-STD-LFIC",
+            YRC: "10X-B-STD-LFIC",
+            SFIC: "10X-B-STD-SFIC",
+            KESO: "10X-B-STD-KESO",
+          },
+          Milling: {
+            LFIC: "10X-B-MILL-LFIC",
+            SFIC: "10X-B-MILL-SFIC",
+            KESO: "10X-B-MILL-KESO",
+            Plain: "10X-B-MILL-PLAIN",
+            "Push Button": "10X-B-MILL-PB"
+          },
+          "Red/green Indicator Lever (VSLL)": {
+            LFIC: { inside: "10X-B-RG-LFIC-IN", outside: "10X-B-RG-LFIC-OUT" },
+            SFIC: { inside: "10X-B-RG-SFIC-IN", outside: "10X-B-RG-SFIC-OUT" },
+            // ... other options
+          },
+          "Red/white Indicator Lever (VSLL)": {
+            LFIC: { inside: "10X-B-RW-LFIC-IN", outside: "10X-B-RW-LFIC-OUT" },
+            SFIC: { inside: "10X-B-RW-SFIC-IN", outside: "10X-B-RW-SFIC-OUT" },
+            // ... other options
+          }
+        }
+      },
       "DL Series": { inside: "DL-0042", outside: "DL-0042" },
       Mortise: { inside: "DL-0042", outside: "82-0153" },
       Exits: "82-0153",

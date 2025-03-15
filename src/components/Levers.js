@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
 import images from "../images";
 import leverStyleOptions from "./LeverStyles";
@@ -171,9 +171,26 @@ const finishOptions = [
 ];
 
 const platformOptions = [
+  { value: "10X Series", label: "10X Series (Bored Locks)" },
   { value: "DL Series", label: "DL Series (Bored Locks)" },
   { value: "Mortise", label: "Mortise Locks" },
   { value: "Exits", label: "Exit Devices" },
+];
+
+const radioOptions = [
+  { value: "Plain", label: "Plain" },
+  { value: "Push Button", label: "Push Button" },
+  { value: "Thumb Turn", label: "Thumb Turn" },
+  { value: "LFIC", label: "LFIC" },
+  { value: "SFIC", label: "SFIC" },
+  { value: "KESO", label: "KESO" },
+];
+
+const categoryOptions = [
+  { value: "Standard", label: "Standard" },
+  { value: "Milling", label: "Milling" },
+  { value: "Red/green Indicator Lever (VSLL)", label: "Red/Green Indicator (VSLL)" },
+  { value: "Red/white Indicator Lever (VSLL)", label: "Red/White Indicator (VSLL)" }
 ];
 
 const handingOptions = [
@@ -215,58 +232,73 @@ const Levers = () => {
   const [selectedFinish, setSelectedFinish] = useState(null);
   const [selectedHanding, setSelectedHanding] = useState(null);
   const [partNumber, setPartNumber] = useState("");
+  const [selectedRadio, setSelectedRadio] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // Reset dependent selections when platform changes
+  useEffect(() => {
+    if (selectedPlatform?.value !== "10X Series") {
+      setSelectedCategory(null);
+      setSelectedRadio(null);
+    }
+  }, [selectedPlatform]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const finishText = selectedFinish ? ` ${selectedFinish.value}` : "";
+    
     if (!selectedPlatform || !selectedLever) {
       setPartNumber("Please select a platform and lever style.");
       return;
     }
 
-    if (leversRequiringHanding.includes(selectedLever.value)) {
-      if (!selectedHanding) {
-        setPartNumber("Please select a handing.");
+    if (leversRequiringHanding.includes(selectedLever.value) && !selectedHanding) {
+      setPartNumber("Please select a handing.");
+      return;
+    }
+
+    if (selectedPlatform.value === "10X Series") {
+      if (!selectedCategory) {
+        setPartNumber("Please select a category.");
+        return;
+      }
+      if (!selectedRadio) {
+        setPartNumber("Please select an option (LFIC, SFIC, KESO, etc.).");
         return;
       }
     }
 
-    const parts = selectedLever.partNumbers?.[selectedPlatform.value];
+    let parts;
+    if (selectedPlatform.value === "10X Series") {
+      parts = selectedLever.partNumbers?.[selectedPlatform.value]?.categories?.[selectedCategory.value];
+    } else {
+      parts = selectedLever.partNumbers?.[selectedPlatform.value];
+    }
+
     if (!parts) {
       setPartNumber("Part numbers not available for this combination.");
       return;
     }
 
-    let finishText = selectedFinish ? ` ${selectedFinish.value}` : "";
     let result = "";
-
-    if (typeof parts === "object" && !Array.isArray(parts)) {
-      if (leversRequiringHanding.includes(selectedLever.value)) {
-        // Handle handed levers
-        if (parts.inside && parts.outside) {
-          // Platforms with inside and outside parts (e.g., DL Series, Mortise)
-          const insidePart = parts.inside?.[selectedHanding.value] || "N/A";
-          const outsidePart = parts.outside?.[selectedHanding.value] || "N/A";
-          result = `Inside: ${insidePart}${finishText} <br /> Outside: ${outsidePart}${finishText}`;
-        } else {
-          // Platforms with a single part number (e.g., Exits)
-          const partNumber = parts[selectedHanding.value] || "N/A";
-          result = `${partNumber}${finishText}`;
-        }
+    
+    if (selectedPlatform.value === "10X Series") {
+      const selectedOption = parts[selectedRadio];
+      if (typeof selectedOption === "object") {
+        result = `Inside: ${selectedOption.inside}${finishText} <br /> Outside: ${selectedOption.outside}${finishText}`;
       } else {
-        // Handle non-handed levers
-        if (parts.inside && parts.outside) {
-          // Platforms with inside and outside parts
-          const insidePart = parts.inside || "N/A";
-          const outsidePart = parts.outside || "N/A";
-          result = `Inside: ${insidePart}${finishText} <br /> Outside: ${outsidePart}${finishText}`;
-        } else {
-          // Platforms with a single part number
-          result = `${parts.toString()}${finishText}`;
-        }
+        result = `${selectedOption}${finishText}`;
       }
     } else {
-      // Handle simple part numbers (non-object)
-      result = `${parts.toString()}${finishText}`;
+      if (leversRequiringHanding.includes(selectedLever.value)) {
+        const insidePart = parts.inside?.[selectedHanding.value] || "N/A";
+        const outsidePart = parts.outside?.[selectedHanding.value] || "N/A";
+        result = `Inside: ${insidePart}${finishText} <br /> Outside: ${outsidePart}${finishText}`;
+      } else if (parts.inside && parts.outside) {
+        result = `Inside: ${parts.inside}${finishText} <br /> Outside: ${parts.outside}${finishText}`;
+      } else {
+        result = `${parts.toString()}${finishText}`;
+      }
     }
 
     setPartNumber(result);
@@ -283,6 +315,7 @@ const Levers = () => {
       </h1>
 
       <form onSubmit={handleSubmit} className="part-form">
+        {/* Platform Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Platform Type:</label>
           <Select
@@ -290,19 +323,52 @@ const Levers = () => {
             onChange={setSelectedPlatform}
             value={selectedPlatform}
             placeholder="Select Platform..."
-            className="react-select-container"
-            classNamePrefix="react-select"
             styles={customStyles}
           />
         </div>
 
+        {/* Category Selector (10X Series only) */}
+        {selectedPlatform?.value === "10X Series" && (
+          <div className="form-group">
+            <label style={{ color: "black" }}>Category:</label>
+            <Select
+              options={categoryOptions}
+              onChange={setSelectedCategory}
+              value={selectedCategory}
+              placeholder="Select Category..."
+              styles={customStyles}
+            />
+          </div>
+        )}
+
+        {/* Radio Options (10X Series only) */}
+        {selectedPlatform?.value === "10X Series" && selectedCategory && (
+          <div className="form-group">
+            <label style={{ color: "black" }}>Select Option:</label>
+            <div>
+              {radioOptions.map((option) => (
+                <label key={option.value} style={{ marginRight: "10px" }}>
+                  <input
+                    type="radio"
+                    value={option.value}
+                    checked={selectedRadio === option.value}
+                    onChange={() => setSelectedRadio(option.value)}
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Lever Style Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Lever Style:</label>
           <Select
             options={leverStyleOptions}
             onChange={(selectedOption) => {
               setSelectedLever(selectedOption);
-              setSelectedHanding(null); // Clear handing when lever changes
+              setSelectedHanding(null);
             }}
             value={selectedLever}
             isDisabled={!selectedPlatform}
@@ -311,29 +377,26 @@ const Levers = () => {
               Option: CustomLeverOption,
               SingleValue: CustomLeverSingleValue,
             }}
-            className="react-select-container"
-            classNamePrefix="react-select"
             styles={customStyles}
           />
         </div>
 
-        {selectedLever &&
-          leversRequiringHanding.includes(selectedLever.value) && (
-            <div className="form-group">
-              <label style={{ color: "black" }}>Handing:</label>
-              <Select
-                options={handingOptions}
-                onChange={setSelectedHanding}
-                value={selectedHanding}
-                placeholder="Select Handing..."
-                className="react-select-container"
-                classNamePrefix="react-select"
-                styles={customStyles}
-                required
-              />
-            </div>
-          )}
+        {/* Handing Selector */}
+        {selectedLever && leversRequiringHanding.includes(selectedLever.value) && (
+          <div className="form-group">
+            <label style={{ color: "black" }}>Handing:</label>
+            <Select
+              options={handingOptions}
+              onChange={setSelectedHanding}
+              value={selectedHanding}
+              placeholder="Select Handing..."
+              styles={customStyles}
+              required
+            />
+          </div>
+        )}
 
+        {/* Finish Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Finish:</label>
           <Select
@@ -345,12 +408,11 @@ const Levers = () => {
               Option: FinishOption,
               SingleValue: FinishSingleValue,
             }}
-            className="react-select-container"
-            classNamePrefix="react-select"
             styles={customStyles}
           />
         </div>
 
+        {/* Form Actions */}
         <div className="form-actions">
           <button type="submit" className="generate-button">
             Get Part Numbers
@@ -364,6 +426,8 @@ const Levers = () => {
               setSelectedFinish(null);
               setSelectedHanding(null);
               setPartNumber("");
+              setSelectedCategory(null);
+              setSelectedRadio(null);
             }}
           >
             Clear
@@ -371,6 +435,7 @@ const Levers = () => {
         </div>
       </form>
 
+      {/* Results Display */}
       {partNumber && (
         <div className="result-container">
           <h2>Part Numbers:</h2>
