@@ -246,7 +246,7 @@ const Levers = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const finishText = selectedFinish ? ` ${selectedFinish.value}` : "";
-    
+
     if (!selectedPlatform || !selectedLever) {
       setPartNumber("Please select a platform and lever style.");
       return;
@@ -281,7 +281,7 @@ const Levers = () => {
     }
 
     let result = "";
-    
+
     if (selectedPlatform.value === "10X Series") {
       const selectedOption = parts[selectedRadio];
       if (typeof selectedOption === "object") {
@@ -364,8 +364,15 @@ const Levers = () => {
         {/* Lever Style Selector */}
         <div className="form-group">
           <label style={{ color: "black" }}>Lever Style:</label>
+          
           <Select
-            options={leverStyleOptions}
+            options={
+              selectedPlatform
+                ? leverStyleOptions.filter((lever) =>
+                  lever.partNumbers[selectedPlatform.value]
+                )
+                : leverStyleOptions
+            }
             onChange={(selectedOption) => {
               setSelectedLever(selectedOption);
               setSelectedHanding(null);

@@ -24,9 +24,9 @@ const App = () => {
         return <Trims />;
       case "Vertical Rod Device Internals":
         return <Rods />;
-      case "Chassis":
+      case "Chassis (Rail Head)":
         return <Chassis />;
-        case "Levers":
+        case "Lever Handles Only":
           return <Levers />;
           case "Mortise Exit Lockbodies":
             return <MortiseExitLockbodies />;
