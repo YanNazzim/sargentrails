@@ -1,32 +1,37 @@
 /* App.css */
 body {
-  background-color: #0a192f; /* Dark navy */
+  background-color: #0a192f;
+  /* Dark navy */
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 20px;
   line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 .app-container {
   max-width: 850px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #172a45; /* Medium navy */
+  background-color: #172a45;
+  /* Medium navy */
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .Heading {
   text-align: center;
-  background-color: #001f3f; /* Darker navy */
+  background-color: #001f3f;
+  /* Darker navy */
   color: #ffffff;
   padding: 1.5rem;
   border-radius: 10px;
   font-size: 2rem;
   margin-bottom: 2rem;
-  border: 2px solid #2ecc71; /* Accent color */
+  border: 2px solid #2ecc71;
+  /* Accent color */
 }
 
 /* Header Styling */
@@ -35,7 +40,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #001f3f; /* Dark navy background */
+  background-color: #001f3f;
+  /* Dark navy background */
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -43,7 +49,8 @@ body {
 }
 
 .company-logo {
-  width: 220px; /* Adjust based on your logo size */
+  width: 220px;
+  /* Adjust based on your logo size */
   height: auto;
   margin-bottom: 10px;
   border-radius: 12px;
@@ -51,7 +58,8 @@ body {
 
 .title {
   font-size: 1.8rem;
-  color: #2ecc71; /* Teal accent */
+  color: #2ecc71;
+  /* Teal accent */
   font-weight: bold;
   text-align: center;
   margin: 0;
@@ -174,29 +182,44 @@ body {
 
 /* Container for parts columns */
 .parts-column {
-  background-color: #f9f9f9; /* Light background for contrast */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Inner spacing */
-  margin: 10px; /* Outer spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #f9f9f9;
+  /* Light background for contrast */
+  border-radius: 8px;
+  /* Rounded corners */
+  padding: 20px;
+  /* Inner spacing */
+  margin: 10px;
+  /* Outer spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
 
 /* Heading for parts columns */
 .parts-column h3 {
-  font-size: 1.5rem; /* Larger font size for headings */
-  color: #333; /* Darker text for better readability */
-  margin-bottom: 15px; /* Space below the heading */
-  border-bottom: 2px solid #007bff; /* Blue underline for emphasis */
-  padding-bottom: 10px; /* Spacing between text and underline */
+  font-size: 1.5rem;
+  /* Larger font size for headings */
+  color: #333;
+  /* Darker text for better readability */
+  margin-bottom: 15px;
+  /* Space below the heading */
+  border-bottom: 2px solid #007bff;
+  /* Blue underline for emphasis */
+  padding-bottom: 10px;
+  /* Spacing between text and underline */
 }
 
 /* Type labels (e.g., Standard, 12-, FM) */
 .type-labels {
-  font-size: 1.2rem; /* Slightly larger font for type labels */
-  color: #007bff; /* Blue color for type labels */
-  margin-top: 15px; /* Space above the type label */
-  margin-bottom: 10px; /* Space below the type label */
-  font-weight: bold; /* Bold text for emphasis */
+  font-size: 1.2rem;
+  /* Slightly larger font for type labels */
+  color: #007bff;
+  /* Blue color for type labels */
+  margin-top: 15px;
+  /* Space above the type label */
+  margin-bottom: 10px;
+  /* Space below the type label */
+  font-weight: bold;
+  /* Bold text for emphasis */
 }
 
 .parts-desc {
@@ -205,33 +228,44 @@ body {
 
 /* List of parts */
 .parts-column ul {
-  list-style-type: none; /* Remove default bullet points */
-  padding-left: 0; /* Remove default padding */
+  list-style-type: none;
+  /* Remove default bullet points */
+  padding-left: 0;
+  /* Remove default padding */
 }
 
 /* Individual part items */
 .parts-column li {
-  background-color: #fff; /* White background for each part */
-  padding: 10px; /* Inner spacing */
-  margin-bottom: 8px; /* Space between parts */
-  border-radius: 4px; /* Rounded corners for each part */
-  border: 1px solid #ddd; /* Light border for separation */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
+  background-color: #fff;
+  /* White background for each part */
+  padding: 10px;
+  /* Inner spacing */
+  margin-bottom: 8px;
+  /* Space between parts */
+  border-radius: 4px;
+  /* Rounded corners for each part */
+  border: 1px solid #ddd;
+  /* Light border for separation */
+  transition: background-color 0.3s ease;
+  /* Smooth hover effect */
 }
 
 /* Hover effect for part items */
 .parts-column li:hover {
-  background-color: #f1f1f1; /* Light gray background on hover */
+  background-color: #f1f1f1;
+  /* Light gray background on hover */
 }
 
 /* Part code (bold text) */
 .parts-column li strong {
-  color: #333; /* Darker text for emphasis */
+  color: #333;
+  /* Darker text for emphasis */
 }
 
 /* Part description */
 .parts-column li span {
-  color: #555; /* Slightly lighter text for description */
+  color: #555;
+  /* Slightly lighter text for description */
 }
 
 .part-form {
@@ -272,8 +306,10 @@ select:focus {
 }
 
 .generate-button {
-  background-color: #2ecc71; /* Teal */
-  color: #001f3f; /* Navy */
+  background-color: #2ecc71;
+  /* Teal */
+  color: #001f3f;
+  /* Navy */
   border: none;
   padding: 1rem 2.5rem;
   border-radius: 8px;
@@ -297,9 +333,11 @@ select:focus {
 }
 
 .reset-button {
-  background-color: #001f3f; /* Navy */
+  background-color: #001f3f;
+  /* Navy */
   color: #ffffff;
-  border: 2px solid #2ecc71; /* Teal */
+  border: 2px solid #2ecc71;
+  /* Teal */
   padding: 1rem 2rem;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -309,8 +347,10 @@ select:focus {
 }
 
 .reset-button:hover {
-  background-color: #2ecc71; /* Teal */
-  color: #001f3f; /* Navy */
+  background-color: #2ecc71;
+  /* Teal */
+  color: #001f3f;
+  /* Navy */
   border-color: transparent;
 }
 
@@ -402,23 +442,23 @@ select:focus {
 }
 
 /* Checked state */
-.checkbox-group input[type="checkbox"]:checked + .custom-checkbox {
+.checkbox-group input[type="checkbox"]:checked+.custom-checkbox {
   background-color: #2ecc71;
   border-color: #2ecc71;
 }
 
-.checkbox-group input[type="checkbox"]:checked + .custom-checkbox::after {
+.checkbox-group input[type="checkbox"]:checked+.custom-checkbox::after {
   opacity: 1;
 }
 
 /* Disabled state */
-.checkbox-group input[type="checkbox"]:disabled + .custom-checkbox {
+.checkbox-group input[type="checkbox"]:disabled+.custom-checkbox {
   background-color: #f8f9fa;
   border-color: #e2e8f0;
   cursor: not-allowed;
 }
 
-.checkbox-group input[type="checkbox"]:disabled ~ span {
+.checkbox-group input[type="checkbox"]:disabled~span {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -476,7 +516,8 @@ select:focus {
   align-items: center;
   margin-bottom: 2rem;
   padding: 1rem;
-  background-color: #001f3f; /* Dark navy background */
+  background-color: #001f3f;
+  /* Dark navy background */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -485,7 +526,8 @@ select:focus {
 .tab-menu {
   display: flex;
   position: relative;
-  background-color: #172a45; /* Medium navy */
+  background-color: #172a45;
+  /* Medium navy */
   border-radius: 50px;
   padding: 6px;
   width: 600px;
@@ -494,45 +536,135 @@ select:focus {
 }
 
 /* Tab Buttons */
-.tab-button {
-  flex: 1;
-  padding: 14px 24px;
+
+/* Add these styles to your App.css */
+
+/* Tab Menu Container */
+.tab-menu-container {
+  display: flex;
+  flex-direction: column;
+  background: #001f3f;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 0 auto 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Master Tabs Row */
+.master-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.master-tab {
+  padding: 12px 24px;
   border: none;
-  background: none;
-  color: #ffffff;
-  font-size: 1rem;
+  background: #172a45;
+  color: #7f8fa4;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
+  border-radius: 8px;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-  border-radius: 50px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.tab-button:hover {
-  color: #2ecc71; /* Teal accent */
+.master-tab:hover {
+  background: #2ecc71;
+  color: #001f3f;
   transform: translateY(-2px);
 }
 
-.tab-button.active {
-  color: #001f3f; /* Dark navy text */
-  font-weight: 700;
+.master-tab.active {
+  background: #2ecc71;
+  color: #001f3f;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
 }
 
-/* Tab Indicator */
-.tab-indicator {
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 12px);
-  background-color: #2ecc71; /* Teal accent */
-  border-radius: 50px;
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 0;
-  top: 6px;
-  left: 0px;
-  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+/* Sub Tabs Grid */
+.sub-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sub-tab {
+  padding: 12px 16px;
+  border: 2px solid #2ecc71;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sub-tab:hover {
+  background: #2ecc71;
+  color: #001f3f;
+  transform: translateY(-2px);
+}
+
+.sub-tab.active {
+  background: #2ecc71;
+  color: #001f3f;
+  font-weight: 600;
+}
+
+/* Universal Tab Styling */
+.universal-tab {
+  border-color: #ffd700;
+  position: relative;
+}
+
+.universal-tab .universal-star {
+  color: #ffd700;
+  font-size: 1.1em;
+}
+
+.universal-tab:hover {
+  border-color: #ffd700;
+  background: #ffd700;
+  color: #001f3f;
+}
+
+.universal-tab:hover .universal-star {
+  color: #001f3f;
+}
+
+.universal-tab.active {
+  background: #ffd700;
+  color: #001f3f;
+  border-color: #ffd700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .master-tabs-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .master-tab {
+    flex: 1 1 120px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .sub-tabs-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
 }
 
 /* Glow Effect for Active Tab */
@@ -553,6 +685,7 @@ select:focus {
   0% {
     opacity: 0.4;
   }
+
   100% {
     opacity: 1;
   }
@@ -568,6 +701,7 @@ select:focus {
     opacity: 0.5;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -707,9 +841,9 @@ select:focus {
   }
 
   .tab-indicator {
-left: -10vw;
-min-width: 125px;
-max-width: 125px;
+    left: -10vw;
+    min-width: 125px;
+    max-width: 125px;
   }
 
   .part-number {
@@ -727,5 +861,5 @@ max-width: 125px;
 }
 
 .Finishes {
-color: black;
+  color: black;
 }

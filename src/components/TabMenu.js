@@ -1,24 +1,47 @@
 import React from "react";
-import "./style/TabMenu.css"; // Import the new CSS file
+import "./style/TabMenu.css";
 
-const TabMenu = ({ activeTab, onTabChange }) => {
-  const tabs = [
-    'Rails',
-    'Chassis (Rail Head)',
-    'Trims',
-    'Lever Handles Only', // New tab
-    'Vertical Rod Device Internals',
-    'Mortise Exit Lockbodies', // New tab
-  ];
+const TabMenu = ({
+  masterTabs,
+  activeMasterTab,
+  onMasterTabChange,
+  subTabs,
+  universalTabs,
+  activeSubTab,
+  onSubTabChange
+}) => {
   return (
     <div className="tab-menu-container">
-      <div className="tab-menu-grid">
-        {tabs.map((tab) => (
+      {/* Master Tabs Row */}
+      <div className="master-tabs-row">
+        {masterTabs.map((tab) => (
           <button
             key={tab}
-            className={`tab-button ${activeTab === tab ? 'active' : ''}`}
-            onClick={() => onTabChange(tab)}
+            className={`master-tab ${activeMasterTab === tab ? 'active' : ''}`}
+            onClick={() => onMasterTabChange(tab)}
           >
+            {tab}
+          </button>
+        ))}
+      </div>
+      {/* Sub Tabs Grid */}
+      <div className="sub-tabs-grid">
+        {subTabs.map((tab) => (
+          <button
+            key={tab}
+            className={`sub-tab ${activeSubTab === tab ? 'active' : ''}`}
+            onClick={() => onSubTabChange(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+        {universalTabs.map((tab) => (
+          <button
+            key={tab}
+            className={`sub-tab universal-tab ${activeSubTab === tab ? 'active' : ''}`}
+            onClick={() => onSubTabChange(tab)}
+          >
+            <span className="universal-star">★</span>
             {tab}
           </button>
         ))}
