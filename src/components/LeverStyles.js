@@ -92,6 +92,34 @@ const leverStyleOptions = [
     label: "L Lever",
     image: images.LeverL,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1128",
+            "Push Button": "10-1127",
+            "Thumb Turn": "10-2425",
+            "Fixed Core": "10-1129",
+            LFIC: "10-1130",
+            SF: "10-1132",
+            YRC: "10-1134",
+            SFIC: "10-1131",
+            KESO: "10-1133",
+          },
+          Milling: {
+            Plain: "10-1153",
+            "Push Button": "10-1152",
+            "Thumb Turn": "10-2435",
+            "Fixed Core": "10-1154",
+            LFIC: "10-1155",
+            SF: "10-1157",
+            YRC: "10-1159",
+            SFIC: "10-1156",
+            KESO: "10-1158",
+          },
+
+        }
+      },
       "DL Series": { inside: "DL-0046", outside: "DL-0046" },
       Mortise: { inside: "DL-0046", outside: "82-0157" },
       Exits: "97-0485",
@@ -102,6 +130,34 @@ const leverStyleOptions = [
     label: "P Lever",
     image: images.LeverP,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1137",
+            "Push Button": "10-1136",
+            "Thumb Turn": "10-2427",
+            "Fixed Core": "10-1138",
+            LFIC: "10-1139",
+            SF: "10-1141",
+            YRC: "10-1143",
+            SFIC: "10-1140",
+            KESO: "10-1142",
+          },
+          Milling: {
+            Plain: "10-1162",
+            "Push Button": "10-1161",
+            "Thumb Turn": "10-2437",
+            "Fixed Core": "10-1163",
+            LFIC: "10-1164",
+            SF: "10-1166",
+            YRC: "10-1168",
+            SFIC: "10-1165",
+            KESO: "10-1167",
+          },
+
+        }
+      },
       "DL Series": { inside: "DL-0047", outside: "DL-0047" },
       Mortise: { inside: "DL-0047", outside: "82-0158" },
       Exits: "97-0484",
@@ -183,6 +239,34 @@ const leverStyleOptions = [
     label: "MD Lever",
     image: images.LeverMD,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1240",
+            "Push Button": "10-1241",
+            "Thumb Turn": "10-2429",
+            "Fixed Core": "10-1242",
+            LFIC: "10-1243",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "10-1244",
+            KESO: "Not Available",
+          },
+          Milling: {
+            Plain: "Not Available",
+            "Push Button": "Not Available",
+            "Thumb Turn": "Not Available",
+            "Fixed Core": "Not Available",
+            LFIC: "Not Available",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "Not Available",
+            KESO: "Not Available",
+          },
+
+        }
+      },
       "DL Series": { inside: "82-0811", outside: "82-0811" },
       Mortise: { inside: "82-0811", outside: "82-0812" },
       Exits: "82-0810",
@@ -213,6 +297,34 @@ const leverStyleOptions = [
     label: "ND Lever",
     image: images.LeverND,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1245",
+            "Push Button": "10-1246",
+            "Thumb Turn": "10-2423",
+            "Fixed Core": "10-1247",
+            LFIC: "10-1248",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "10-1249",
+            KESO: "Not Available",
+          },
+          Milling: {
+            Plain: "Not Available",
+            "Push Button": "Not Available",
+            "Thumb Turn": "Not Available",
+            "Fixed Core": "Not Available",
+            LFIC: "Not Available",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "Not Available",
+            KESO: "Not Available",
+          },
+
+        }
+      },
       "DL Series": { inside: "82-0908", outside: "82-0908" },
       Mortise: { inside: "82-0908", outside: "82-0909" },
       Exits: "82-0907",
@@ -315,6 +427,34 @@ const leverStyleOptions = [
     label: "MB Lever",
     image: images.LeverMB,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1263",
+            "Push Button": "10-1264",
+            "Thumb Turn": "10-2428",
+            "Fixed Core": "10-1265",
+            LFIC: "10-1266",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "10-1267",
+            KESO: "Not Available",
+          },
+          Milling: {
+            Plain: "Not Available",
+            "Push Button": "Not Available",
+            "Thumb Turn": "Not Available",
+            "Fixed Core": "Not Available",
+            LFIC: "Not Available",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "Not Available",
+            KESO: "Not Available",
+          },
+
+        }
+      },
       "DL Series": { inside: "82-0805", outside: "82-0805" },
       Mortise: { inside: "82-0805", outside: "82-0806" },
       Exits: "82-0804",
@@ -375,6 +515,34 @@ const leverStyleOptions = [
     label: "MW Lever",
     image: images.LeverMW,
     partNumbers: {
+      "10X Series": {
+        // Category-based structure
+        categories: {
+          Standard: {
+            Plain: "10-1268",
+            "Push Button": "10-1269",
+            "Thumb Turn": "10-2431",
+            "Fixed Core": "10-1270",
+            LFIC: "10-1271",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "10-1272",
+            KESO: "Not Available",
+          },
+          Milling: {
+            Plain: "Not Available",
+            "Push Button": "Not Available",
+            "Thumb Turn": "Not Available",
+            "Fixed Core": "Not Available",
+            LFIC: "Not Available",
+            SF: "Not Available",
+            YRC: "Not Available",
+            SFIC: "Not Available",
+            KESO: "Not Available",
+          },
+
+        }
+      },
       "DL Series": { inside: "82-0898", outside: "82-0898" },
       Mortise: { inside: "82-0898", outside: "82-0899" },
       Exits: "82-0897",
