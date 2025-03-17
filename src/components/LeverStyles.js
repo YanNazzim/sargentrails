@@ -30,7 +30,7 @@ const leverStyleOptions = [
           Standard: {
             Plain: "10-1121",
             "Push Button": "10-1120",
-            "Thumbturn": "10-2424",
+            "Thumb Turn": "10-2424",
             "Fixed Core": "10-1122",
             LFIC: "10-1123",
             SF: "10-1125",
@@ -41,7 +41,7 @@ const leverStyleOptions = [
           Milling: {
             Plain: "10-1146",
             "Push Button": "10-1145",
-            "Thumbturn": "10-2434",
+            "Thumb Turn": "10-2434",
             "Fixed Core": "10-1147",
             LFIC: "10-1148",
             SF: "10-1150",
@@ -722,7 +722,17 @@ const leverStyleOptions = [
       "10X Series": {
         categories: {
           "Red/Green Indicator Lever (VSLL)": {
-            "Plain": "VSLL-GRN-10X",
+            "Plain": { inside: "10-3834", outside: "10-3819" },
+            "Emergency": "10-3838",
+            "Fixed Core": "10-3823",
+            "Push Button": { inside: "10-3835", outside: "10-2440" },
+            "LFIC": "10-3820",
+            "SF": "10-3824",
+            "YRC": "10-3825",
+            "SFIC": "10-3821",
+            "KESO": "10-3822",
+
+
           }
         }
       },
@@ -730,13 +740,22 @@ const leverStyleOptions = [
   },
   {
     value: "VSLL-WHT",
-    label: "VSLL Red/White Indicator Lever",
+    label: "VSLL Red/white Indicator Lever",
     image: images.LeverVSLLWhite,
     partNumbers: {
       "10X Series": {
         categories: {
-          "Red/White Indicator Lever (VSLL)": {
-            "Plain": "VSLL-WHT-10X",
+          "Red/white Indicator Lever (VSLL)": {
+            "Plain": { inside: "10-3836", outside: "10-3826" },
+            "Emergency": "10-3839",
+            "Fixed Core": "10-3831",
+            "Push Button": { inside: "10-3837", outside: "10-3827" },
+            "LFIC": "10-3828",
+            "SF": "10-3832",
+            "YRC": "10-3833",
+            "SFIC": "10-3829",
+            "KESO": "10-3830",
+
           }
         }
       },

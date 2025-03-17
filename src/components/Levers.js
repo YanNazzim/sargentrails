@@ -179,16 +179,19 @@ const platformOptions = [
 
 const radioOptions = [
   { value: "Plain", label: "Plain" },
-  { value: "Push Button", label: "Push Button" },
   { value: "Thumb Turn", label: "Thumb Turn" },
+  { value: "Push Button", label: "Push Button" },
+  { value: "Fixed Core", label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)" },
   { value: "LFIC", label: "LFIC" },
-  { value: "SFIC", label: "SFIC" },
-  { value: "KESO", label: "KESO" },
+  { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
+  { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
+  { value: "SFIC", label: "SFIC (70, 72, 73-)" },
+  { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
 ];
 
 const categoryOptions = [
   { value: "Standard", label: "Standard" },
-  { value: "Milling", label: "Milling" },
+  { value: "Milling", label: "Standard W/ Tactile Milling" },
   {
     value: "Red/Green Indicator Lever (VSLL)",
     label: "Red/Green Indicator (VSLL)",
@@ -196,7 +199,7 @@ const categoryOptions = [
   },
   {
     value: "Red/white Indicator Lever (VSLL)", // Lowercase 'w' in white
-    label: "Red/White Indicator (VSLL)",
+    label: "Red/white Indicator (VSLL)",
     triggers: "VSLL-WHT"
   }
 ];
@@ -232,8 +235,6 @@ const leversRequiringHanding = [
   "NJ",
   "NS",
   "NU",
-  "VSLL-GRN",
-  "VSLL-WHT"
 ];
 
 const Levers = () => {
@@ -292,8 +293,13 @@ const Levers = () => {
 
     let result = "";
 
+    // Modify this section in handleSubmit:
     if (selectedPlatform.value === "10X Series") {
-      const selectedOption = parts[selectedRadio];
+      const selectedOption = parts?.[selectedRadio]; // Added optional chaining
+      if (!selectedOption) {
+        setPartNumber("Invalid configuration for selected options");
+        return;
+      }
       if (typeof selectedOption === "object") {
         result = `Inside: ${selectedOption.inside}${finishText} <br /> Outside: ${selectedOption.outside}${finishText}`;
       } else {
@@ -366,17 +372,29 @@ const Levers = () => {
           <div className="form-group">
             <label style={{ color: "black" }}>Select Option:</label>
             <div>
-              {radioOptions.map((option) => (
-                <label key={option.value} style={{ marginRight: "10px" }}>
-                  <input
-                    type="radio"
-                    value={option.value}
-                    checked={selectedRadio === option.value}
-                    onChange={() => setSelectedRadio(option.value)}
-                  />
-                  {option.label}
-                </label>
-              ))}
+              {(selectedLever?.value.startsWith("VSLL")
+                ? [
+                  { value: "Plain", label: "Plain" },
+                  { value: "Emergency", label: "Emergency Key Hole" }, // Replaced Thumb Turn
+                  { value: "Push Button", label: "Push Button" },
+                  { value: "Fixed Core", label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)" },
+                  { value: "LFIC", label: "LFIC" },
+                  { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
+                  { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
+                  { value: "SFIC", label: "SFIC (70, 72, 73-)" },
+                  { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
+                ]
+                : radioOptions).map((option) => (
+                  <label key={option.value} style={{ marginRight: "10px" }}>
+                    <input
+                      type="radio"
+                      value={option.value}
+                      checked={selectedRadio === option.value}
+                      onChange={() => setSelectedRadio(option.value)}
+                    />
+                    {option.label}
+                  </label>
+                ))}
             </div>
           </div>
         )}
