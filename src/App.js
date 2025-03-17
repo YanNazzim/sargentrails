@@ -41,7 +41,7 @@ const App = () => {
       <div className="header">
         <img src={images.logo} alt="Sargent Logo" className="company-logo" />
         <h1 className="title">
-          Sargent Part Number Lookup Tool <br /> (Bored/Mortise Coming Soon)
+          Sargent Part Number Lookup Tool <br />
         </h1>
         <h3>For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
       </div>
