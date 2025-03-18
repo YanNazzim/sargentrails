@@ -556,6 +556,9 @@ select:focus {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  padding: 25px;
+  border: solid .375em #26af62;
+  border-radius: 25px;
 }
 
 .master-tab {
@@ -607,6 +610,8 @@ select:focus {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  max-width: fit-content;
+  min-width: 350px;
 }
 
 .sub-tab:hover {
@@ -646,6 +651,10 @@ select:focus {
   background: #ffd700;
   color: #001f3f;
   border-color: #ffd700;
+}
+
+.universal-tab.active .universal-star {
+  color: black;
 }
 
 /* Responsive Design */

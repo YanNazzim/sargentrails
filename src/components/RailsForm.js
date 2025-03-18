@@ -17,7 +17,8 @@ const FinishOption = (props) => {
           width: "30px",
           height: "auto",
           marginRight: "10px",
-          verticalAlign: "middle",
+      borderRadius: "25px",
+      verticalAlign: "middle",
         }}
       />
       <span>{props.data.label}</span>
@@ -36,7 +37,8 @@ const FinishSingleValue = (props) => {
           width: "30px",
           height: "auto",
           marginRight: "10px",
-          verticalAlign: "middle",
+      borderRadius: "25px",
+      verticalAlign: "middle",
         }}
       />
       <span>{props.data.label}</span>
@@ -441,6 +443,7 @@ const RailsForm = () => {
       ...provided,
       display: "flex",
       alignItems: "center",
+      borderRadius: "25px",
       color: "black"
     }),
   };

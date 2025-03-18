@@ -5,6 +5,7 @@ import MortiseExitLockbodies from "./components/MortiseExitLockbodies";
 import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
+import Cylinders from "./components/Cylinders";
 import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
@@ -13,7 +14,7 @@ const App = () => {
   const tabConfig = {
     masterTabs: [
       {
-        name: "Exits",
+        name: "Exit Devices",
         subTabs: [
           "Rails",
           "Chassis (Rail Head)",
@@ -25,20 +26,19 @@ const App = () => {
       {
         name: "Bored Locks",
         subTabs: [
-          "Cylinders",
           "Deadbolts",
           "Mortise Lock Trim"
         ]
       },
       {
-        name: "Mortise",
+        name: "Mortise Locks",
         subTabs: [
           "Mortise Case",
           "Mortise Trim"
         ]
       }
     ],
-    universalTabs: ["Lever Handles Only"]
+    universalTabs: ["Lever Handles Only", "Cylinders"]
   };
 
   const [activeMasterTab, setActiveMasterTab] = useState(tabConfig.masterTabs[0].name);
@@ -70,7 +70,7 @@ const App = () => {
         return <MortiseExitLockbodies />;
       // Add cases for new sub-tabs
       case "Cylinders":
-        return <div>Cylinders Component</div>;
+        return <Cylinders />;
       case "Deadbolts":
         return <div>Deadbolts Component</div>;
       case "Mortise Lock Trim":
@@ -92,6 +92,7 @@ const App = () => {
           Sargent Part Number Lookup Tool <br />
         </h1>
         <h3>For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
+        <h3 style={{color: "#ffd700"}}>★ = Same Form Used Across All Device Platforms (Universal Form)</h3>
       </div>
 
       <div className="tab-container" aria-live="polite">
