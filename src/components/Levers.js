@@ -229,7 +229,6 @@ const leversRequiringHanding = [
   "MX",
   "MY",
   "MZ",
-  "ND",
   "NF",
   "NI",
   "NJ",
