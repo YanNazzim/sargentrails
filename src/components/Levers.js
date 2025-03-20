@@ -181,8 +181,11 @@ const radioOptions = [
   { value: "Plain", label: "Plain" },
   { value: "Thumb Turn", label: "Thumb Turn" },
   { value: "Push Button", label: "Push Button" },
-  { value: "Fixed Core", label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)" },
-  { value: "LFIC", label: "LFIC" },
+  {
+    value: "Fixed Core",
+    label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)",
+  },
+  { value: "LFIC", label: "LFIC -- Sargent 6 Pin (60, 63, 64)" },
   { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
   { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
   { value: "SFIC", label: "SFIC (70, 72, 73-)" },
@@ -195,13 +198,13 @@ const categoryOptions = [
   {
     value: "Red/Green Indicator Lever (VSLL)",
     label: "Red/Green Indicator (VSLL)",
-    triggers: "VSLL-GRN"
+    triggers: "VSLL-GRN",
   },
   {
     value: "Red/white Indicator Lever (VSLL)", // Lowercase 'w' in white
-    label: "Red/white Indicator (VSLL)",
-    triggers: "VSLL-WHT"
-  }
+    label: "Red/White Indicator (VSLL)",
+    triggers: "VSLL-WHT",
+  },
 ];
 
 const handingOptions = [
@@ -261,7 +264,10 @@ const Levers = () => {
       return;
     }
 
-    if (leversRequiringHanding.includes(selectedLever.value) && !selectedHanding) {
+    if (
+      leversRequiringHanding.includes(selectedLever.value) &&
+      !selectedHanding
+    ) {
       setPartNumber("Please select a handing.");
       return;
     }
@@ -277,17 +283,20 @@ const Levers = () => {
       }
     }
 
-    console.log('Selected Lever:', selectedLever);
-    console.log('Platform:', selectedPlatform?.value);
-    console.log('Category:', selectedCategory?.value);
+    console.log("Selected Lever:", selectedLever);
+    console.log("Platform:", selectedPlatform?.value);
+    console.log("Category:", selectedCategory?.value);
 
     let parts;
     if (selectedPlatform.value === "10X Series") {
-      parts = selectedLever.partNumbers?.[selectedPlatform.value]?.categories?.[selectedCategory.value];
-      console.log('10X Series parts:', parts);
+      parts =
+        selectedLever.partNumbers?.[selectedPlatform.value]?.categories?.[
+          selectedCategory.value
+        ];
+      console.log("10X Series parts:", parts);
     } else {
       parts = selectedLever.partNumbers?.[selectedPlatform.value];
-      console.log('Other platform parts:', parts);
+      console.log("Other platform parts:", parts);
     }
 
     let result = "";
@@ -316,8 +325,6 @@ const Levers = () => {
       }
     }
 
-
-
     setPartNumber(result);
   };
 
@@ -332,68 +339,95 @@ const Levers = () => {
       </h1>
 
       <form onSubmit={handleSubmit} className="part-form">
+        {/* Platform Dropdown */}
         <div className="form-group">
           <label style={{ color: "black" }}>Platform Type:</label>
-          <Select
-            options={platformOptions}
-            onChange={setSelectedPlatform}
-            value={selectedPlatform}
-            placeholder="Select Platform..."
-            styles={customStyles}
-          />
+          <select
+            value={selectedPlatform ? selectedPlatform.value : ""}
+            onChange={(e) => {
+              const selectedValue = e.target.value;
+              const selectedObj = platformOptions.find(
+                (opt) => opt.value === selectedValue
+              );
+              setSelectedPlatform(selectedObj);
+            }}
+            required
+          >
+            <option value="">Select Platform...</option>
+            {platformOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
 
+        {/* Category Dropdown (only for 10X Series) */}
         {selectedPlatform?.value === "10X Series" && (
           <div className="form-group">
             <label style={{ color: "black" }}>Category:</label>
-            <Select
-              options={categoryOptions}
-              onChange={(selected) => {
-                console.log('Selected Category:', selected);
-                setSelectedCategory(selected);
-                if (selected?.triggers) {
-                  console.log('Looking for lever with value:', selected.triggers);
-                  const vsllLever = leverStyleOptions.find(l => l.value === selected.triggers);
-                  console.log('Found lever:', vsllLever);
+            <select
+              value={selectedCategory ? selectedCategory.value : ""}
+              onChange={(e) => {
+                const selectedValue = e.target.value;
+                const selectedObj = categoryOptions.find(
+                  (opt) => opt.value === selectedValue
+                );
+                setSelectedCategory(selectedObj);
+                if (selectedObj?.triggers) {
+                  const vsllLever = leverStyleOptions.find(
+                    (l) => l.value === selectedObj.triggers
+                  );
                   setSelectedLever(vsllLever);
                 } else {
                   setSelectedLever(null);
                 }
               }}
-              value={selectedCategory}
-              placeholder="Select Category..."
-              styles={customStyles}
-            />
+              required
+            >
+              <option value="">Select Category...</option>
+              {categoryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
         )}
 
+        {/* Radio Options (for 10X Series only) */}
         {selectedPlatform?.value === "10X Series" && selectedCategory && (
           <div className="form-group">
             <label style={{ color: "black" }}>Select Option:</label>
             <div>
-              {(selectedLever?.value.startsWith("VSLL")
+              {(selectedLever?.value && selectedLever.value.startsWith("VSLL")
                 ? [
-                  { value: "Plain", label: "Plain" },
-                  { value: "Emergency", label: "Emergency Key Hole" }, // Replaced Thumb Turn
-                  { value: "Push Button", label: "Push Button" },
-                  { value: "Fixed Core", label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)" },
-                  { value: "LFIC", label: "LFIC" },
-                  { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
-                  { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
-                  { value: "SFIC", label: "SFIC (70, 72, 73-)" },
-                  { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
-                ]
-                : radioOptions).map((option) => (
-                  <label key={option.value} style={{ marginRight: "10px" }}>
-                    <input
-                      type="radio"
-                      value={option.value}
-                      checked={selectedRadio === option.value}
-                      onChange={() => setSelectedRadio(option.value)}
-                    />
-                    {option.label}
-                  </label>
-                ))}
+                    { value: "Plain", label: "Plain" },
+                    { value: "Emergency", label: "Emergency Key Hole" },
+                    { value: "Push Button", label: "Push Button" },
+                    {
+                      value: "Fixed Core",
+                      label:
+                        "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)",
+                    },
+                    { value: "LFIC", label: "LFIC" },
+                    { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
+                    { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
+                    { value: "SFIC", label: "SFIC (70, 72, 73-)" },
+                    { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
+                  ]
+                : radioOptions
+              ).map((option) => (
+                <label key={option.value} style={{ marginRight: "10px" }}>
+                  <input
+                    type="radio"
+                    value={option.value}
+                    checked={selectedRadio === option.value}
+                    onChange={() => setSelectedRadio(option.value)}
+                  />
+                  {option.label}
+                </label>
+              ))}
             </div>
           </div>
         )}
@@ -404,17 +438,29 @@ const Levers = () => {
             // In the lever Select options filter:
             options={
               selectedPlatform
-                ? leverStyleOptions.filter(lever => {
-                  console.log('Checking lever:', lever.value);
-                  if (selectedCategory?.triggers) {
-                    console.log('Category trigger:', selectedCategory.triggers);
-                    console.log('Match?', lever.value === selectedCategory.triggers);
-                    return lever.value === selectedCategory.triggers;
-                  }
-                  const hasParts = !!lever.partNumbers[selectedPlatform.value];
-                  console.log('Lever', lever.value, 'has parts for platform?', hasParts);
-                  return hasParts;
-                })
+                ? leverStyleOptions.filter((lever) => {
+                    console.log("Checking lever:", lever.value);
+                    if (selectedCategory?.triggers) {
+                      console.log(
+                        "Category trigger:",
+                        selectedCategory.triggers
+                      );
+                      console.log(
+                        "Match?",
+                        lever.value === selectedCategory.triggers
+                      );
+                      return lever.value === selectedCategory.triggers;
+                    }
+                    const hasParts =
+                      !!lever.partNumbers[selectedPlatform.value];
+                    console.log(
+                      "Lever",
+                      lever.value,
+                      "has parts for platform?",
+                      hasParts
+                    );
+                    return hasParts;
+                  })
                 : leverStyleOptions
             }
             onChange={(selectedOption) => {
@@ -432,19 +478,20 @@ const Levers = () => {
           />
         </div>
 
-        {selectedLever && leversRequiringHanding.includes(selectedLever.value) && (
-          <div className="form-group">
-            <label style={{ color: "black" }}>Handing:</label>
-            <Select
-              options={handingOptions}
-              onChange={setSelectedHanding}
-              value={selectedHanding}
-              placeholder="Select Handing..."
-              styles={customStyles}
-              required
-            />
-          </div>
-        )}
+        {selectedLever &&
+          leversRequiringHanding.includes(selectedLever.value) && (
+            <div className="form-group">
+              <label style={{ color: "black" }}>Handing:</label>
+              <Select
+                options={handingOptions}
+                onChange={setSelectedHanding}
+                value={selectedHanding}
+                placeholder="Select Handing..."
+                styles={customStyles}
+                required
+              />
+            </div>
+          )}
 
         <div className="form-group">
           <label style={{ color: "black" }}>Finish:</label>

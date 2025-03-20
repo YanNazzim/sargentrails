@@ -83,28 +83,15 @@ const Cylinders = () => {
       finalPart = partNumbers[formData.deviceType.value]?.base || "";
     }
 
-    // Join prefixes with a hyphen
-    const prefixesString = formData.prefixes.join("-");
+    // Join prefixes with a hyphen if there are any prefixes
+    const prefixesString =
+      formData.prefixes.length > 0 ? formData.prefixes.join("-") + " - " : "";
 
-    // Apply finish and keying suffix
-    finalPart = `${prefixesString}-${finalPart} - ${formData.finish.value} - Specify Keying Details`;
+    // Construct the final part number
+    finalPart = `${prefixesString}${finalPart} - ${formData.finish.value} - Specify Keying Details`;
+
     setPartNumber(finalPart);
   };
-
-  // Custom group heading
-  const GroupHeading = (props) => (
-    <div
-      className="group-heading"
-      style={{
-        padding: "8px 12px",
-        backgroundColor: "#f0f4f8",
-        color: "black",
-        fontWeight: "600",
-      }}
-    >
-      {props.children}
-    </div>
-  );
 
   // Custom option component
   const CustomOption = ({ children, ...props }) => (
@@ -128,87 +115,118 @@ const Cylinders = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">Cylinders <br /> 🚧 UNDER CONSTRUCTION : COMING SOON 🚧</h1>
+      <h1 className="Heading">
+        Cylinders <br /> 🚧 UNDER CONSTRUCTION : COMING SOON 🚧
+      </h1>
 
       <form onSubmit={handleSubmit} className="part-form">
         {/* Device Type Select */}
         <div className="form-group">
           <label>Device Type:</label>
-          <Select
-            options={deviceOptions}
-            value={formData.deviceType}
-            onChange={handleDeviceChange}
-            components={{
-              Option: CustomOption,
-              Group: components.Group,
-              GroupHeading,
+          <select
+            value={formData.deviceType ? formData.deviceType.value : ""}
+            onChange={(e) => {
+              const selectedValue = e.target.value;
+              let selectedOption = null;
+              // Find the matching option in our grouped options
+              deviceOptions.forEach((group) => {
+                const found = group.options.find(
+                  (option) => option.value === selectedValue
+                );
+                if (found) selectedOption = found;
+              });
+              // Use the same handler to update state and show function dropdown if needed
+              handleDeviceChange(selectedOption);
             }}
             required
-            isSearchable={false}
-          />
+          >
+            <option value="">Select a device type</option>
+            {deviceOptions.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
         </div>
 
         {/* Function Dropdown (only for Trim Cylinders) */}
         {showFunction && (
           <div className="form-group">
             <label>Function:</label>
-            <Select
-              options={functionsByDeviceType.exitDevices}
-              value={formData.function}
-              onChange={(selected) =>
-                setFormData((p) => ({ ...p, function: selected }))
-              }
+            <select
+              value={formData.function ? formData.function.value : ""}
+              onChange={(e) => {
+                const selectedValue = e.target.value;
+                const selectedOption = functionsByDeviceType.exitDevices.find(
+                  (option) => option.value === selectedValue
+                );
+                setFormData((prevData) => ({
+                  ...prevData,
+                  function: selectedOption,
+                }));
+              }}
               required
-            />
+            >
+              <option value="">Select a function</option>
+              {functionsByDeviceType.exitDevices.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
         )}
 
         {/* Prefixes Grid (only for Trim Cylinders) */}
-          <div className="form-group">
-            <label>Prefixes:</label>
-            <div className="checkbox-group">
-              {prefixes &&
-                prefixes.map((prefix) => (
-                  <label key={prefix.code}>
-                    <input
-                      type="checkbox"
-                      value={prefix.code}
-                      checked={formData.prefixes.includes(prefix.code)}
-                      onChange={(e) => {
-                        const newPrefixes = e.target.checked
-                          ? [...formData.prefixes, prefix.code]
-                          : formData.prefixes.filter((p) => p !== prefix.code);
+        <div className="form-group">
+          <label>Prefixes:</label>
+          <div className="checkbox-group">
+            {prefixes &&
+              prefixes.map((prefix) => (
+                <label key={prefix.code}>
+                  <input
+                    type="checkbox"
+                    value={prefix.code}
+                    checked={formData.prefixes.includes(prefix.code)}
+                    onChange={(e) => {
+                      const newPrefixes = e.target.checked
+                        ? [...formData.prefixes, prefix.code]
+                        : formData.prefixes.filter((p) => p !== prefix.code);
 
-                        // Handle conflicts
-                        const filtered = newPrefixes.filter(
-                          (p) =>
-                            !prefixes
-                              .find((px) => px.code === prefix.code)
-                              ?.conflicts?.includes(p)
-                        );
-                        setFormData((p) => ({ ...p, prefixes: filtered }));
-                      }}
-                      disabled={
-                        prefix.conflicts &&
-                        prefix.conflicts.some((c) =>
-                          formData.prefixes.includes(c)
-                        )
-                      }
-                    />
-                    <span className="custom-checkbox"></span>
-                    <span>
-                      <strong>({prefix.code})</strong> — {prefix.name}
-                    </span>
-                  </label>
-                ))}
-            </div>
+                      // Handle conflicts
+                      const filtered = newPrefixes.filter(
+                        (p) =>
+                          !prefixes
+                            .find((px) => px.code === prefix.code)
+                            ?.conflicts?.includes(p)
+                      );
+                      setFormData((p) => ({ ...p, prefixes: filtered }));
+                    }}
+                    disabled={
+                      prefix.conflicts &&
+                      prefix.conflicts.some((c) =>
+                        formData.prefixes.includes(c)
+                      )
+                    }
+                  />
+                  <span className="custom-checkbox"></span>
+                  <span>
+                    <strong>({prefix.code})</strong> — {prefix.name}
+                  </span>
+                </label>
+              ))}
           </div>
-
+        </div>
 
         {/* Finish Select */}
         <div className="form-group">
           <label>Finish:</label>
           <Select
+            className="ReactSelect"
             options={finishes}
             value={formData.finish}
             onChange={(selected) =>

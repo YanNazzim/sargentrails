@@ -1188,19 +1188,24 @@ const RodsForm = () => {
 
         {/* 5CH Prefix Checkbox */}
         <div className="form-group">
-          <label>
-            <input
-              type="checkbox"
-              checked={formData.has5CHPrefix}
-              onChange={(e) =>
-                setFormData({ ...formData, has5CHPrefix: e.target.checked })
-              }
-            />
-            Include 5CH Prefix (5LB Maximum Force)
-          </label>
+          <div className="checkbox-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.has5CHPrefix}
+                onChange={(e) =>
+                  setFormData({ ...formData, has5CHPrefix: e.target.checked })
+                }
+              />
+              <span className="custom-checkbox"></span>
+              <span>
+                <strong>(5CH)</strong> — 5LB Maximum Force
+              </span>
+            </label>
+          </div>
         </div>
 
-        {/* 106/113 Auxiliary Control Checkbox (Only for WD8600 or WD-PE8600) */}
+        {/* 106/113 Auxiliary Control Checkbox */}
         {(formData.device === "WD8600" ||
           formData.device === "WD-PE8600" ||
           formData.device === "MD-PE8600" ||
@@ -1208,19 +1213,24 @@ const RodsForm = () => {
           formData.device === "AD-PE8400" ||
           formData.device === "MD-PE8400") && (
           <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={formData.hasAuxiliaryControl}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    hasAuxiliaryControl: e.target.checked,
-                  })
-                }
-              />
-              Device has an auxiliary control (106/113)
-            </label>
+            <div className="checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={formData.hasAuxiliaryControl}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      hasAuxiliaryControl: e.target.checked,
+                    })
+                  }
+                />
+                <span className="custom-checkbox"></span>
+                <span>
+                  <strong>(106/113)</strong> — Rods are paired with Auxiliary Control
+                </span>
+              </label>
+            </div>
           </div>
         )}
 
