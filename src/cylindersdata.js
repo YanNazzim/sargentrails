@@ -42,12 +42,12 @@ export const prefixes = [
   {
     code: "70",
     name: "SFIC (Housing to accept 6- or 7-Pin SFIC Permanent Cores, plastic disposable core provided)",
-    conflicts: ["49", "5CH"], // Conflicts with other prefixes
+    conflicts: ["60"], // Conflicts with other prefixes
   },
   {
-    code: "49",
-    name: "Inside Visual Indicator for 8816",
-    conflicts: ["12"], // Conflicts with other prefixes
+    code: "60",
+    name: "LFIC (Housing to accept SARGENT Permanent Large Format Interchangeable Core, Disposable plastic Core provided (Permanent Cores ordered separately))",
+    conflicts: ["70"], // Conflicts with other prefixes
   },
   {
     code: "5CH",
@@ -154,15 +154,16 @@ export const finishes = [
 // Part numbers based on device type, function, and prefixes
 export const partNumbers = {
   exitDevices: {
-    16: {
-      base: "EXIT-F1-BASE",
+    "04": {
+      mortiseBase: "46",
+      regularBase: "34",      
       prefixes: {
-        12: "EXIT-F1-12",
-        49: "EXIT-F1-49",
+        70: { mortise: "46", regular: "34" },
+        60: { mortise: "46", regular: "34" },
         "12-59": "EXIT-F1-12-59", // Combined prefix key
       },
     },
-    function2: {
+    16: {
       base: "EXIT-F2-BASE",
       prefixes: {
         12: "EXIT-F2-12",

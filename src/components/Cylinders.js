@@ -58,39 +58,77 @@ const Cylinders = () => {
       return;
     }
 
-    let finalPart = "";
+    let results = [];
     if (formData.deviceType.value === "trimCylinders" && formData.function) {
-      // Trim cylinder logic
-      finalPart = partNumbers.exitDevices[formData.function.value]?.base || "";
+      const funcData = partNumbers.exitDevices[formData.function.value];
 
-      // Handle combined prefixes
-      const prefixKey = formData.prefixes.sort().join("-"); // Sort to ensure consistent key
-      if (
-        partNumbers.exitDevices[formData.function.value]?.prefixes?.[prefixKey]
-      ) {
-        finalPart =
-          partNumbers.exitDevices[formData.function.value].prefixes[prefixKey];
-      } else {
+      // Handle prefixes
+      if (formData.prefixes.length > 0) {
         formData.prefixes.forEach((prefix) => {
-          finalPart =
-            partNumbers.exitDevices[formData.function.value]?.prefixes?.[
-              prefix
-            ] || finalPart;
+          const prefixData = funcData.prefixes?.[prefix];
+          if (prefixData) {
+            if (formData.function.value === "16") {
+              // Special handling for 16 function (inside/outside cylinders)
+              results.push({
+                mortise: {
+                  inside: `${prefixData.mortise.inside} - ${formData.finish.value}`,
+                  outside: `${prefixData.mortise.outside} - ${formData.finish.value}`,
+                },
+                regular: {
+                  inside: `${prefixData.regular.inside} - ${formData.finish.value}`,
+                  outside: `${prefixData.regular.outside} - ${formData.finish.value}`,
+                },
+              });
+            } else {
+              // Regular handling for other functions
+              results.push({
+                mortise: `${prefixData.mortise} - ${formData.finish.value}`,
+                regular: `${prefixData.regular} - ${formData.finish.value}`,
+              });
+            }
+          }
         });
+      } else {
+        // Base numbers without prefixes
+        if (formData.function.value === "16") {
+          // Special handling for 16 function (inside/outside cylinders)
+          results.push({
+            mortise: {
+              inside: `${funcData.mortiseBase.inside} - ${formData.finish.value}`,
+              outside: `${funcData.mortiseBase.outside} - ${formData.finish.value}`,
+            },
+            regular: {
+              inside: `${funcData.regularBase.inside} - ${formData.finish.value}`,
+              outside: `${funcData.regularBase.outside} - ${formData.finish.value}`,
+            },
+          });
+        } else {
+          // Regular handling for other functions
+          results.push({
+            mortise: `${funcData.mortiseBase} - ${formData.finish.value}`,
+            regular: `${funcData.regularBase} - ${formData.finish.value}`,
+          });
+        }
       }
-    } else {
-      // Other device logic
-      finalPart = partNumbers[formData.deviceType.value]?.base || "";
     }
 
-    // Join prefixes with a hyphen if there are any prefixes
-    const prefixesString =
-      formData.prefixes.length > 0 ? formData.prefixes.join("-") + " - " : "";
+    // Format final output with proper line breaks
+    const finalOutput = results
+      .map((r) => {
+        if (formData.function.value === "16") {
+          return `Mortise Exit Devices:
+    - Inside Cylinder: ${r.mortise.inside} - Specify Keying Details
+    - Outside Cylinder: ${r.mortise.outside} - Specify Keying Details
+  All other Devices:
+    - Inside Cylinder: ${r.regular.inside} - Specify Keying Details
+    - Outside Cylinder: ${r.regular.outside} - Specify Keying Details`;
+        } else {
+          return `Mortise Exit Devices: ${r.mortise} - Specify Keying Details\nAll other Devices: ${r.regular} - Specify Keying Details`;
+        }
+      })
+      .join("\n");
 
-    // Construct the final part number
-    finalPart = `${prefixesString}${finalPart} - ${formData.finish.value} - Specify Keying Details`;
-
-    setPartNumber(finalPart);
+    setPartNumber(finalOutput);
   };
 
   // Custom option component
@@ -286,14 +324,21 @@ const Cylinders = () => {
         <div className="result-container">
           <h2>Found Part Numbers:</h2>
           <div className="part-number">
-            <p>
-              <strong>Cylinder:</strong> {partNumber}
-            </p>
+            {partNumber.split("\n").map((line, index) => (
+              <p key={index}>
+                {line.split(": ").map((part, i) => (
+                  <span key={i}>
+                    {i === 0 ? <strong>{part}:</strong> : part}
+                    {i === 0 && " "}
+                  </span>
+                ))}
+              </p>
+            ))}
           </div>
         </div>
       )}
-    </div>
-  );
-};
+    </div> // Closing the main div
+  ); // Closing the return statement
+}; // Closing the Cylinders component
 
 export default Cylinders;
