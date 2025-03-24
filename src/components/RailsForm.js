@@ -17,8 +17,8 @@ const FinishOption = (props) => {
           width: "30px",
           height: "auto",
           marginRight: "10px",
-      borderRadius: "25px",
-      verticalAlign: "middle",
+          borderRadius: "25px",
+          verticalAlign: "middle",
         }}
       />
       <span>{props.data.label}</span>
@@ -37,8 +37,8 @@ const FinishSingleValue = (props) => {
           width: "30px",
           height: "auto",
           marginRight: "10px",
-      borderRadius: "25px",
-      verticalAlign: "middle",
+          borderRadius: "25px",
+          verticalAlign: "middle",
         }}
       />
       <span>{props.data.label}</span>
@@ -390,14 +390,14 @@ const RailsForm = () => {
       formData.stile === "DummyRailInActive"
         ? partsData.DummyRailInActive
         : formData.stile === "DummyRailActive"
-        ? partsData.DummyRailActive
-        : formData.stile === "Wide"
-        ? partsData.wideRails
-        : formData.stile === "LowProfile"
-        ? partsData.LowProfileRails
-        : formData.stile === "JellyFish"
-        ? partsData.JellyFishRails
-        : partsData.narrowRails;
+          ? partsData.DummyRailActive
+          : formData.stile === "Wide"
+            ? partsData.wideRails
+            : formData.stile === "LowProfile"
+              ? partsData.LowProfileRails
+              : formData.stile === "JellyFish"
+                ? partsData.JellyFishRails
+                : partsData.narrowRails;
 
     const partNumberEntry = partNumbers[key] || "Not Found";
     const [basePartNumber, note] = partNumberEntry.split(" - ");
@@ -545,23 +545,26 @@ const RailsForm = () => {
           </div>
         )}
 
-        
+
         {/* Size Dropdown */}
         <div className="form-group">
           <label>Size:</label>
-          <select
-            value={formData.size}
-            onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+          <Select
+            value={formData.stile && options.sizes[formData.stile]?.find(
+              (size) => size.code === formData.size
+            )}
+            onChange={(selectedOption) =>
+              setFormData({ ...formData, size: selectedOption?.code || "" })
+            }
+            options={formData.stile ? options.sizes[formData.stile] : []}
+            getOptionLabel={(option) => option.display}
+            getOptionValue={(option) => option.code}
+            placeholder="Select Size"
+            isDisabled={!formData.stile}
+            styles={customStyles}
+
             required
-          >
-            <option value="">Select Size</option>
-            {formData.stile &&
-              options.sizes[formData.stile]?.map((size) => (
-                <option key={size.code} value={size.code}>
-                  {size.display}
-                </option>
-              ))}
-          </select>
+          />
         </div>
 
         {/* Finish using react‑select */}
