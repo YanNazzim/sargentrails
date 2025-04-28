@@ -291,7 +291,7 @@ const Levers = () => {
     if (selectedPlatform.value === "10X Series") {
       parts =
         selectedLever.partNumbers?.[selectedPlatform.value]?.categories?.[
-          selectedCategory.value
+        selectedCategory.value
         ];
       console.log("10X Series parts:", parts);
     } else {
@@ -314,15 +314,27 @@ const Levers = () => {
         result = `${selectedOption}${finishText}`;
       }
     } else {
-      if (leversRequiringHanding.includes(selectedLever.value)) {
-        const insidePart = parts.inside?.[selectedHanding.value] || "N/A";
-        const outsidePart = parts.outside?.[selectedHanding.value] || "N/A";
+      // --- Start of Modification ---
+      if (
+        selectedPlatform.value === "Exits" &&
+        leversRequiringHanding.includes(selectedLever.value)
+      ) {
+        // Directly access the handed part number for Exits
+        const handedPart = parts?.[selectedHanding.value] || "N/A";
+        result = `${handedPart}${finishText}`;
+      } else if (leversRequiringHanding.includes(selectedLever.value)) {
+        // Existing logic for other handed platforms (DL Series, Mortise)
+        const insidePart = parts?.inside?.[selectedHanding.value] || "N/A";
+        const outsidePart = parts?.outside?.[selectedHanding.value] || "N/A";
         result = `Inside: ${insidePart}${finishText} <br /> Outside: ${outsidePart}${finishText}`;
-      } else if (parts.inside && parts.outside) {
+      } else if (parts?.inside && parts?.outside) {
+        // Existing logic for non-handed levers with inside/outside parts
         result = `Inside: ${parts.inside}${finishText} <br /> Outside: ${parts.outside}${finishText}`;
       } else {
-        result = `${parts.toString()}${finishText}`;
+        // Existing logic for other cases
+        result = `${parts?.toString()}${finishText}`;
       }
+      // --- End of Modification ---
     }
 
     setPartNumber(result);
@@ -402,20 +414,20 @@ const Levers = () => {
             <div>
               {(selectedLever?.value && selectedLever.value.startsWith("VSLL")
                 ? [
-                    { value: "Plain", label: "Plain" },
-                    { value: "Emergency", label: "Emergency Key Hole" },
-                    { value: "Push Button", label: "Push Button" },
-                    {
-                      value: "Fixed Core",
-                      label:
-                        "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)",
-                    },
-                    { value: "LFIC", label: "LFIC" },
-                    { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
-                    { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
-                    { value: "SFIC", label: "SFIC (70, 72, 73-)" },
-                    { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
-                  ]
+                  { value: "Plain", label: "Plain" },
+                  { value: "Emergency", label: "Emergency Key Hole" },
+                  { value: "Push Button", label: "Push Button" },
+                  {
+                    value: "Fixed Core",
+                    label:
+                      "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)",
+                  },
+                  { value: "LFIC", label: "LFIC" },
+                  { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
+                  { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },
+                  { value: "SFIC", label: "SFIC (70, 72, 73-)" },
+                  { value: "KESO", label: "KESO Cylinder (SARGENT 82-)" },
+                ]
                 : radioOptions
               ).map((option) => (
                 <label key={option.value} style={{ marginRight: "10px" }}>
@@ -439,28 +451,28 @@ const Levers = () => {
             options={
               selectedPlatform
                 ? leverStyleOptions.filter((lever) => {
-                    console.log("Checking lever:", lever.value);
-                    if (selectedCategory?.triggers) {
-                      console.log(
-                        "Category trigger:",
-                        selectedCategory.triggers
-                      );
-                      console.log(
-                        "Match?",
-                        lever.value === selectedCategory.triggers
-                      );
-                      return lever.value === selectedCategory.triggers;
-                    }
-                    const hasParts =
-                      !!lever.partNumbers[selectedPlatform.value];
+                  console.log("Checking lever:", lever.value);
+                  if (selectedCategory?.triggers) {
                     console.log(
-                      "Lever",
-                      lever.value,
-                      "has parts for platform?",
-                      hasParts
+                      "Category trigger:",
+                      selectedCategory.triggers
                     );
-                    return hasParts;
-                  })
+                    console.log(
+                      "Match?",
+                      lever.value === selectedCategory.triggers
+                    );
+                    return lever.value === selectedCategory.triggers;
+                  }
+                  const hasParts =
+                    !!lever.partNumbers[selectedPlatform.value];
+                  console.log(
+                    "Lever",
+                    lever.value,
+                    "has parts for platform?",
+                    hasParts
+                  );
+                  return hasParts;
+                })
                 : leverStyleOptions
             }
             onChange={(selectedOption) => {
