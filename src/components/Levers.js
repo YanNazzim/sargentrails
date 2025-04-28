@@ -314,7 +314,6 @@ const Levers = () => {
         result = `${selectedOption}${finishText}`;
       }
     } else {
-      // --- Start of Modification ---
       if (
         selectedPlatform.value === "Exits" &&
         leversRequiringHanding.includes(selectedLever.value)
@@ -334,7 +333,6 @@ const Levers = () => {
         // Existing logic for other cases
         result = `${parts?.toString()}${finishText}`;
       }
-      // --- End of Modification ---
     }
 
     setPartNumber(result);
