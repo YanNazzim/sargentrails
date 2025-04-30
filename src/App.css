@@ -394,6 +394,120 @@ body {
 }
 
 /* Custom checkbox */
+
+.categorized-prefix-selector {
+  display: grid;
+  /* Adjust minmax for desired minimum card width */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px; /* Increased gap slightly */
+  margin-top: 15px;
+  margin-bottom: 20px;
+  align-items: start; /* Add this line */
+}
+
+/* ... keep other styles as they are ... */
+
+.prefix-category-card {
+  border: 1px solid #e0e0e0; /* Lighter border */
+  border-radius: 12px; /* Slightly more pronounced radius */
+  overflow: hidden;
+  background-color: #ffffff; /* Clean white background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer, more modern shadow */
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transitions for hover */
+  /* No height or align-self needed here usually, let content dictate height */
+}
+
+.prefix-category-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); /* Slightly deeper shadow on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.category-header {
+  background-color: #f8f9fa; /* Slightly off-white header */
+  border: none;
+  /* border-bottom: 1px solid #e0e0e0; */ /* Removed bottom border for cleaner look */
+  padding: 12px 18px; /* Adjusted padding */
+  width: 100%;
+  text-align: left;
+  font-weight: 600; /* Slightly bolder */
+  font-size: 1.05em;
+  color: #333; /* Darker text for better contrast */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.category-header:hover {
+  background-color: #f1f3f5; /* Slightly darker hover for header */
+}
+
+.category-arrow {
+  transition: transform 0.3s ease-in-out; /* Smoother timing */
+  display: inline-block;
+  font-size: 0.8em; /* Make arrow slightly smaller */
+  color: #555;
+}
+
+.category-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+/* --- Animation for Content --- */
+.category-content-wrapper {
+  /* Container to handle the transition */
+  overflow: scroll;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transitions */
+  max-height: 0; /* Collapsed by default */
+  opacity: 0; /* Hidden by default */
+  background-color: #fff; /* Ensure background for content */
+  border-top: 1px solid #e0e0e0; /* Add separator line */
+}
+
+.category-content-wrapper.expanded {
+  max-height: 500px; /* Set a max-height sufficient for content. Adjust if needed. */
+  opacity: 1;
+}
+
+.category-content {
+  padding: 18px; /* Consistent padding */
+  /* max-height and overflow are handled by the wrapper */
+}
+
+
+/* Checkbox styling within the card */
+.category-content .prefix-label {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px; /* Increased spacing */
+  cursor: pointer;
+  font-size: 0.95em; /* Slightly adjust font size if needed */
+  line-height: 1.4;
+}
+
+.category-content .prefix-label.disabled {
+  color: #aaa; /* Lighter gray for disabled */
+  cursor: not-allowed;
+}
+
+.category-content .prefix-label.disabled .prefix-name {
+   /* text-decoration: line-through; */ /* Optional */
+   opacity: 0.7;
+}
+
+.category-content .prefix-label input[type="checkbox"] {
+  margin-top: 3px; /* Fine-tune alignment */
+  margin-right: 10px; /* More space */
+  flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.category-content .prefix-name {
+  flex-grow: 1;
+}
+
 .checkbox-group .custom-checkbox {
   position: relative;
   width: 20px;
