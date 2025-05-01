@@ -1,6 +1,7 @@
 // components/Cylinders.js
 import React, { useState } from "react";
 import Select, { components } from "react-select";
+import images from "../images"; // Import images from the images folder
 import {
   deviceTypes,
   functionsByDeviceType,
@@ -320,8 +321,21 @@ const Cylinders = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">Cylinders</h1>
-
+      <h1 className="Heading">Cylinders <br /> 🛑 Dont use this page yet! 🛑</h1>
+      {/* Add the GIF here */}
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}> {/* Optional centering and margin */}
+      <img
+          src={images.stop}
+          alt="Cylinder animation"
+          style={{ height: '200px', borderRadius: '8px' }} // Optional styling
+        />
+        <img
+          src={images.UnderConstruction}
+          alt="Cylinder animation"
+          style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} // Optional styling
+        />
+        
+      </div>
       <form onSubmit={handleSubmit} className="part-form">
         {/* Device Type Select */}
         <div className="form-group">

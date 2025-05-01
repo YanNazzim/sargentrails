@@ -114,7 +114,8 @@ const images = {
   P700NE: require('./images/P700 NE.png'),
 
   logo: require("./images/Sargent Logo.jpg"),
-
+  UnderConstruction: require("./images/Construction.gif"),
+  stop: require("./images/stop.jpg"),
 };
 
 export default images;
