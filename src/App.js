@@ -9,6 +9,7 @@ import Cylinders from "./components/Cylinders";
 import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
+import Latches from "./components/Latches";
 
 const App = () => {
   const tabConfig = {
@@ -72,36 +73,10 @@ const App = () => {
         return <Levers />;
       case "Mortise Exit Lockbodies":
         return <MortiseExitLockbodies />;
-      // Add cases for new sub-tabs
       case "Cylinders":
         return <Cylinders />;
       case "Latches":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Latches <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
+        return <Latches />;
       case "Tailpieces":
         return (
           <div className="content-transition">
