@@ -432,7 +432,7 @@ body {
   width: 100%;
   text-align: left;
   font-weight: 600; /* Slightly bolder */
-  font-size: 1.05em;
+  font-size: 2em;
   color: #333; /* Darker text for better contrast */
   cursor: pointer;
   display: flex;
@@ -477,7 +477,6 @@ body {
   /* max-height and overflow are handled by the wrapper */
 }
 
-
 /* Checkbox styling within the card */
 .category-content .prefix-label {
   display: flex;
@@ -494,8 +493,8 @@ body {
 }
 
 .category-content .prefix-label.disabled .prefix-name {
-   /* text-decoration: line-through; */ /* Optional */
-   opacity: 0.7;
+  /* text-decoration: line-through; */ /* Optional */
+  opacity: 0.7;
 }
 
 .category-content .prefix-label input[type="checkbox"] {
@@ -659,19 +658,20 @@ body {
   border: none;
   background: #172a45;
   color: #7f8fa4;
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   font-weight: 600;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-wrap: wrap;
 }
 
 .tab-button:hover {
   background: #2ecc71;
   color: #001f3f;
-  transform: translateY(-2px);
+  transform: translateX(-2px);
 }
 
 .tab-button.active {
@@ -683,12 +683,12 @@ body {
 /* Master Tabs Row with Slider */
 .master-tabs-row {
   display: flex;
+  flex-direction: column;
   position: relative;
-  justify-content: space-between;
   background-color: #172a45; /* Medium navy */
   border-radius: 50px;
   padding: 6px;
-  width: 650px;
+  width: 250px;
   max-width: 90%;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
@@ -700,7 +700,7 @@ body {
   border: none;
   background: transparent;
   color: #7f8fa4;
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   font-weight: 600;
   cursor: pointer;
   border-radius: 8px;
@@ -718,10 +718,10 @@ body {
 /* Slider */
 .slider {
   position: absolute;
-  top: 6px;
-  left: 0;
-  height: calc(100% - 12px);
-  width: calc(100% / 3); /* Dynamic width based on number of tabs */
+  top: -3px;
+  left: -4;
+  width: calc(100% - 12px);
+  height: calc(100% / 3); /* Dynamic width based on number of tabs */
   background-color: #2ecc71; /* Teal */
   border-radius: 50px;
   transition: transform 0.3s ease;
@@ -729,37 +729,41 @@ body {
 }
 
 /* Responsive Design for Master Tabs */
-@media (max-width: 768px) {
+@media (max-width: 780px) {
   .master-tabs-row {
     width: 100%;
     max-width: 100%;
-    padding: 4px;
   }
 
   .master-tab {
-    padding: 10px 12px;
-    font-size: 0.95rem;
+    font-size: 1.5rem;
   }
 
   .slider {
-    height: calc(100% - 8px);
+    width: calc(100% - 8px);
     top: 4px;
+  }
+  /* Sub Tabs Grid */
+  .sub-tabs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    max-width: 800px;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 480px) {
   .master-tab {
-    padding: 8px 10px;
-    font-size: 0.85rem;
+    font-size: 1.3rem;
   }
 }
 
 /* Sub Tabs Grid */
 .sub-tabs-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 2fr);
   gap: 0.8rem;
-  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -784,7 +788,7 @@ body {
 .sub-tab:hover {
   background: #2ecc71;
   color: #001f3f;
-  transform: translateY(-2px);
+  transform: translateX(-2px);
 }
 
 .sub-tab.active {
@@ -865,7 +869,7 @@ body {
   .master-tab {
     flex: 1 1 120px;
     padding: 10px 12px;
-    font-size: 0.95rem;
+    font-size: 1.3rem;
   }
 
   .sub-tabs-grid {
@@ -1005,7 +1009,7 @@ body {
 
   .tab-button {
     padding: 12px 16px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .parts-column {
@@ -1023,7 +1027,7 @@ body {
 
   .master-tab {
     padding: 10px 12px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .sub-tabs-grid {

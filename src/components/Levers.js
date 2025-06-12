@@ -208,8 +208,8 @@ const categoryOptions = [
 ];
 
 const handingOptions = [
-  { value: "LH", label: "Left Hand" },
-  { value: "RH", label: "Right Hand" },
+  { value: "LH", label: "Left Hand Reverse (LH/LHR)" },
+  { value: "RH", label: "Right Hand Reverse (RH/RHR)" },
 ];
 
 const leversRequiringHanding = [
@@ -223,20 +223,12 @@ const leversRequiringHanding = [
   "MS",
   "MQ",
   "MN",
-  "MM",
-  "ML",
-  "MK",
   "MH",
   "MG",
   "MW",
-  "MX",
-  "MY",
   "MZ",
-  "NF",
-  "NI",
-  "NJ",
-  "NS",
   "NU",
+  "H008",
 ];
 
 const Levers = () => {

@@ -21,7 +21,7 @@ const TabMenu = ({
     <div className="tab-menu-container">
       {/* Master Tabs Row */}
       <div className="master-tabs-row">
-        <div className="slider" style={{ transform: `translateX(${sliderPosition}%)` }} />
+        <div className="slider" style={{ transform: `translateY(${sliderPosition}%)` }} />
         {masterTabs.map((tab) => (
           <button
             key={tab}

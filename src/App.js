@@ -20,33 +20,37 @@ const App = () => {
           "Chassis (Rail Head)",
           "Trims",
           "Mortise Exit Lockbodies",
-          "Vertical Rod Device Internals"
-        ]
+          "Vertical Rod Device Internals",
+        ],
       },
-      {
-        name: "Bored Locks",
-        subTabs: [
-          "Deadbolts",
-          "Mortise Lock Trim"
-        ]
-      },
+
       {
         name: "Mortise Locks",
         subTabs: [
-          "Mortise Case",
-          "Mortise Trim"
-        ]
-      }
+          "Mortise Lockbodies",
+          "Trim Kits",
+          "Thumbturns",
+          "Emergency Releases",
+        ],
+      },
+      {
+        name: "Bored Locks",
+        subTabs: ["Cylindrical Lockbodies", "Latches", "Tailpieces", "Strikes"],
+      },
     ],
-    universalTabs: ["Lever Handles Only", "Cylinders"]
+    universalTabs: ["Lever Handles Only", "Cylinders"],
   };
 
-  const [activeMasterTab, setActiveMasterTab] = useState(tabConfig.masterTabs[0].name);
-  const [activeSubTab, setActiveSubTab] = useState(tabConfig.masterTabs[0].subTabs[0]);
+  const [activeMasterTab, setActiveMasterTab] = useState(
+    tabConfig.masterTabs[0].name
+  );
+  const [activeSubTab, setActiveSubTab] = useState(
+    tabConfig.masterTabs[0].subTabs[0]
+  );
 
   const handleMasterTabChange = (masterTab) => {
     setActiveMasterTab(masterTab);
-    const newMaster = tabConfig.masterTabs.find(m => m.name === masterTab);
+    const newMaster = tabConfig.masterTabs.find((m) => m.name === masterTab);
     setActiveSubTab(newMaster.subTabs[0]);
   };
 
@@ -71,10 +75,222 @@ const App = () => {
       // Add cases for new sub-tabs
       case "Cylinders":
         return <Cylinders />;
-      case "Deadbolts":
-        return <div>Deadbolts Component</div>;
-      case "Mortise Lock Trim":
-        return <div>Mortise Lock Trim Component</div>;
+      case "Latches":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Latches <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Tailpieces":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Tailpieces <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Cylindrical Lockbodies":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Cylindrical Lockbodies <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Strikes":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Strikes <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Thumbturns":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Thumbturns <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Emergency Releases":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Eergency Releases <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Mortise Lockbodies":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Mortise Lockbodies <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
+      case "Trim Kits":
+        return (
+          <div className="content-transition">
+            <h1 className="Heading">
+              Trim Kits <br /> 🛑 Dont use this page yet! 🛑
+            </h1>
+            {/* Add the GIF here */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              {" "}
+              {/* Optional centering and margin */}
+              <img
+                src={images.stop}
+                alt="Cylinder animation"
+                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
+              />
+              <img
+                src={images.UnderConstruction}
+                alt="Cylinder animation"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }} // Optional styling
+              />
+            </div>
+          </div>
+        );
       case "Mortise Case":
         return <div>Mortise Case Component</div>;
       case "Mortise Trim":
@@ -91,25 +307,27 @@ const App = () => {
         <h1 className="title">
           Sargent Part Number Lookup Tool <br />
         </h1>
-        <h3>For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
-        <h3 style={{color: "#ffd700"}}>★ = Same Form Used Across All Device Platforms (Universal Form)</h3>
+        <h3 style={{ textAlign: "center" }}>For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
+        <h3 style={{ color: "#ffd700", textAlign: "center" }}>
+          ★ = Same Form Used Across All Device Platforms (Universal Form)
+        </h3>
       </div>
 
       <div className="tab-container" aria-live="polite">
         <TabMenu
-          masterTabs={tabConfig.masterTabs.map(m => m.name)}
+          masterTabs={tabConfig.masterTabs.map((m) => m.name)}
           activeMasterTab={activeMasterTab}
           onMasterTabChange={handleMasterTabChange}
-          subTabs={tabConfig.masterTabs.find(m => m.name === activeMasterTab).subTabs}
+          subTabs={
+            tabConfig.masterTabs.find((m) => m.name === activeMasterTab).subTabs
+          }
           universalTabs={tabConfig.universalTabs}
           activeSubTab={activeSubTab}
           onSubTabChange={handleSubTabChange}
         />
       </div>
-      
-      <div className="content-container">
-        {renderContent()}
-      </div>
+
+      <div className="content-container">{renderContent()}</div>
     </div>
   );
 };
