@@ -13,7 +13,7 @@ const leverStyleOptions = [
         outside: { LH: "DL-0041", RH: "DL-0040" },
       },
       Mortise: {
-        inside: { LH: "DL-0041", RH: "DL-0040" },
+        inside: { LH: "81-0467", RH: "81-0468" },
         outside: { LH: "82-0152", RH: "82-0151" },
       },
       Exits: { LH: "82-0152", RH: "82-0151" },
@@ -53,7 +53,7 @@ const leverStyleOptions = [
         }
       },
       "DL Series": { inside: "DL-0042", outside: "DL-0042" },
-      Mortise: { inside: "DL-0042", outside: "82-0153" },
+      Mortise: { inside: "81-0490", outside: "82-0153" },
       Exits: "82-0153",
     },
   },
@@ -63,7 +63,7 @@ const leverStyleOptions = [
     image: images.LeverE,
     partNumbers: {
       "DL Series": { inside: "DL-0043", outside: "DL-0043" },
-      Mortise: { inside: "DL-0043", outside: "82-0154" },
+      Mortise: { inside: "81-0470", outside: "82-0154" },
       Exits: "82-0154",
     },
   },
@@ -73,7 +73,7 @@ const leverStyleOptions = [
     image: images.LeverF,
     partNumbers: {
       "DL Series": { inside: "DL-0044", outside: "DL-0044" },
-      Mortise: { inside: "DL-0044", outside: "82-0155" },
+      Mortise: { inside: "81-0471", outside: "82-0155" },
       Exits: "82-0155",
     },
   },
@@ -83,7 +83,7 @@ const leverStyleOptions = [
     image: images.LeverJ,
     partNumbers: {
       "DL Series": { inside: "DL-0045", outside: "DL-0045" },
-      Mortise: { inside: "DL-0045", outside: "82-0156" },
+      Mortise: { inside: "81-0447", outside: "82-0156" },
       Exits: "97-0486",
     },
   },
@@ -121,7 +121,7 @@ const leverStyleOptions = [
         }
       },
       "DL Series": { inside: "DL-0046", outside: "DL-0046" },
-      Mortise: { inside: "DL-0046", outside: "82-0157" },
+      Mortise: { inside: "81-0489", outside: "82-0157" },
       Exits: "97-0485",
     },
   },
@@ -159,7 +159,7 @@ const leverStyleOptions = [
         }
       },
       "DL Series": { inside: "DL-0047", outside: "DL-0047" },
-      Mortise: { inside: "DL-0047", outside: "82-0158" },
+      Mortise: { inside: "81-0513", outside: "82-0158" },
       Exits: "97-0484",
     },
   },
@@ -169,7 +169,7 @@ const leverStyleOptions = [
     image: images.LeverW,
     partNumbers: {
       "DL Series": { inside: "DL-0048", outside: "DL-0048" },
-      Mortise: { inside: "DL-0048", outside: "82-0159" },
+      Mortise: { inside: "81-0445", outside: "82-0159" },
       Exits: "82-0159",
     },
   },
@@ -181,7 +181,7 @@ const leverStyleOptions = [
     image: images.LeverR,
     partNumbers: {
       "DL Series": { inside: "DL-0049", outside: "DL-0049" },
-      Mortise: { inside: "DL-0049", outside: "82-0517" },
+      Mortise: { inside: "82-0516", outside: "82-0517" },
       Exits: "82-0517",
     },
   },
@@ -195,7 +195,7 @@ const leverStyleOptions = [
         outside: { LH: "DL-0052", RH: "DL-0051" },
       },
       Mortise: {
-        inside: { LH: "DL-0052", RH: "DL-0051" },
+        inside: { LH: "82-0520", RH: "82-0521" },
         outside: { LH: "82-0522", RH: "82-0523" },
       },
       Exits: { LH: "82-0522", RH: "82-0523" },
@@ -211,7 +211,7 @@ const leverStyleOptions = [
         outside: { LH: "DL-0056", RH: "DL-0055" },
       },
       Mortise: {
-        inside: { LH: "DL-0056", RH: "DL-0055" },
+        inside: { LH: "83-0528", RH: "82-0529" },
         outside: { LH: "82-0530", RH: "82-0531" },
       },
       Exits: { LH: "82-0530", RH: "82-0531" },
@@ -227,7 +227,7 @@ const leverStyleOptions = [
         outside: { LH: "DL-0054", RH: "DL-0053" },
       },
       Mortise: {
-        inside: { LH: "DL-0054", RH: "DL-0053" },
+        inside: { LH: "82-0524", RH: "82-0525"},
         outside: { LH: "82-0526", RH: "82-0527" },
       },
       Exits: { LH: "82-0526", RH: "82-0527" },
