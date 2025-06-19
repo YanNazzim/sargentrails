@@ -47,7 +47,6 @@ const Latches = () => {
     const [formData, setFormData] = useState({
         series: "",
         latchType: "",
-        prefixes: [],
         finish: null,
     });
 
@@ -85,32 +84,26 @@ const Latches = () => {
                 "2-3/8_Standard": {
                     label: '2-3/8" backset - 2-1/4" x 1" latch face width (Standard)',
                     base: `Guarded: 06-5083 <br/> Non-Guarded: 06-5225`, // Example with <br>
-                    prefixes: {},
                 },
                 "2-3/8_RadiusCorner": {
                     label: '2-3/8" Radius Corner - 2-1/4" x 1" latch face width',
                     base: `Guarded: 06-5085 <br/> Unguarded: 06-5227`,
-                    prefixes: {},
                 },
                 "2-3/4_Standard": { // Changed name to remove spaces and use consistent underscore
                     label: '2-3/4" backset - 2-1/4" x 1" latch face width (17- Option)',
                     base: `Guarded: 06-5094 <br/> Unguarded: 06-5231`,
-                    prefixes: {},
                 },
                 "2-3/4_Alt": { // Changed name to remove spaces and use consistent underscore
                     label: '2-3/4" backset - 2-1/4" x 1-1/8" latch face width(24- Option)',
                     base: `Guarded: 06-5102 <br/> Unguarded: 06-5234`,
-                    prefixes: {},
                 },
                 "3-3/4_Standard": { // Changed name to remove spaces and use consistent underscore
                     label: '3-3/4" backset - 2-1/4" x 1" latch face width',
                     base: `Guarded: 06-5096 <br/> Unguarded: 06-5232`,
-                    prefixes: {},
                 },
                 "Guarded_Drive_in": { // Changed name to remove spaces and use consistent underscore
                     label: 'Guarded Drive-In Latchbolt',
                     base: `06-5100`,
-                    prefixes: {},
                 },
             },
         },
@@ -120,12 +113,10 @@ const Latches = () => {
                 "2-3/8 backset": { // Changed name to remove spaces and use consistent underscore
                     label: '2-3/8" backset - 1" latch face width (20- Option)',
                     base: `Guarded: 05-2184 <br/> Unguarded: 05-2185`,
-                    prefixes: {},
                 },
                 "2-3/4 backset": { // Changed name to remove spaces and use consistent underscore
                     label: '2-3/4" backset - 1-1/8" latch face width (Standard)',
                     base: `Guarded: 05-2182 <br/> Unguarded: 05-2183`,
-                    prefixes: {},
                 },
             },
         },
@@ -135,12 +126,10 @@ const Latches = () => {
                 "2-3/8": {
                     label: '2-3/8" backset - 1" latch face width (20- Option)',
                     base: `Guarded: 07-2431 <br/> Unguarded: 07-2433`,
-                    prefixes: {},
                 },
                 "2-3/4": {
                     label: '2-3/4" backset - 1-1/8" latch face width (Standard)',
                     base: `Guarded: 07-2430 <br/> Unguarded: 07-2432`,
-                    prefixes: {},
                 },
             },
         },
@@ -150,7 +139,6 @@ const Latches = () => {
                 "2-3/4": {
                     label: 'Standard 2-3/4" Backset with 1" Latch Face Width',
                     base: `Guarded: 08-5283 <br/> Unguarded: 08-5282`,
-                    prefixes: {},
                 }
             }
         },
@@ -160,32 +148,75 @@ const Latches = () => {
                 "2-3/8_Unguarded": {
                     label: '10XU15, 10XU65, 10XU68 - 2-3/8" backset - 1" latch face width (Unguarded | 20- option)',
                     base: `10-3187`,
-                    prefixes: {},
                 },
                 "2-3/4_Unguarded": {
                     label: '10XU15, 10XU65, 10XU68 - 2-3/4" backset - 1-1/8" latch face width (Unguarded | Standard)',
                     base: `10-2022`,
-                    prefixes: {},
                 },
                 "3-3/4_Unguarded": {
                     label: '10XU15, 10XU65, 10XU68 - 3-3/4" backset - 1-1/8" latch face width (Unguarded | 23- Option)',
                     base: `10-2054`,
-                    prefixes: {},
                 },
                 "5_Unguarded": {
                     label: '10XU15, 10XU65, 10XU68 - 5" backset - 1-1/8" latch face width (Unguarded | 25- Option)',
                     base: `10-2057`,
-                    prefixes: {},
+                },
+                "2-3/8_Guarded": {
+                    label: 'All Other Mechanical Functions - 2-3/8" backset - 1" latch face width - 1/2" Throw (Guarded | 20- option)',
+                    base: `10-3186`,
+                },
+                "2-3/4_Guarded": {
+                    label: 'All Other Mechanical Functions - 2-3/4" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | Standard)',
+                    base: `10-3192`,
+                },
+                "2-3/4_Guardedthrow": {
+                    label: 'All Other Mechanical Functions - 2-3/4" backset - 1-1/8" latch face width - 3/4" Throw (Guarded | Optional)',
+                    base: `10-2634`,
+                },
+                "3-3/4_Guarded": {
+                    label: 'All Other Mechanical Functions - 3-3/4" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | 23- option)',
+                    base: `10-2053`,
+                },
+                "5_Guarded": {
+                    label: 'All Other Mechanical Functions - 5" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | 25- option)',
+                    base: `10-2058`,
+                },
+                "2-3/8_Guarded_E": {
+                    label: 'All Electrified Functions - 2-3/8" backset - 1" latch face width - 1/2" Throw (Guarded | 20- option)',
+                    base: `10-3433`,
+                },
+                "2-3/4_Guarded_E": {
+                    label: 'All Electrified Functions - 2-3/4" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | Standard)',
+                    base: `10-3430`,
+                },
+                "3-3/4_Guarded_E": {
+                    label: 'All Electrified Functions - 3-3/4" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | 23- option)',
+                    base: `10-3431`,
+                },
+                "5_Guarded_E": {
+                    label: 'All Electrified Functions - 5" backset - 1-1/8" latch face width - 1/2" Throw (Guarded | 25- option)',
+                    base: `10-3432`,
                 },
             },
         },
         "11Line": {
             type: "functions",
             options: {
-                "Standard": {
-                    label: "Standard Function Latch",
-                    base: `81-0700`,
-                    prefixes: {},
+                "Group B": {
+                    label: "Functions 11G04, 11G05, 11G13, 11G15-3, 11G16, 11G17, 11G30, 11G37, 11G38, ",
+                    base: `11-2106`, // Latch for functions 11G05, 11G37
+                },
+                "Group A": {
+                    label: "11U15 - Passage",
+                    base: `11-2107`, // Latch for other 11 Line functions
+                },
+                                "Group D": {
+                    label: "Functions 11G44, 11G50, 11G54",
+                    base: `11-2110`, // Latch for other 11 Line functions
+                },
+                                                "Group K": {
+                    label: "11G24 - Entrance",
+                    base: `11-2108`, // Latch for other 11 Line functions
                 },
             },
         },
@@ -202,10 +233,6 @@ const Latches = () => {
         { value: "8X", label: "8X Line Bored Lock" },
         { value: "10X", label: "10X Series Bored Lock" },
         { value: "11Line", label: "11 Line Bored Lock" },
-    ];
-
-    const prefixesOptions = [
-        { code: "LC", name: "Less Cylinder", conflicts: [] },
     ];
 
     const finishOptions = [
@@ -329,7 +356,6 @@ const Latches = () => {
             ...formData,
             series: e.target.value,
             latchType: "",
-            prefixes: [],
         });
         setPartNumber("");
     };
@@ -338,43 +364,8 @@ const Latches = () => {
         setFormData({
             ...formData,
             latchType: e.target.value,
-            prefixes: [],
         });
         setPartNumber("");
-    };
-
-    const handlePrefixChange = (e) => {
-        const prefixCode = e.target.value;
-        const isChecked = e.target.checked;
-
-        setFormData(prevData => {
-            let newPrefixes = isChecked
-                ? [...prevData.prefixes, prefixCode]
-                : prevData.prefixes.filter((p) => p !== prefixCode);
-
-            if (isChecked) {
-                const selectedPrefixDef = prefixesOptions.find(p => p.code === prefixCode);
-                if (selectedPrefixDef && selectedPrefixDef.conflicts) {
-                    newPrefixes = newPrefixes.filter(p => !selectedPrefixDef.conflicts.includes(p));
-                }
-            }
-            return { ...prevData, prefixes: newPrefixes };
-        });
-        setPartNumber("");
-    };
-
-    const isPrefixDisabled = (prefixCode) => {
-        for (const selected of formData.prefixes) {
-            const selectedDef = prefixesOptions.find(p => p.code === selected);
-            if (selectedDef && selectedDef.conflicts && selectedDef.conflicts.includes(prefixCode)) {
-                return true;
-            }
-        }
-        const thisPrefixDef = prefixesOptions.find(p => p.code === prefixCode);
-        if (thisPrefixDef && thisPrefixDef.conflicts && thisPrefixDef.conflicts.some(c => formData.prefixes.includes(c))) {
-            return true;
-        }
-        return false;
     };
 
     const handleFinishChange = (selectedOption) => {
@@ -385,7 +376,7 @@ const Latches = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const { series, latchType, prefixes, finish } = formData;
+        const { series, latchType, finish } = formData;
 
         if (!series || !latchType || !finish) {
             alert("Please fill out all required fields: Series, Latch Type, and Finish.");
@@ -406,22 +397,10 @@ const Latches = () => {
         }
 
         let basePart = selectedLatchOption.base;
-        const sortedPrefixes = [...prefixes].sort();
-        const prefixKey = sortedPrefixes.join("-");
-
-        // Apply prefix overrides
-        let partToDisplay = basePart;
-        if (selectedLatchOption.prefixes && selectedLatchOption.prefixes[prefixKey]) {
-            partToDisplay = selectedLatchOption.prefixes[prefixKey];
-        } else if (prefixes.length > 0) {
-            // Fallback: If no exact combination, just append prefixes to base
-            // This might need refinement based on your actual data rules
-            partToDisplay = `${basePart}-${prefixKey}`;
-        }
 
         // Append finish to each line of the partToDisplay string if it contains <br/>
         // This ensures the finish is added to each individual part number.
-        const partsWithFinish = partToDisplay.split('<br/>').map(part => `${part.trim()}-${finish.value}`).join('<br/>');
+        const partsWithFinish = basePart.split('<br/>').map(part => `${part.trim()}-${finish.value}`).join('<br/>');
 
         setPartNumber(partsWithFinish); // Set the part number with HTML
     };
@@ -430,7 +409,6 @@ const Latches = () => {
         setFormData({
             series: "",
             latchType: "",
-            prefixes: [],
             finish: null,
         });
         setPartNumber("");
@@ -475,28 +453,6 @@ const Latches = () => {
                         </select>
                     </div>
                 )}
-
-                {/* Prefixes Grid */}
-                <div className="form-group">
-                    <label>Prefixes:</label>
-                    <div className="checkbox-group">
-                        {prefixesOptions.map((prefix) => (
-                            <label key={prefix.code}>
-                                <input
-                                    type="checkbox"
-                                    value={prefix.code}
-                                    checked={formData.prefixes.includes(prefix.code)}
-                                    onChange={handlePrefixChange}
-                                    disabled={isPrefixDisabled(prefix.code)}
-                                />
-                                <span className="custom-checkbox"></span>
-                                <span>
-                                    <strong>({prefix.code})</strong> — {prefix.name}
-                                </span>
-                            </label>
-                        ))}
-                    </div>
-                </div>
 
                 {/* Finish Selection */}
                 <div className="form-group">
