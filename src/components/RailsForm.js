@@ -5,7 +5,6 @@ import "../App.css";
 import images from "../images"; // Adjust the path as needed
 import Select, { components } from "react-select";
 
-
 // Custom Option to render finish image and label in the dropdown list
 const FinishOption = (props) => {
   return (
@@ -50,7 +49,6 @@ const RailsForm = () => {
   const [disabledPrefixes, setDisabledPrefixes] = useState([]);
   const [formData, setFormData] = useState({
     stile: "",
-    lexan: "No",
     prefixes: [],
     size: "",
     finish: "",
@@ -70,10 +68,6 @@ const RailsForm = () => {
     }
   }, [partNumber]);
 
-  // Optional Reset UseEffect:
-  // When the selected style is "JellyFish", automatically set lexan to "No"
-
-
   const options = {
     stile: [
       { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500" },
@@ -83,7 +77,6 @@ const RailsForm = () => {
       { code: "DummyRailActive", display: "8895 Active Dummy Rail" },
       { code: "JellyFish", display: 'Vingcard "Jellyfish" Rail' },
     ],
-    lexan: ["Yes", "No"],
     prefixes: [
       {
         code: "12",
@@ -92,63 +85,116 @@ const RailsForm = () => {
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
+        code: "19",
+        name: "Remove 809 Lexan Pad (Blank all metal Push Pad)",
+        conflicts: [],
+        conflictsWithStile: ["JellyFish"],
+      },
+      {
         code: "5CH",
         name: "5LB Maximum Force",
-        conflicts: ["58", "59"],
+        conflicts: ["58", "59", "SN", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "16",
         name: "Keyed Cylinder Dogging",
-        conflicts: ["12", "59", "AL"],
+        conflicts: ["12", "59", "AL", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "53",
         name: "Latchbolt Monitoring Switch",
-        conflicts: ["59"],
+        conflicts: ["59", "SN", "IN"],
         conflictsWithStile: ["LowProfile", "JellyFish", "DummyRailInActive"],
       },
       {
         code: "55",
         name: "Request to Exit",
-        conflicts: ["59"],
+        conflicts: ["59", "SN", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "56",
         name: "Electric Latch Retraction",
-        conflicts: ["56-HK", "58", "59", "AL"],
+        conflicts: ["58", "59", "AL", "BT"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "56-HK",
         name: "Electric Latch Retraction W/ Hex-Key Dogging",
-        conflicts: ["56", "12", "58", "59", "AL"],
+        conflicts: ["56", "12", "58", "59", "AL", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "58",
         name: "Elecrtic Dogging",
-        conflicts: ["56", "59"],
+        conflicts: ["56", "59", "SN", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "59",
         name: "Electroguard® Delayed Egress",
-        conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL"],
+        conflicts: ["16", "53", "55", "56", "56-HK", "58", "AL", "SN", "IN"],
         conflictsWithStile: ["LowProfile", "JellyFish", "DummyRailInActive"],
       },
       {
         code: "AL",
         name: "Alarm",
-        conflicts: ["16", "56", "59"],
+        conflicts: ["16", "56", "59", "SN", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
       {
         code: "PL",
         name: "Photo-Luminescent Rail (Non Electrified)",
+        conflicts: ["SN", "IN"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
+      },
+      {
+        code: "IN",
+        name: "Rail to be used with IN100/IN120 Readers",
+        conflicts: [
+          "12",
+          "16",
+          "53",
+          "55",
+          "56",
+          "56-HK",
+          "58",
+          "59",
+          "AL",
+          "5CH",
+          "PL",
+          "SN",
+        ], // Updated conflicts for IN
+        conflictsWithStile: [
+          "DummyRailActive",
+          "LowProfile",
+          "JellyFish",
+          "DummyRailInActive",
+          "Narrow",
+        ],
+      },
+      {
+        code: "SN",
+        name: "Rail to be used with SN200/SN210 Readers",
+        conflicts: [
+          "5CH",
+          "53",
+          "55",
+          "58",
+          "59",
+          "AL",
+          "PL",
+          "IN",
+        ], // New SN prefix conflicts
+        conflictsWithStile: [
+          "DummyRailActive",
+          "LowProfile",
+          "JellyFish",
+          "DummyRailInActive",
+          "Narrow",
+        ],
       },
     ],
     sizes: {
@@ -274,28 +320,20 @@ const RailsForm = () => {
   };
 
   useEffect(() => {
-
     console.log("Current Stile:", formData.stile);
     console.log("Available Sizes:", options.sizes[formData.stile]);
-    if (formData.stile === "JellyFish") {
-      setFormData((prev) => ({ ...prev, lexan: "No" }));
-    }
   }, [formData.stile, options.sizes]);
 
-  // ─── Handle Prefix Conflicts (when toggling checkboxes) ─────────────────────
   const handlePrefixChange = (e) => {
     const prefixCode = e.target.value;
     const isChecked = e.target.checked;
 
-    // Get the selected prefix object
     const selectedPrefix = options.prefixes.find((p) => p.code === prefixCode);
 
-    // Update prefixes array
     const newPrefixes = isChecked
       ? [...formData.prefixes, prefixCode]
       : formData.prefixes.filter((p) => p !== prefixCode);
 
-    // Handle conflicts among prefixes (if any)
     let newDisabledPrefixes = [...disabledPrefixes];
 
     if (selectedPrefix?.conflicts) {
@@ -308,20 +346,6 @@ const RailsForm = () => {
         newDisabledPrefixes = newDisabledPrefixes.filter(
           (code) => !selectedPrefix.conflicts.includes(code)
         );
-      }
-    } else if (prefixCode === "59") {
-      const conflictingPrefix = options.prefixes.find((p) => p.code === "59");
-      if (conflictingPrefix?.conflicts) {
-        if (isChecked) {
-          newDisabledPrefixes = [
-            ...newDisabledPrefixes,
-            ...conflictingPrefix.conflicts,
-          ];
-        } else {
-          newDisabledPrefixes = newDisabledPrefixes.filter(
-            (code) => !conflictingPrefix.conflicts.includes(code)
-          );
-        }
       }
     }
 
@@ -336,9 +360,7 @@ const RailsForm = () => {
     }
   };
 
-  // ─── Remove Already‑Selected Prefixes When Style Changes ────────────────────
   useEffect(() => {
-    // Determine prefixes that conflict with the current style
     const styleConflict = options.prefixes
       .filter(
         (prefix) =>
@@ -347,7 +369,6 @@ const RailsForm = () => {
       )
       .map((prefix) => prefix.code);
 
-    // If any selected prefix conflicts with the chosen style, remove it.
     if (
       formData.prefixes.some((prefixCode) => styleConflict.includes(prefixCode))
     ) {
@@ -356,9 +377,8 @@ const RailsForm = () => {
       );
       setFormData({ ...formData, prefixes: newPrefixes });
     }
-  }, [formData, formData.stile, options.prefixes]);
+  }, [formData, options.prefixes]);
 
-  // ─── Compute Effective Disabled Prefixes ─────────────────────────────────────
   const styleConflictPrefixes = options.prefixes
     .filter(
       (prefix) =>
@@ -370,36 +390,33 @@ const RailsForm = () => {
     ...new Set([...disabledPrefixes, ...styleConflictPrefixes]),
   ];
 
-  // ─── Handle Form Submission ───────────────────────────────────────────────────
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create the prefix key. If no prefixes are selected, this becomes an empty string.
-    const prefixKey = formData.prefixes.sort().join("-"); // will be "" if no prefix is selected
+    const prefixKey = formData.prefixes.sort().join("-");
 
-    // Key pattern: {stile}-{lexan}-{prefixKey}-{size}
-    let key = `${formData.stile}-${formData.lexan}-${prefixKey}-${formData.size}`;
-
+    let key;
     if (formData.prefixes.includes("PL") && formData.handing) {
       const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
-      key += `-${handingCode}`;
+      key = `${formData.stile}-${prefixKey}-${formData.size}-${handingCode}`;
+    } else {
+      key = `${formData.stile}-${prefixKey}-${formData.size}`;
     }
 
-    // Choose the correct part numbers category based on the selected style.
-    const partNumbers =
+    const partNumbersCategory =
       formData.stile === "DummyRailInActive"
         ? partsData.DummyRailInActive
         : formData.stile === "DummyRailActive"
-          ? partsData.DummyRailActive
-          : formData.stile === "Wide"
-            ? partsData.wideRails
-            : formData.stile === "LowProfile"
-              ? partsData.LowProfileRails
-              : formData.stile === "JellyFish"
-                ? partsData.JellyFishRails
-                : partsData.narrowRails;
+        ? partsData.DummyRailActive
+        : formData.stile === "Wide"
+        ? partsData.wideRails
+        : formData.stile === "LowProfile"
+        ? partsData.LowProfileRails
+        : formData.stile === "JellyFish"
+        ? partsData.JellyFishRails
+        : partsData.narrowRails;
 
-    const partNumberEntry = partNumbers[key] || "Not Found";
+    const partNumberEntry = partNumbersCategory[key] || "Not Found";
     const [basePartNumber, note] = partNumberEntry.split(" - ");
 
     if (basePartNumber === "Not Available") {
@@ -417,11 +434,9 @@ const RailsForm = () => {
     setNote(note || "");
   };
 
-  // ─── Reset Handler ───────────────────────────────────────────────────────────
   const handleReset = () => {
     setFormData({
       stile: "",
-      lexan: "No",
       prefixes: [],
       size: "",
       finish: "",
@@ -433,7 +448,6 @@ const RailsForm = () => {
     setDisabledPrefixes([]);
   };
 
-  // ─── react‑select Custom Styles & Finish Handler ──────────────────────────────
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -444,7 +458,7 @@ const RailsForm = () => {
       display: "flex",
       alignItems: "center",
       borderRadius: "25px",
-      color: "black"
+      color: "black",
     }),
   };
 
@@ -457,9 +471,7 @@ const RailsForm = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">
-        80 Series Exit Device Rails
-      </h1>
+      <h1 className="Heading">80 Series Exit Device Rails</h1>
 
       <form onSubmit={handleSubmit} className="part-form">
         {/* Stile Type */}
@@ -476,27 +488,6 @@ const RailsForm = () => {
             {options.stile.map((opt) => (
               <option key={opt.code} value={opt.code}>
                 {opt.display}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Lexan Pad */}
-        <div className="form-group">
-          <label>
-            Remove the Black Lexan Pad? (should the rail have the 19- prefix):
-          </label>
-          <select
-            value={formData.lexan}
-            onChange={(e) =>
-              setFormData({ ...formData, lexan: e.target.value })
-            }
-            required
-            disabled={formData.stile === "JellyFish"}
-          >
-            {options.lexan.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
               </option>
             ))}
           </select>
@@ -545,14 +536,16 @@ const RailsForm = () => {
           </div>
         )}
 
-
         {/* Size Dropdown */}
         <div className="form-group">
           <label>Size:</label>
           <Select
-            value={formData.stile && options.sizes[formData.stile]?.find(
-              (size) => size.code === formData.size
-            )}
+            value={
+              formData.stile &&
+              options.sizes[formData.stile]?.find(
+                (size) => size.code === formData.size
+              )
+            }
             onChange={(selectedOption) =>
               setFormData({ ...formData, size: selectedOption?.code || "" })
             }
@@ -562,7 +555,6 @@ const RailsForm = () => {
             placeholder="Select Size"
             isDisabled={!formData.stile}
             styles={customStyles}
-
             required
           />
         </div>
@@ -590,7 +582,11 @@ const RailsForm = () => {
           <button type="submit" className="generate-button">
             Find Part Number
           </button>
-          <button type="button" onClick={handleReset} className="generate-button">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="generate-button"
+          >
             Reset
           </button>
         </div>
