@@ -84,6 +84,12 @@ const RailsForm = () => {
         conflicts: ["16", "56-HK"],
         conflictsWithStile: ["JellyFish", "DummyRailInActive"],
       },
+            {
+        code: "FM",
+        name: "FEMA Rated (FM8700)",
+        conflicts: ["16", "56-HK"],
+        conflictsWithStile: ["Narrow", "JellyFish", "DummyRailInActive"],
+      },
       {
         code: "19",
         name: "Remove 809 Lexan Pad (Blank all metal Push Pad)",

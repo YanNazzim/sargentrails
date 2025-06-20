@@ -62,6 +62,8 @@ export const partsData = {
     "Wide-12-J": "68-2705",
     "Wide-12-G": "68-2704",
 
+
+
     // #region 12-5CH
     "Wide-12-5CH-E": "68-7524",
     "Wide-12-5CH-F": "68-7525",
@@ -387,6 +389,42 @@ export const partsData = {
     "Wide-12-FM-F": "68-5467",
     "Wide-12-FM-J": "68-5468",
     "Wide-12-FM-G": "68-5469",
+
+            // #region 53-FM- only
+    "Wide-53-FM-E": "68-5470",
+    "Wide-53-FM-F": "68-5471",
+    "Wide-53-FM-J": "68-5472",
+    "Wide-53-FM-G": "68-5473",
+
+                // #region 12-53-FM- only
+    "Wide-12-53-FM-E": "68-5474",
+    "Wide-12-53-FM-F": "68-5475",
+    "Wide-12-53-FM-J": "68-5476",
+    "Wide-12-53-FM-G": "68-5477",
+
+                    // #region 55-FM- only
+    "Wide-55-FM-E": "68-5478",
+    "Wide-55-FM-F": "68-5479",
+    "Wide-55-FM-J": "68-5480",
+    "Wide-55-FM-G": "68-5481",
+
+                        // #region 12-55-FM- only
+    "Wide-12-55-FM-E": "68-5482",
+    "Wide-12-55-FM-F": "68-5483",
+    "Wide-12-55-FM-J": "68-5484",
+    "Wide-12-55-FM-G": "68-5485",
+
+                            // #region 53-55-FM- only
+    "Wide-53-55-FM-E": "68-5486",
+    "Wide-53-55-FM-F": "68-5487",
+    "Wide-53-55-FM-J": "68-5488",
+    "Wide-53-55-FM-G": "68-5489",
+
+                                // #region 12-53-55-FM- only
+    "Wide-12-53-55-FM-E": "68-5490",
+    "Wide-12-53-55-FM-F": "68-5491",
+    "Wide-12-53-55-FM-J": "68-5492",
+    "Wide-12-53-55-FM-G": "68-5493",
 
     // #region 19- Wide Rails
 
