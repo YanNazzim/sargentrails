@@ -9,7 +9,7 @@ export const partsData = {
     "Wide--G": "68-2696",
 
         // #region IN Series Rails (Rail to be used with IN100/IN120 Reader)
-    "Wide-IN-E": "68-7068",
+    "Wide-IN-E": "68-7064",
     "Wide-IN-F": "68-7065",
     "Wide-IN-J": "68-7067",
     "Wide-IN-G": "68-7066",
