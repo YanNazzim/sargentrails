@@ -10,6 +10,9 @@ import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
+import MortiseSpindles from "./components/MortiseSpindles"; // Already included file name 'f:/SargentRails/sargentrails/src/components/MortiseSpindles.js' differs from file name 'f:/SargentRails/sargentrails/src/components/mortisespindles.js' only in casing.
+import Faceplates from "./components/faceplates"
+
 
 const App = () => {
   const tabConfig = {
@@ -28,6 +31,9 @@ const App = () => {
       {
         name: "Mortise Locks",
         subTabs: [
+          "Mortise Spindles",
+          "Mounting Posts",
+          "Faceplates",
           "Mortise Lockbodies",
           "Trim Kits",
           "Thumbturns",
@@ -61,6 +67,12 @@ const App = () => {
 
   const renderContent = () => {
     switch (activeSubTab) {
+    case "Mortise Spindles": 
+      return <MortiseSpindles />;
+    case "Mounting Posts":
+      return <div>Mounting Posts Component</div>;
+      case "Faceplates":
+      return <Faceplates />;
       case "Rails":
         return <Rails />;
       case "Trims":

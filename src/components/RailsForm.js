@@ -1,4 +1,4 @@
-// RailsForm.js
+// src/components/RailsForm.js
 import React, { useState, useEffect, useRef } from "react";
 import { partsData } from "../partsData";
 import "../App.css";
@@ -70,8 +70,10 @@ const RailsForm = () => {
 
   const options = {
     stile: [
-      { code: "Narrow", display: "Narrow Stile - 8300, 8400, 8500" },
-      { code: "Wide", display: "Wide Stile - 8600, 8700, NB-8700, 8800, 8900" },
+      { code: "PENarrow", display: "PE80 Series Narrow Stile (PE8300, PE8400, PE8500)" },
+      { code: "PEWide", display: "PE80 Series Wide Stile (PE8600, PE8700, PENB-8700, PE8800, PE8900)" },
+      { code: "Narrow", display: "80 Series Narrow Stile - 8300, 8400, 8500" },
+      { code: "Wide", display: "80 Series Wide Stile - 8600, 8700, NB-8700, 8800, 8900" },
       { code: "LowProfile", display: "Low Profile - LP8600, LR8600, LS8600" },
       { code: "DummyRailInActive", display: "8893 In-Active Dummy Rail" },
       { code: "DummyRailActive", display: "8895 Active Dummy Rail" },
@@ -88,7 +90,7 @@ const RailsForm = () => {
         code: "FM",
         name: "FEMA Rated (FM8700)",
         conflicts: ["16", "56-HK"],
-        conflictsWithStile: ["Narrow", "JellyFish", "DummyRailInActive"],
+        conflictsWithStile: ["Narrow", "PENarrow", "JellyFish", "DummyRailInActive"],
       },
       {
         code: "19",
@@ -179,6 +181,8 @@ const RailsForm = () => {
           "JellyFish",
           "DummyRailInActive",
           "Narrow",
+          "PENarrow",
+          "PEWide",
         ],
       },
       {
@@ -200,6 +204,8 @@ const RailsForm = () => {
           "JellyFish",
           "DummyRailInActive",
           "Narrow",
+          "PENarrow",
+          "PEWide",
         ],
       },
     ],
@@ -210,11 +216,23 @@ const RailsForm = () => {
         { code: "J", display: 'J - For openings 37" to 42"' },
         { code: "G", display: 'G - For openings 43" to 48"' },
       ],
+      PENarrow: [
+        { code: "E", display: 'E - For openings 26" to 32"' },
+        { code: "F", display: 'F - For openings 32.5" to 36"' },
+        { code: "J", display: 'J - For openings 36.5" to 42"' },
+        { code: "G", display: 'G - For openings 42.5" to 48"' },
+      ],
       Wide: [
         { code: "E", display: 'E - For openings 24" to 32"' },
         { code: "F", display: 'F - For openings 33" to 36"' },
         { code: "J", display: 'J - For openings 37" to 42"' },
         { code: "G", display: 'G - For openings 43" to 48"' },
+      ],
+      PEWide: [
+        { code: "E", display: 'E - For openings 26" to 32"' },
+        { code: "F", display: 'F - For openings 32.5" to 36"' },
+        { code: "J", display: 'J - For openings 36.5" to 42"' },
+        { code: "G", display: 'G - For openings 42.5" to 48"' },
       ],
       LowProfile: [
         { code: "L", display: 'L - For openings 36"' },
@@ -399,45 +417,80 @@ const RailsForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const prefixKey = formData.prefixes.sort().join("-");
+    let generatedBasePart = "";
+    let generatedNote = "";
 
-    let key;
-    if (formData.prefixes.includes("PL") && formData.handing) {
-      const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
-      key = `${formData.stile}-${prefixKey}-${formData.size}-${handingCode}`;
+    if (formData.stile === "PENarrow" || formData.stile === "PEWide") {
+      const baseCode = formData.stile === "PENarrow" ? "PE80N" : "PE80W";
+      let dynamicBaseNumber = `${baseCode}${formData.size}`;
+
+      // Handle Handing for PL prefix, appended to the dynamicBaseNumber
+      if (formData.prefixes.includes("PL") && formData.handing) {
+        const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
+        dynamicBaseNumber = `${dynamicBaseNumber}-${handingCode}`;
+      }
+
+      // Prefixes go in front of the combined base and size/handing
+      const sortedPrefixes = formData.prefixes.sort();
+      let prefixString = sortedPrefixes.length > 0 ? sortedPrefixes.join("-") + "-" : "";
+
+      generatedBasePart = `${prefixString}${dynamicBaseNumber}`;
+      generatedNote = ""; // No specific notes for dynamically generated PE parts
     } else {
-      key = `${formData.stile}-${prefixKey}-${formData.size}`;
+      // Existing logic for other stile types
+      const prefixKey = formData.prefixes.sort().join("-");
+
+      let key;
+      if (formData.prefixes.includes("PL") && formData.handing) {
+        const handingCode = formData.handing === "Left Hand" ? "LHR" : "RHR";
+        key = `${formData.stile}-${prefixKey}-${formData.size}-${handingCode}`;
+      } else {
+        key = `${formData.stile}-${prefixKey}-${formData.size}`;
+      }
+
+      let partNumbersCategory;
+      switch (formData.stile) {
+        case "DummyRailInActive":
+          partNumbersCategory = partsData.DummyRailInActive;
+          break;
+        case "DummyRailActive":
+          partNumbersCategory = partsData.DummyRailActive;
+          break;
+        case "LowProfile":
+          partNumbersCategory = partsData.LowProfileRails;
+          break;
+        case "JellyFish":
+          partNumbersCategory = partsData.JellyFishRails;
+          break;
+        case "Wide":
+          partNumbersCategory = partsData.wideRails;
+          break;
+        case "Narrow":
+        default:
+          partNumbersCategory = partsData.narrowRails;
+          break;
+      }
+
+      const partNumberEntry = partNumbersCategory[key] || "Not Found";
+      const [basePartNumberFromData, noteFromData] = partNumberEntry.split(" - ");
+
+      generatedBasePart = basePartNumberFromData;
+      generatedNote = noteFromData || "";
     }
 
-    const partNumbersCategory =
-      formData.stile === "DummyRailInActive"
-        ? partsData.DummyRailInActive
-        : formData.stile === "DummyRailActive"
-        ? partsData.DummyRailActive
-        : formData.stile === "Wide"
-        ? partsData.wideRails
-        : formData.stile === "LowProfile"
-        ? partsData.LowProfileRails
-        : formData.stile === "JellyFish"
-        ? partsData.JellyFishRails
-        : partsData.narrowRails;
-
-    const partNumberEntry = partNumbersCategory[key] || "Not Found";
-    const [basePartNumber, note] = partNumberEntry.split(" - ");
-
-    if (basePartNumber === "Not Available") {
+    if (generatedBasePart === "Not Available") {
       setPartNumber("Not Available");
       setNote("This size is not available. Please try the next size up.");
       return;
     }
 
-    const generatedNumber =
-      basePartNumber !== "Not Found"
-        ? `${basePartNumber}-${formData.finish}`
+    const finalPartNumber =
+      generatedBasePart !== "Not Found"
+        ? `${generatedBasePart}-${formData.finish}`
         : "Not Found";
 
-    setPartNumber(generatedNumber);
-    setNote(note || "");
+    setPartNumber(finalPartNumber);
+    setNote(generatedNote);
   };
 
   const handleReset = () => {

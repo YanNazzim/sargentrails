@@ -487,8 +487,8 @@ export const trimsData = {
     },
     "80-8800-16": {
       "1-3/4": "<br />Outside: #34 <br /> Inside: #44",
-      2: "<br />Outside: #48 <br /> Inside: #34",
-      "2-1/4": "<br />Outside: #50 <br /> Inside: #34",
+      2: "<br />Outside: #34 <br /> Inside: #44",
+      "2-1/4": "<br />Outside: #34 <br /> Inside: #44",
     },
     "80-8800-40": {
       "1-3/4": "Non-Cylinder Function",
