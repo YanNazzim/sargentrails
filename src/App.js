@@ -6,12 +6,15 @@ import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
 import Cylinders from "./components/Cylinders";
+import MountingPosts from "./components/MountingPosts"; // Import the new component
 import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
-import MortiseSpindles from "./components/MortiseSpindles"; // Already included file name 'f:/SargentRails/sargentrails/src/components/MortiseSpindles.js' differs from file name 'f:/SargentRails/sargentrails/src/components/mortisespindles.js' only in casing.
+import MortiseSpindles from "./components/MortiseSpindles";
 import Faceplates from "./components/faceplates"
+import MortiseLockbodies from "./components/MortiseLockbodies";
+import MortiseTrimKits from "./components/MortiseTrimKits";
 
 
 const App = () => {
@@ -70,9 +73,11 @@ const App = () => {
     case "Mortise Spindles": 
       return <MortiseSpindles />;
     case "Mounting Posts":
-      return <div>Mounting Posts Component</div>;
+      return <MountingPosts />; // Render the new component
       case "Faceplates":
       return <Faceplates />;
+      case "Trim Kits":
+        return <MortiseTrimKits/>;
       case "Rails":
         return <Rails />;
       case "Trims":
@@ -225,59 +230,7 @@ const App = () => {
           </div>
         );
       case "Mortise Lockbodies":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Mortise Lockbodies <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
-      case "Trim Kits":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Trim Kits <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
+        return <MortiseLockbodies />;
       case "Mortise Case":
         return <div>Mortise Case Component</div>;
       case "Mortise Trim":

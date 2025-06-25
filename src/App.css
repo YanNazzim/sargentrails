@@ -234,6 +234,14 @@ body {
   border: none; /* Remove the border */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow for depth */
 }
+.result-container p{
+  margin-top: 2rem;
+  background-color: #172a45; /* Medium navy background */
+  border-radius: 12px; /* Slightly more rounded corners */
+  border: none; /* Remove the border */
+  font-size: 1.2rem;
+  text-align: center;
+}
 
 .part-number {
   font-size: 1.5rem; /* Increased font size */
