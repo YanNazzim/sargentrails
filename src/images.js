@@ -116,6 +116,28 @@ const images = {
   logo: require("./images/Sargent Logo.jpg"),
   UnderConstruction: require("./images/Construction.gif"),
   stop: require("./images/stop.jpg"),
+
+  ORose: require("./images/ORose.png"),
+  CORose: require("./images/CORose.png"),
+  LNRose: require("./images/LNRose.png"),
+  TRRose: require("./images/TRRose.png"),
+  CRRose: require("./images/CRRose.png"),
+  LRose: require("./images/LRose.png"),
+  TORose: require("./images/TORose.png"),
+  TEEsc: require("./images/TEEsc.png"),
+  CEEsc: require("./images/CEEsc.png"),
+  E2Rose: require("./images/E2Rose.png"),
+  E3Rose: require("./images/E3Rose.png"),
+  E4Rose: require("./images/E4Rose.png"),
+  ERose: require("./images/ERose.png"),
+  LE1Esc: require("./images/LE1Esc.png"),
+  LE3Esc: require("./images/LE3Esc.png"),
+  LW1Esc: require("./images/LW1Esc.png"),
+  LSEsc: require("./images/LSEsc.png"),
+  VN1Esc: require("./images/VN1Esc.png"),
+  WTEsc: require("./images/WTEsc.png"),
+
+
 };
 
 export default images;
