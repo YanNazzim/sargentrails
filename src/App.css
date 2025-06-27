@@ -8,6 +8,34 @@ body {
   line-height: 1.6;
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
+.strikes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* space between cards */
+  justify-content: center; /* center the cards */
+}
+
+.strike-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  width: 320px; /* width of the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.strike-image {
+  width: 300px; /* fixed width for the image */
+  height: auto; /* maintain aspect ratio */
+  margin-bottom: 15px;
+  border-radius: 12.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: #000000 5px solid;
+}
+
+.strike-info {
+  font-size: 16px;
+}
 
 .app-container {
   max-width: 850px;
@@ -234,7 +262,7 @@ body {
   border: none; /* Remove the border */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow for depth */
 }
-.result-container p{
+.result-container p {
   margin-top: 2rem;
   background-color: #172a45; /* Medium navy background */
   border-radius: 12px; /* Slightly more rounded corners */

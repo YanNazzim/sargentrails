@@ -15,7 +15,7 @@ import MortiseSpindles from "./components/MortiseSpindles";
 import Faceplates from "./components/faceplates"
 import MortiseLockbodies from "./components/MortiseLockbodies";
 import MortiseTrimKits from "./components/MortiseTrimKits";
-
+import Strikes from "./components/Strikes";
 
 const App = () => {
   const tabConfig = {
@@ -45,10 +45,10 @@ const App = () => {
       },
       {
         name: "Bored Locks",
-        subTabs: ["Cylindrical Lockbodies", "Latches", "Tailpieces", "Strikes"],
+        subTabs: ["Cylindrical Lockbodies", "Latches", "Tailpieces"],
       },
     ],
-    universalTabs: ["Lever Handles Only", "Cylinders"],
+    universalTabs: ["Lever Handles Only", "Cylinders", "Strikes"],
   };
 
   const [activeMasterTab, setActiveMasterTab] = useState(
@@ -148,33 +148,8 @@ const App = () => {
             </div>
           </div>
         );
-      case "Strikes":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Strikes <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
+    case "Strikes":
+      return <Strikes />;
       case "Thumbturns":
         return (
           <div className="content-transition">
@@ -231,10 +206,6 @@ const App = () => {
         );
       case "Mortise Lockbodies":
         return <MortiseLockbodies />;
-      case "Mortise Case":
-        return <div>Mortise Case Component</div>;
-      case "Mortise Trim":
-        return <div>Mortise Trim Component</div>;
       default:
         return <Rails />;
     }

@@ -137,6 +137,12 @@ const images = {
   VN1Esc: require("./images/VN1Esc.png"),
   WTEsc: require("./images/WTEsc.png"),
 
+  //Strikes
+  StrikeC908: require('./images/C908Strike.png'),
+  Strike815: require('./images/815Strike.png'),
+  Strike650: require('./images/650Strike.png'),
+  Strike606: require('./images/606Strike.png'),
+  Strike640: require('./images/640Strike.png'),
 
 };
 
