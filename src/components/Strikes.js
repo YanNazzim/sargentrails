@@ -1,5 +1,3 @@
-// src/components/Strikes.js
-
 import React, { useState } from 'react';
 import { strikesData, devicePlatforms, modelsByPlatform } from './strikesData';
 import '../App.css';
@@ -7,53 +5,86 @@ import '../App.css';
 const Strikes = () => {
   const [selectedPlatform, setSelectedPlatform] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
-  const [strikes, setStrikes] = useState([]);
 
   const handlePlatformChange = (e) => {
-    const platform = e.target.value;
-    setSelectedPlatform(platform);
+    setSelectedPlatform(e.target.value);
     setSelectedModel('');
-    setStrikes([]);
   };
 
   const handleModelChange = (e) => {
-    const model = e.target.value;
-    setSelectedModel(model);
-    const platformData = strikesData[selectedPlatform];
-    if (platformData && platformData[model]) {
-        const modelStrikes = platformData[model];
-        // Check if the strikes are categorized (like in the 8600 series)
-        if (Array.isArray(modelStrikes)) {
-            setStrikes(modelStrikes);
-        } else {
-            // If categorized, show all strikes from all categories
-            const allStrikes = Object.values(modelStrikes).flat();
-            setStrikes(allStrikes);
-        }
-    } else {
-        setStrikes([]);
-    }
+    setSelectedModel(e.target.value);
   };
 
-  const renderStrikes = () => {
-    if (strikes.length === 0) {
+const renderStrikes = () => {
+    if (!selectedPlatform || !selectedModel) {
       return null;
     }
 
-    return (
-      <div className="strikes-container">
-        {strikes.map((strike, index) => (
-          <div key={index} className="strike-card">
-            <img
-                src={strike.imageName}
-                alt={strike.partNumber}
-                className="strike-image"
-            />
-            <div className="strike-info">
+    const strikesForModel = strikesData[selectedPlatform]?.[selectedModel];
+
+    if (!strikesForModel) {
+      return <p>No strike information available for this model.</p>;
+    }
+
+    // Case 1: Simple array of strikes
+    if (Array.isArray(strikesForModel)) {
+      return (
+        <div className="strikes-container">
+          {strikesForModel.map((strike, index) => (
+            <div key={index} className="strike-card">
+              <img src={strike.imageName || strike.imageUrl} alt={strike.partNumber} className="strike-image" />
+              <div className="strike-info">
                 <strong>{strike.partNumber}</strong> - {strike.description}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      );
+    }
+
+    // Case 2: Object containing categories of strikes
+    return (
+      <div className="strike-category-row"> {/* Add this wrapper */}
+        {Object.entries(strikesForModel).map(([category, data]) => {
+          // Sub-case A: Grouped strikes with a single image
+          if (data.image && Array.isArray(data.parts)) {
+            return (
+              <div key={category} className="strike-category">
+                <h3>{category}</h3>
+                <div className="strike-card-grouped">
+                  <img src={data.image} alt={category} className="strike-image-grouped" />
+                  <div className="strike-details-list">
+                    {data.parts.map((part, index) => (
+                      <div key={index} className="strike-part-item">
+                        <p><strong>Part Number:</strong> {part.partNumber}</p>
+                        <p>{part.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          // Sub-case B: Categories containing arrays of strikes
+          if (Array.isArray(data)) {
+            return (
+              <div key={category} className="strike-category">
+                <h3>{category}</h3>
+                <div className="strikes-container">
+                  {data.map((strike, index) => (
+                    <div key={index} className="strike-card">
+                      <img src={strike.imageName || strike.imageUrl} alt={strike.partNumber} className="strike-image" />
+                      <div className="strike-info">
+                        <strong>{strike.partNumber}</strong> - {strike.description}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
     );
   };
@@ -88,9 +119,9 @@ const Strikes = () => {
           </div>
         )}
 
-        {strikes.length > 0 && (
+        {selectedModel && (
           <div className="result-container">
-            <h2>Available Strikes:</h2>
+            <h2>Available Strikes for {selectedModel}:</h2>
             {renderStrikes()}
           </div>
         )}
