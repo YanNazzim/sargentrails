@@ -18,9 +18,10 @@ export const strikesData = {
       ]
     },
     "8500": [
-        { partNumber: "657", description: "Standard Strike", imageName: "https://www.qualitydoor.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/s/a/sargent-657-black-standard-strike-for-8500-series-exit-devices-black.jpg" },
-        { partNumber: "656", description: "Mullion Strike", imageName: "https://www.sargentlock.com/wp-content/uploads/2019/01/656-300x300.jpg" },
-        { partNumber: "649", description: "Strike for Fire Rated Applications", imageName: "https://www.rbadoor.com/wp-content/uploads/2018/01/Sargent-649-300x300.jpg" },
+      { partNumber: "649", description: "Strike for Fire Rated Applications", imageName: images.Strike649 },
+        { partNumber: "657", description: "Standard Strike", imageName: images.Strike657 },
+        { partNumber: "658", description: "Optional Strike", imageName: images.Strike658 },
+        { partNumber: "656", description: "Mullion Strike", imageName: images.Strike656 },
     ],
     "8600": {
       "Wood/Hollow Metal": [
