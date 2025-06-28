@@ -143,6 +143,7 @@ const images = {
   Strike650: require('./images/650Strike.png'),
   Strike606: require('./images/606Strike.png'),
   Strike640: require('./images/640Strike.png'),
+  Strike646: require('./images/646Strike.png'),
   Strike649: require('./images/649Strike.png'),
   Strike658: require('./images/658Strike.png'),
   Strike657: require('./images/657Strike.png'),

@@ -25,11 +25,11 @@ export const strikesData = {
     ],
     "8600": {
       "Wood/Hollow Metal": [
-        { partNumber: "650", description: "Top Strike for Metal Doors", imageName: "https://sargentlock.com/wp-content/uploads/2019/01/650-300x300.jpg" },
-        { partNumber: "606", description: "Bottom Strike for Metal Doors", imageName: "https://sargentlock.com/wp-content/uploads/2019/01/606-300x300.jpg" },
+        { partNumber: "650/652", description: "Top Strike for Metal Doors", imageName: images.Strike650 },
+        { partNumber: "606", description: "Bottom Strike for Metal Doors", imageName: images.Strike606 },
       ],
       "Aluminum": [
-        { partNumber: "640", description: "Top & Bottom Strike for Aluminum Doors", imageName: "https://www.barzellock.com/wp-content/uploads/2019/01/640-300x300.jpg" },
+        { partNumber: "639/640", description: "Top & Bottom Strike for Aluminum Doors", imageName: images.Strike640 },
       ],
     },
     "8700": [
