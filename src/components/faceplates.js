@@ -27,14 +27,17 @@ const customStyles = {
   control: (provided) => ({
     ...provided,
     color: 'black',
+    borderRadius: "25px"
   }),
   singleValue: (provided) => ({
     ...provided,
     color: 'black',
+    borderRadius: "25px"
   }),
   option: (provided) => ({
     ...provided,
     color: 'black',
+    borderRadius: "25px"
   }),
   input: (provided) => ({
     ...provided,
@@ -48,7 +51,7 @@ const FinishOption = (props) => (
     <img
       src={props.data.image}
       alt={props.data.label}
-      style={{ width: "30px", marginRight: "10px" }}
+      style={{ width: "30px", marginRight: "10px", borderRadius: "25px" }}
     />
     <span style={{ color: 'black' }}>{props.data.label}</span>
   </components.Option>
@@ -59,7 +62,7 @@ const FinishSingleValue = (props) => (
     <img
       src={props.data.image}
       alt={props.data.label}
-      style={{ width: "30px", marginRight: "10px" }}
+      style={{ width: "30px", marginRight: "10px", borderRadius: "25px" }}
     />
     <span style={{ color: 'black' }}>{props.data.label}</span>
   </components.SingleValue>

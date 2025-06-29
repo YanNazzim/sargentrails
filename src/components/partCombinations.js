@@ -651,12 +651,12 @@ const partCombinations = {
         },
         12: {
           chassis: `
-          <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
-          <br /> 16 Function Only (No Indicator) = 68-2425 
-          <br /> 28 Function Only (Pull Trim) = 68-2329
-          <br /> 63 Function Only (Pull Trim) = 68-2326
-          <br /> 66 Function Only (Pull Trim) = 68-2443
-          `,
+        <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
+        <br /> 16 Function Only (No Indicator) = 68-2426 
+        <br /> 28 Function Only (Pull Trim) = 68-2330
+        <br /> 63 Function Only (Pull Trim) = 68-2327
+        <br /> 66 Function Only (Pull Trim) = 68-2444
+        `,
         },
         "12-53": {
           chassis: "68-6076",
@@ -697,7 +697,31 @@ const partCombinations = {
             <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1783-FINISH
             `,
         },
+                "12-49": {
+          chassis: `
+            <br /> 16 Function (Includes Indicator) = 68-6266
+            <br /> 66 Function (Includes Indicator) = 68-6272
+            `,
+          chassisCover: `
+            <br /> All Functions (Except 16 & 66) = 68-1782-FINISH
+            <br /> 16 & 66 Function (Classroom Intruder - Double Cylinder) = 68-1783-FINISH
+            `,
+        },
+                "12-49-AL": {
+          chassis: `
+            <br /> 16 Function Only (Includes Indicator) = 68-6288
+            <br /> 66 Function Only (Includes Indicator) = 68-6284
+            `,
+          chassisCover: `68-1785-FINISH`,
+        },
         "49-AL": {
+          chassis: `
+            <br /> 16 Function Only (Includes Indicator) = 68-6288
+            <br /> 66 Function Only (Includes Indicator) = 68-6284
+            `,
+          chassisCover: `68-1785-FINISH`,
+        },
+                "12-49-GL": {
           chassis: `
             <br /> 16 Function Only (Includes Indicator) = 68-6288
             <br /> 66 Function Only (Includes Indicator) = 68-6284

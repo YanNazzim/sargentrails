@@ -55,6 +55,12 @@ const ChassisForm = () => {
         { code: "PE8900", display: "PE8900 Mortise", stile: "Wide" },
         
   ];
+    const handleFinishChange = (selectedOption) => {
+    setFormData({
+      ...formData,
+      finish: selectedOption ? selectedOption.value : "",
+    });
+  };
 
   // Define the prefixes and their conflicts
   const prefixes = [
@@ -225,7 +231,7 @@ const ChassisForm = () => {
   
   
     // Extract the finish value (e.g., "03", "04", etc.)
-    const finishValue = formData.finish.value; // Access the `value` property
+    const finishValue = formData.finish; // Access the `value` property
   
   
     // Look up related parts
@@ -269,6 +275,20 @@ const ChassisForm = () => {
     });
   };
 
+    const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      minHeight: "40px",
+    }),
+    option: (provided) => ({
+      ...provided,
+      display: "flex",
+      alignItems: "center",
+      borderRadius: "25px",
+      color: "black",
+    }),
+  };
+
   // Custom Option to render finish image and label in the dropdown list
   const FinishOption = (props) => {
     return (
@@ -281,6 +301,7 @@ const ChassisForm = () => {
             height: "auto",
             marginRight: "10px",
             verticalAlign: "middle",
+            borderRadius: "25px"
           }}
         />
         <span>{props.data.label}</span>
@@ -300,6 +321,7 @@ const ChassisForm = () => {
             height: "auto",
             marginRight: "10px",
             verticalAlign: "middle",
+            borderRadius: "25px"
           }}
         />
         <span>{props.data.label}</span>
@@ -386,24 +408,21 @@ const ChassisForm = () => {
           </select>
         </div>
 
-        {/* Finish Dropdown */}
+        {/* Finish using react‑select */}
         <div className="form-group">
           <label>Finish:</label>
           <Select
             options={finish}
-            onChange={
-              (selectedOption) =>
-                setFormData({ ...formData, finish: selectedOption }) // Set the entire finish object
-            }
+            onChange={handleFinishChange}
             value={
-              finish.find((f) => f.value === formData.finish?.value) || null
+              finish.find((f) => f.value === formData.finish) || null
             }
             placeholder="Select Finish"
             components={{
               Option: FinishOption,
               SingleValue: FinishSingleValue,
             }}
-            className="Finishes"
+            styles={customStyles}
           />
         </div>
 

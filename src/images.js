@@ -150,7 +150,6 @@ const images = {
   Strike64988: require("./images/64988Strike.png"),
   Strike658: require("./images/658Strike.png"),
   Strike657: require("./images/657Strike.png"),
-  Strike656: require("./images/656Strike.png"),
   Strike653: require("./images/653Strike.png"),
   Strike655: require("./images/655Strike.png"),
   Strike642: require("./images/642Strike.png"),
@@ -158,8 +157,17 @@ const images = {
   Strike613: require("./images/613Strike.png"),
   MortiseCL: require("./images/MortiseCLStrike.png"),
   Strike877: require("./images/877OBStrike.png"),
+  Strike800: require("./images/800Strike.png"),
+  Strike80011: require("./images/11Line800Strike.png"),
+  Strike505: require("./images/505Strike.png"),
+  Strike808: require("./images/808Strike.png"),
+  Strike80811: require("./images/11Line808Strike.png"),
+  Strike654: require("./images/654Strike.png"),
+  Strike656: require("./images/656Strike.png"),
+  Strike659: require("./images/659Strike.png"),
   StrikeWBS: require("./images/WBStrike.png"),
   StrikeDBS: require("./images/DBStrike.png"),
+  Strike9200DBS: require("./images/9200DBStrike.png"),
 };
 
 export default images;

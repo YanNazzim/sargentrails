@@ -494,6 +494,7 @@ const customSelectStyles = {
     ...provided,
     color: "black",
     backgroundColor: state.isFocused ? "#007bff20" : "white",
+    borderRadius: "25px"
   }),
   menuList: (provided) => ({
     ...provided,

@@ -34,13 +34,14 @@ const customTrimStyles = {
     alignItems: "center",
     padding: "12px",
     backgroundColor: state.isFocused ? "#007bff20" : "white",
-    borderRadius: "10px",
+    borderRadius: "25px",
     transition: "background-color 0.2s",
   }),
   singleValue: (provided) => ({
     ...provided,
     display: "flex",
     alignItems: "center",
+    
   }),
 };
 
@@ -56,6 +57,8 @@ const FinishOption = (props) => {
           height: "auto",
           marginRight: "10px",
           verticalAlign: "middle",
+                    borderRadius: "25px",
+
         }}
       />
       <span>{props.data.label}</span>
@@ -1101,6 +1104,8 @@ const TrimsForm = () => {
       display: "flex",
       alignItems: "center",
       color: "black",
+                    borderRadius: "25px",
+
     }),
   };
 

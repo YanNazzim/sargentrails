@@ -1042,6 +1042,8 @@ const RodsForm = () => {
             height: "auto",
             marginRight: "10px",
             verticalAlign: "middle",
+                    borderRadius: "25px",
+
           }}
         />
         <span>{props.data.label}</span>
@@ -1061,6 +1063,8 @@ const RodsForm = () => {
             height: "auto",
             marginRight: "10px",
             verticalAlign: "middle",
+                    borderRadius: "25px",
+
           }}
         />
         <span>{props.data.label}</span>
@@ -1285,6 +1289,8 @@ const RodsForm = () => {
                   display: "flex",
                   alignItems: "center",
                   color: "black",
+                    borderRadius: "25px",
+
                 }),
               }}
             />

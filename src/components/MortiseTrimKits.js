@@ -19,6 +19,7 @@ const FinishOption = (props) => {
           height: "auto",
           marginRight: "10px",
           verticalAlign: "middle",
+          borderRadius: "25px"
         }}
       />
       <span>{props.data.label}</span>
@@ -110,6 +111,7 @@ const customSelectStyles = {
     padding: "8px 12px",
     display: "flex",
     alignItems: "center",
+    borderRadius: "25px"
   }),
   menuList: (provided) => ({
     ...provided,

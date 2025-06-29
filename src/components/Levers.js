@@ -8,6 +8,7 @@ const customStyles = {
     ...provided,
     color: "black",
     backgroundColor: state.isSelected ? "#2ecc71" : provided.backgroundColor,
+    borderRadius: "25px",
   }),
   singleValue: (provided) => ({
     ...provided,
@@ -70,7 +71,7 @@ const FinishOption = (props) => {
           width: "50px",
           height: "auto",
           marginRight: "10px",
-          borderRadius: "8px",
+          borderRadius: "25px",
           verticalAlign: "middle",
         }}
       />

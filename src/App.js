@@ -39,8 +39,6 @@ const App = () => {
           "Faceplates",
           "Mortise Lockbodies",
           "Trim Kits",
-          "Thumbturns",
-          "Emergency Releases",
         ],
       },
       {
@@ -150,60 +148,8 @@ const App = () => {
         );
     case "Strikes":
       return <Strikes />;
-      case "Thumbturns":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Thumbturns <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
-      case "Emergency Releases":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Eergency Releases <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
+
+
       case "Mortise Lockbodies":
         return <MortiseLockbodies />;
       default:
