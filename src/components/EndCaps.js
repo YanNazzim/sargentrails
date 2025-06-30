@@ -273,12 +273,12 @@ const EndCaps = () => {
     "PE80 Series": {
       "default": { // Default for PE80 Series if no specific prefix is selected
         endCap: "PE-0266",
-        bracket: "PE-0200",
+        bracket: "PE-2626",
         screws: "68-3905",
       },
       "OL": { // For "OL - Overlapping End Cap" on PE80 Series
         endCap: "PE-0267",
-        bracket: "PE-0200",
+        bracket: "PE-2630",
         screws: "68-3905",
       },
     },
