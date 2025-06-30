@@ -530,7 +530,7 @@ const RailsForm = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">80 Series Exit Device Rails</h1>
+      <h1 className="Heading">Exit Device Rails & Crossbars</h1>
 
       <form onSubmit={handleSubmit} className="part-form">
         {/* Stile Type */}

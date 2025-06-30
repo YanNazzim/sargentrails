@@ -17,6 +17,11 @@ const images = {
   finish32D: require("./images/32D.png"),
   finishBSP: require("./images/BSP.png"),
   finishWSP: require("./images/WSP.png"),
+  finishEAB: require("./images/EAB.png"),
+  finishEB: require("./images/EB.png"),
+  finishED: require("./images/ED.png"),
+  finishEN: require("./images/EN.png"),
+  finishEP: require("./images/EP.png"),
 
   // Standard levers
   LeverA: require("./images/LeverA.png"),

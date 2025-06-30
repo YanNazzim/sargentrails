@@ -16,6 +16,8 @@ import Faceplates from "./components/faceplates"
 import MortiseLockbodies from "./components/MortiseLockbodies";
 import MortiseTrimKits from "./components/MortiseTrimKits";
 import Strikes from "./components/Strikes";
+import EndCaps from "./components/EndCaps"; // Import the new component
+
 
 const App = () => {
   const tabConfig = {
@@ -23,7 +25,8 @@ const App = () => {
       {
         name: "Exit Devices",
         subTabs: [
-          "Rails",
+          "Rails/Crossbars",
+          "End Caps",
           "Chassis (Rail Head)",
           "Trims",
           "Mortise Exit Lockbodies",
@@ -71,13 +74,15 @@ const App = () => {
     case "Mortise Spindles": 
       return <MortiseSpindles />;
     case "Mounting Posts":
-      return <MountingPosts />; // Render the new component
+      return <MountingPosts />; 
       case "Faceplates":
       return <Faceplates />;
       case "Trim Kits":
         return <MortiseTrimKits/>;
-      case "Rails":
+      case "Rails/Crossbars":
         return <Rails />;
+    case "End Caps": 
+        return <EndCaps />;
       case "Trims":
         return <Trims />;
       case "Vertical Rod Device Internals":
