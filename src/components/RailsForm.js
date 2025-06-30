@@ -70,10 +70,11 @@ const RailsForm = () => {
 
   const options = {
     stile: [
-      { code: "PENarrow", display: "PE80 Series Narrow Stile (PE8300, PE8400, PE8500)" },
-      { code: "PEWide", display: "PE80 Series Wide Stile (PE8600, PE8700, PENB-8700, PE8800, PE8900)" },
       { code: "Narrow", display: "80 Series Narrow Stile - 8300, 8400, 8500" },
       { code: "Wide", display: "80 Series Wide Stile - 8600, 8700, NB-8700, 8800, 8900" },
+      { code: "90Series", display: "90 Series Devices" }, // New Stile
+      { code: "PENarrow", display: "PE80 Series Narrow Stile (PE8300, PE8400, PE8500)" },
+      { code: "PEWide", display: "PE80 Series Wide Stile (PE8600, PE8700, PENB-8700, PE8800, PE8900)" },
       { code: "LowProfile", display: "Low Profile - LP8600, LR8600, LS8600" },
       { code: "DummyRailInActive", display: "8893 In-Active Dummy Rail" },
       { code: "DummyRailActive", display: "8895 Active Dummy Rail" },
@@ -97,6 +98,12 @@ const RailsForm = () => {
         name: "Remove 809 Lexan Pad (Blank all metal Push Pad)",
         conflicts: [],
         conflictsWithStile: ["JellyFish"],
+      },
+      {
+        code: "42", // New Prefix
+        name: "Reinforced Crossbar",
+        conflicts: [],
+        conflictsWithStile: [], // No conflicts with other stiles
       },
       {
         code: "5CH",
@@ -257,6 +264,12 @@ const RailsForm = () => {
         { code: "J", display: 'J - For openings 37" to 42"' },
         { code: "G", display: 'G - For openings 43" to 48"' },
       ],
+      "90Series": [ // New 90 Series sizes
+        { code: "E", display: 'E - For openings 24" to 32"' },
+        { code: "F", display: 'F - For openings 33" to 36"' },
+        { code: "J", display: 'J - For openings 37" to 42"' },
+        { code: "G", display: 'G - For openings 43" to 48"' },
+      ],
     },
     finishes: [
       {
@@ -339,9 +352,27 @@ const RailsForm = () => {
         label: "WSP - White suede powder coat, sprayed",
         image: images.finishWSP,
       },
+      // New finishes for 90 Series
+    { value: "EAB", label: "EAB - Satin brass painted, sprayed", image: images.finishEAB }, // No specific image provided
+    { value: "EB", label: "EB - Dark bronze painted, sprayed", image: images.finishEB },
+    { value: "ED", label: "ED - Flat black painted, sprayed", image: images.finishED },
+    { value: "EN", label: "EN - Silver aluminum coated, sprayed", image: images.finishEN },
+    { value: "EP", label: "EP - Light bronze painted, sprayed", image: images.finishEP },
     ],
     handing: ["Left Hand", "Right Hand"],
   };
+
+  // Determine which finishes are available based on the selected stile
+  const currentFinishOptions = options.finishes.filter(f => {
+    // These finishes are only for 90Series
+    const series90OnlyFinishes = ["EAB", "ED", "EN"];
+    if (series90OnlyFinishes.includes(f.value)) {
+      return formData.stile === "90Series";
+    }
+    // All other finishes are available for any stile including 90Series
+    return true;
+  });
+
 
   useEffect(() => {
     console.log("Current Stile:", formData.stile);
@@ -352,28 +383,35 @@ const RailsForm = () => {
     const prefixCode = e.target.value;
     const isChecked = e.target.checked;
 
-    const selectedPrefix = options.prefixes.find((p) => p.code === prefixCode);
+    let newPrefixes;
+    if (formData.stile === "90Series") {
+        // If 90Series is selected, only '42' can be active.
+        // If '42' is checked, set prefixes to ['42']. If unchecked, set to [].
+        newPrefixes = isChecked && prefixCode === "42" ? ["42"] : [];
+    } else {
+        // Existing logic for other stiles
+        newPrefixes = isChecked
+            ? [...formData.prefixes, prefixCode]
+            : formData.prefixes.filter((p) => p !== prefixCode);
 
-    const newPrefixes = isChecked
-      ? [...formData.prefixes, prefixCode]
-      : formData.prefixes.filter((p) => p !== prefixCode);
+        let newDisabledPrefixes = [...disabledPrefixes];
+        const selectedPrefix = options.prefixes.find((p) => p.code === prefixCode);
 
-    let newDisabledPrefixes = [...disabledPrefixes];
-
-    if (selectedPrefix?.conflicts) {
-      if (isChecked) {
-        newDisabledPrefixes = [
-          ...newDisabledPrefixes,
-          ...selectedPrefix.conflicts,
-        ];
-      } else {
-        newDisabledPrefixes = newDisabledPrefixes.filter(
-          (code) => !selectedPrefix.conflicts.includes(code)
-        );
-      }
+        if (selectedPrefix?.conflicts) {
+            if (isChecked) {
+                newDisabledPrefixes = [
+                    ...newDisabledPrefixes,
+                    ...selectedPrefix.conflicts,
+                ];
+            } else {
+                newDisabledPrefixes = newDisabledPrefixes.filter(
+                    (code) => !selectedPrefix.conflicts.includes(code)
+                );
+            }
+        }
+        setDisabledPrefixes(newDisabledPrefixes);
     }
 
-    setDisabledPrefixes(newDisabledPrefixes);
     setFormData({ ...formData, prefixes: newPrefixes });
 
     if (prefixCode === "PL") {
@@ -403,16 +441,37 @@ const RailsForm = () => {
     }
   }, [formData, options.prefixes]);
 
-  const styleConflictPrefixes = options.prefixes
-    .filter(
-      (prefix) =>
-        prefix.conflictsWithStile &&
-        prefix.conflictsWithStile.includes(formData.stile)
-    )
-    .map((prefix) => prefix.code);
-  const effectiveDisabledPrefixes = [
-    ...new Set([...disabledPrefixes, ...styleConflictPrefixes]),
-  ];
+  // Logic to disable prefixes based on selected stile (especially for 90Series)
+  const isPrefixDisabled = (prefixCode) => {
+    // If 90Series is selected, disable all prefixes except '42'
+    if (formData.stile === "90Series") {
+      return prefixCode !== "42";
+    }
+
+    // Existing logic for other stiles and conflicts
+    const styleConflict = options.prefixes
+      .filter(
+        (prefix) =>
+          prefix.conflictsWithStile &&
+          prefix.conflictsWithStile.includes(formData.stile)
+      )
+      .map((prefix) => prefix.code);
+
+    const conflictingWithSelected = options.prefixes
+      .filter((prefix) =>
+        formData.prefixes.some(
+          (selectedP) => prefix.conflicts.includes(selectedP) || (options.prefixes.find(p => p.code === selectedP)?.conflicts?.includes(prefix.code))
+        )
+      )
+      .map(p => p.code);
+
+    return (
+      (styleConflict.includes(prefixCode) && !formData.prefixes.includes(prefixCode)) ||
+      (disabledPrefixes.includes(prefixCode) && !formData.prefixes.includes(prefixCode)) ||
+      (conflictingWithSelected.includes(prefixCode) && !formData.prefixes.includes(prefixCode))
+    );
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -436,7 +495,12 @@ const RailsForm = () => {
 
       generatedBasePart = `${prefixString}${dynamicBaseNumber}`;
       generatedNote = ""; // No specific notes for dynamically generated PE parts
-    } else {
+    } else if (formData.stile === "90Series") { // New 90 Series logic
+      const prefixString = formData.prefixes.includes("42") ? "42-" : "";
+      generatedBasePart = `${prefixString}981-${formData.size}`;
+      generatedNote = "";
+    }
+    else {
       // Existing logic for other stile types
       const prefixKey = formData.prefixes.sort().join("-");
 
@@ -563,7 +627,7 @@ const RailsForm = () => {
                   value={prefix.code}
                   checked={formData.prefixes.includes(prefix.code)}
                   onChange={handlePrefixChange}
-                  disabled={effectiveDisabledPrefixes.includes(prefix.code)}
+                  disabled={isPrefixDisabled(prefix.code)}
                 />
                 <span className="custom-checkbox"></span>
                 <span>
@@ -622,10 +686,10 @@ const RailsForm = () => {
         <div className="form-group">
           <label>Finish:</label>
           <Select
-            options={options.finishes}
+            options={currentFinishOptions}
             onChange={handleFinishChange}
             value={
-              options.finishes.find((f) => f.value === formData.finish) || null
+              currentFinishOptions.find((f) => f.value === formData.finish) || null
             }
             placeholder="Select Finish"
             components={{
