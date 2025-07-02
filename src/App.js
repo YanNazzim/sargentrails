@@ -17,7 +17,7 @@ import MortiseLockbodies from "./components/MortiseLockbodies";
 import MortiseTrimKits from "./components/MortiseTrimKits";
 import Strikes from "./components/Strikes";
 import EndCaps from "./components/EndCaps"; // Import the new component
-
+import Tailpieces from "./components/Tailpieces";
 
 const App = () => {
   const tabConfig = {
@@ -98,32 +98,7 @@ const App = () => {
       case "Latches":
         return <Latches />;
       case "Tailpieces":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Tailpieces <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
+      return <Tailpieces />;
       case "Cylindrical Lockbodies":
         return (
           <div className="content-transition">
