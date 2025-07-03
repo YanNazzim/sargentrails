@@ -75,8 +75,8 @@ const tailpieceData = {
           "2-1/4\"": { part: "10-3776", imageKey: "TailpieceSargentSFICEM" },
         },
         XC: {
-          "1-3/8\"-2\"": { part: "10-3779", imageKey: "TailpieceSFIC" },
-          "2-1/4\"": { part: "10-3780", imageKey: "TailpieceSFIC" },
+          "1-3/8\"-2\"": { part: "10-3779", imageKey: "TailpieceSargentSFICEMXC" },
+          "2-1/4\"": { part: "10-3780", imageKey: "TailpieceSargentSFICEMXC" },
         },
       },
     },
@@ -85,36 +85,36 @@ const tailpieceData = {
         "Schlage": {
           "Mechanical Functions": {
             "Fixed Core 6 Pin": {
-              "1-3/8\"-2\"": { part: "10-3625", imageKey: "TailpieceSchlageFixed" },
-              "2-1/4\"": { part: "10-3626", imageKey: "TailpieceSchlageFixed" },
+              "1-3/8\"-2\"": { part: "10-3625", imageKey: "TailpieceSchlageConventional" },
+              "2-1/4\"": { part: "10-3626", imageKey: "TailpieceSchlageConventional" },
             },
           },
           "Electrified Functions": {
             "Fixed Core 6 Pin": {
-              "1-3/8\"-2\"": { part: "10-3781", imageKey: "TailpieceSchlageFixed" },
-              "2-1/4\"": { part: "10-3782", imageKey: "TailpieceSchlageFixed" },
+              "1-3/8\"-2\"": { part: "10-3781", imageKey: "TailpieceSchlageConventionalEM" },
+              "2-1/4\"": { part: "10-3782", imageKey: "TailpieceSchlageConventionalEM" },
             },
           },
         },
         "ASSA ABLOY ACCENTRA": {
           "Mechanical Functions": {
             "Fixed Core 6 Pin (YC-)": {
-              "1-3/8\"-2\"": { part: "10-3639", imageKey: "TailpieceAccentraFixed" },
-              "2-1/4\"": { part: "10-3640", imageKey: "TailpieceAccentraFixed" },
+              "1-3/8\"-2\"": { part: "10-3639", imageKey: "TailpieceACCENTRAConventional6" },
+              "2-1/4\"": { part: "10-3640", imageKey: "TailpieceACCENTRAConventional6" },
             },
             "Fixed Core 7 Pin (YC-7P-)": {
-              "1-3/8\"-2\"": { part: "10-3664", imageKey: "TailpieceAccentraFixed" },
-              "2-1/4\"": { part: "10-3665", imageKey: "TailpieceAccentraFixed" },
+              "1-3/8\"-2\"": { part: "10-3664", imageKey: "TailpieceACCENTRAConventional7" },
+              "2-1/4\"": { part: "10-3665", imageKey: "TailpieceACCENTRAConventional7" },
             },
           },
           "Electrified Functions": {
             "Fixed Core 6 Pin (YC-)": {
-              "1-3/8\"-2\"": { part: "10-3783", imageKey: "TailpieceAccentraFixed" },
-              "2-1/4\"": { part: "10-3784", imageKey: "TailpieceAccentraFixed" },
+              "1-3/8\"-2\"": { part: "10-3783", imageKey: "TailpieceACCENTRAConventional6EM" },
+              "2-1/4\"": { part: "10-3784", imageKey: "TailpieceACCENTRAConventional6EM" },
             },
             "Fixed Core 7 Pin (YC-7P-)": {
-              "1-3/8\"-2\"": { part: "10-3785", imageKey: "TailpieceAccentraFixed" },
-              "2-1/4\"": { part: "10-3786", imageKey: "TailpieceAccentraFixed" },
+              "1-3/8\"-2\"": { part: "10-3785", imageKey: "TailpieceACCENTRAConventional7EM" },
+              "2-1/4\"": { part: "10-3786", imageKey: "TailpieceACCENTRAConventional7EM" },
             },
           },
         },
@@ -123,14 +123,14 @@ const tailpieceData = {
         "All SFIC": {
           "Mechanical Functions": {
             "6 or 7 Pin": {
-              "1-3/8\"-2\"": { part: "10-3633", imageKey: "TailpieceSFIC" },
-              "2-1/4\"": { part: "10-3634", imageKey: "TailpieceSFIC" },
+              "1-3/8\"-2\"": { part: "10-3633", imageKey: "TailpieceSargentSFIC" },
+              "2-1/4\"": { part: "10-3634", imageKey: "TailpieceSargentSFIC" },
             },
           },
           "Electrified Functions": {
             "6 or 7 Pin": {
-              "1-3/8\"-2\"": { part: "10-3775", imageKey: "TailpieceSFIC" },
-              "2-1/4\"": { part: "10-3776", imageKey: "TailpieceSFIC" },
+              "1-3/8\"-2\"": { part: "10-3775", imageKey: "TailpieceSargentSFICEM" },
+              "2-1/4\"": { part: "10-3776", imageKey: "TailpieceSargentSFICEM" },
             },
           },
         },
@@ -143,22 +143,22 @@ const tailpieceData = {
           },
           "Electrified Functions": {
             "LFIC 6 Pin (SF-)": {
-              "1-3/8\"-2\"": { part: "10-3789", imageKey: "TailpieceSchlageLFIC" },
-              "2-1/4\"": { part: "10-3790", imageKey: "TailpieceSchlageLFIC" },
+              "1-3/8\"-2\"": { part: "10-3789", imageKey: "TailpieceSchlageLFICEM" },
+              "2-1/4\"": { part: "10-3790", imageKey: "TailpieceSchlageLFICEM" },
             },
           },
         },
         "ASSA ABLOY ACCENTRA": {
           "Mechanical Functions": {
             "LFIC 6 Pin (YRC-)": {
-              "1-3/8\"-2\"": { part: "10-1191", imageKey: "TailpieceAccentraLFIC" },
-              "2-1/4\"": { part: "10-1192", imageKey: "TailpieceAccentraLFIC" },
+              "1-3/8\"-2\"": { part: "10-1191", imageKey: "TailpieceACCENTRALFIC" },
+              "2-1/4\"": { part: "10-1192", imageKey: "TailpieceACCENTRALFIC" },
             },
           },
           "Electrified Functions": {
             "LFIC 6 Pin (YRC-)": {
-              "1-3/8\"-2\"": { part: "10-3787", imageKey: "TailpieceAccentraLFIC" },
-              "2-1/4\"": { part: "10-3788", imageKey: "TailpieceAccentraLFIC" },
+              "1-3/8\"-2\"": { part: "10-3787", imageKey: "TailpieceACCENTRALFICEM" },
+              "2-1/4\"": { part: "10-3788", imageKey: "TailpieceACCENTRALFICEM" },
             },
           },
         },

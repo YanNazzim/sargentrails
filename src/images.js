@@ -186,6 +186,16 @@ const images = {
   TailpieceSargentSFICXC: require("./images/TailpieceSargentSFICXC.png"),
   TailpieceSargentSFICEM: require("./images/TailpieceSargentSFICEM.png"),
   TailpieceSargentSFICEMXC: require("./images/TailpieceSargentSFICEMXC.png"),
+  TailpieceSchlageConventional: require("./images/TailpieceSchlageConventional.png"),
+  TailpieceSchlageConventionalEM: require("./images/TailpieceSchlageConventionalEM.png"),
+  TailpieceACCENTRAConventional6: require("./images/TailpieceACCENTRAConventional6.png"),
+  TailpieceACCENTRAConventional6EM: require("./images/TailpieceACCENTRAConventional6EM.png"),
+  TailpieceACCENTRAConventional7: require("./images/TailpieceACCENTRAConventional7.png"),
+  TailpieceACCENTRAConventional7EM: require("./images/TailpieceACCENTRAConventional7EM.png"),
+  TailpieceSchlageLFIC: require("./images/TailpieceSchlageLFIC.png"),
+  TailpieceSchlageLFICEM: require("./images/TailpieceSchlageLFICEM.png"),
+  TailpieceACCENTRALFIC: require("./images/TailpieceACCENTRALFIC.png"),
+  TailpieceACCENTRALFICEM: require("./images/TailpieceACCENTRALFICEM.png"),
 
 };
 
