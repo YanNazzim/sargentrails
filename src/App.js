@@ -49,7 +49,7 @@ const App = () => {
       },
       {
         name: "Bored Locks",
-        subTabs: ["Bored Lockbodies", "Latches", "Tailpieces"], // 'Cylindrical Lockbodies' is already here, now it will be rendered by the component
+        subTabs: ["Lockbodies", "Latches", "Tailpieces"], // 'Cylindrical Lockbodies' is already here, now it will be rendered by the component
       },
     ],
     universalTabs: ["Lever Handles Only", "Cylinders", "Strikes"],
@@ -102,7 +102,7 @@ const App = () => {
         return <Latches />;
       case "Tailpieces":
         return <Tailpieces />;
-      case "Bored Lockbodies": // Add this case
+      case "Lockbodies": // Add this case
         return <CylindricalLockbodies />; // Render the new component
       case "Strikes":
         return <Strikes />;
