@@ -437,7 +437,7 @@ const Tailpieces = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">Tailpiece Part Number Lookup</h1>
+      <h1 className="Heading">Bored Lock Tailpieces</h1>
 
       <form onSubmit={handleSubmit} className="part-form">
         {/* Lock Series Selection */}

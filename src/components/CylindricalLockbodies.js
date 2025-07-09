@@ -409,7 +409,7 @@ const CylindricalLockbodies = () => {
 
   return (
     <div className="content-transition">
-      <h1 className="Heading">10X Line Cylindrical Lockbodies</h1>
+      <h1 className="Heading">Bored Lock Lockbodies</h1>
       <form onSubmit={handleSubmit} className="part-form">
         {/* Lockbody Type Selection */}
         <div className="form-group">
