@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from "react";
 import Rails from "./components/RailsForm";
 import Levers from "./components/Levers";
@@ -6,18 +7,20 @@ import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
 import Cylinders from "./components/Cylinders";
-import MountingPosts from "./components/MountingPosts"; // Import the new component
+import MountingPosts from "./components/MountingPosts";
 import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
 import MortiseSpindles from "./components/MortiseSpindles";
-import Faceplates from "./components/faceplates"
+import Faceplates from "./components/faceplates";
 import MortiseLockbodies from "./components/MortiseLockbodies";
 import MortiseTrimKits from "./components/MortiseTrimKits";
 import Strikes from "./components/Strikes";
-import EndCaps from "./components/EndCaps"; // Import the new component
+import EndCaps from "./components/EndCaps";
 import Tailpieces from "./components/Tailpieces";
+// Import the new component
+import CylindricalLockbodies from "./components/CylindricalLockbodies"; // Add this line
 
 const App = () => {
   const tabConfig = {
@@ -46,7 +49,7 @@ const App = () => {
       },
       {
         name: "Bored Locks",
-        subTabs: ["Cylindrical Lockbodies", "Latches", "Tailpieces"],
+        subTabs: ["Cylindrical Lockbodies", "Latches", "Tailpieces"], // 'Cylindrical Lockbodies' is already here, now it will be rendered by the component
       },
     ],
     universalTabs: ["Lever Handles Only", "Cylinders", "Strikes"],
@@ -71,17 +74,17 @@ const App = () => {
 
   const renderContent = () => {
     switch (activeSubTab) {
-    case "Mortise Spindles": 
-      return <MortiseSpindles />;
-    case "Mounting Posts":
-      return <MountingPosts />; 
+      case "Mortise Spindles":
+        return <MortiseSpindles />;
+      case "Mounting Posts":
+        return <MountingPosts />;
       case "Faceplates":
-      return <Faceplates />;
+        return <Faceplates />;
       case "Trim Kits":
-        return <MortiseTrimKits/>;
+        return <MortiseTrimKits />;
       case "Rails/Crossbars":
         return <Rails />;
-    case "End Caps": 
+      case "End Caps":
         return <EndCaps />;
       case "Trims":
         return <Trims />;
@@ -98,38 +101,11 @@ const App = () => {
       case "Latches":
         return <Latches />;
       case "Tailpieces":
-      return <Tailpieces />;
-      case "Cylindrical Lockbodies":
-        return (
-          <div className="content-transition">
-            <h1 className="Heading">
-              Cylindrical Lockbodies <br /> 🛑 Dont use this page yet! 🛑
-            </h1>
-            {/* Add the GIF here */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              {" "}
-              {/* Optional centering and margin */}
-              <img
-                src={images.stop}
-                alt="Cylinder animation"
-                style={{ height: "200px", borderRadius: "8px" }} // Optional styling
-              />
-              <img
-                src={images.UnderConstruction}
-                alt="Cylinder animation"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }} // Optional styling
-              />
-            </div>
-          </div>
-        );
-    case "Strikes":
-      return <Strikes />;
-
-
+        return <Tailpieces />;
+      case "Cylindrical Lockbodies": // Add this case
+        return <CylindricalLockbodies />; // Render the new component
+      case "Strikes":
+        return <Strikes />;
       case "Mortise Lockbodies":
         return <MortiseLockbodies />;
       default:
