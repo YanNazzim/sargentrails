@@ -14,6 +14,12 @@ export const partsData = {
     "Wide-IN-J": "68-7067",
     "Wide-IN-G": "68-7066",
 
+            // #region SN Series Rails (Rail to be used with SN200/SN210 Reader)
+    "Wide-SN-E": "68-7064",
+    "Wide-SN-F": "68-7065",
+    "Wide-SN-J": "68-7067",
+    "Wide-SN-G": "68-7066",
+
             // #region 12-56-SN Series Rails (Rail to be used with SN200/SN210 Reader)
     "Wide-12-56-SN-E": "68-7385",
     "Wide-12-56-SN-F": "68-7386",
