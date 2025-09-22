@@ -173,6 +173,30 @@ const images = {
   StrikeWBS: require("./images/WBStrike.png"),
   StrikeDBS: require("./images/DBStrike.png"),
   Strike9200DBS: require("./images/9200DBStrike.png"),
+
+  TailpieceConventional: require("./images/TailpieceConventional.png"),
+  TailpieceConventionalKESO: require("./images/TailpieceConventionalKESO.png"),
+  TailpieceConventionalEM: require("./images/TailpieceConventionalEM.png"),
+  TailpieceConventionalEMKESO: require("./images/TailpieceConventionalEMKESO.png"),
+  TailpieceSargentLFIC: require("./images/TailpieceSargentLFIC.png"),
+  TailpieceSargentLFICXC: require("./images/TailpieceSargentLFICXC.png"),
+  TailpieceSargentLFICEM: require("./images/TailpieceSargentLFICEM.png"),
+  TailpieceSargentLFICXCEM: require("./images/TailpieceSargentLFICXCEM.png"),
+  TailpieceSargentSFIC: require("./images/TailpieceSargentSFIC.png"),
+  TailpieceSargentSFICXC: require("./images/TailpieceSargentSFICXC.png"),
+  TailpieceSargentSFICEM: require("./images/TailpieceSargentSFICEM.png"),
+  TailpieceSargentSFICEMXC: require("./images/TailpieceSargentSFICEMXC.png"),
+  TailpieceSchlageConventional: require("./images/TailpieceSchlageConventional.png"),
+  TailpieceSchlageConventionalEM: require("./images/TailpieceSchlageConventionalEM.png"),
+  TailpieceACCENTRAConventional6: require("./images/TailpieceACCENTRAConventional6.png"),
+  TailpieceACCENTRAConventional6EM: require("./images/TailpieceACCENTRAConventional6EM.png"),
+  TailpieceACCENTRAConventional7: require("./images/TailpieceACCENTRAConventional7.png"),
+  TailpieceACCENTRAConventional7EM: require("./images/TailpieceACCENTRAConventional7EM.png"),
+  TailpieceSchlageLFIC: require("./images/TailpieceSchlageLFIC.png"),
+  TailpieceSchlageLFICEM: require("./images/TailpieceSchlageLFICEM.png"),
+  TailpieceACCENTRALFIC: require("./images/TailpieceACCENTRALFIC.png"),
+  TailpieceACCENTRALFICEM: require("./images/TailpieceACCENTRALFICEM.png"),
+
 };
 
 export default images;
