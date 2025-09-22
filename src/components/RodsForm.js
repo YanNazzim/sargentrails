@@ -451,18 +451,18 @@ const RodsForm = () => {
         { code: "94-0038", description: "Bottom Bolt" },
       ],
       topCaseParts: [
-        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        { code: "68-5374", description: "Top Case Assembly", type: "Standard" },
         {
-          code: "68-3523",
+          code: "68-5375",
           description: "Top Case Assembly",
           type: '1/4" Cladding',
         },
         {
-          code: "68-3524",
+          code: "68-5376",
           description: "Top Case Assembly",
           type: '1/2" Cladding',
         },
-        { code: "650", description: "Top Strike", type: "Strike" },
+        { code: "640", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
         { code: "68-0888", description: "Bottom Plate", type: "Strike" },
@@ -519,6 +519,17 @@ const RodsForm = () => {
         { code: "94-0038", description: "Bottom Bolt" },
       ],
       topCaseParts: [
+        { code: "68-3522", description: "Top Case Assembly", type: "Standard" },
+        {
+          code: "68-3523",
+          description: "Top Case Assembly",
+          type: '1/4" Cladding',
+        },
+        {
+          code: "68-3524",
+          description: "Top Case Assembly",
+          type: '1/2" Cladding',
+        },
         { code: "650", description: "Top Strike", type: "Strike" },
       ],
       bottomCaseParts: [
