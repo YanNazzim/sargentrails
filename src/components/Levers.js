@@ -226,7 +226,7 @@ const leversRequiringHanding = [
   "MN",
   "MH",
   "MG",
-  "MW",
+  "WG",
   "MZ",
   "NU",
   "H008",
