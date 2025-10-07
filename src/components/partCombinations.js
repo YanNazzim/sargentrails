@@ -1,3 +1,5 @@
+// src/components/partCombinations.js
+
 // Define part combinations with base parts and prefix overrides
 const partCombinations = {
   // Narrow Stile
@@ -264,7 +266,6 @@ const partCombinations = {
       },
     },
   },
-
   "AD8600-Left": {
     base: {
       chassis: "68-5068",
@@ -427,7 +428,7 @@ const partCombinations = {
       },
     },
   },
-  "NB8700-Left": {
+    "OLD8700-Left": {
     base: {
       chassis: `68-4568`,
       chassisCover: `68-0405-FINISH`,
@@ -438,13 +439,51 @@ const partCombinations = {
       },
     },
   },
-  "NB8700-Right": {
+  "OLD8700-Right": {
     base: {
       chassis: `68-4569`,
       chassisCover: `68-0405-FINISH`,
       prefixes: {
         53: {
           chassis: "68-5450",
+        },
+      },
+    },
+  },
+  "NB8700-Left": {
+    base: {
+      chassis: `
+        <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2201 
+        <br /> Functions 10 & 40 = 68-2163 
+        <br /> Function 28 = 68-2210 
+        <br /> Functions 62 & 63 = 68-2204`,
+      chassisCover: `68-0405-FINISH`,
+      prefixes: {
+        53: {
+          chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3714 
+            <br /> Functions 10 & 40 = 68-3823 
+            <br /> Function 28 = 68-3829 
+            <br /> Functions 62 & 63 = 68-3826`,
+        },
+      },
+    },
+  },
+  "NB8700-Right": {
+    base: {
+      chassis: `
+        <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-2202 
+        <br /> Functions 10 & 40 = 68-2164 
+        <br /> Function 28 = 68-2211 
+        <br /> Functions 62 & 63 = 68-2205`,
+      chassisCover: `68-0405-FINISH`,
+      prefixes: {
+        53: {
+          chassis: `
+            <br /> All Functions (Except 10, 28, 40, 62, 63) = 68-3715 
+            <br /> Functions 10 & 40 = 68-3824 
+            <br /> Function 28 = 68-3830 
+            <br /> Functions 62 & 63 = 68-3827`,
         },
       },
     },
@@ -471,7 +510,6 @@ const partCombinations = {
             <br /> 63 Function Only (Pull Trim) = 68-3727
             <br /> 66 Function Only (Pull Trim) = 68-3732
             `,
-
           chassisCover: `
             <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
             <br /> 16 & 66 Function (No Indicator) = 68-1015-FINISH 
@@ -630,7 +668,6 @@ const partCombinations = {
             <br /> 63 Function Only (Pull Trim) = 68-3728
             <br /> 66 Function Only (Pull Trim) = 68-3733
             `,
-
           chassisCover: `
             <br /> All Functions (Except 16, 28, 63, 66) = 68-0406-FINISH 
             <br /> 16 & 66 Function (No Indicator) = 68-1016-FINISH 
@@ -811,7 +848,7 @@ const partCombinations = {
         },
       },
     },
-  },
+  }, // <-- *** FIX #1: ADDED MISSING COMMA HERE ***
   "8900-Left": {
     base: {
       chassis: `
@@ -836,7 +873,7 @@ const partCombinations = {
         `,
     },
   },
-
+  // PE80 Series Devices
   // Narrow Stile
   "PE8300-Left": {
     base: {
@@ -1137,7 +1174,6 @@ const partCombinations = {
       },
     },
   },
-
   "AD-PE8600-Left": {
     base: {
       chassis: ` 68-5068`,
@@ -1408,7 +1444,6 @@ const partCombinations = {
                 <br /> 63 Function Only (Pull Trim) = 68-3727
                 <br /> 66 Function Only (Pull Trim) = 68-3732
                 `,
-
           chassisCover: `
                 <br /> All Functions (Except 16, 28, 63, 66) = PE-0145-FINISH 
                 <br /> 16 & 66 Function (No Indicator) = PE-0410-FINISH 
@@ -1599,7 +1634,6 @@ const partCombinations = {
                 <br /> 63 Function Only (Pull Trim) = 68-3728
                 <br /> 66 Function Only (Pull Trim) = 68-3733
                 `,
-
           chassisCover: `
                 <br /> All Functions (Except 16, 28, 63, 66) = PE-0145-FINISH 
                 <br /> 16 & 66 Function (No Indicator) = PE-0411-FINISH 
@@ -1746,7 +1780,7 @@ const partCombinations = {
                 <br /> 16 Function Only (No Indicator) = 68-7965 
                 <br /> 28 Function Only (Pull Trim) = 68-7971
                 <br /> 63 Function Only (Pull Trim) = 68-7967
-                <br /> 66 Function Only (Pull Trim) = 68-7970
+                <br /> 66 Function Only (Pull Trim) = 68-7969
                 `,
           chassisCover: `
                   <br /> 16 Function Only (No Indicator) = PE-0410-FINISH 
@@ -1807,7 +1841,7 @@ const partCombinations = {
         },
       },
     },
-  },
+  } // <-- *** FIX #2: REMOVED EXTRA COMMA HERE ***
 };
 
 export default partCombinations;

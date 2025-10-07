@@ -932,3 +932,4 @@ const leverStyleOptions = [
 ];
 
 export default leverStyleOptions;
+export { leverStyleOptions }; // <-- ADDED EXPORT

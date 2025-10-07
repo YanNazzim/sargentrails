@@ -3,77 +3,80 @@ import React, { useState } from "react";
 import Select from "react-select";
 import "../App.css"; // Ensure App.css styles are applied
 
-// Helper function to parse the dimension string
-const parseDimension = (dimensionString) => {
-  if (!dimensionString) return { standard: "", studio: "" };
-  const parts = dimensionString.split("/");
-  return {
-    standard: parts[0] || "",
-    studio: parts[1] || parts[0] || "", // If only one part, use it for both
-  };
-};
-
-const spindleData = {
+// MORTISE SPINDLE DATA - EXPORTED
+export const spindleData = {
   "Standard Trim": { // Corresponds to "PART No." column
-    "1-3/8 to 1-5/8": { partNo: "82-1625", dimension: parseDimension("1.712/1.692") },
-    "1-3/4 to 2": { partNo: "82-1626", dimension: parseDimension("1.900/1.880") },
-    "2-1/8 to 2-3/8": { partNo: "82-1627", dimension: parseDimension("2.087/2.067") },
-    "2-1/2 to 2-3/4": { partNo: "82-1628", dimension: parseDimension("2.274/2.254") },
-    "2-7/8 to 3-1/8": { partNo: "82-1629", dimension: parseDimension("2.462/2.442") },
-    "3-1/4 to 3-1/2": { partNo: "82-1630", dimension: parseDimension("2.650/2.630") },
-    "3-5/8 to 3-7/8": { partNo: "82-1631", dimension: parseDimension("2.837/2.817") },
-    "4 to 4-1/4": { partNo: "82-1632", dimension: parseDimension("3.024/3.004") },
-    "4-3/8 to 4-5/8": { partNo: "82-1633", dimension: parseDimension("3.212/3.192") },
-    "4-3/4 to 5": { partNo: "82-1634", dimension: parseDimension("3.399/3.379") },
-    "5-1/8 to 5-3/8": { partNo: "82-1635", dimension: parseDimension("3.587/3.567") },
-    "5-1/2 to 5-3/4": { partNo: "82-1636", dimension: parseDimension("3.774/3.754") },
-    "5-7/8 to 6": { partNo: "82-1637", dimension: parseDimension("3.962/3.942") },
-    "4-1/4 to 4-1/2": { partNo: "82-1638", dimension: parseDimension("4.149/4.129") }, // New range
-    "5-1/8 to 5-7/8": { partNo: "82-1639", dimension: parseDimension("4.337/4.317") }, // New range
-    "5-1/2 to 6": { partNo: "82-1640", dimension: parseDimension("4.524/4.504") }, // New range
-    "5-7/8 to 6.25": { partNo: "82-1641", dimension: parseDimension("4.712/4.692") }, // New range
+    "1-3/8 to 1-5/8": { partNo: "82-1625", dimension: { standard: "1.712", studio: "1.692" } },
+    "1-3/4 to 2": { partNo: "82-1626", dimension: { standard: "1.900", studio: "1.880" } },
+    "2-1/8 to 2-3/8": { partNo: "82-1627", dimension: { standard: "2.087", studio: "2.067" } },
+    "2-1/2 to 2-3/4": { partNo: "82-1628", dimension: { standard: "2.274", studio: "2.254" } },
+    "2-7/8 to 3-1/8": { partNo: "82-1629", dimension: { standard: "2.462", studio: "2.442" } },
+    "3-1/4 to 3-1/2": { partNo: "82-1630", dimension: { standard: "2.650", studio: "2.630" } },
+    "3-5/8 to 3-7/8": { partNo: "82-1631", dimension: { standard: "2.837", studio: "2.817" } },
+    "4 to 4-1/4": { partNo: "82-1632", dimension: { standard: "3.024", studio: "3.004" } },
+    "4-3/8 to 4-5/8": { partNo: "82-1633", dimension: { standard: "3.212", studio: "3.192" } },
+    "4-3/4 to 5": { partNo: "82-1634", dimension: { standard: "3.399", studio: "3.379" } },
+    "5-1/8 to 5-3/8": { partNo: "82-1635", dimension: { standard: "3.587", studio: "3.567" } },
+    "5-1/2 to 5-3/4": { partNo: "82-1636", dimension: { standard: "3.774", studio: "3.754" } },
+    "5-7/8 to 6": { partNo: "82-1637", dimension: { standard: "3.962", studio: "3.942" } },
+    "4-1/4 to 4-1/2": { partNo: "82-1638", dimension: { standard: "4.149", studio: "4.129" } }, // New range
+    "5-1/8 to 5-7/8": { partNo: "82-1639", dimension: { standard: "4.337", studio: "4.317" } }, // New range
+    "5-1/2 to 6": { partNo: "82-1640", dimension: { standard: "4.524", studio: "4.504" } }, // New range
+    "5-7/8 to 6.25": { partNo: "82-1641", dimension: { standard: "4.712", studio: "4.692" } }, // New range
   },
   "Studio Trim": { // Corresponds to "MAKE FROM PART No." column
-    "1-3/8 to 1-5/8": { partNo: "82-0367", dimension: parseDimension("1.712/1.692") },
-    "1-3/4 to 2": { partNo: "82-0368", dimension: parseDimension("1.900/1.880") },
-    "2-1/8 to 2-3/8": { partNo: "82-0369", dimension: parseDimension("2.087/2.067") },
-    "2-1/2 to 2-3/4": { partNo: "82-0370", dimension: parseDimension("2.274/2.254") },
-    "2-7/8 to 3-1/8": { partNo: "82-0371", dimension: parseDimension("2.462/2.442") },
-    "3-1/4 to 3-1/2": { partNo: "82-0372", dimension: parseDimension("2.650/2.630") },
-    "3-5/8 to 3-7/8": { partNo: "82-0373", dimension: parseDimension("2.837/2.817") },
-    "4 to 4-1/4": { partNo: "82-0374", dimension: parseDimension("3.024/3.004") },
-    "4-3/8 to 4-5/8": { partNo: "82-0375", dimension: parseDimension("3.212/3.192") },
-    "4-3/4 to 5": { partNo: "82-0376", dimension: parseDimension("3.399/3.379") },
-    "5-1/8 to 5-3/8": { partNo: "82-0377", dimension: parseDimension("3.587/3.567") },
-    "5-1/2 to 5-3/4": { partNo: "82-0378", dimension: parseDimension("3.774/3.754") },
-    "5-7/8 to 6": { partNo: "82-0379", dimension: parseDimension("3.962/3.942") },
+    "1-3/8 to 1-5/8": { partNo: "82-0367", dimension: { standard: "1.712", studio: "1.692" } },
+    "1-3/4 to 2": { partNo: "82-0368", dimension: { standard: "1.900", studio: "1.880" } },
+    "2-1/8 to 2-3/8": { partNo: "82-0369", dimension: { standard: "2.087", studio: "2.067" } },
+    "2-1/2 to 2-3/4": { partNo: "82-0370", dimension: { standard: "2.274", studio: "2.254" } },
+    "2-7/8 to 3-1/8": { partNo: "82-0371", dimension: { standard: "2.462", studio: "2.442" } },
+    "3-1/4 to 3-1/2": { partNo: "82-0372", dimension: { standard: "2.650", studio: "2.630" } },
+    "3-5/8 to 3-7/8": { partNo: "82-0373", dimension: { standard: "2.837", studio: "2.817" } },
+    "4 to 4-1/4": { partNo: "82-0374", dimension: { standard: "3.024", studio: "3.004" } },
+    "4-3/8 to 4-5/8": { partNo: "82-0375", dimension: { standard: "3.212", studio: "3.192" } },
+    "4-3/4 to 5": { partNo: "82-0376", dimension: { standard: "3.399", studio: "3.379" } },
+    "5-1/8 to 5-3/8": { partNo: "82-0377", dimension: { standard: "3.587", studio: "3.567" } },
+    "5-1/2 to 5-3/4": { partNo: "82-0378", dimension: { standard: "3.774", studio: "3.754" } },
+    "5-7/8 to 6": { partNo: "82-0379", dimension: { standard: "3.962", studio: "3.942" } },
     // Additional ranges from the image for "MAKE FROM PART No." column
-    "4-1/4 to 4-1/2": { partNo: "82-0380", dimension: parseDimension("4.149/4.129") },
-    "5-1/8 to 5-7/8": { partNo: "82-0381", dimension: parseDimension("4.337/4.317") },
-    "5-1/2 to 6": { partNo: "82-0382", dimension: parseDimension("4.524/4.504") },
-    "5-7/8 to 6.25": { partNo: "82-0383", dimension: parseDimension("4.712/4.692") },
+    "4-1/4 to 4-1/2": { partNo: "82-0380", dimension: { standard: "4.149", studio: "4.129" } },
+    "5-1/8 to 5-7/8": { partNo: "82-0381", dimension: { standard: "4.337", studio: "4.317" } },
+    "5-1/2 to 6": { partNo: "82-0382", dimension: { standard: "4.524", studio: "4.504" } },
+    "5-7/8 to 6.25": { partNo: "82-0383", dimension: { standard: "4.712", studio: "4.692" } },
   },
 };
 
-const doorThicknessOptions = [
-  { value: "1-3/8 to 1-5/8", label: '1-3/8" to 1-5/8"' },
-  { value: "1-3/4 to 2", label: '1-3/4" to 2" (Standard)' },
-  { value: "2-1/8 to 2-3/8", label: '2-1/8" to 2-3/8"' },
-  { value: "2-1/2 to 2-3/4", label: '2-1/2" to 2-3/4"' },
-  { value: "2-7/8 to 3-1/8", label: '2-7/8" to 3-1/8"' },
-  { value: "3-1/4 to 3-1/2", label: '3-1/4" to 3-1/2"' },
-  { value: "3-5/8 to 3-7/8", label: '3-5/8" to 3-7/8"' },
-  { value: "4 to 4-1/4", label: '4" to 4-1/4"' },
-  { value: "4-3/8 to 4-5/8", label: '4-3/8" to 4-5/8"' },
-  { value: "4-3/4 to 5", label: '4-3/4" to 5"' },
-  { value: "5-1/8 to 5-3/8", label: '5-1/8" to 5-3/8"' },
-  { value: "5-1/2 to 5-3/4", label: '5-1/2" to 5-3/4"' },
-  { value: "5-7/8 to 6", label: '5-7/8" to 6"' },
-  { value: "4-1/4 to 4-1/2", label: '4-1/4" to 4-1/2"' },
-  { value: "5-1/8 to 5-7/8", label: '5-1/8" to 5-7/8"' },
-  { value: "5-1/2 to 6", label: '5-1/2" to 6"' },
-  { value: "5-7/8 to 6.25", label: '5-7/8" to 6-1/4"' },
-];
+// Helper function to convert fractional strings to decimal for sorting
+const parseThicknessToDecimal = (thicknessStr) => {
+  const parts = thicknessStr.split(" ");
+  let decimalValue = 0;
+  if (parts.length === 1) {
+    // Handle whole numbers like "2" or "3.5"
+    decimalValue = parseFloat(thicknessStr);
+  } else if (parts.length === 2) {
+    // Handle mixed numbers like "1 3/8"
+    const whole = parseFloat(parts[0]);
+    const fractionParts = parts[1].split("/");
+    if (fractionParts.length === 2) {
+      const numerator = parseFloat(fractionParts[0]);
+      const denominator = parseFloat(fractionParts[1]);
+      decimalValue = whole + (numerator / denominator);
+    }
+  }
+  return decimalValue;
+};
+
+// Sort the door thickness options numerically
+const sortedDoorThicknessKeys = Object.keys(spindleData["Standard Trim"]).sort((a, b) => {
+  const decimalA = parseThicknessToDecimal(a);
+  const decimalB = parseThicknessToDecimal(b);
+  return decimalA - decimalB;
+});
+
+const doorThicknessOptions = sortedDoorThicknessKeys.map((key) => ({
+  value: key,
+  label: `${key}"`,
+}));
 
 const customSelectStyles = {
   control: (provided) => ({

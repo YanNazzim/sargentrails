@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import "../App.css"; // Ensure App.css styles are applied
+// Removed unused imports to clear warnings, you can re-add them if needed later: import images from "../images";
 
-// Data extracted from 10X Lockbodies.pdf
-const lockbodiesData = {
+// Data extracted from 10X Lockbodies.pdf - EXPORTED
+export const lockbodiesData = {
   "10X Line": {
     types: [
       { value: "Mechanical", label: "Mechanical Lockbody" },

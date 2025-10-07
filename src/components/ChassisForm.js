@@ -1,11 +1,11 @@
-// ChassisForm.js
-import React, { useState } from "react";
+// src/components/ChassisForm.js
+import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
-import images from "../images"; // Adjust the path as needed
+import images from "../images";
 import "../App.css";
-import partCombinations from "./partCombinations"; // Adjust the path as needed
+import partCombinations from "./partCombinations";
 
-const ChassisForm = () => {
+const ChassisForm = ({ initialData }) => {
   const [formData, setFormData] = useState({
     device: "",
     prefixes: [],
@@ -17,10 +17,29 @@ const ChassisForm = () => {
   const [partNumber, setPartNumber] = useState("");
   const [relatedParts, setRelatedParts] = useState({
     chassis: "",
-    innerChassis: "", // Added innerChassis
+    innerChassis: "",
     chassisCover: "",
     coverScrews: "",
   });
+
+  // This hook pre-fills the form when a search result is clicked
+  useEffect(() => {
+    if (initialData) {
+      setFormData(prevData => ({
+        ...prevData,
+        device: initialData.device || "",
+        // Reset other fields to ensure a clean state for the new search
+        prefixes: [],
+        function: "",
+        handing: "",
+        finish: "",
+      }));
+      // Clear previous results
+      setPartNumber("");
+      setRelatedParts({ chassis: "", innerChassis: "", chassisCover: "", coverScrews: "" });
+    }
+  }, [initialData]);
+
 
   // Define the devices with divisions for Narrow Stile and Wide Stile
   const devices = [
@@ -35,7 +54,8 @@ const ChassisForm = () => {
     { code: "AD8600", display: "AD8600 CVR", stile: "Wide" },
     { code: "WD8600", display: "WD8600 CVR", stile: "Wide" },
     { code: "8700", display: "8700 SVR", stile: "Wide" },
-    { code: "NB8700", display: "NB8700 SVR (No Bottom Rod)", stile: "Wide" },
+    { code: "NB8700", display: "NB8700 SVR (New Style: Post 04/14/25)", stile: "Wide" },
+    { code: "OLD8700", display: "NB8700 SVR (Old Style: Pre 04/14/25)", stile: "Wide" }, // <-- *** FIX IS HERE ***
     { code: "8800", display: "8800 Rim", stile: "Wide" },
     { code: "8900", display: "8900 Mortise", stile: "Wide" },
     
@@ -229,20 +249,15 @@ const ChassisForm = () => {
       return;
     }
   
+    const finishValue = formData.finish; 
   
-    // Extract the finish value (e.g., "03", "04", etc.)
-    const finishValue = formData.finish; // Access the `value` property
-  
-  
-    // Look up related parts
     const parts = getPartsForCombination(
       formData.device,
       formData.handing,
       formData.prefixes,
-      finishValue // Pass the extracted finish value
+      finishValue
     );
   
-    // Apply finish to parts
     setRelatedParts({
       chassis: parts.chassis,
       innerChassis: parts.innerChassis,
@@ -250,11 +265,9 @@ const ChassisForm = () => {
       coverScrews: parts.coverScrews,
     });
   
-    // Generate part number
     const prefixKey = formData.prefixes.sort().join("-");
     const key = `${prefixKey}-${formData.device}-${formData.function}${formData.handing ? `-${formData.handing}` : ""}`;
-    const generatedNumber = `${key}`;
-    setPartNumber(generatedNumber);
+    setPartNumber(key); // Set partNumber to trigger result display
   };
 
   // Handle reset
@@ -269,7 +282,7 @@ const ChassisForm = () => {
     setPartNumber("");
     setRelatedParts({
       chassis: "",
-      innerChassis: "", // Reset innerChassis
+      innerChassis: "",
       chassisCover: "",
       coverScrews: "",
     });
@@ -289,7 +302,6 @@ const ChassisForm = () => {
     }),
   };
 
-  // Custom Option to render finish image and label in the dropdown list
   const FinishOption = (props) => {
     return (
       <components.Option {...props}>
@@ -309,7 +321,6 @@ const ChassisForm = () => {
     );
   };
 
-  // Custom SingleValue to render the selected finish with its image
   const FinishSingleValue = (props) => {
     return (
       <components.SingleValue {...props}>
@@ -450,7 +461,7 @@ const ChassisForm = () => {
                 dangerouslySetInnerHTML={{ __html: relatedParts.chassis }}
               />
             </p>
-            {relatedParts.innerChassis && ( // Conditionally display innerChassis
+            {relatedParts.innerChassis && (
               <p>
                 <strong>Inner Chassis:</strong>{" "}
                 <span

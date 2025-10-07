@@ -744,68 +744,135 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Tab Menu */
-.tab-menu {
-  display: flex;
-  position: relative;
-  background-color: #172a45; /* Medium navy */
-  border-radius: 50px;
-  padding: 6px;
-  width: 600px;
-  max-width: 90%;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Global Search Bar Styling - MODIFIED FOR FIXED POSITION AND SIZE */
+.global-search-container {
+    /* REMOVED: margin-bottom, width, max-width, align-items: center */
+    padding: 10px;
+    background-color: transparent; /* Default collapsed state */
+    border-radius: 15px;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out; 
+    
+    /* NEW FIXED POSITION STYLES */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000; /* Increased z-index */
+    
+    /* Display Setup */
+    display: flex;
+    flex-direction: row-reverse; /* Puts the icon on the right */
 }
 
-/* Tab Buttons */
-.tab-button {
-  padding: 12px 24px;
-  border: none;
-  background: #172a45;
-  color: #7f8fa4;
-  font-size: 1.6rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-wrap: wrap;
+/* Styles for the container when the search bar is open */
+.global-search-container.expanded {
+    width: 450px; /* INCREASED WIDTH */
+    padding: 10px;
+    background-color: #001f3f; /* Dark background when open */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    /* For consistency, explicitly define positioning properties for transition */
 }
 
-.tab-button:hover {
-  background: #2ecc71;
-  color: #001f3f;
-  transform: translateX(-2px);
+
+.search-option-label {
+    padding: 5px 0;
+    line-height: 1.3;
 }
 
-.tab-button.active {
-  background: #2ecc71;
-  color: #001f3f;
-  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+.category-header-result {
+    font-weight: 700;
+    color: #2ecc71; /* Teal accent */
+    margin-bottom: 5px;
+    font-size: 1.1em;
 }
 
-/* Master Tabs Row with Slider */
+.description-result {
+    font-size: 1em;
+    color: #a0aec0; /* Lighter white/gray */
+    margin-bottom: 3px;
+}
+
+.part-info-result {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #fff;
+    white-space: normal;
+}
+
+
+/* NEW: Wrapper for the icon and beta tag - ensure it sits to the right */
+.search-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* No margin-bottom needed due to flex positioning */
+}
+
+/* NEW: Icon button styling */
+.search-toggle-button {
+    background: #2ecc71;
+    color: #001f3f;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.search-toggle-button:hover {
+    background: #26af62;
+    transform: scale(1.05);
+}
+
+/* NEW: Beta Tag Styling */
+.beta-tag {
+    background: #ffcc00;
+    color: #001f3f;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* NEW: Wrapper for the search field to ensure correct display */
+.search-field-wrapper {
+    flex-grow: 1; 
+    min-width: 0;
+    margin-right: 10px; /* Space between field and icon */
+}
+
+
+/* Master Tabs Row: Redesign for Horizontal Buttons */
 .master-tabs-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Changed from column to row for intuitive selection */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: center;
   position: relative;
   background-color: #172a45; /* Medium navy */
-  border-radius: 50px;
-  padding: 6px;
-  width: 250px;
-  max-width: 90%;
+  border-radius: 12px;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%; /* Ensure full use of space */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
 }
 
+/* Master Tab Button: Large, Primary Selection */
 .master-tab {
-  flex: 1;
-  padding: 12px 24px;
+  flex: 1; /* Allow tabs to grow evenly */
+  min-width: 150px; /* Ensure a minimum width */
+  padding: 12px 18px; 
   border: none;
   background: transparent;
   color: #7f8fa4;
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 1.5rem; /* Larger font for primary choice */
+  font-weight: 700; 
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -813,54 +880,45 @@ body {
   letter-spacing: 0.5px;
   position: relative;
   z-index: 1;
+  margin: 5px; /* Spacing between buttons */
 }
 
 .master-tab.active {
-  color: #001f3f; /* Navy */
+  background: #2ecc71; /* Teal background for active tab */
+  color: #001f3f; /* Navy text for better contrast */
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
 }
 
-/* Slider */
+/* REMOVE SLIDER STYLES HERE */
 .slider {
-  position: absolute;
-  top: -3px;
-  left: -4;
-  width: calc(100% - 12px);
-  height: calc(100% / 3); /* Dynamic width based on number of tabs */
-  background-color: #2ecc71; /* Teal */
-  border-radius: 50px;
-  transition: transform 0.3s ease;
-  z-index: 0;
+  display: none; /* Hide the slider element */
 }
 
-/* Responsive Design for Master Tabs */
-@media (max-width: 780px) {
-  .master-tabs-row {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .master-tab {
-    font-size: 1.5rem;
-  }
-
-  .slider {
-    width: calc(100% - 8px);
-    top: 4px;
-  }
-  /* Sub Tabs Grid */
-  .sub-tabs-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+/* Initial Load Message (Displayed when no tab is selected) */
+.initial-load-message {
+  padding: 3rem;
+  text-align: center;
+  background-color: #172a45;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  margin-top: 2rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 480px) {
-  .master-tab {
-    font-size: 1.3rem;
-  }
+.initial-title {
+  font-size: 2.5rem;
+  color: #2ecc71;
+  margin-bottom: 1rem;
+}
+
+.initial-instruction {
+  font-size: 1.5rem;
+  color: #ffffff;
+  max-width: 800px;
 }
 
 /* Sub Tabs Grid */
@@ -892,44 +950,13 @@ body {
 .sub-tab:hover {
   background: #2ecc71;
   color: #001f3f;
-  transform: translateX(-2px);
+  transform: translateY(-2px);
 }
 
 .sub-tab.active {
   background: #2ecc71;
   color: #001f3f;
   font-weight: 600;
-}
-
-/* Universal Tab Styling */
-.universal-tab {
-  border-color: #ffd700;
-  position: relative;
-}
-
-.universal-tab .universal-star {
-  color: #ffd700;
-  font-size: 1.1em;
-}
-
-.universal-tab:hover {
-  border-color: #ffd700;
-  background: #ffd700;
-  color: #001f3f;
-}
-
-.universal-tab:hover .universal-star {
-  color: #001f3f;
-}
-
-.universal-tab.active {
-  background: #ffd700;
-  color: #001f3f;
-  border-color: #ffd700;
-}
-
-.universal-tab.active .universal-star {
-  color: black;
 }
 
 /* Universal Tab Styling */
@@ -971,176 +998,21 @@ body {
   }
 
   .master-tab {
-    flex: 1 1 120px;
+    flex: 1 1 45%; /* Allow two per row on mobile/tablet */
     padding: 10px 12px;
     font-size: 1.3rem;
+    min-width: 100px;
   }
+  
 
   .sub-tabs-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
   }
-}
-
-/* Glow Effect for Active Tab */
-.tab-button.active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50px;
-  box-shadow: 0 0 12px rgba(46, 204, 113, 0.4);
-  opacity: 0;
-  animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-  0% {
-    opacity: 0.4;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Content transitions */
-.content-transition {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0.5;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Chassis form */
-.chassis-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  font-family: "Arial", sans-serif;
-  text-align: center;
-  padding: 20px;
-}
-
-.chassis-form-content {
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 100%;
-}
-
-.chassis-form-title {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.chassis-form-message {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.chassis-form-suggestion {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.chassis-form-email {
-  font-size: 1.2rem;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.chassis-form-email:hover {
-  text-decoration: underline;
-}
-
-/* Mobile Responsive Enhancements */
-@media (max-width: 768px) {
-  .app-container {
-    padding: 1rem;
-    margin: 1rem;
-  }
-
-  .Heading {
-    font-size: 1.6rem;
-    padding: 1rem;
-  }
-
-  .parts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .generate-button,
-  .reset-button {
-    width: 100%;
-  }
-
-  .react-select__control {
-    min-height: 45px !important;
-  }
-
-  .checkbox-group {
-    grid-template-columns: 1fr;
-  }
-
-  .tab-menu {
-    width: 100%;
-    padding: 4px;
-  }
-
-  .tab-button {
-    padding: 12px 16px;
-    font-size: 1rem;
-  }
-
-  .parts-column {
-    margin: 5px 0;
-    padding: 15px;
-  }
-
-  .result-container {
-    padding: 1.5rem;
-  }
-  .master-tabs-row {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .master-tab {
-    padding: 10px 12px;
-    font-size: 1rem;
-  }
-
-  .sub-tabs-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-  }
-
+  
   .sub-tab {
     min-width: 100%;
+    font-size: 0.9rem;
   }
 }
 
@@ -1172,11 +1044,9 @@ body {
     padding: 10px 12px;
     font-size: 0.85rem;
   }
-
-  .tab-indicator {
-    left: -10vw;
-    min-width: 125px;
-    max-width: 125px;
+  
+  .master-tab {
+    font-size: 1.1rem;
   }
 
   .part-number {
@@ -1191,9 +1061,54 @@ body {
   .chassis-form-content {
     padding: 25px;
   }
+  
+  .sub-tab {
+    font-size: 0.85rem;
+  }
+  
+  /* Mobile: When expanded, expand to full width and anchor to left/right edges */
+  .global-search-container.expanded {
+    width: calc(100vw - 40px); 
+    left: 20px; 
+    right: 20px;
+  }
 }
 
 .Finishes {
   color: black;
   border-radius: "25px"
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #172a45;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

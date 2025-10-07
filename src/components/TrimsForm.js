@@ -1,4 +1,4 @@
-// TrimsForm.js
+// src/components/TrimsForm.js
 import React, { useState, useEffect, useRef } from "react";
 import { trimsData } from "../trimsData"; // Import trimsData instead of partsDataimport "../App.css";
 import images from "../images"; // Adjust path as needed
@@ -216,7 +216,7 @@ const CustomTrimSingleValue = (props) => {
   );
 };
 
-const TrimsForm = () => {
+const TrimsForm = ({ initialData }) => { // <-- ACCEPT PROP
   const [formData, setFormData] = useState({
     series: "",
     device: "",
@@ -237,6 +237,34 @@ const TrimsForm = () => {
   const [note, setNote] = useState("");
   const [warning, setWarning] = useState("");
   const resultRef = useRef(null);
+
+  // New useEffect to handle pre-filling when initialData prop changes
+  useEffect(() => {
+    if (initialData && initialData.functionCode) {
+      
+      // The helper function and variables were removed as they were unnecessary and causing linting issues.
+
+      const newFormData = {
+        series: initialData.series || "",
+        device: initialData.device || "",
+        // If series is 7000, we should clear functionCode and let user select both O/I functions
+        functionCode: initialData.series !== "7000" ? initialData.functionCode || "" : "",
+        // We do not pre-fill 7000 series O/I functions from simple part number lookups yet
+        outsideFunctionCode: "",
+        insideFunctionCode: "", 
+        cylinderPrefixes: [], 
+        electricalPrefixes: [], 
+        doorThickness: initialData.doorThickness || "",
+        trim: initialData.trim || "",
+        leverStyle: initialData.leverStyle || "",
+        finish: initialData.finish || "",
+        handing: initialData.handing || "",
+      };
+
+      setFormData(newFormData);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialData]); 
 
   // Auto-scroll to results when part number updates
   useEffect(() => {
@@ -309,9 +337,6 @@ const TrimsForm = () => {
     formData.series !== "30" && // Exclude 30 series
     !noCylinderFunctions.includes(formData.functionCode); // Hide if function is in noCylinderFunctions
 
-  // Lever style options (NEW)
-
-
   // Function options (same for all series)
   const functionOptions = [
     { value: "01", label: "01 - Blank Escutcheon Plate" },
@@ -331,7 +356,7 @@ const TrimsForm = () => {
     {
       value: "16",
       label:
-        "16 - Classroom Intruder - Key Outside Retracts Latch; Key Inside Unlocks/Locks O/S Trim",
+        "16 - Classroom Intruder - Key Outside Retracts Latch/Key Inside Unlocks/Locks O/S Trim",
     },
     { value: "28", label: "28 - Passage Only (No cylinder) With Pull" },
     { value: "40", label: "40 - Freewheeling Dummy" },
@@ -346,7 +371,7 @@ const TrimsForm = () => {
     {
       value: "66",
       label:
-        "66 - Key Outside Retracts Latch; Key Inside Unlocks/Lock Outside Trim",
+        "66 - Key Outside Retracts Latch/Key Inside Unlocks/Lock Outside Trim",
     },
     { value: "73", label: "73 - Electrified ET Trim (Fail Safe)" },
     { value: "74", label: "74 - Electrified ET Trim (Fail Secure)" },
@@ -817,7 +842,7 @@ const TrimsForm = () => {
     return series === "PE80" ? ["WE", "NE"] : ["ET"];
   };
 
-  // Get the list of valid trims
+  // eslint-disable-next-line no-unused-vars
   const availableTrimOptions = trimOptions.filter((opt) =>
     getAvailableTrims(
       formData.series,
@@ -942,6 +967,14 @@ const TrimsForm = () => {
 
     // 🔹 Apply "31-" prefix if thickness is over 1-3/4"
     const needs31Prefix = thickness !== "1-3/4"; // Applies for "2", "2-1/4", "QSPAR"
+
+    // Helper to get selected prefixes string
+    const selectedPrefixesDisplay = [
+      ...formData.electricalPrefixes,
+      ...formData.cylinderPrefixes,
+    ]
+      .sort()
+      .join("-");
 
     // 🔹 Special handling for 7000 series
     if (formData.series === "7000") {
@@ -1108,14 +1141,6 @@ const TrimsForm = () => {
 
     }),
   };
-
-  // Compute a display string for selected prefixes (for verification)
-  const selectedPrefixesDisplay = [
-    ...formData.electricalPrefixes,
-    ...formData.cylinderPrefixes,
-  ]
-    .sort()
-    .join("-");
 
   return (
     <div className="content-transition">

@@ -44,7 +44,8 @@ const FinishSingleValue = (props) => {
   );
 };
 
-const lockbodyFunctions = [
+// MORTISE LOCKBODY FUNCTIONS - EXPORTED
+export const lockbodyFunctions = [
   // Functions from "Deadbolt Only"
   {
     value: "8203",
@@ -355,7 +356,7 @@ const lockbodyFunctions = [
   {
     value: "8292",
     label: "8292 - All Purpose Holdback",
-    description: "Key outside retracts latchbolt. Key inside can lock latchbolt in retracted position when the lever is rotated. Trim inside always retracts latchbolt. No outside trim. Auxiliary deadlatch. 7892\"T\" turn is used in place of knob (32 or 32D only). Special-105 cam required for inside cylinder (Supplied Standard). Latch holdback to set, rotating & hold lever, then rotate key twice toward latchbolt. Lever will remain in rotated position indicating it is unlocked.",
+    description: 'Key outside retracts latchbolt. Key inside can lock latchbolt in retracted position when the lever is rotated. Trim inside always retracts latchbolt. No outside trim. Auxiliary deadlatch. 7892"T" turn is used in place of knob (32 or 32D only). Special-105 cam required for inside cylinder (Supplied Standard). Latch holdback to set, rotating & hold lever, then rotate key twice toward latchbolt. Lever will remain in rotated position indicating it is unlocked.',
     image: null,
   },
   {

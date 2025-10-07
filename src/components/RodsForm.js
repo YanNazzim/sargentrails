@@ -1,27 +1,13 @@
+// src/components/RodsForm.js
 import React, { useState } from "react";
 import Select, { components } from "react-select"; // Import Select and components
 import images from "../images"; // Adjust the path as needed
 
 import "../App.css";
 
-const RodsForm = () => {
-  const [formData, setFormData] = useState({
-    device: "",
-    has5CHPrefix: false,
-    hasAuxiliaryControl: false, // New state for 106/113 Auxiliary Control
-    openingHeight: "",
-    aff: "",
-    finish: "",
-  });
-
-  const [partNumber, setPartNumber] = useState("");
-  const [topRodParts, setTopRodParts] = useState([]);
-  const [bottomRodParts, setBottomRodParts] = useState([]);
-  const [topCaseParts, setTopCaseParts] = useState([]);
-  const [bottomCaseParts, setBottomCaseParts] = useState([]);
-
-  // Define the devices and their corresponding rod kits
-  const devices = [
+// --- START: VERTICAL ROD DEVICES DATA (EXPORTED) ---
+// Note: $ is used as a placeholder for the finish code in the part codes.
+export const verticalRodDevices = [
     // Surface Vertical Rods
     {
       code: "8700",
@@ -30,7 +16,7 @@ const RodsForm = () => {
       topRodParts: [
         { code: "670T", description: "Top Rod Only", type: "Standard" },
         {
-          code: `97-0020-${formData.finish}`,
+          code: `97-0020-$`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -49,7 +35,7 @@ const RodsForm = () => {
       bottomRodParts: [
         { code: "670B", description: "Bottom Rod Only", type: "Standard" },
         {
-          code: `97-0020-${formData.finish}`,
+          code: `97-0020-$`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -82,12 +68,12 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018-${formData.finish}`,
+          code: `97-0018-$`,
           description: "Top Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
@@ -103,24 +89,24 @@ const RodsForm = () => {
           type: "12-",
         },
         {
-          code: `97-0392-${formData.finish}`,
+          code: `97-0392-$`,
           description: "Top Case Cover",
           type: "12-",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "12-",
         },
 
         { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
         {
-          code: `97-0392-${formData.finish}`,
+          code: `97-0392-$`,
           description: "Top Case Cover",
           type: "(12-)NB ",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "(12-)NB",
         },
@@ -136,12 +122,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `97-0084-${formData.finish}`,
+          code: `97-0084-$`,
           description: "Top Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },
@@ -158,7 +144,7 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018-${formData.finish}`,
+          code: `97-0018-$`,
           description: "Bottom Case Cover",
           type: "Standard",
         },
@@ -174,7 +160,7 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4) ",
         },
         {
-          code: `97-0087-${formData.finish}`,
+          code: `97-0087-$`,
           description: "Bottom Case Cover",
           type: "(12-)(FM, HC, HC4) ",
         },
@@ -217,7 +203,7 @@ const RodsForm = () => {
       topRodParts: [
         { code: "670T", description: "Top Rod Only", type: "Standard" },
         {
-          code: `97-0020-${formData.finish}`,
+          code: `97-0020-$`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -236,7 +222,7 @@ const RodsForm = () => {
       bottomRodParts: [
         { code: "670B", description: "Bottom Rod Only", type: "Standard" },
         {
-          code: `97-0020-${formData.finish}`,
+          code: `97-0020-$`,
           description: "Rod Guide",
           type: "Standard",
         },
@@ -260,36 +246,36 @@ const RodsForm = () => {
       topCaseParts: [
         { code: "68-4557", description: "Top Case Assembly", type: "Standard" },
         {
-          code: `97-0018-${formData.finish}`,
+          code: `97-0018-$`,
           description: "Top Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
 
         { code: "68-4559", description: "Top Case Assembly", type: "12-" },
         {
-          code: `97-0392-${formData.finish}`,
+          code: `97-0392-$`,
           description: "Top Case Cover",
           type: "12-",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "12-",
         },
 
         { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
         {
-          code: `97-0392-${formData.finish}`,
+          code: `97-0392-$`,
           description: "Top Case Cover",
           type: "(12-)NB ",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "(12-)NB",
         },
@@ -300,12 +286,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4) ",
         },
         {
-          code: `97-0084-${formData.finish}`,
+          code: `97-0084-$`,
           description: "Top Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },
@@ -317,12 +303,12 @@ const RodsForm = () => {
           type: "Standard",
         },
         {
-          code: `97-0018-${formData.finish}`,
+          code: `97-0018-$`,
           description: "Bottom Case Cover",
           type: "Standard",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Top Case Cover Screws",
           type: "Standard",
         },
@@ -333,12 +319,12 @@ const RodsForm = () => {
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `97-0087-${formData.finish}`,
+          code: `97-0087-$`,
           description: "Bottom Case Cover",
           type: "(12-)(FM, HC, HC4)",
         },
         {
-          code: `68-3905-${formData.finish}`,
+          code: `68-3905-$`,
           description: "Bottom Case Cover Screws",
           type: "(12-)(FM, HC, HC4)",
         },
@@ -958,6 +944,26 @@ const RodsForm = () => {
     },
   ];
 
+
+const RodsForm = () => {
+  const [formData, setFormData] = useState({
+    device: "",
+    has5CHPrefix: false,
+    hasAuxiliaryControl: false, // New state for 106/113 Auxiliary Control
+    openingHeight: "",
+    aff: "",
+    finish: "",
+  });
+
+  const [partNumber, setPartNumber] = useState("");
+  const [topRodParts, setTopRodParts] = useState([]);
+  const [bottomRodParts, setBottomRodParts] = useState([]);
+  const [topCaseParts, setTopCaseParts] = useState([]);
+  const [bottomCaseParts, setBottomCaseParts] = useState([]);
+
+  // Define the devices and their corresponding rod kits (using the exported data)
+  const devices = verticalRodDevices;
+
   const finishes = [
     {
       value: "03",
@@ -1057,7 +1063,7 @@ const RodsForm = () => {
 
           }}
         />
-        <span>{props.data.label}</span>
+        <span>{props.children}</span>
       </components.Option>
     );
   };
@@ -1078,7 +1084,7 @@ const RodsForm = () => {
 
           }}
         />
-        <span>{props.data.label}</span>
+        <span>{props.children}</span>
       </components.SingleValue>
     );
   };
@@ -1127,20 +1133,41 @@ const RodsForm = () => {
       selectedDevice.bottomRodKit
     } x ${formData.openingHeight} x ${formData.aff}`;
 
-    // Combine the part numbers with line breaks
-    // Add finish to the part number if a Surface Rod Device is selected
-    const fullPartNumber = formData.device.includes("8700")
-      ? `${topRodPartNumber} ${formData.finish} <br /> ${bottomRodPartNumber} ${formData.finish}`
-      : `${topRodPartNumber} <br /> ${bottomRodPartNumber}`;
+    // Replace generic placeholder '$' in parts list with actual finish
+    const applyFinishToPart = (part) => {
+        let code = part.code;
+        // The placeholder in the data is '$-' or just '$'
+        if (typeof code === 'string' && code.includes('-$')) {
+            code = code.replace('-$', `-${formData.finish}`);
+        }
+        return { ...part, code };
+    };
+
+    // Apply the finish to the individual parts arrays
+    const finalTopRodParts = topRodParts.map(applyFinishToPart);
+    const finalBottomRodParts = selectedDevice.bottomRodParts.map(applyFinishToPart);
+    const finalTopCaseParts = (selectedDevice.topCaseParts || []).map(applyFinishToPart);
+    const finalBottomCaseParts = (selectedDevice.bottomCaseParts || []).map(applyFinishToPart);
+
+
+    // Combine the rod part numbers for display
+    // Add finish to the part number if a Surface Rod Device is selected (8700/PE8700)
+    const isSurfaceRodDevice = formData.device.includes("8700");
+    const finishSuffix = isSurfaceRodDevice ? `-${formData.finish}` : "";
+
+    const fullPartNumber = (
+      `Top Rod Kit: ${topRodPartNumber}${finishSuffix} <br />` +
+      `Bottom Rod Kit: ${bottomRodPartNumber}${finishSuffix}`
+    );
 
     // Set the full part number and individual parts
     setPartNumber(fullPartNumber);
-    setTopRodParts(topRodParts);
-    setBottomRodParts(selectedDevice.bottomRodParts);
+    setTopRodParts(finalTopRodParts);
+    setBottomRodParts(finalBottomRodParts);
 
     // Set top and bottom case parts
-    setTopCaseParts(selectedDevice.topCaseParts || []);
-    setBottomCaseParts(selectedDevice.bottomCaseParts || []);
+    setTopCaseParts(finalTopCaseParts);
+    setBottomCaseParts(finalBottomCaseParts);
   };
 
   // Handle reset
@@ -1151,10 +1178,13 @@ const RodsForm = () => {
       hasAuxiliaryControl: false,
       openingHeight: "",
       aff: "",
+      finish: "",
     });
     setPartNumber("");
     setTopRodParts([]);
     setBottomRodParts([]);
+    setTopCaseParts([]);
+    setBottomCaseParts([]);
   };
 
   return (
@@ -1296,12 +1326,10 @@ const RodsForm = () => {
                   minHeight: "40px",
                 }),
                 option: (provided) => ({
-                  ...provided,
                   display: "flex",
                   alignItems: "center",
                   color: "black",
-                    borderRadius: "25px",
-
+                  borderRadius: "25px",
                 }),
               }}
             />

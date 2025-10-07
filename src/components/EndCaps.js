@@ -47,6 +47,62 @@ const FinishSingleValue = (props) => {
   );
 };
 
+// Define data for the form - EXPORTED
+export const seriesOptions = [
+    { value: "80 Series", label: "80 Series" },
+    { value: "PE80 Series", label: "PE80 Series" },
+    { value: "20 Series", label: "20 Series" },
+    { value: "30 Series", label: "30 Series" },
+];
+
+// Define the prefixes - EXPORTED
+export const prefixesData = [
+  { code: "43", name: "Flush End Cap", applicableSeries: ["80 Series"] },
+  { code: "OL", name: "Overlapping End Cap", applicableSeries: ["PE80 Series"] },
+];
+
+// Define a mapping for end cap part numbers, including bracket and screws - EXPORTED
+export const endCapPartDetails = {
+    "80 Series": {
+      "default": { // Default for 80 Series if no specific prefix is selected
+        endCap: "565",
+        bracket: "Included in 565",
+        screws: "68-3905",
+      },
+      "43": { // For "43 - Flush End Cap" on 80 Series
+        endCap: "665",
+        bracket: "Included in 665",
+        screws: "68-3905",
+      },
+    },
+    "PE80 Series": {
+      "default": { // Default for PE80 Series if no specific prefix is selected
+        endCap: "PE-0266",
+        bracket: "PE-2626",
+        screws: "68-3905",
+      },
+      "OL": { // For "OL - Overlapping End Cap" on PE80 Series
+        endCap: "PE-0267",
+        bracket: "PE-2630",
+        screws: "68-3905",
+      },
+    },
+    "20 Series": {
+      "default": { // Default for 20 Series
+        endCap: "68-0434",
+        bracket: "68-2141",
+        screws: "68-3905",
+      },
+    },
+    "30 Series": {
+      "default": { // Default for 30 Series
+        endCap: "28-0110",
+        bracket: "68-3367",
+        screws: "68-3905",
+      },
+    },
+};
+
 const EndCaps = () => {
   const [formData, setFormData] = useState({
     series: null,
@@ -55,19 +111,6 @@ const EndCaps = () => {
   });
 
   const [partNumber, setPartNumber] = useState("");
-
-  // Define data for the form
-  const seriesOptions = [
-    { value: "80 Series", label: "80 Series" },
-    { value: "PE80 Series", label: "PE80 Series" },
-    { value: "20 Series", label: "20 Series" },
-    { value: "30 Series", label: "30 Series" },
-  ];
-
-  const prefixesData = [
-    { code: "43", name: "Flush End Cap", applicableSeries: ["80 Series"] },
-    { code: "OL", name: "Overlapping End Cap", applicableSeries: ["PE80 Series"] },
-  ];
 
   // Standard finish options
   const standardFinishOptions = [
@@ -256,47 +299,6 @@ const EndCaps = () => {
     setPartNumber("");
   };
 
-  // Define a mapping for end cap part numbers, including bracket and screws
-  const endCapPartDetails = {
-    "80 Series": {
-      "default": { // Default for 80 Series if no specific prefix is selected
-        endCap: "565",
-        bracket: "Included in 565",
-        screws: "68-3905",
-      },
-      "43": { // For "43 - Flush End Cap" on 80 Series
-        endCap: "665",
-        bracket: "Included in 665",
-        screws: "68-3905",
-      },
-    },
-    "PE80 Series": {
-      "default": { // Default for PE80 Series if no specific prefix is selected
-        endCap: "PE-0266",
-        bracket: "PE-2626",
-        screws: "68-3905",
-      },
-      "OL": { // For "OL - Overlapping End Cap" on PE80 Series
-        endCap: "PE-0267",
-        bracket: "PE-2630",
-        screws: "68-3905",
-      },
-    },
-    "20 Series": {
-      "default": { // Default for 20 Series
-        endCap: "68-0434",
-        bracket: "68-2141",
-        screws: "68-3905",
-      },
-    },
-    "30 Series": {
-      "default": { // Default for 30 Series
-        endCap: "28-0110",
-        bracket: "68-3367",
-        screws: "68-3905",
-      },
-    },
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
