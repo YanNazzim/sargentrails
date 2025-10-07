@@ -4,7 +4,8 @@ import Select from "react-select";
 import "../App.css";
 import images from "../images"; // Import the images object
 
-const tailpieceData = {
+// Change: Added 'export' keyword
+export const tailpieceData = {
   "10X Line": {
     "Fixed Core": {
       "Mechanical Functions": {
@@ -244,23 +245,23 @@ const Tailpieces = () => {
 
   const cylinderSubtypeOptions = (() => {
     if (selectedLockSeries && selectedCylinderType && selectedFunctionType) {
+      let dataPath;
       if (selectedCylinderType.value === "Competitive Cylinders/Cores") {
         if (selectedCompetitiveType && selectedBrand) {
-          return Object.keys(
+          dataPath =
             tailpieceData[selectedLockSeries.value][
               selectedCylinderType.value
             ][selectedCompetitiveType.value][selectedBrand.value][
               selectedFunctionType.value
-            ]
-          ).map((key) => ({ value: key, label: key }));
+            ][selectedCylinderSubtype.value];
         }
       } else {
-        return Object.keys(
+        dataPath =
           tailpieceData[selectedLockSeries.value][selectedCylinderType.value][
             selectedFunctionType.value
-          ]
-        ).map((key) => ({ value: key, label: key }));
+          ][selectedCylinderSubtype.value];
       }
+      return dataPath ? Object.keys(dataPath).map((key) => ({ value: key, label: key })) : [];
     }
     return [];
   })();

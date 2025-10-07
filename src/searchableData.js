@@ -12,6 +12,7 @@ import partCombinations from './components/partCombinations';
 import { verticalRodDevices } from './components/RodsForm';
 import { devices as mortiseExitDevices, functions as mortiseExitFunctions, prefixes as mortiseExitPrefixes } from './components/MortiseExitLockbodies';
 import { prefixesData as endCapPrefixesData, endCapPartDetails } from './components/EndCaps';
+import { tailpieceData } from './components/Tailpieces'; // <-- Correctly imported
 
 // Helper function to determine available trims (Keep existing helper)
 const getAvailableTrims = (series, device, functionCode) => {
@@ -30,18 +31,57 @@ const getAvailableTrims = (series, device, functionCode) => {
     return series === "PE80" ? ["WE", "NE"] : ["ET"];
 };
 
-// --- NEW LOGIC: Generate Full Trims Form Output for Search ---
+// Helper to get hardware details (copied from TrimsForm.js logic)
+const getTrimHardware = (series, thickness, basePartNumber) => {
+    if (!basePartNumber) return { formatted: "Unknown Hardware" };
+
+    const category = series.startsWith("7000") ? "7000" : "standard";
+    const suffixMatch = basePartNumber.match(/-(8|4|2)$/);
+    const suffix = suffixMatch ? suffixMatch[0] : "";
+    
+    const trimHardware = trimsData.trimHardware;
+    const selectedThickness = trimHardware[category]?.[thickness] ? thickness : "1-3/4"; 
+    
+    const screws = trimHardware[category]?.[selectedThickness]?.screws || ["Unknown Screws"];
+    const spindle = trimHardware[category]?.[selectedThickness]?.spindles?.[suffix] || "Unknown Spindle";
+
+    let hardwareText = "";
+    const currentFunctionCode = basePartNumber.split('-')[0].substring(3); 
+    
+    if (!Array.isArray(screws)) {
+        hardwareText = "Hardware details not available";
+    } else {
+        if (currentFunctionCode === "04") {
+             hardwareText = screws.slice(0, 2).join(", ");
+        } else if (currentFunctionCode === "10") {
+             hardwareText = screws[0] || "";
+        } else {
+             hardwareText = screws[0] + "<br />" + (spindle || "");
+        }
+    }
+    
+    return { formatted: hardwareText };
+};
+
+const getCylinderUsed = (lookupKey, thickness) => {
+    const cylinderData = trimsData.cylinders && trimsData.cylinders[lookupKey];
+    return cylinderData && thickness in cylinderData
+        ? cylinderData[thickness]
+        : "N/A"; 
+};
+
+// -------------------------------------------------------------
+// START: DEFINITIONS FOR ALL SEARCH FUNCTIONS (must be defined before being called)
+// -------------------------------------------------------------
+
 const getSearchableTrimsFullOutput = () => {
     const fullTrims = [];
-    
-    // Define the subset of parameters to iterate over for search result generation
     const supportedSeries = ["80", "PE80", "90"];
     const supportedDevices = {
-        "80": ["8800", "8500"], // Focus on main devices
+        "80": ["8800", "8500"], 
         "PE80": ["PE8800", "PE8500"],
         "90": ["9800", "9900"],
     };
-    // Focus on functions that commonly use cylinders/hardware
     const supportedFunctions = [ "04", "06", "13", "16", "44", "75"]; 
     const supportedHandings = ["RHR", "LHR"];
     const supportedThicknesses = ["1-3/4", "2-1/4"];
@@ -49,53 +89,9 @@ const getSearchableTrimsFullOutput = () => {
         { value: "15", label: "15" }, 
         { value: "26D", label: "26D" },
     ];
-    
-    // We assume the default standard trim and a common standard lever for pre-calculation
     const defaultTrim = "ET"; 
     const defaultLever = "L"; 
 
-    // Helper functions to replicate TrimsForm logic for this scope
-    const trimHardware = trimsData.trimHardware;
-    const cylindersData = trimsData.cylinders;
-
-    const getCylinderUsed = (lookupKey, thickness) => {
-        const cylinderData = cylindersData && cylindersData[lookupKey];
-        return cylinderData && thickness in cylinderData
-            ? cylinderData[thickness]
-            : "N/A"; 
-    };
-    
-    const getTrimHardware = (series, thickness, basePartNumber) => {
-        if (!basePartNumber) return { formatted: "Unknown Hardware" };
-
-        const category = series.startsWith("7000") ? "7000" : "standard";
-        const suffixMatch = basePartNumber.match(/-(8|4|2)$/);
-        const suffix = suffixMatch ? suffixMatch[0] : "";
-        
-        const selectedThickness = trimHardware[category]?.[thickness] ? thickness : "1-3/4"; 
-        
-        const screws = trimHardware[category]?.[selectedThickness]?.screws || ["Unknown Screws"];
-        const spindle = trimHardware[category]?.[selectedThickness]?.spindles?.[suffix] || "Unknown Spindle";
-
-        let hardwareText = "";
-        const currentFunctionCode = basePartNumber.split('-')[0].substring(3); 
-        
-        if (!Array.isArray(screws)) {
-            hardwareText = "Hardware details not available";
-        } else {
-            if (currentFunctionCode === "04") {
-                 hardwareText = screws.slice(0, 2).join(", ");
-            } else if (currentFunctionCode === "10") {
-                 hardwareText = screws[0] || "";
-            } else {
-                 hardwareText = screws[0] + "<br />" + (spindle || "");
-            }
-        }
-        
-        return { formatted: hardwareText };
-    };
-    
-    // Main iteration loop
     for (const series of supportedSeries) {
         for (const device of supportedDevices[series]) {
             for (const functionCode of supportedFunctions) {
@@ -107,7 +103,6 @@ const getSearchableTrimsFullOutput = () => {
                         for (const finish of standardFinishes) {
                             for (const thickness of supportedThicknesses) {
                                 
-                                // Skip if the default trim is not available for this device/function
                                 const availableTrims = getAvailableTrims(series, device, functionCode);
                                 if (!availableTrims.includes(defaultTrim)) continue;
 
@@ -120,24 +115,19 @@ const getSearchableTrimsFullOutput = () => {
                                     .replace("[trim]", defaultTrim)
                                     .replace("[lever style]", defaultLever);
                                     
-                                // Fix example part number format for search results
                                 const finalPartLine = generatedNumber.replace(/^(.*)\[trim\](.*)$/g, '$1' + defaultTrim + defaultLever + '$2');
                                 
-                                // --- Hardware and Cylinder Lookup ---
                                 const cylinderUsed = getCylinderUsed(lookupKey, thickness);
                                 const hardwareDetails = getTrimHardware(series, thickness, basePartRaw);
                                 
-                                // --- Final Formatted Output for Modal ---
                                 const formattedOutput = `
                                     <strong>Part Number:</strong> ${finalPartLine}<br />
                                     <strong>Cylinder Used:</strong> ${cylinderUsed}<br />
                                     ${hardwareDetails.formatted}
                                 `;
                                 
-                                // Determine the main search key (e.g., '713-8')
                                 const searchKeyBase = basePartRaw.replace(/[^\w-]/g, '');
 
-                                // --- Add to searchable array ---
                                 fullTrims.push({
                                     category: "Exit Trims (Full Output)",
                                     subcategory: `${series} ${device}`,
@@ -155,7 +145,6 @@ const getSearchableTrimsFullOutput = () => {
     }
     return fullTrims;
 };
-// --- END NEW LOGIC ---
 
 const getSearchableLatches = () => {
     const latches = [];
@@ -172,9 +161,8 @@ const getSearchableLatches = () => {
         if (seriesData.options) {
             for (const [optionKey, optionDetails] of Object.entries(seriesData.options)) {
                 const friendlySeriesName = seriesNameMap[seriesKey] || seriesKey;
-                const partNumbers = optionDetails.base.replace(/<br\s*\/?>/gi, ' '); // Get part numbers for keywords
+                const partNumbers = optionDetails.base.replace(/<br\s*\/?>/gi, ' '); 
 
-                // Extract backset from the label for more specific keywords
                 const backsetMatch = optionDetails.label.match(/(\d-\d\/\d")/);
                 const backsetKeyword = backsetMatch ? backsetMatch[0] : '';
 
@@ -183,7 +171,7 @@ const getSearchableLatches = () => {
                     `latches for ${friendlySeriesName}`,
                     `${friendlySeriesName} latch`,
                     `${friendlySeriesName} latches`,
-                    `${seriesKey} latch`, // Keep original key
+                    `${seriesKey} latch`, 
                     optionKey,
                     optionDetails.label,
                     partNumbers,
@@ -207,6 +195,7 @@ const getSearchableLatches = () => {
     }
     return latches;
 };
+
 const getSearchableMortiseFunctions = () => {
     return mortiseFunctionData.map(func => ({
         category: "Mortise Lockbodies",
@@ -217,6 +206,7 @@ const getSearchableMortiseFunctions = () => {
         keywords: `8200 mortise function ${func.value} ${func.label} ${func.description} trim deadbolt lockbody`.toLowerCase()
     }));
 };
+
 const getSearchableCylindricalLockbodies = () => {
     const lockbodies = [];
     const lockbodyParts = cylindricalData["10X Line"].parts;
@@ -244,6 +234,7 @@ const getSearchableCylindricalLockbodies = () => {
     }
     return lockbodies;
 };
+
 const getSearchableSpindles = () => {
     const spindles = [];
     for (const [trimType, trimData] of Object.entries(spindleData)) {
@@ -251,12 +242,10 @@ const getSearchableSpindles = () => {
             const dim = partDetails.dimension;
             const length = dim.standard ? `Std: ${dim.standard}" / Studio: ${dim.studio}"` : 'N/A';
             
-            // *** NEW: Add more granular keywords for thickness ranges ***
             let extraKeywords = '';
             if (thicknessRange.includes("1-3/4 to 2")) extraKeywords += " 1-7/8";
             if (thicknessRange.includes("2-1/8 to 2-3/8")) extraKeywords += " 2-1/4";
             if (thicknessRange.includes("2-1/2 to 2-3/4")) extraKeywords += " 2-5/8";
-            // Add other common intermediate values for other ranges if needed
 
             spindles.push({
                 category: "Mortise Spindles",
@@ -270,6 +259,7 @@ const getSearchableSpindles = () => {
     }
     return spindles;
 };
+
 const getSearchableLevers = () => {
     const levers = [];
     leverStyleOptions.forEach(lever => {
@@ -309,6 +299,7 @@ const getSearchableLevers = () => {
     });
     return levers;
 };
+
 const getSearchableRails = () => {
     const rails = [];
     for (const [railType, railParts] of Object.entries(railData)) {
@@ -332,6 +323,7 @@ const getSearchableRails = () => {
     }
     return rails;
 };
+
 const getSearchableChassis = () => {
     const chassis = [];
     const deviceMap = {
@@ -364,6 +356,7 @@ const getSearchableChassis = () => {
     }
     return chassis;
 };
+
 const getSearchableVerticalRods = () => {
     const rodParts = [];
     verticalRodDevices.forEach(device => {
@@ -396,6 +389,7 @@ const getSearchableVerticalRods = () => {
     });
     return rodParts;
 };
+
 const getSearchableTrims = () => {
     const trims = [];
 
@@ -424,7 +418,7 @@ const getSearchableTrims = () => {
 
             trims.push({
                 category: "Exit Trims",
-                subcategory: `${series} ${device} - F${functionCode}`,
+                subcategory: "Styles/Codes",
                 search_key: key,
                 description: `${trimType} - Function ${functionCode} (Base Template)`,
                 part_info: `Template: ${partTemplate.replace(/\n/g, ' ')}`,
@@ -455,6 +449,7 @@ const getSearchableTrims = () => {
     
     return trims;
 };
+
 const getSearchableEndCaps = () => {
     const endCaps = [];
     
@@ -491,6 +486,7 @@ const getSearchableEndCaps = () => {
     }
     return endCaps;
 };
+
 const getSearchableMortiseExitLockbodies = () => {
     const lockbodies = [];
     
@@ -530,6 +526,48 @@ const getSearchableMortiseExitLockbodies = () => {
     return lockbodies;
 };
 
+const getSearchableTailpieces = () => {
+    const tailpieces = [];
+    
+    const traverseData = (data, path = []) => {
+        if (data && typeof data === 'object') {
+            if (data.part && data.imageKey) {
+                const [/* lockSeries */, cylinderType, competitiveType, brand, functionType, cylinderSubtype, doorThickness] = path;
+                
+                const category = "Bored Lock Tailpieces";
+                const subcategory = [cylinderType, competitiveType, brand].filter(Boolean).join(' / ');
+                
+                const description = [functionType, cylinderSubtype, doorThickness].filter(Boolean).join(' | ');
+                const keywords = path.join(' ') + ' ' + data.part + ' tailpiece cylinder bore lock 10x';
+
+                tailpieces.push({
+                    category: category,
+                    subcategory: subcategory,
+                    search_key: data.part,
+                    description: description,
+                    part_info: data.part,
+                    keywords: keywords.toLowerCase()
+                });
+                return;
+            }
+
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    traverseData(data[key], [...path, key]);
+                }
+            }
+        }
+    };
+    
+    traverseData(tailpieceData);
+    
+    return tailpieces;
+};
+
+// -------------------------------------------------------------
+// END: DEFINITIONS FOR ALL SEARCH FUNCTIONS
+// -------------------------------------------------------------
+
 
 export const getSearchableData = () => {
     return [
@@ -537,13 +575,14 @@ export const getSearchableData = () => {
         ...getSearchableLatches(),
         ...getSearchableMortiseFunctions(),
         ...getSearchableCylindricalLockbodies(),
-        ...getSearchableSpindles(), // This now uses the updated function
+        ...getSearchableSpindles(),
         ...getSearchableLevers(),
         ...getSearchableRails(),
         ...getSearchableChassis(),
         ...getSearchableVerticalRods(),
         ...getSearchableTrims(),
         ...getSearchableEndCaps(),
-        ...getSearchableMortiseExitLockbodies()
+        ...getSearchableMortiseExitLockbodies(),
+        ...getSearchableTailpieces()
     ];
 };
