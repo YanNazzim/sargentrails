@@ -1,5 +1,5 @@
 // Latches.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
 import images from "../images"; // Adjust path as needed
 import "../App.css"; // Import the main CSS file
@@ -286,7 +286,7 @@ export const finishOptions = [
     },
 ];
     
-const Latches = () => {
+const Latches = ({ initialData }) => {
     const [formData, setFormData] = useState({
         series: "",
         latchType: "",
@@ -294,6 +294,18 @@ const Latches = () => {
     });
 
     const [partNumber, setPartNumber] = useState("");
+
+    // NEW: useEffect to pre-fill form from search
+    useEffect(() => {
+        if (initialData) {
+            setFormData(prev => ({
+                ...prev,
+                series: initialData.series || "",
+                latchType: initialData.latchType || "",
+                finish: null, // Reset finish
+            }));
+        }
+    }, [initialData]);
 
     // Custom styles for react-select to ensure black text
     const customSelectStyles = {

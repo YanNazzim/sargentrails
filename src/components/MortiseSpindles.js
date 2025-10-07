@@ -1,5 +1,5 @@
 // src/components/MortiseSpindles.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "../App.css"; // Ensure App.css styles are applied
 
@@ -51,10 +51,8 @@ const parseThicknessToDecimal = (thicknessStr) => {
   const parts = thicknessStr.split(" ");
   let decimalValue = 0;
   if (parts.length === 1) {
-    // Handle whole numbers like "2" or "3.5"
     decimalValue = parseFloat(thicknessStr);
   } else if (parts.length === 2) {
-    // Handle mixed numbers like "1 3/8"
     const whole = parseFloat(parts[0]);
     const fractionParts = parts[1].split("/");
     if (fractionParts.length === 2) {
@@ -99,21 +97,32 @@ const customSelectStyles = {
   }),
 };
 
-const MortiseSpindles = () => {
+const MortiseSpindles = ({ initialData }) => {
   const [formData, setFormData] = useState({
     trimType: null,
     doorThickness: null,
   });
-  const [partInfo, setPartInfo] = useState(null); // Changed to store an object with partNo and dimension
+  const [partInfo, setPartInfo] = useState(null);
+
+  useEffect(() => {
+    if (initialData) {
+      const thicknessOption = doorThicknessOptions.find(opt => opt.value === initialData.doorThickness);
+      setFormData({
+        trimType: initialData.trimType || null,
+        doorThickness: thicknessOption || null
+      });
+      setPartInfo(null);
+    }
+  }, [initialData]);
 
   const handleTrimTypeChange = (e) => {
     setFormData({ ...formData, trimType: e.target.value });
-    setPartInfo(null); // Reset part info
+    setPartInfo(null);
   };
 
   const handleDoorThicknessChange = (selectedOption) => {
     setFormData({ ...formData, doorThickness: selectedOption });
-    setPartInfo(null); // Reset part info
+    setPartInfo(null);
   };
 
   const handleSubmit = (e) => {
@@ -139,14 +148,13 @@ const MortiseSpindles = () => {
       trimType: null,
       doorThickness: null,
     });
-    setPartInfo(null); // Reset part info
+    setPartInfo(null);
   };
 
   return (
     <div className="content-transition">
       <h1 className="Heading">Mortise Spindles</h1>
       <form onSubmit={handleSubmit} className="part-form">
-        {/* Trim Type Selection */}
         <div className="form-group">
           <label>Trim Type:</label>
           <div className="radio-group" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -175,7 +183,6 @@ const MortiseSpindles = () => {
           </div>
         </div>
 
-        {/* Door Thickness Selection */}
         <div className="form-group">
           <label>Door Thickness:</label>
           <Select
@@ -189,7 +196,6 @@ const MortiseSpindles = () => {
           />
         </div>
 
-        {/* Form Actions */}
         <div className="form-actions">
           <button type="submit" className="generate-button">
             Find Part Number
@@ -200,14 +206,13 @@ const MortiseSpindles = () => {
         </div>
       </form>
 
-      {/* Results */}
       {partInfo && (
         <div className="result-container">
           <h2>Found Spindle Information:</h2>
           <div className="part-number">
             Part Number: {partInfo.partNo}
           </div>
-          {partInfo.dimension && ( // Only show dimension if it exists
+          {partInfo.dimension && (
             <div className="part-number">
               Total Length of Spindle End to End:{" "}
               {formData.trimType === "Standard Trim"

@@ -1,5 +1,5 @@
-// src/components/mortsielockbodies.js
-import React, { useState } from "react";
+// src/components/MortiseLockbodies.js
+import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
 import "../App.css"; // Ensure App.css styles are applied
 import images from "../images"; // Assuming images are defined here
@@ -503,11 +503,22 @@ const customSelectStyles = {
   }),
 };
 
-const MortiseLockbodies = () => {
+const MortiseLockbodies = ({ initialData }) => {
   const [selectedFunction, setSelectedFunction] = useState(null);
   const [selectedHanding, setSelectedHanding] = useState(null);
   const [selectedFinish, setSelectedFinish] = useState(null);
   const [displayResult, setDisplayResult] = useState(false);
+
+  useEffect(() => {
+    if (initialData && initialData.functionCode) {
+        const prefilledFunction = lockbodyFunctions.find(f => f.value === initialData.functionCode);
+        setSelectedFunction(prefilledFunction || null);
+        // Reset other fields
+        setSelectedHanding(null);
+        setSelectedFinish(null);
+        setDisplayResult(false);
+    }
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

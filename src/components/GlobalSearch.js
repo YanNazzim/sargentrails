@@ -20,13 +20,16 @@ const GlobalSearch = ({ onSearchExecuted }) => {
     const fuse = useMemo(() => {
         const options = {
             keys: [
-                { name: 'description', weight: 0.5 },
-                { name: 'subcategory', weight: 0.3 },
-                { name: 'keywords', weight: 0.1 },
+                { name: 'keywords', weight: 0.5 },
+                { name: 'description', weight: 0.3 },
+                { name: 'subcategory', weight: 0.2 },
                 { name: 'part_info', weight: 0.1 },
             ],
             includeScore: true,
-            threshold: 0.4, // Adjust this value to make the search more or less strict
+            threshold: 0.45, // Slightly more lenient to favor partial keyword matches
+            minMatchCharLength: 2,
+            distance: 200,
+            findAllMatches: true, 
             ignoreLocation: true,
         };
         return new Fuse(searchData, options);
@@ -46,11 +49,12 @@ const GlobalSearch = ({ onSearchExecuted }) => {
 
     const handleSearchChange = (selectedOption) => {
         if (selectedOption) {
-             onSearchExecuted(selectedOption.value);
-             setIsSearchVisible(false); // Hide after selection
+            onSearchExecuted(selectedOption.value);
+            setSearchTerm(""); // Clear the search term
+            setIsSearchVisible(false); // Hide after selection
         }
     };
-    
+
     // Custom format for results display
     const formatOptionLabel = ({ value }) => (
         <div className="search-option-label">
@@ -58,20 +62,13 @@ const GlobalSearch = ({ onSearchExecuted }) => {
                 {value.category} / {value.subcategory}
             </div>
             <div className="description-result">{value.description}</div>
-            {value.category === "Exit Trims (Full Output)" ? (
-                 <div 
-                     className="part-info-result" 
-                     dangerouslySetInnerHTML={{ 
-                         __html: value.part_info.split('<br />')[0].replace('<strong>Part Number:</strong>', 'PN:') + ' ... (Click to Pre-fill)'
-                     }}
-                 />
-             ) : (
-                <div className="part-info-result">Part Info: {value.part_info}</div>
-             )}
+            <div className="configure-now-button">
+                {value.category === "Exit Device Rails" ? "View Part Info" : "Configure Now ➔"}
+            </div>
         </div>
     );
-    
-     // Custom styles for react-select components
+
+    // Custom styles for react-select components
     const customSelectStyles = {
         control: (provided) => ({
             ...provided,
@@ -84,11 +81,11 @@ const GlobalSearch = ({ onSearchExecuted }) => {
             backgroundColor: 'white !important',
         }),
         menu: (provided) => ({
-             ...provided,
-             zIndex: 9999,
-             backgroundColor: '#172a45',
-             padding: '10px',
-             borderRadius: '10px',
+            ...provided,
+            zIndex: 9999,
+            backgroundColor: '#172a45',
+            padding: '10px',
+            borderRadius: '10px',
         }),
         option: (provided, state) => ({
             ...provided,
@@ -99,6 +96,7 @@ const GlobalSearch = ({ onSearchExecuted }) => {
             borderRadius: '8px',
             transition: 'background-color 0.2s',
             marginBottom: '5px',
+            cursor: 'pointer',
         }),
         input: (provided) => ({
             ...provided,

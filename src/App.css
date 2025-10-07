@@ -1225,3 +1225,20 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.configure-now-button {
+  margin-top: 8px;
+  padding: 5px 10px;
+  background-color: #2ecc71;
+  color: #0a192f;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  width: fit-content;
+  transition: background-color 0.2s;
+}
+
+.search-option-label:hover .configure-now-button {
+  background-color: #fff;
+  color: #0a192f;
+}

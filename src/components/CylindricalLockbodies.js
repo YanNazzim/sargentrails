@@ -1,8 +1,7 @@
 // src/components/CylindricalLockbodies.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "../App.css"; // Ensure App.css styles are applied
-// Removed unused imports to clear warnings, you can re-add them if needed later: import images from "../images";
 
 // Data extracted from 10X Lockbodies.pdf - EXPORTED
 export const lockbodiesData = {
@@ -239,280 +238,277 @@ export const lockbodiesData = {
   },
 };
 
-// Custom styles for react-select to ensure black text
 const customSelectStyles = {
-  control: (provided) => ({
-    ...provided,
-    minHeight: "40px",
-    color: "black",
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: "black",
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    color: "black",
-    backgroundColor: state.isFocused ? "#007bff20" : "white",
-    borderRadius: "25px",
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    padding: '4px',
-  }),
-};
-
-const CylindricalLockbodies = () => {
-  const [selectedLockbodyType, setSelectedLockbodyType] = useState(null);
-  const [selectedFunction, setSelectedFunction] = useState(null);
-  const [selectedDoorThickness, setSelectedDoorThickness] = useState(null);
-  const [selectedLeverType, setSelectedLeverType] = useState(null);
-  const [isRxPrefix, setIsRxPrefix] = useState(false);
-  const [partNumber, setPartNumber] = useState("");
-  const [note, setNote] = useState("");
-
-  // Options for Lockbody Type dropdown
-  const lockbodyTypeOptions = lockbodiesData["10X Line"].types;
-
-  // Dynamically generate function options based on selected lockbody type and RX prefix
-  const getFunctionOptions = () => {
-    if (!selectedLockbodyType) return [];
-
-    let availableFunctions = [];
-
-    if (isRxPrefix) {
-      // If RX prefix is selected, filter RX functions relevant to the lockbody type
-      if (selectedLockbodyType.value === "Electrified") {
-        availableFunctions = lockbodiesData["10X Line"].rxFunctions.filter(func => func.value.startsWith("RX-10XG7"));
+    control: (provided) => ({
+      ...provided,
+      minHeight: "40px",
+      color: "black",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "black",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: "black",
+      backgroundColor: state.isFocused ? "#007bff20" : "white",
+      borderRadius: "25px",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      padding: '4px',
+    }),
+  };
+  
+const CylindricalLockbodies = ({ initialData }) => {
+    const [selectedLockbodyType, setSelectedLockbodyType] = useState(null);
+    const [selectedFunction, setSelectedFunction] = useState(null);
+    const [selectedDoorThickness, setSelectedDoorThickness] = useState(null);
+    const [selectedLeverType, setSelectedLeverType] = useState(null);
+    const [isRxPrefix, setIsRxPrefix] = useState(false);
+    const [partNumber, setPartNumber] = useState("");
+    const [note, setNote] = useState("");
+  
+    useEffect(() => {
+        if (initialData) {
+          const typeOption = lockbodiesData["10X Line"].types.find(t => t.value === initialData.type);
+          const funcOption = lockbodiesData["10X Line"].mechanicalFunctions.find(f => f.value === initialData.function) || lockbodiesData["10X Line"].electrifiedFunctions.find(f => f.value === initialData.function);
+          const thicknessOption = lockbodiesData["10X Line"].doorThicknesses.find(t => t.value === initialData.doorThickness);
+          const leverOption = lockbodiesData["10X Line"].leverTypes.find(t => t.value === initialData.leverType);
+          
+          setSelectedLockbodyType(typeOption || null);
+          setSelectedFunction(funcOption ? { value: funcOption.value, label: `${funcOption.value} - ${funcOption.label}` } : null);
+          setSelectedDoorThickness(thicknessOption || null);
+          setSelectedLeverType(leverOption || null);
+          setIsRxPrefix(initialData.function && initialData.function.startsWith("RX-"));
+          setPartNumber("");
+          setNote("");
+        }
+      }, [initialData]);
+  
+    const getFunctionOptions = () => {
+      if (!selectedLockbodyType) return [];
+  
+      let availableFunctions = [];
+  
+      if (isRxPrefix) {
+        if (selectedLockbodyType.value === "Electrified") {
+          availableFunctions = lockbodiesData["10X Line"].rxFunctions.filter(func => func.value.startsWith("RX-10XG7"));
+        } else {
+          availableFunctions = lockbodiesData["10X Line"].rxFunctions.filter(func => !func.value.startsWith("RX-10XG7"));
+        }
       } else {
-        // For Mechanical and VSL Mechanical, filter RX functions that are NOT electrified
-        availableFunctions = lockbodiesData["10X Line"].rxFunctions.filter(func => !func.value.startsWith("RX-10XG7"));
+        if (selectedLockbodyType.value === "Electrified") {
+          availableFunctions = lockbodiesData["10X Line"].electrifiedFunctions;
+        } else {
+          availableFunctions = lockbodiesData["10X Line"].mechanicalFunctions.filter(func => !func.value.startsWith("RX-"));
+        }
       }
-    } else {
-      // If no RX prefix, show standard functions based on lockbody type
-      if (selectedLockbodyType.value === "Electrified") {
-        availableFunctions = lockbodiesData["10X Line"].electrifiedFunctions;
-      } else {
-        // For Mechanical and VSL Mechanical, show standard functions that are NOT RX
-        availableFunctions = lockbodiesData["10X Line"].mechanicalFunctions.filter(func => !func.value.startsWith("RX-"));
-      }
-    }
-
-    // Format the labels as "FUNCTION_NUMBER - Description"
-    return availableFunctions.map(func => ({
-      value: func.value,
-      label: `${func.value} - ${func.label}`
-    }));
-  };
-
-  // Handlers for state changes
-  const handleLockbodyTypeChange = (selectedOption) => {
-    setSelectedLockbodyType(selectedOption);
-    setSelectedFunction(null);
-    setSelectedDoorThickness(null);
-    setSelectedLeverType(null);
-    setIsRxPrefix(false); // Reset RX prefix when lockbody type changes
-    setPartNumber("");
-    setNote("");
-  };
-
-  const handleFunctionChange = (selectedOption) => {
-    setSelectedFunction(selectedOption);
-    setPartNumber("");
-    setNote("");
-  };
-
-  const handleRxPrefixChange = (e) => {
-    const isChecked = e.target.checked;
-    setIsRxPrefix(isChecked);
-    setSelectedFunction(null); // Reset function when RX prefix changes
-    setPartNumber("");
-    setNote("");
-  };
-
-  const handleDoorThicknessChange = (selectedOption) => {
-    setSelectedDoorThickness(selectedOption);
-    setPartNumber("");
-    setNote("");
-  };
-
-  const handleLeverTypeChange = (selectedOption) => {
-    setSelectedLeverType(selectedOption);
-    setPartNumber("");
-    setNote("");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!selectedLockbodyType || !selectedFunction || !selectedDoorThickness || !selectedLeverType) {
-      alert("Please fill out all required fields.");
+  
+      return availableFunctions.map(func => ({
+        value: func.value,
+        label: `${func.value} - ${func.label}`
+      }));
+    };
+  
+    const handleLockbodyTypeChange = (selectedOption) => {
+      setSelectedLockbodyType(selectedOption);
+      setSelectedFunction(null);
+      setSelectedDoorThickness(null);
+      setSelectedLeverType(null);
+      setIsRxPrefix(false);
       setPartNumber("");
       setNote("");
-      return;
-    }
-
-    const currentLineData = lockbodiesData["10X Line"].parts[selectedLockbodyType.value];
-    if (!currentLineData) {
-      setPartNumber("Data not found for selected lockbody type.");
+    };
+  
+    const handleFunctionChange = (selectedOption) => {
+      setSelectedFunction(selectedOption);
+      setPartNumber("");
       setNote("");
-      return;
-    }
-
-    const functionData = currentLineData[selectedFunction.value];
-    if (!functionData) {
-      setPartNumber("Data not found for selected function.");
+    };
+  
+    const handleRxPrefixChange = (e) => {
+      const isChecked = e.target.checked;
+      setIsRxPrefix(isChecked);
+      setSelectedFunction(null);
+      setPartNumber("");
       setNote("");
-      return;
-    }
-
-    const thicknessData = functionData[selectedDoorThickness.value];
-    if (!thicknessData) {
-      setPartNumber("Data not found for selected door thickness.");
+    };
+  
+    const handleDoorThicknessChange = (selectedOption) => {
+      setSelectedDoorThickness(selectedOption);
+      setPartNumber("");
       setNote("");
-      return;
-    }
-
-    let foundPart = thicknessData[selectedLeverType.value];
-
-    if (foundPart === "N/A") {
-      setPartNumber("Not Available for this configuration.");
+    };
+  
+    const handleLeverTypeChange = (selectedOption) => {
+      setSelectedLeverType(selectedOption);
+      setPartNumber("");
       setNote("");
-    } else if (foundPart) {
-      let currentNote = "";
-      // Check for asterisk and add note
-      if (foundPart.includes('*')) {
-        foundPart = foundPart.replace('*', '');
-        currentNote = "(*Includes finished button, specify finish.)";
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      if (!selectedLockbodyType || !selectedFunction || !selectedDoorThickness || !selectedLeverType) {
+        alert("Please fill out all required fields.");
+        setPartNumber("");
+        setNote("");
+        return;
       }
-      // Handle potential typo from PDF (e.g., "10-38~18*")
-      if (foundPart.includes('~')) {
-         foundPart = foundPart.replace('~', '');
+  
+      const currentLineData = lockbodiesData["10X Line"].parts[selectedLockbodyType.value];
+      if (!currentLineData) {
+        setPartNumber("Data not found for selected lockbody type.");
+        setNote("");
+        return;
       }
-
-      setPartNumber(foundPart);
-      setNote(currentNote);
-    } else {
-      setPartNumber("Part number not found. Please check your selections.");
+  
+      const functionData = currentLineData[selectedFunction.value];
+      if (!functionData) {
+        setPartNumber("Data not found for selected function.");
+        setNote("");
+        return;
+      }
+  
+      const thicknessData = functionData[selectedDoorThickness.value];
+      if (!thicknessData) {
+        setPartNumber("Data not found for selected door thickness.");
+        setNote("");
+        return;
+      }
+  
+      let foundPart = thicknessData[selectedLeverType.value];
+  
+      if (foundPart === "N/A") {
+        setPartNumber("Not Available for this configuration.");
+        setNote("");
+      } else if (foundPart) {
+        let currentNote = "";
+        if (foundPart.includes('*')) {
+          foundPart = foundPart.replace('*', '');
+          currentNote = "(*Includes finished button, specify finish.)";
+        }
+        if (foundPart.includes('~')) {
+           foundPart = foundPart.replace('~', '');
+        }
+  
+        setPartNumber(foundPart);
+        setNote(currentNote);
+      } else {
+        setPartNumber("Part number not found. Please check your selections.");
+        setNote("");
+      }
+    };
+  
+    const handleReset = () => {
+      setSelectedLockbodyType(null);
+      setSelectedFunction(null);
+      setSelectedDoorThickness(null);
+      setSelectedLeverType(null);
+      setIsRxPrefix(false);
+      setPartNumber("");
       setNote("");
-    }
-  };
-
-  const handleReset = () => {
-    setSelectedLockbodyType(null);
-    setSelectedFunction(null);
-    setSelectedDoorThickness(null);
-    setSelectedLeverType(null);
-    setIsRxPrefix(false);
-    setPartNumber("");
-    setNote("");
-  };
-
-  return (
-    <div className="content-transition">
-      <h1 className="Heading">Bored Lock Lockbodies</h1>
-      <form onSubmit={handleSubmit} className="part-form">
-        {/* Lockbody Type Selection */}
-        <div className="form-group">
-          <label>Lockbody Type:</label>
-          <Select
-            options={lockbodyTypeOptions}
-            onChange={handleLockbodyTypeChange}
-            value={selectedLockbodyType}
-            placeholder="Select Lockbody Type..."
-            styles={customSelectStyles}
-            required
-          />
-        </div>
-
-        {/* RX Prefix Checkbox */}
-        {selectedLockbodyType && (
+    };
+  
+    return (
+      <div className="content-transition">
+        <h1 className="Heading">Bored Lock Lockbodies</h1>
+        <form onSubmit={handleSubmit} className="part-form">
           <div className="form-group">
-            <label>Prefixes:</label>
-            <div className="checkbox-group">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={isRxPrefix}
-                  onChange={handleRxPrefixChange}
-                />
-                <span className="custom-checkbox"></span>
-                <span>
-                  <strong>(RX-)</strong> — Request to Exit
-                </span>
-              </label>
+            <label>Lockbody Type:</label>
+            <Select
+              options={lockbodiesData["10X Line"].types}
+              onChange={handleLockbodyTypeChange}
+              value={selectedLockbodyType}
+              placeholder="Select Lockbody Type..."
+              styles={customSelectStyles}
+              required
+            />
+          </div>
+  
+          {selectedLockbodyType && (
+            <div className="form-group">
+              <label>Prefixes:</label>
+              <div className="checkbox-group">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={isRxPrefix}
+                    onChange={handleRxPrefixChange}
+                  />
+                  <span className="custom-checkbox"></span>
+                  <span>
+                    <strong>(RX-)</strong> — Request to Exit
+                  </span>
+                </label>
+              </div>
+            </div>
+          )}
+  
+          {selectedLockbodyType && (
+            <div className="form-group">
+              <label>Function:</label>
+              <Select
+                options={getFunctionOptions()}
+                onChange={handleFunctionChange}
+                value={selectedFunction}
+                placeholder="Select Function..."
+                styles={customSelectStyles}
+                required
+              />
+            </div>
+          )}
+  
+          {selectedFunction && (
+            <div className="form-group">
+              <label>Door Thickness:</label>
+              <Select
+                options={lockbodiesData["10X Line"].doorThicknesses}
+                onChange={handleDoorThicknessChange}
+                value={selectedDoorThickness}
+                placeholder="Select Door Thickness..."
+                styles={customSelectStyles}
+                required
+              />
+            </div>
+          )}
+  
+          {selectedDoorThickness && (
+            <div className="form-group">
+              <label>Lever Type:</label>
+              <Select
+                options={lockbodiesData["10X Line"].leverTypes}
+                onChange={handleLeverTypeChange}
+                value={selectedLeverType}
+                placeholder="Select Lever Type..."
+                styles={customSelectStyles}
+                required
+              />
+            </div>
+          )}
+  
+          <div className="form-actions">
+            <button type="submit" className="generate-button">
+              Find Part Number
+            </button>
+            <button type="button" onClick={handleReset} className="reset-button">
+              Reset
+            </button>
+          </div>
+        </form>
+  
+        {partNumber && (
+          <div className="result-container">
+            <h2>Found Part Number:</h2>
+            <div className="part-number">
+              {partNumber}
+              {note && <span className="note">{note}</span>}
             </div>
           </div>
         )}
-
-        {/* Function Selection */}
-        {selectedLockbodyType && (
-          <div className="form-group">
-            <label>Function:</label>
-            <Select
-              options={getFunctionOptions()}
-              onChange={handleFunctionChange}
-              value={selectedFunction}
-              placeholder="Select Function..."
-              styles={customSelectStyles}
-              required
-            />
-          </div>
-        )}
-
-        {/* Door Thickness Selection */}
-        {selectedFunction && (
-          <div className="form-group">
-            <label>Door Thickness:</label>
-            <Select
-              options={lockbodiesData["10X Line"].doorThicknesses}
-              onChange={handleDoorThicknessChange}
-              value={selectedDoorThickness}
-              placeholder="Select Door Thickness..."
-              styles={customSelectStyles}
-              required
-            />
-          </div>
-        )}
-
-        {/* Lever Type Selection (Applies to all 10X Lockbodies) */}
-        {selectedDoorThickness && (
-          <div className="form-group">
-            <label>Lever Type:</label>
-            <Select
-              options={lockbodiesData["10X Line"].leverTypes}
-              onChange={handleLeverTypeChange}
-              value={selectedLeverType}
-              placeholder="Select Lever Type..."
-              styles={customSelectStyles}
-              required
-            />
-          </div>
-        )}
-
-        {/* Form Actions */}
-        <div className="form-actions">
-          <button type="submit" className="generate-button">
-            Find Part Number
-          </button>
-          <button type="button" onClick={handleReset} className="reset-button">
-            Reset
-          </button>
-        </div>
-      </form>
-
-      {/* Results */}
-      {partNumber && (
-        <div className="result-container">
-          <h2>Found Part Number:</h2>
-          <div className="part-number">
-            {partNumber}
-            {note && <span className="note">{note}</span>}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default CylindricalLockbodies;
+      </div>
+    );
+  };
+  
+  export default CylindricalLockbodies;
