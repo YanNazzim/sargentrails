@@ -21,13 +21,16 @@ const GlobalSearch = ({ onSearchExecuted }) => {
         const options = {
             keys: [
                 { name: 'description', weight: 0.5 },
-                { name: 'subcategory', weight: 0.3 },
-                { name: 'keywords', weight: 0.1 },
+                { name: 'subcategory', weight: 0.2 },
+                { name: 'keywords', weight: 0.2 },
                 { name: 'part_info', weight: 0.1 },
             ],
             includeScore: true,
-            threshold: 0.4, // Adjust this value to make the search more or less strict
+            threshold: 0.45, // Slightly more lenient to favor partial keyword matches
             ignoreLocation: true,
+            minMatchCharLength: 2,
+            distance: 200,
+            findAllMatches: true,
         };
         return new Fuse(searchData, options);
     }, [searchData]);

@@ -14,6 +14,46 @@ import { devices as mortiseExitDevices, functions as mortiseExitFunctions, prefi
 import { prefixesData as endCapPrefixesData, endCapPartDetails } from './components/EndCaps';
 import { tailpieceData } from './components/Tailpieces'; // <-- Correctly imported
 
+// Utility helpers to create robust keyword metadata for Fuse.js searches
+const createKeywordBuilder = () => {
+    const tokens = new Set();
+
+    const addToken = (term) => {
+        if (term === undefined || term === null) return;
+        const cleaned = String(term)
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/&amp;/g, '&')
+            .trim();
+        if (!cleaned) return;
+
+        const lower = cleaned.toLowerCase();
+        const normalizedVariants = [
+            lower,
+            lower.replace(/[-_/]/g, ' '),
+            lower.replace(/\s+/g, ''),
+            lower.replace(/\s+/g, '-'),
+        ];
+
+        normalizedVariants.forEach(variant => {
+            if (variant) tokens.add(variant);
+        });
+
+        lower.split(/[^a-z0-9]+/).forEach(piece => {
+            if (piece) tokens.add(piece);
+        });
+    };
+
+    const build = () => Array.from(tokens).join(' ');
+
+    return { addToken, build };
+};
+
+const buildKeywords = (...termGroups) => {
+    const builder = createKeywordBuilder();
+    termGroups.flat().forEach(term => builder.addToken(term));
+    return builder.build();
+};
+
 // Helper function to determine available trims (Keep existing helper)
 const getAvailableTrims = (series, device, functionCode) => {
     if (functionCode === "04" && (device === "8800" || device === "PE8800")) {
@@ -134,7 +174,23 @@ const getSearchableTrimsFullOutput = () => {
                                     search_key: searchKeyBase,
                                     description: `F${functionCode} ${searchKeyBase} ${defaultTrim}${defaultLever} ${handing} ${finish.value} ${thickness}`,
                                     part_info: formattedOutput.trim().replace(/\n\s*/g, ' '),
-                                    keywords: `${series} ${device} trim full output ${searchKeyBase} ${functionCode} ${defaultTrim}${defaultLever} ${handing} ${finish.value} ${thickness} ${cylinderUsed}`.toLowerCase()
+                                    keywords: buildKeywords(
+                                        [
+                                            series,
+                                            device,
+                                            functionCode,
+                                            searchKeyBase,
+                                            `${defaultTrim}${defaultLever}`,
+                                            handing,
+                                            finish.value,
+                                            thickness,
+                                            cylinderUsed,
+                                            `F${functionCode}`,
+                                            `full output trim`,
+                                            `${series} ${device} trim`,
+                                        ],
+                                        [`${series}-${device}-${functionCode}`, `${defaultTrim} trim`, `${defaultLever} lever`, 'exit trim full output']
+                                    )
                                 });
                             }
                         }
@@ -166,29 +222,27 @@ const getSearchableLatches = () => {
                 const backsetMatch = optionDetails.label.match(/(\d-\d\/\d")/);
                 const backsetKeyword = backsetMatch ? backsetMatch[0] : '';
 
-                const keywords = [
-                    `latch for ${friendlySeriesName}`,
-                    `latches for ${friendlySeriesName}`,
-                    `${friendlySeriesName} latch`,
-                    `${friendlySeriesName} latches`,
-                    `${seriesKey} latch`, 
-                    optionKey,
-                    optionDetails.label,
-                    partNumbers,
-                    "bored lock latch",
-                    "cylindrical lock latch",
-                    "latches",
-                    "backset",
-                    backsetKeyword
-                ].join(' ').toLowerCase();
-
                 latches.push({
                     category: "Bored Lock Latches",
                     subcategory: seriesKey,
                     search_key: optionKey,
                     description: optionDetails.label,
                     part_info: optionDetails.base.replace(/<br\/>/g, ' / ').replace(/<br \/>/g, ' / '),
-                    keywords: keywords
+                    keywords: buildKeywords(
+                        [
+                            friendlySeriesName,
+                            seriesKey,
+                            optionKey,
+                            optionDetails.label,
+                            partNumbers,
+                            backsetKeyword,
+                            'bored lock latch',
+                            'cylindrical latch',
+                            'latch',
+                            'backset',
+                        ],
+                        ['cylindrical lock', 'strike latch', 'latchbolt', 'replacement latch', 'series latch']
+                    )
                 });
             }
         }
@@ -203,7 +257,17 @@ const getSearchableMortiseFunctions = () => {
         search_key: func.value,
         description: func.label,
         part_info: func.description.substring(0, 75) + '...',
-        keywords: `8200 mortise function ${func.value} ${func.label} ${func.description} trim deadbolt lockbody`.toLowerCase()
+        keywords: buildKeywords(
+            [
+                func.value,
+                func.label,
+                func.description,
+                '8200 mortise lockbody',
+                'mortise lock function',
+                'lockbody function',
+            ],
+            ['mortise body', 'series 8200', 'function description', 'mortise trim']
+        )
     }));
 };
 
@@ -217,15 +281,25 @@ const getSearchableCylindricalLockbodies = () => {
                 for (const [leverType, partNo] of Object.entries(thicknessData)) {
                     if (partNo && partNo !== 'N/A') {
                         let funcLabel = funcKey;
-                        const keywords = `10X bored lock lockbody function ${funcKey} ${type} ${leverType} ${thickness} ${funcLabel} ${partNo} cylindrical lock body`;
-
                         lockbodies.push({
                             category: "Bored Lockbodies (10X)",
                             subcategory: funcKey,
                             search_key: funcKey,
                             description: `${funcKey} | ${type} | ${thickness} | Lever: ${leverType}`,
                             part_info: partNo.replace(/\*/g, '').replace(/~/g, ''),
-                            keywords: keywords.toLowerCase()
+                            keywords: buildKeywords(
+                                [
+                                    '10x',
+                                    'bored lockbody',
+                                    funcKey,
+                                    type,
+                                    leverType,
+                                    thickness,
+                                    funcLabel,
+                                    partNo,
+                                ],
+                                ['cylindrical lockbody', 'lock body', 'series 10x', '7 line compatible', 'cylindrical chassis']
+                            )
                         });
                     }
                 }
@@ -253,7 +327,19 @@ const getSearchableSpindles = () => {
                 search_key: thicknessRange,
                 description: `Fits Door: ${thicknessRange}"`,
                 part_info: `Part: ${partDetails.partNo}. Lengths: ${length}.`,
-                keywords: `spindle for ${trimType}, ${trimType} spindle ${thicknessRange} ${extraKeywords} ${partDetails.partNo} 82-16 mortise door thickness`.toLowerCase()
+                keywords: buildKeywords(
+                    [
+                        trimType,
+                        thicknessRange,
+                        extraKeywords,
+                        partDetails.partNo,
+                        length,
+                        'mortise spindle',
+                        'door thickness',
+                        '82-16 spindle',
+                    ],
+                    ['spindle kit', 'trim spindle', 'replacement spindle']
+                )
             });
         }
     }
@@ -286,14 +372,27 @@ const getSearchableLevers = () => {
             }
             
             const leverKeywords = `${lever.value} lever style handle ${lever.label}`
-            
+
             levers.push({
                 category: "Levers",
                 subcategory: lever.label,
                 search_key: lever.value,
                 description: lever.label + (isHanded ? " (Handed)" : ""),
                 part_info: partDetails || "Part details available upon selection.",
-                keywords: (keywords + " " + leverKeywords).toLowerCase()
+                keywords: buildKeywords(
+                    [
+                        lever.value,
+                        lever.label,
+                        leverKeywords,
+                        keywords,
+                        partDetails,
+                        'lever handle',
+                        'trim lever',
+                        'door lever',
+                        isHanded ? 'handed lever' : 'non handed lever',
+                    ],
+                    ['lever style', 'lever design', 'exit trim lever', 'mortise lever']
+                )
             });
         }
     });
@@ -312,11 +411,25 @@ const getSearchableRails = () => {
 
                 rails.push({
                     category: "Exit Device Rails",
-                    subcategory: stylizedRailType, 
+                    subcategory: stylizedRailType,
                     search_key: key,
                     description: `Size ${sizeCode} | Prefixes: ${prefixes || 'Standard'}`,
                     part_info: partNo.replace(/ - Only for .*$/, ''),
-                    keywords: `${stylizedRailType} rail crossbar ${sizeCode} ${prefixes} ${partNo} exit device`.toLowerCase()
+                    keywords: buildKeywords(
+                        [
+                            stylizedRailType,
+                            `${stylizedRailType} rail`,
+                            `${stylizedRailType} rails`,
+                            sizeCode,
+                            prefixes,
+                            partNo,
+                            key,
+                            'exit device rail',
+                            'crossbar',
+                            'rail assembly',
+                        ],
+                        ['rail combo', 'rail combination', 'rail kit', 'rail set', 'rail head']
+                    )
                 });
             }
         }
@@ -351,7 +464,22 @@ const getSearchableChassis = () => {
             search_key: key,
             description: `${device} Chassis (${handing}) - ${deviceType}`,
             part_info: `Chassis: ${chassisInfo.substring(0, 50)}...`,
-            keywords: `chassis for ${device}, ${device} chassis rail head inner cover ${handing} ${deviceType} rim mortise lock CVR SVR`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    device,
+                    handing,
+                    deviceType,
+                    chassisInfo,
+                    'rail head',
+                    'exit device chassis',
+                    'chassis',
+                    'rim',
+                    'mortise',
+                    'cvr',
+                    'svr',
+                ],
+                ['chassis cover', 'rail head cover', 'base chassis', 'exit device body']
+            )
         });
     }
     return chassis;
@@ -370,10 +498,23 @@ const getSearchableVerticalRods = () => {
                 search_key: `${deviceCode}_Rods`,
                 description: `${deviceCode} Top and Bottom Rod Kits`,
                 part_info: `Top: ${device.topRodKit} / Bottom: ${device.bottomRodKit}`,
-                keywords: `${keywordsBase} rod kit ${device.topRodKit} ${device.bottomRodKit}`.toLowerCase()
+                keywords: buildKeywords(
+                    [
+                        deviceCode,
+                        device.display,
+                        device.topRodKit,
+                        device.bottomRodKit,
+                        'vertical rod kit',
+                        'rod kit',
+                        'top rod',
+                        'bottom rod',
+                        'exit device rod',
+                    ],
+                    ['vr kit', 'rod package', 'rod parts', 'cvr rods', 'svr rods']
+                )
             });
         }
-        
+
         if (device.topCaseParts) {
             device.topCaseParts.forEach(part => {
                 rodParts.push({
@@ -382,7 +523,19 @@ const getSearchableVerticalRods = () => {
                     search_key: `${deviceCode}_Case_${part.code}`,
                     description: `Case Part: ${part.description}`,
                     part_info: `Part: ${part.code} (Type: ${part.type || 'Standard'})`,
-                    keywords: `${keywordsBase} case latch ${part.code} ${part.description}`.toLowerCase()
+                    keywords: buildKeywords(
+                        [
+                            deviceCode,
+                            device.display,
+                            part.code,
+                            part.description,
+                            part.type,
+                            'vertical rod case',
+                            'case part',
+                            'latch case',
+                        ],
+                        ['rod mechanism', 'rod housing', 'vr case', 'exit device case']
+                    )
                 });
             });
         }
@@ -407,12 +560,11 @@ const getSearchableTrims = () => {
             const search_key_alias = `${devicePrefix}${functionCode}`;
             const search_key_alias_2 = `${device}${functionCode}`;
 
-            let keywordsBase = `trim for ${series} ${device}, ${series} ${device} trim pull escutcheon handle function ${functionCode} ${examplePart} 700 P700 ${search_key_alias} ${search_key_alias_2} ${trimType}`;
-
             const availableTrims = getAvailableTrims(series, device, functionCode);
+            const trimLeverCombos = [];
             for (const trim of availableTrims) {
                 for (const lever of leverStyleOptions) {
-                    keywordsBase += ` ${trim}${lever.value}`;
+                    trimLeverCombos.push(`${trim}${lever.value}`);
                 }
             }
 
@@ -422,11 +574,29 @@ const getSearchableTrims = () => {
                 search_key: key,
                 description: `${trimType} - Function ${functionCode} (Base Template)`,
                 part_info: `Template: ${partTemplate.replace(/\n/g, ' ')}`,
-                keywords: keywordsBase.toLowerCase()
+                keywords: buildKeywords(
+                    [
+                        series,
+                        device,
+                        functionCode,
+                        examplePart,
+                        trimType,
+                        partTemplate,
+                        search_key_alias,
+                        search_key_alias_2,
+                        availableTrims,
+                        trimLeverCombos,
+                        'exit trim',
+                        'trim style',
+                        'pull plate',
+                        'escutcheon',
+                    ],
+                    ['trim template', 'function trim', `${series} ${device} trim`, `${functionCode} trim`]
+                )
             });
         }
     }
-    
+
     const specificTrims = [
         { key: '704', label: '704 Night Latch Trim', parts: 'Key Retracts Latch' },
         { key: '713', label: '713 Classroom Trim', parts: 'Key Unlocks Lever' },
@@ -443,10 +613,20 @@ const getSearchableTrims = () => {
             search_key: t.key,
             description: t.label,
             part_info: t.parts,
-            keywords: `${t.label} trim pull handle code ${t.key}`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    t.label,
+                    t.key,
+                    t.parts,
+                    'exit trim',
+                    'trim style',
+                    'pull handle',
+                ],
+                ['trim code', 'trim designation']
+            )
         });
     });
-    
+
     return trims;
 };
 
@@ -466,9 +646,21 @@ const getSearchableEndCaps = () => {
             search_key: `${seriesKey}_DEFAULT`,
             description: `Standard End Cap, Bracket, and Screws (Base)`,
             part_info: `Cap: ${defaultCap} / Bracket: ${bracketPart} / Screws: ${screwPart}`,
-            keywords: `end cap for ${series}, ${series} end cap cover base ${defaultCap} ${bracketPart} ${screwPart} screws`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    series,
+                    defaultCap,
+                    bracketPart,
+                    screwPart,
+                    'end cap',
+                    'cap screws',
+                    'bracket',
+                    'cover',
+                ],
+                ['standard end cap', 'exit device cap', 'rail cap', 'tip cap']
+            )
         });
-        
+
         for (const [prefixCode, parts] of Object.entries(details).filter(([key]) => key !== 'default')) {
              const prefixedCap = parts.endCap.replace(/-\$/g, '');
              const prefixDef = endCapPrefixesData.find(p => p.code === prefixCode);
@@ -480,7 +672,21 @@ const getSearchableEndCaps = () => {
                 search_key: `${seriesKey}_${prefixCode}`,
                 description: `${prefixCode} - ${prefixDef?.name} End Cap`,
                 part_info: `End Cap: ${prefixedCap} / Screws: ${screwPartPrefixed}`,
-                keywords: `end cap for ${series}, ${series} end cap cover ${prefixCode} ${prefixDef?.name} ${prefixedCap} ${screwPartPrefixed} screws flush overlapping`.toLowerCase()
+                keywords: buildKeywords(
+                    [
+                        series,
+                        prefixCode,
+                        prefixDef?.name,
+                        prefixedCap,
+                        screwPartPrefixed,
+                        'end cap',
+                        'cover',
+                        'screws',
+                        'flush end cap',
+                        'overlapping end cap',
+                    ],
+                    ['prefix end cap', 'series end cap', 'trim cap']
+                )
             });
         }
     }
@@ -497,7 +703,18 @@ const getSearchableMortiseExitLockbodies = () => {
             search_key: func.value,
             description: func.label,
             part_info: `Example Base Part: 9${func.value}-`,
-            keywords: `mortise exit lockbody function ${func.value} ${func.label} 9${func.value} 8900 8300`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    func.value,
+                    func.label,
+                    `9${func.value}`,
+                    'mortise exit lockbody',
+                    'function',
+                    '8900',
+                    '8300',
+                ],
+                ['exit body function', 'pe80 function', '80 series function']
+            )
         });
     });
 
@@ -508,10 +725,18 @@ const getSearchableMortiseExitLockbodies = () => {
             search_key: prefix.code,
             description: `${prefix.code} Prefix`,
             part_info: prefix.name,
-            keywords: `mortise exit lockbody prefix ${prefix.code} ${prefix.name} fire rated`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    prefix.code,
+                    prefix.name,
+                    'mortise exit lockbody prefix',
+                    'fire rated',
+                ],
+                ['prefix code', 'prefix option', 'series prefix']
+            )
         });
     });
-    
+
     mortiseExitDevices.forEach(device => {
         lockbodies.push({
             category: "Mortise Exit Lockbodies (80/PE80)",
@@ -519,7 +744,16 @@ const getSearchableMortiseExitLockbodies = () => {
             search_key: device.value,
             description: device.label,
             part_info: `Used for ${device.label} Lockbodies.`,
-            keywords: `mortise exit lockbody device ${device.value} ${device.label} 8000 pe8000`.toLowerCase()
+            keywords: buildKeywords(
+                [
+                    device.value,
+                    device.label,
+                    'mortise exit lockbody device',
+                    '8000',
+                    'pe8000',
+                ],
+                ['device option', 'mortise exit device', 'exit device family']
+            )
         });
     });
 
@@ -533,12 +767,11 @@ const getSearchableTailpieces = () => {
         if (data && typeof data === 'object') {
             if (data.part && data.imageKey) {
                 const [/* lockSeries */, cylinderType, competitiveType, brand, functionType, cylinderSubtype, doorThickness] = path;
-                
+
                 const category = "Bored Lock Tailpieces";
                 const subcategory = [cylinderType, competitiveType, brand].filter(Boolean).join(' / ');
-                
+
                 const description = [functionType, cylinderSubtype, doorThickness].filter(Boolean).join(' | ');
-                const keywords = path.join(' ') + ' ' + data.part + ' tailpiece cylinder bore lock 10x';
 
                 tailpieces.push({
                     category: category,
@@ -546,7 +779,26 @@ const getSearchableTailpieces = () => {
                     search_key: data.part,
                     description: description,
                     part_info: data.part,
-                    keywords: keywords.toLowerCase()
+                    keywords: buildKeywords(
+                        [
+                            path,
+                            data.part,
+                            cylinderType,
+                            competitiveType,
+                            brand,
+                            functionType,
+                            cylinderSubtype,
+                            doorThickness,
+                            'tailpiece',
+                            'tail piece',
+                            'tailpieces',
+                            'tail',
+                            'cylinder tail',
+                            'bored lock',
+                            '10x',
+                        ],
+                        ['adapter tailpiece', 'conversion tail', 'cam tailpiece']
+                    )
                 });
                 return;
             }
