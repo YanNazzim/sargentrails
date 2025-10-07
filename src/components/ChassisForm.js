@@ -55,7 +55,7 @@ const ChassisForm = ({ initialData }) => {
     { code: "WD8600", display: "WD8600 CVR", stile: "Wide" },
     { code: "8700", display: "8700 SVR", stile: "Wide" },
     { code: "NB8700", display: "NB8700 SVR (New Style: Post 04/14/25)", stile: "Wide" },
-    { code: "OLD8700", display: "NB8700 SVR (Old Style: Pre 04/14/25)", stile: "Wide" }, // <-- *** FIX IS HERE ***
+    { code: "OLDNB8700", display: "NB8700 SVR (Old Style: Pre 04/14/25)", stile: "Wide" }, // <-- *** FIX IS HERE ***
     { code: "8800", display: "8800 Rim", stile: "Wide" },
     { code: "8900", display: "8900 Mortise", stile: "Wide" },
     

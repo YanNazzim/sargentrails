@@ -428,7 +428,7 @@ const partCombinations = {
       },
     },
   },
-    "OLD8700-Left": {
+    "OLDNB8700-Left": {
     base: {
       chassis: `68-4568`,
       chassisCover: `68-0405-FINISH`,
@@ -439,7 +439,7 @@ const partCombinations = {
       },
     },
   },
-  "OLD8700-Right": {
+  "OLDNB8700-Right": {
     base: {
       chassis: `68-4569`,
       chassisCover: `68-0405-FINISH`,
