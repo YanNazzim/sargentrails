@@ -614,7 +614,7 @@ const partCombinations = {
             <br /> 16 Function Only (No Indicator) = 68-7512  
             <br /> 28 Function Only (Pull Trim) = 68-7514
             <br /> 63 Function Only (Pull Trim) = 68-7516
-            <br /> 63 Function Only (Pull Trim) = 68-7518
+            <br /> 66 Function Only (Pull Trim) = 68-7518
             `,
           chassisCover: `
             <br /> All Functions (Except 16 & 66) = 68-0406-FINISH

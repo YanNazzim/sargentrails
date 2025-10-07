@@ -26,8 +26,11 @@ const createKeywordBuilder = () => {
         if (!cleaned) return;
 
         const lower = cleaned.toLowerCase();
+        
+        // Add the original term as a whole
+        tokens.add(lower);
+
         const normalizedVariants = [
-            lower,
             lower.replace(/[-_/]/g, ' '),
             lower.replace(/\s+/g, ''),
             lower.replace(/\s+/g, '-'),

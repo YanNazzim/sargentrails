@@ -16,7 +16,7 @@ const GlobalSearch = ({ onSearchExecuted }) => {
         setSearchData(getSearchableData());
     }, []);
 
-    // 2. Create the Fuse.js index
+    // 2. Create the Fuse.js index with more lenient options
     const fuse = useMemo(() => {
         const options = {
             keys: [
@@ -26,9 +26,9 @@ const GlobalSearch = ({ onSearchExecuted }) => {
                 { name: 'part_info', weight: 0.1 },
             ],
             includeScore: true,
-            threshold: 0.45, // Slightly more lenient to favor partial keyword matches
-            minMatchCharLength: 2,
-            distance: 200,
+            threshold: 0.3, // Lowered for more fuzzy matching
+            minMatchCharLength: 1, // Allow single character searches
+            distance: 1000,
             findAllMatches: true, 
             ignoreLocation: true,
         };
@@ -37,7 +37,7 @@ const GlobalSearch = ({ onSearchExecuted }) => {
 
     // 3. Perform search when searchTerm changes
     useEffect(() => {
-        if (!searchTerm || searchTerm.length < 2) {
+        if (!searchTerm) {
             setResults([]);
             return;
         }
