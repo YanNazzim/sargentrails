@@ -122,32 +122,123 @@ body {
   border: 2px solid #2ecc71; /* Accent color */
 }
 
-/* Header Styling */
+/* Header Styling - MODIFIED FOR NAVBAR STRUCTURE */
 .header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Keep column so top section is above message bar */
+  width: 100%;
   background-color: #001f3f; /* Dark navy background */
-  padding: 1.5rem;
+  padding: 0; /* Remove header padding */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* Keep margin-bottom to separate from content */
+}
+
+/* New: Top Bar containing Logo, Categories, and Main Title */
+.navbar-top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space out the categories/logo and the title */
+  padding: 1rem 2rem; 
+  border-bottom: 2px solid #172a45; 
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .company-logo {
-  width: 220px; /* Adjust based on your logo size */
+  width: 120px; /* Adjusted logo size */
   height: auto;
-  margin-bottom: 10px;
-  border-radius: 12px;
+  margin-bottom: 0;
+  margin-right: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #2ecc71;
+  padding: 5px;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* NEW: Style for the horizontal list of categories */
+.navbar-categories {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; 
+    gap: 0.8rem; /* Reduced gap for button space */
+    padding: 0 1rem; 
+    justify-content: flex-start; 
+    flex-wrap: wrap;
+    min-width: 0; 
+}
+
+/* NEW: Style for individual clickable category buttons */
+.navbar-category-button {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff; /* White text for contrast */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    z-index: 10;
+    margin: 0; /* Remove default button margin */
+    line-height: 1.2;
+}
+
+/* Hover/Focus Effects */
+.navbar-category-button:hover {
+    color: #2ecc71; /* Teal text on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #172a45;
+}
+
+/* Active State */
+.navbar-category-button.active {
+    color: #001f3f; /* Dark navy text */
+    background-color: #2ecc71; /* Solid teal background */
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.6);
+    transform: scale(1.05);
 }
 
 .title {
-  font-size: 1.8rem;
-  color: #2ecc71; /* Teal accent */
+  font-size: 1.4rem;
+  color: #2ecc71;
   font-weight: bold;
+  margin: 0;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* New: Bar containing the verification/star messages */
+.navbar-messages-bar {
+  display: flex;
+  justify-content: space-around; /* Space out the two messages */
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #172a45; /* Slightly different background for message bar */
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.navbar-message-note {
+  /* For better results... */
+  font-size: 1rem;
+  color: #ffffff;
   text-align: center;
   margin: 0;
+  flex-basis: 50%;
+}
+
+.navbar-message-star {
+  /* Gold star message */
+  font-size: 1rem;
+  color: #ffd700;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+  flex-basis: 50%;
 }
 
 /* Form Group */
@@ -731,17 +822,114 @@ body {
   color: #4299e1 !important;
 }
 
-/* Tab Menu Container */
-.tab-menu-container {
+/* Tab Menu Container - REMOVED */
+.master-tabs-row, .tab-menu-container {
+  display: none; 
+}
+
+
+/* Initial Load Message (Displayed when no tab is selected) */
+.initial-load-message {
+  padding: 3rem;
+  text-align: center;
+  background-color: #172a45;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  margin-top: 2rem;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: #001f3f; /* Dark navy background */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.initial-title {
+  font-size: 2.5rem;
+  color: #2ecc71;
+  margin-bottom: 1rem;
+}
+
+.initial-instruction {
+  font-size: 1.5rem;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+/* Sub Tabs Grid */
+.sub-tabs-container { /* New wrapper for the sub-tabs logic below the header */
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #001f3f; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sub-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better wrapping */
+  gap: 0.8rem;
+  margin: 0 auto;
+  justify-content: center; /* Center the grid items */
+}
+
+.sub-tab {
+  padding: 12px 16px;
+  border: 2px solid #2ecc71;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 100%;
+}
+
+.sub-tab:hover {
+  background: #2ecc71;
+  color: #001f3f;
+  transform: translateY(-2px);
+}
+
+.sub-tab.active {
+  background: #2ecc71;
+  color: #001f3f;
+  font-weight: 600;
+}
+
+/* Universal Tab Styling */
+.universal-tab {
+  border-color: #ffd700;
+  position: relative;
+}
+
+.universal-tab .universal-star {
+  color: #ffd700;
+  font-size: 1.1em;
+}
+
+.universal-tab:hover {
+  border-color: #ffd700;
+  background: #ffd700;
+  color: #001f3f;
+}
+
+.universal-tab:hover .universal-star {
+  color: #001f3f;
+}
+
+.universal-tab.active {
+  background: #ffd700;
+  color: #001f3f;
+  border-color: #ffd700;
+}
+
+.universal-tab.active .universal-star {
+  color: black;
 }
 
 /* Global Search Bar Styling - MODIFIED FOR FIXED POSITION AND SIZE */
@@ -847,150 +1035,36 @@ body {
 }
 
 
-/* Master Tabs Row: Redesign for Horizontal Buttons */
-.master-tabs-row {
-  display: flex;
-  flex-direction: row; /* Changed from column to row for intuitive selection */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  justify-content: center;
-  position: relative;
-  background-color: #172a45; /* Medium navy */
-  border-radius: 12px;
-  padding: 10px;
-  width: 100%;
-  max-width: 100%; /* Ensure full use of space */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
-}
-
-/* Master Tab Button: Large, Primary Selection */
-.master-tab {
-  flex: 1; /* Allow tabs to grow evenly */
-  min-width: 150px; /* Ensure a minimum width */
-  padding: 12px 18px; 
-  border: none;
-  background: transparent;
-  color: #7f8fa4;
-  font-size: 1.5rem; /* Larger font for primary choice */
-  font-weight: 700; 
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  position: relative;
-  z-index: 1;
-  margin: 5px; /* Spacing between buttons */
-}
-
-.master-tab.active {
-  background: #2ecc71; /* Teal background for active tab */
-  color: #001f3f; /* Navy text for better contrast */
-  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
-}
-
-/* REMOVE SLIDER STYLES HERE */
-.slider {
-  display: none; /* Hide the slider element */
-}
-
-/* Initial Load Message (Displayed when no tab is selected) */
-.initial-load-message {
-  padding: 3rem;
-  text-align: center;
-  background-color: #172a45;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  margin-top: 2rem;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.initial-title {
-  font-size: 2.5rem;
-  color: #2ecc71;
-  margin-bottom: 1rem;
-}
-
-.initial-instruction {
-  font-size: 1.5rem;
-  color: #ffffff;
-  max-width: 800px;
-}
-
-/* Sub Tabs Grid */
-.sub-tabs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  gap: 0.8rem;
-  margin: 0 auto;
-}
-
-.sub-tab {
-  padding: 12px 16px;
-  border: 2px solid #2ecc71;
-  background: transparent;
-  color: #ffffff;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  max-width: fit-content;
-  min-width: 350px;
-}
-
-.sub-tab:hover {
-  background: #2ecc71;
-  color: #001f3f;
-  transform: translateY(-2px);
-}
-
-.sub-tab.active {
-  background: #2ecc71;
-  color: #001f3f;
-  font-weight: 600;
-}
-
-/* Universal Tab Styling */
-.universal-tab {
-  border-color: #ffd700;
-  position: relative;
-}
-
-.universal-tab .universal-star {
-  color: #ffd700;
-  font-size: 1.1em;
-}
-
-.universal-tab:hover {
-  border-color: #ffd700;
-  background: #ffd700;
-  color: #001f3f;
-}
-
-.universal-tab:hover .universal-star {
-  color: #001f3f;
-}
-
-.universal-tab.active {
-  background: #ffd700;
-  color: #001f3f;
-  border-color: #ffd700;
-}
-
-.universal-tab.active .universal-star {
-  color: black;
-}
-
 /* Responsive Design */
+@media (max-width: 1100px) {
+    .navbar-top-section {
+        justify-content: center;
+    }
+    .navbar-categories {
+        order: 3; /* Move categories below logo and title on smaller screens */
+        padding: 1rem 0 0 0;
+        justify-content: center;
+        flex-basis: 100%;
+        gap: 0.8rem;
+    }
+    .company-logo {
+        order: 1;
+        margin-right: 0.8rem;
+        width: 100px;
+    }
+    .title {
+        order: 2;
+        text-align: left;
+        font-size: 1.6rem;
+    }
+    .navbar-category-button {
+        font-size: 1rem;
+    }
+    .sub-tabs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
   .master-tabs-row {
     flex-wrap: wrap;
@@ -1004,7 +1078,46 @@ body {
     min-width: 100px;
   }
   
+  /* Apply mobile-specific changes to new navbar elements */
+  .navbar-top-section {
+    padding: 1rem;
+    justify-content: center; /* Center on small screens */
+    flex-wrap: wrap;
+  }
+  .navbar-categories {
+    order: 3; /* Keep at the bottom */
+    flex-basis: 100%;
+    padding: 0.5rem 0 0 0;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .company-logo {
+    width: 80px; /* Even smaller logo on mobile */
+    margin-right: 1rem;
+    order: 1;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    text-align: center;
+    order: 2;
+  }
+  
+  .navbar-category-button {
+      font-size: 0.8rem;
+  }
 
+  .navbar-messages-bar {
+    flex-direction: column; /* Stack vertically on small screens */
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-message-note, .navbar-message-star {
+    font-size: 0.9rem;
+    flex-basis: 100%;
+    margin: 3px 0;
+  }
+  
   .sub-tabs-grid {
     grid-template-columns: 1fr;
     max-width: 500px;

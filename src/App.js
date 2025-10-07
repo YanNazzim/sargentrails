@@ -7,7 +7,6 @@ import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
 import MountingPosts from "./components/MountingPosts";
-import TabMenu from "./components/TabMenu";
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
@@ -156,7 +155,7 @@ const App = () => {
       return (
         <div className="initial-load-message content-transition">
           <h2 className="initial-title">Welcome to the Sargent Part Number Lookup Tool.</h2>
-          <p className="initial-instruction">Please select a **Device Platform** first (e.g., "Exit Devices," "Mortise Locks") from the large buttons below, and then select a **Specific Part** to get started.</p>
+          <p className="initial-instruction">Please select a **Device Platform** first (e.g., "Exit Devices," "Mortise Locks") from the clickable categories in the header, and then select a **Specific Part** to get started.</p>
         </div>
       );
     }
@@ -213,34 +212,65 @@ const App = () => {
   };
 
   const activeMasterSubTabs = tabConfig.masterTabs.find((m) => m.name === activeMasterTab)?.subTabs || [];
+  const categoryNames = tabConfig.masterTabs.map(m => m.name);
   
+  const subTabs = activeMasterTab
+    ? activeMasterSubTabs.map((tab) => ({ type: 'sub', name: tab }))
+    : [];
+  
+  const universalTabs = tabConfig.universalTabs.map((tab) => ({ type: 'universal', name: tab }));
+
+  const allVisibleSubTabs = [...subTabs, ...universalTabs];
+
   return (
     <div className="app">
       <div className="header">
-        <img src={images.logo} alt="Company Logo" className="company-logo" />
-        <h1 className="title">
-          Sargent Part Number Lookup Tool <br />
-        </h1>
-        <h3 style={{ textAlign: "center" }}>For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
-        <h3 style={{ color: "#ffd700", textAlign: "center" }}>
-          ★ = Same Form Used Across All Device Platforms (Universal Form)
-        </h3>
+        <div className="navbar-top-section">
+          <img src={images.logo} alt="Company Logo" className="company-logo" />
+          
+          {/* MODIFIED: Container for clickable category buttons */}
+          <div className="navbar-categories">
+              {categoryNames.map(name => (
+                  <button 
+                      key={name} 
+                      className={`navbar-category-button ${activeMasterTab === name ? 'active' : ''}`}
+                      onClick={() => handleMasterTabChange(name)}
+                  >
+                      {name}
+                  </button>
+              ))}
+          </div>
+          
+          <h1 className="title">
+            Sargent Part Number Lookup Tool
+          </h1>
+        </div>
+        <div className="navbar-messages-bar">
+           <h3 className="navbar-message-note">For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
+           <h3 className="navbar-message-star">★ = Same Form Used Across All Device Platforms (Universal Form)</h3>
+        </div>
       </div>
 
       {/* MOVED OUTSIDE HEADER FOR FIXED POSITIONING */}
       <GlobalSearch onSearchExecuted={handleSearchResultClick} />
-
-      <div className="tab-container" aria-live="polite">
-        <TabMenu
-          masterTabs={tabConfig.masterTabs.map((m) => m.name)}
-          activeMasterTab={activeMasterTab}
-          onMasterTabChange={handleMasterTabChange}
-          subTabs={activeMasterSubTabs}
-          universalTabs={tabConfig.universalTabs}
-          activeSubTab={activeSubTab}
-          onSubTabChange={handleSubTabChange}
-        />
-      </div>
+      
+      {/* NEW: Directly render the sub-tab bar based on selected master tab */}
+      {activeMasterTab && (
+        <div className="tab-container sub-tabs-container" aria-live="polite">
+          <div className="sub-tabs-grid">
+              {allVisibleSubTabs.map((tab) => (
+                <button
+                  key={tab.name}
+                  className={`sub-tab ${tab.type === 'universal' ? 'universal-tab' : ''} ${activeSubTab === tab.name ? 'active' : ''}`}
+                  onClick={() => handleSubTabChange(tab.name)}
+                >
+                  {tab.type === 'universal' && <span className="universal-star">★</span>}
+                  {tab.name}
+                </button>
+              ))}
+          </div>
+        </div>
+      )}
 
       <div className="content-container">{renderContent()}</div>
 
