@@ -1,4 +1,4 @@
-// src/components/GlobalSearch.js
+// src/components/GlobalSearch.js (Modified)
 import React, { useState } from "react";
 import "../App.css";
 
@@ -27,8 +27,14 @@ const GlobalSearch = () => {
           {/* Gen AI Search Widget */}
 
           <gen-search-widget
+          className="gen-search-widget"
             configId="14d04b0e-51c2-4a44-a33a-b53c5053fbea"
             triggerId="searchWidgetTrigger"
+            // ⬇️ TRY THESE CSS VARIABLES ⬇️
+            style={{
+              "--input-text-color": "black",
+              "--search-input-color": "black",
+            }}
           ></gen-search-widget>
 
           <input placeholder="Search here" id="searchWidgetTrigger" />

@@ -1259,3 +1259,8 @@ body {
   background-color: #fff;
   color: #0a192f;
 }
+
+.gen-search-widget {
+  color: black;
+  background-color: tomato;
+}
