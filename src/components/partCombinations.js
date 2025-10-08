@@ -491,7 +491,7 @@ const partCombinations = {
   "8800-Left": {
     base: {
       chassis: `
-        <br /> All functions (Except 16, 28, 63, 66) = 68-4261 
+        <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
         <br /> 16 Function Only (No Indicator) = 68-2425 
         <br /> 28 Function Only (Pull Trim) = 68-2329
         <br /> 63 Function Only (Pull Trim) = 68-2326
@@ -649,7 +649,7 @@ const partCombinations = {
   "8800-Right": {
     base: {
       chassis: `
-        <br /> All functions (Except 16, 28, 63, 66) = 68-4261 
+        <br /> All functions (Except 16, 28, 63, 66) = 68-4263 
         <br /> 16 Function Only (No Indicator) = 68-2426 
         <br /> 28 Function Only (Pull Trim) = 68-2330
         <br /> 63 Function Only (Pull Trim) = 68-2327
