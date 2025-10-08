@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Rails from "./components/RailsForm";
 import Levers from "./components/Levers";
 import MortiseExitLockbodies from "./components/MortiseExitLockbodies";
@@ -25,6 +25,16 @@ import Modal from "./components/Modal"; // <-- Re-import the Modal component
 const CYLINDERS_TOOL_URL = "https://sargent-cylinders.netlify.app/";
 
 const App = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://cloud.google.com/ai/gen-app-builder/client?hl=en_US";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   const tabConfig = {
     masterTabs: [
       {

@@ -10,6 +10,16 @@ body {
 }
 /* Add these styles to your existing App.css file */
 
+#searchWidgetTrigger {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #2ecc71;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #172a45;
+  color: white;
+}
+
 .part-image {
   border-radius: 25px;
 }
@@ -1126,6 +1136,13 @@ body {
   .sub-tab {
     min-width: 100%;
     font-size: 0.9rem;
+  }
+  
+  /* Mobile: When expanded, expand to full width and anchor to left/right edges */
+  .global-search-container.expanded {
+    width: calc(100vw - 40px); 
+    left: 20px; 
+    right: 20px;
   }
 }
 
