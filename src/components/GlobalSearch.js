@@ -1,47 +1,32 @@
-// src/components/GlobalSearch.js (Modified)
-import React, { useState } from "react";
+// src/components/GlobalSearch.js
+import React from "react";
 import "../App.css";
 
-const GlobalSearch = () => {
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
+// Renamed HeaderSearch for conceptual clarity in the header
+const HeaderSearch = ({ onSearchExecuted }) => { 
+  // State for search visibility and toggle logic removed.
 
   return (
-    <div
-      className={`global-search-container ${isSearchVisible ? "expanded" : ""}`}
-    >
-      <div className="search-icon-wrapper">
-        <button
-          type="button"
-          className="search-toggle-button"
-          onClick={() => setIsSearchVisible((prev) => !prev)}
-          aria-expanded={isSearchVisible}
-          aria-label="Toggle Global Search Bar"
-        >
-          {isSearchVisible ? "❌" : "🔍"}
-        </button>
-        <span className="beta-tag">BETA</span>
+    // Use a new class for layout management within the header's flex row
+    <div className="header-search-container">
+      <div className="search-field-wrapper">
+        <gen-search-widget
+        className="gen-search-widget"
+          configId="14d04b0e-51c2-4a44-a33a-b53c5053fbea"
+          triggerId="searchWidgetTrigger"
+          // ⬇️ TRY THESE CSS VARIABLES ⬇️
+          style={{
+            "--input-text-color": "black",
+            "--search-input-color": "black",
+          }}
+        ></gen-search-widget>
+
+        {/* Use a placeholder appropriate for a persistent search bar */}
+        <input placeholder="Search knowledge base" id="searchWidgetTrigger" />
       </div>
-
-      {isSearchVisible && (
-        <div className="search-field-wrapper">
-          {/* Gen AI Search Widget */}
-
-          <gen-search-widget
-          className="gen-search-widget"
-            configId="14d04b0e-51c2-4a44-a33a-b53c5053fbea"
-            triggerId="searchWidgetTrigger"
-            // ⬇️ TRY THESE CSS VARIABLES ⬇️
-            style={{
-              "--input-text-color": "black",
-              "--search-input-color": "black",
-            }}
-          ></gen-search-widget>
-
-          <input placeholder="Search here" id="searchWidgetTrigger" />
-        </div>
-      )}
+      <span className="beta-tag">BETA</span> {/* Keep the beta tag next to the search bar */}
     </div>
   );
 };
 
-export default GlobalSearch;
+export default HeaderSearch;
