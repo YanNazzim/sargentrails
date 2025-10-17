@@ -81,7 +81,7 @@ export const tailpieceData = {
         },
       },
     },
-    "Competitive Cylinders/Cores": {
+    "Competitor Cylinders/Cores": {
       "Fixed Core": {
         "Schlage": {
           "Mechanical Functions": {
@@ -171,7 +171,7 @@ export const tailpieceData = {
 const Tailpieces = () => {
   const [selectedLockSeries, setSelectedLockSeries] = useState(null);
   const [selectedCylinderType, setSelectedCylinderType] = useState(null);
-  const [selectedCompetitiveType, setSelectedCompetitiveType] = useState(null);
+  const [selectedCompetitorType, setSelectedCompetitorType] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedFunctionType, setSelectedFunctionType] = useState(null);
   const [selectedCylinderSubtype, setSelectedCylinderSubtype] = useState(null);
@@ -200,9 +200,9 @@ const Tailpieces = () => {
       }))
     : [];
 
-  const competitiveTypeOptions =
+  const CompetitorTypeOptions =
     selectedCylinderType &&
-    selectedCylinderType.value === "Competitive Cylinders/Cores"
+    selectedCylinderType.value === "Competitor Cylinders/Cores"
       ? Object.keys(
           tailpieceData[selectedLockSeries.value][selectedCylinderType.value]
         ).map((key) => ({
@@ -212,12 +212,12 @@ const Tailpieces = () => {
       : [];
 
   const brandOptions =
-    selectedCompetitiveType &&
-    selectedCylinderType.value === "Competitive Cylinders/Cores"
+    selectedCompetitorType &&
+    selectedCylinderType.value === "Competitor Cylinders/Cores"
       ? Object.keys(
           tailpieceData[selectedLockSeries.value][
             selectedCylinderType.value
-          ][selectedCompetitiveType.value]
+          ][selectedCompetitorType.value]
         ).map((key) => ({
           value: key,
           label: key,
@@ -226,12 +226,12 @@ const Tailpieces = () => {
 
   const functionTypeOptions = (() => {
     if (selectedLockSeries && selectedCylinderType) {
-      if (selectedCylinderType.value === "Competitive Cylinders/Cores") {
-        if (selectedCompetitiveType && selectedBrand) {
+      if (selectedCylinderType.value === "Competitor Cylinders/Cores") {
+        if (selectedCompetitorType && selectedBrand) {
           return Object.keys(
             tailpieceData[selectedLockSeries.value][
               selectedCylinderType.value
-            ][selectedCompetitiveType.value][selectedBrand.value]
+            ][selectedCompetitorType.value][selectedBrand.value]
           ).map((key) => ({ value: key, label: key }));
         }
       } else {
@@ -245,23 +245,23 @@ const Tailpieces = () => {
 
   const cylinderSubtypeOptions = (() => {
     if (selectedLockSeries && selectedCylinderType && selectedFunctionType) {
-      let dataPath;
-      if (selectedCylinderType.value === "Competitive Cylinders/Cores") {
-        if (selectedCompetitiveType && selectedBrand) {
-          dataPath =
+      let dataObject;
+      if (selectedCylinderType.value === "Competitor Cylinders/Cores") {
+        if (selectedCompetitorType && selectedBrand) {
+          dataObject =
             tailpieceData[selectedLockSeries.value][
               selectedCylinderType.value
-            ][selectedCompetitiveType.value][selectedBrand.value][
+            ][selectedCompetitorType.value][selectedBrand.value][
               selectedFunctionType.value
-            ][selectedCylinderSubtype.value];
+            ];
         }
       } else {
-        dataPath =
+        dataObject =
           tailpieceData[selectedLockSeries.value][selectedCylinderType.value][
             selectedFunctionType.value
-          ][selectedCylinderSubtype.value];
+          ];
       }
-      return dataPath ? Object.keys(dataPath).map((key) => ({ value: key, label: key })) : [];
+      return dataObject ? Object.keys(dataObject).map((key) => ({ value: key, label: key })) : [];
     }
     return [];
   })();
@@ -274,12 +274,12 @@ const Tailpieces = () => {
       selectedCylinderSubtype
     ) {
       let dataPath;
-      if (selectedCylinderType.value === "Competitive Cylinders/Cores") {
-        if (selectedCompetitiveType && selectedBrand) {
+      if (selectedCylinderType.value === "Competitor Cylinders/Cores") {
+        if (selectedCompetitorType && selectedBrand) {
           dataPath =
             tailpieceData[selectedLockSeries.value][
               selectedCylinderType.value
-            ][selectedCompetitiveType.value][selectedBrand.value][
+            ][selectedCompetitorType.value][selectedBrand.value][
               selectedFunctionType.value
             ][selectedCylinderSubtype.value];
         }
@@ -298,7 +298,7 @@ const Tailpieces = () => {
   const handleLockSeriesChange = (selectedOption) => {
     setSelectedLockSeries(selectedOption);
     setSelectedCylinderType(null);
-    setSelectedCompetitiveType(null);
+    setSelectedCompetitorType(null);
     setSelectedBrand(null);
     setSelectedFunctionType(null);
     setSelectedCylinderSubtype(null);
@@ -309,7 +309,7 @@ const Tailpieces = () => {
 
   const handleCylinderTypeChange = (selectedOption) => {
     setSelectedCylinderType(selectedOption);
-    setSelectedCompetitiveType(null);
+    setSelectedCompetitorType(null);
     setSelectedBrand(null);
     setSelectedFunctionType(null);
     setSelectedCylinderSubtype(null);
@@ -318,8 +318,8 @@ const Tailpieces = () => {
     setPartImage("");
   };
 
-  const handleCompetitiveTypeChange = (selectedOption) => {
-    setSelectedCompetitiveType(selectedOption);
+  const handleCompetitorTypeChange = (selectedOption) => {
+    setSelectedCompetitorType(selectedOption);
     setSelectedBrand(null);
     setSelectedFunctionType(null);
     setSelectedCylinderSubtype(null);
@@ -363,9 +363,9 @@ const Tailpieces = () => {
 
     let result = null;
     if (selectedLockSeries && selectedCylinderType) {
-      if (selectedCylinderType.value === "Competitive Cylinders/Cores") {
+      if (selectedCylinderType.value === "Competitor Cylinders/Cores") {
         if (
-          selectedCompetitiveType &&
+          selectedCompetitorType &&
           selectedBrand &&
           selectedFunctionType &&
           selectedCylinderSubtype &&
@@ -374,7 +374,7 @@ const Tailpieces = () => {
           result =
             tailpieceData[selectedLockSeries.value][
               selectedCylinderType.value
-            ][selectedCompetitiveType.value][selectedBrand.value][
+            ][selectedCompetitorType.value][selectedBrand.value][
               selectedFunctionType.value
             ][selectedCylinderSubtype.value][selectedDoorThickness.value];
         }
@@ -405,7 +405,7 @@ const Tailpieces = () => {
   const handleReset = () => {
     setSelectedLockSeries(null);
     setSelectedCylinderType(null);
-    setSelectedCompetitiveType(null);
+    setSelectedCompetitorType(null);
     setSelectedBrand(null);
     setSelectedFunctionType(null);
     setSelectedCylinderSubtype(null);
@@ -469,25 +469,25 @@ const Tailpieces = () => {
           </div>
         )}
 
-        {/* Competitive Type Selection (Fixed Core / Interchangeable Core) */}
+        {/* Competitor Type Selection (Fixed Core / Interchangeable Core) */}
         {selectedCylinderType &&
-          selectedCylinderType.value === "Competitive Cylinders/Cores" && (
+          selectedCylinderType.value === "Competitor Cylinders/Cores" && (
             <div className="form-group">
-              <label>Competitive Cylinder Type:</label>
+              <label>Competitor Cylinder Type:</label>
               <Select
-                options={competitiveTypeOptions}
-                onChange={handleCompetitiveTypeChange}
-                value={selectedCompetitiveType}
-                placeholder="Select Competitive Cylinder Type..."
+                options={CompetitorTypeOptions}
+                onChange={handleCompetitorTypeChange}
+                value={selectedCompetitorType}
+                placeholder="Select Competitor Cylinder Type..."
                 styles={customSelectStyles}
                 required
               />
             </div>
           )}
 
-        {/* Brand/Category Selection for Competitive Cylinders */}
-        {selectedCompetitiveType &&
-          selectedCylinderType.value === "Competitive Cylinders/Cores" && (
+        {/* Brand/Category Selection for Competitor Cylinders */}
+        {selectedCompetitorType &&
+          selectedCylinderType.value === "Competitor Cylinders/Cores" && (
             <div className="form-group">
               <label>Brand/Category:</label>
               <Select
@@ -503,9 +503,9 @@ const Tailpieces = () => {
 
         {/* Function Type Selection (Mechanical/Electrified) */}
         {(selectedCylinderType &&
-          selectedCylinderType.value !== "Competitive Cylinders/Cores") ||
+          selectedCylinderType.value !== "Competitor Cylinders/Cores") ||
         (selectedCylinderType &&
-          selectedCylinderType.value === "Competitive Cylinders/Cores" &&
+          selectedCylinderType.value === "Competitor Cylinders/Cores" &&
           selectedBrand) ? (
           <div className="form-group">
             <label>Function Type:</label>
