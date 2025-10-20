@@ -872,6 +872,31 @@ const getSearchableTailpieces = () => {
     return tailpieces;
 };
 
+const getSearchable9400Parts = () => {
+    const parts = [
+        { part: "94-2376", desc: "Center Case, Active (Chassis)", keywords: ["chassis", "center case", "active", "9400"] },
+        { part: "94-2380", desc: "Center Case, InActive (Chassis)", keywords: ["chassis", "center case", "inactive", "9400"] },
+        { part: "94-2385", desc: "Top Latch Assy (6'4\" to 8'6\")", keywords: ["top latch", "assembly", "latch", "rod", "9400"] },
+        { part: "94-2474", desc: "Top Latch Assy (8'6\" to 10'8\")", keywords: ["top latch", "assembly", "latch", "tall door", "9400"] },
+        { part: "94-2386", desc: "Bottom Latch Assy (Base)", keywords: ["bottom latch", "assembly", "rod", "9400", "94-2386-FINISH"] },
+        { part: "94-0190", desc: "Crossbar (Base)", keywords: ["crossbar", "rail", "push bar", "9400", "94-0190-FINISH"] },
+        { part: "94-2384", desc: "Tenon Pack (Base)", keywords: ["tenon", "pack", "kit", "9400", "94-2384-FINISH"] },
+        { part: "94-2390", desc: "Top Strike Pack", keywords: ["top strike", "pack", "kit", "9400"] },
+        { part: "94-2391", desc: "Bottom Strike Pack", keywords: ["bottom strike", "pack", "kit", "9400"] },
+        { part: "94-2389", desc: "Latch Mounting Brackets Pack", keywords: ["latch", "mounting", "brackets", "9400"] },
+        { part: "68-2143", desc: "Screw Pack (Mounting)", keywords: ["screw", "mounting", "pack", "68-2143", "9400"] },
+    ];
+
+    return parts.map(item => ({
+        category: "9400 CVR Parts",
+        subcategory: "Component",
+        search_key: item.part,
+        description: item.desc,
+        part_info: item.part,
+        keywords: buildKeywords("9400", "CVR", "CVR parts", item.part, item.desc, item.keywords)
+    }));
+};
+
 // -------------------------------------------------------------
 // END: DEFINITIONS FOR ALL SEARCH FUNCTIONS
 // -------------------------------------------------------------
@@ -891,6 +916,7 @@ export const getSearchableData = () => {
         ...getSearchableTrims(),
         ...getSearchableEndCaps(),
         ...getSearchableMortiseExitLockbodies(),
+        ...getSearchable9400Parts(),
         ...getSearchableTailpieces()
     ];
 };
