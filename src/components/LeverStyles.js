@@ -1,3 +1,4 @@
+// src/components/LeverStyles.js
 import images from "../images"; // Adjust path as needed
 
 const leverStyleOptions = [
@@ -29,8 +30,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1121",
-            "Push Button": "10-1120",
-            "Thumb Turn": "10-2424",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1120",
             "Fixed Core": "10-1122",
             LFIC: "10-1123",
             SF: "10-1125",
@@ -40,8 +40,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "10-1146",
-            "Push Button": "10-1145",
-            "Thumb Turn": "10-2434",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1145",
             "Fixed Core": "10-1147",
             LFIC: "10-1148",
             SF: "10-1150",
@@ -97,8 +96,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1128",
-            "Push Button": "10-1127",
-            "Thumb Turn": "10-2425",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1127",
             "Fixed Core": "10-1129",
             LFIC: "10-1130",
             SF: "10-1132",
@@ -108,8 +106,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "10-1153",
-            "Push Button": "10-1152",
-            "Thumb Turn": "10-2435",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1152",
             "Fixed Core": "10-1154",
             LFIC: "10-1155",
             SF: "10-1157",
@@ -135,8 +132,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1137",
-            "Push Button": "10-1136",
-            "Thumb Turn": "10-2427",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1136",
             "Fixed Core": "10-1138",
             LFIC: "10-1139",
             SF: "10-1141",
@@ -146,8 +142,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "10-1162",
-            "Push Button": "10-1161",
-            "Thumb Turn": "10-2437",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1161",
             "Fixed Core": "10-1163",
             LFIC: "10-1164",
             SF: "10-1166",
@@ -244,8 +239,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1240",
-            "Push Button": "10-1241",
-            "Thumb Turn": "10-2429",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1241",
             "Fixed Core": "10-1242",
             LFIC: "10-1243",
             SF: "Not Available",
@@ -255,8 +249,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "Not Available",
-            "Push Button": "Not Available",
-            "Thumb Turn": "Not Available",
+            "Push Button/Thumb Turn (Sargent Conventional)": "Not Available",
             "Fixed Core": "Not Available",
             LFIC: "Not Available",
             SF: "Not Available",
@@ -302,8 +295,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1245",
-            "Push Button": "10-1246",
-            "Thumb Turn": "10-2423",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1246",
             "Fixed Core": "10-1247",
             LFIC: "10-1248",
             SF: "Not Available",
@@ -313,8 +305,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "Not Available",
-            "Push Button": "Not Available",
-            "Thumb Turn": "Not Available",
+            "Push Button/Thumb Turn (Sargent Conventional)": "Not Available",
             "Fixed Core": "Not Available",
             LFIC: "Not Available",
             SF: "Not Available",
@@ -432,8 +423,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1263",
-            "Push Button": "10-1264",
-            "Thumb Turn": "10-2428",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1264",
             "Fixed Core": "10-1265",
             LFIC: "10-1266",
             SF: "Not Available",
@@ -443,8 +433,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "Not Available",
-            "Push Button": "Not Available",
-            "Thumb Turn": "Not Available",
+            "Push Button/Thumb Turn (Sargent Conventional)": "Not Available",
             "Fixed Core": "Not Available",
             LFIC: "Not Available",
             SF: "Not Available",
@@ -520,8 +509,7 @@ const leverStyleOptions = [
         categories: {
           Standard: {
             Plain: "10-1268",
-            "Push Button": "10-1269",
-            "Thumb Turn": "10-2431",
+            "Push Button/Thumb Turn (Sargent Conventional)": "10-1269",
             "Fixed Core": "10-1270",
             LFIC: "10-1271",
             SF: "Not Available",
@@ -531,8 +519,7 @@ const leverStyleOptions = [
           },
           Milling: {
             Plain: "Not Available",
-            "Push Button": "Not Available",
-            "Thumb Turn": "Not Available",
+            "Push Button/Thumb Turn (Sargent Conventional)": "Not Available",
             "Fixed Core": "Not Available",
             LFIC: "Not Available",
             SF: "Not Available",
@@ -932,4 +919,4 @@ const leverStyleOptions = [
 ];
 
 export default leverStyleOptions;
-export { leverStyleOptions }; // <-- ADDED EXPORT
+export { leverStyleOptions };
