@@ -1,3 +1,4 @@
+// src/components/Levers.js
 import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
 import images from "../images";
@@ -180,12 +181,11 @@ const platformOptions = [
 
 const radioOptions = [
   { value: "Plain", label: "Plain" },
-  { value: "Thumb Turn", label: "Thumb Turn" },
-  { value: "Push Button", label: "Push Button" },
   {
-    value: "Fixed Core",
-    label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)",
+    value: "Push Button/Thumb Turn (Sargent Conventional)",
+    label: "Push Button/Thumb Turn (Sargent Conventional)",
   },
+  { value: "Fixed Core", label: "Fixed Core (CORBIN 6/7 Pin, ACCENTRA 6/7 Pin, SCHLAGE 6 Pin)" },
   { value: "LFIC", label: "LFIC -- Sargent 6 Pin (60, 63, 64)" },
   { value: "SF", label: "LFIC -- SCHLAGE 6 Pin (SF)" },
   { value: "YRC", label: "LFIC -- ACCENTRA 6 Pin (YRC)" },

@@ -1216,3 +1216,31 @@ ENHANCED SEARCH BAR STYLES (Inline Header Position)
   color: black;
   background-color: tomato;
 }
+
+/* The actual image that pops up */
+.finish-hover-image {
+    position: absolute;
+    bottom: 100%; /* Position above the span */
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* Center and add slight offset */
+    z-index: 10;
+    
+    width: 80px; 
+    height: 80px;
+    object-fit: cover;
+    
+    border-radius: 50%; /* Rounded shape */
+    border: 3px solid #ffcc00; /* Yellow border for accent */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* On hover, show the image */
+.finish-swatch-item:hover .finish-hover-image {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-20px); /* Move it up slightly on hover */
+}

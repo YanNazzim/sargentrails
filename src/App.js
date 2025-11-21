@@ -20,7 +20,12 @@ import EndCaps from "./components/EndCaps";
 import Tailpieces from "./components/Tailpieces";
 import CylindricalLockbodies from "./components/CylindricalLockbodies";
 import GlobalSearch from "./components/GlobalSearch";
-import Modal from "./components/Modal"; // <-- Re-import the Modal component
+import Modal from "./components/Modal"; 
+import SpindleKits from "./components/SpindleKits"; 
+import LockingSlideKits from "./components/LockingSlideKits";
+import NinetyFourHundredParts from "./components/9400Parts";
+import ExtensionRods from "./components/ExtensionRods";
+import AuxControlParts from "./components/AuxControlParts"; // <--- NEW IMPORT
 
 // Define the external tool URL
 const CYLINDERS_TOOL_URL = "https://sargent-cylinders.netlify.app/";
@@ -47,6 +52,11 @@ const App = () => {
           "Trims",
           "Mortise Exit Lockbodies",
           "Vertical Rod Device Internals",
+          "Spindle Retrofit Kits",
+          "Locking Slide Conversion Kits",
+          "9400 CVR Parts",
+          "Extension Rods",
+          "Aux Control Parts", // <--- ADDED NEW SUBTAB
         ],
       },
       {
@@ -276,6 +286,16 @@ const App = () => {
         return <Strikes />;
       case "Mortise Lockbodies":
         return <MortiseLockbodies initialData={formData.mortiseLockbodies} />;
+      case "Spindle Retrofit Kits":
+          return <SpindleKits />;
+      case "Locking Slide Conversion Kits":
+          return <LockingSlideKits />;
+      case "9400 CVR Parts":
+          return <NinetyFourHundredParts />;
+      case "Extension Rods":
+          return <ExtensionRods />;
+      case "Aux Control Parts": // <--- NEW CASE
+          return <AuxControlParts />;
       case "Cylinders":
         return (
             <div className="initial-load-message content-transition">

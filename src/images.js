@@ -23,6 +23,11 @@ const images = {
   finishEN: require("./images/EN.png"),
   finishEP: require("./images/EP.png"),
 
+  // Spindle Kit Images - NEW
+  Spindle700: require("./images/Spindle700.png"),
+  Spindle700_4: require("./images/Spindle700_4.png"),
+  Spindle700_8: require("./images/Spindle700_8.png"),
+
   // Standard levers
   LeverA: require("./images/LeverA.png"),
   LeverB: require("./images/LeverB.png"),
