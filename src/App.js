@@ -7,6 +7,7 @@ import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
 import MountingPosts from "./components/MountingPosts";
+import TechSupportHubBanner from './components/TechSupportHubBanner'; // IMPORT NEW COMPONENT
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
@@ -320,6 +321,7 @@ const App = () => {
            <h3 className="navbar-message-star">★ = Same Form Used Across All Device Platforms (Universal Form)</h3>
         </div>
       </div>
+        <TechSupportHubBanner />
 
       <GlobalSearch onSearchExecuted={handleSearchResultClick} />
       
