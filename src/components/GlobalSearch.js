@@ -12,7 +12,8 @@ const HeaderSearch = ({ onSearchExecuted }) => {
       <div className="search-field-wrapper">
         <gen-search-widget
         className="gen-search-widget"
-          configId="14d04b0e-51c2-4a44-a33a-b53c5053fbea"
+          configId="64e54ea6-0482-4f95-b14d-8d268cd8e835" // UPDATED to match ChatWidget
+          location="us" // ADDED to match ChatWidget
           triggerId="searchWidgetTrigger"
           // ⬇️ TRY THESE CSS VARIABLES ⬇️
           style={{
