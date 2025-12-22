@@ -575,6 +575,7 @@ const RailsForm = () => {
     control: (provided) => ({
       ...provided,
       minHeight: "40px",
+      
     }),
     option: (provided) => ({
       ...provided,

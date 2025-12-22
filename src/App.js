@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Rails from "./components/RailsForm";
 import Levers from "./components/Levers";
 import MortiseExitLockbodies from "./components/MortiseExitLockbodies";
@@ -7,7 +7,7 @@ import Trims from "./components/TrimsForm";
 import Rods from "./components/RodsForm";
 import Chassis from "./components/ChassisForm";
 import MountingPosts from "./components/MountingPosts";
-import TechSupportHubBanner from './components/TechSupportHubBanner'; // IMPORT NEW COMPONENT
+import TechSupportHubBanner from './components/TechSupportHubBanner'; 
 import "./App.css";
 import images from "./images";
 import Latches from "./components/Latches";
@@ -19,28 +19,18 @@ import Strikes from "./components/Strikes";
 import EndCaps from "./components/EndCaps";
 import Tailpieces from "./components/Tailpieces";
 import CylindricalLockbodies from "./components/CylindricalLockbodies";
-import GlobalSearch from "./components/GlobalSearch";
-import Modal from "./components/Modal"; 
+// Removed unused Modal import
 import SpindleKits from "./components/SpindleKits"; 
 import LockingSlideKits from "./components/LockingSlideKits";
 import NinetyFourHundredParts from "./components/9400Parts";
 import ExtensionRods from "./components/ExtensionRods";
-import AuxControlParts from "./components/AuxControlParts"; // <--- NEW IMPORT
+import AuxControlParts from "./components/AuxControlParts";
+import ChatWidget from "./components/ChatWidget"; 
 
 // Define the external tool URL
 const CYLINDERS_TOOL_URL = "https://sargent-cylinders.netlify.app/";
 
 const App = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://cloud.google.com/ai/gen-app-builder/client?hl=en_US";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
   const tabConfig = {
     masterTabs: [
       {
@@ -56,7 +46,7 @@ const App = () => {
           "Locking Slide Conversion Kits",
           "9400 CVR Parts",
           "Extension Rods",
-          "Aux Control Parts", // <--- ADDED NEW SUBTAB
+          "Aux Control Parts",
         ],
       },
       {
@@ -79,8 +69,8 @@ const App = () => {
 
   const [activeMasterTab, setActiveMasterTab] = useState(null);
   const [activeSubTab, setActiveSubTab] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // <-- NEW: State for modal
-  const [modalData, setModalData] = useState(null); // <-- NEW: State for modal data
+  
+  // REMOVED: Unused Modal state (isModalOpen, modalData)
 
   // Centralized state for form data
   const [formData, setFormData] = useState({
@@ -130,119 +120,6 @@ const App = () => {
     resetAllForms();
   };
 
-  const handleSearchResultClick = (result) => {
-    if (result.category === "Exit Device Rails") {
-        setModalData(result);
-        setIsModalOpen(true);
-        return; // Stop further execution
-    }
-
-    const { category, subcategory, description, search_key, path } = result;
-    
-    const formToTabMap = {
-      // Existing Mappings
-      "Exit Device Chassis (Rail Head)": { master: "Exit Devices", sub: "Chassis (Rail Head)", form: "chassis" },
-      "Exit Trims (Full Output)": { master: "Exit Devices", sub: "Trims", form: "trims" },
-      "Levers": { master: null, sub: "Lever Handles Only", form: "levers" },
-      // New Mappings
-      "Bored Lock Latches": { master: "Bored Locks", sub: "Latches", form: "latches" },
-      "Mortise Lockbodies": { master: "Mortise Locks", sub: "Mortise Lockbodies", form: "mortiseLockbodies" },
-      "Bored Lockbodies (10X)": { master: "Bored Locks", sub: "Lockbodies", form: "cylindricalLockbodies" },
-      "Mortise Spindles": { master: "Mortise Locks", sub: "Mortise Spindles", form: "mortiseSpindles" },
-      "Vertical Rod Device Internals": { master: "Exit Devices", sub: "Vertical Rod Device Internals", form: "rods" },
-      "Exit Trims": { master: "Exit Devices", sub: "Trims", form: "trims" },
-      "Exit Device End Caps": { master: "Exit Devices", sub: "End Caps", form: "endCaps" },
-      "Mortise Exit Lockbodies (80/PE80)": { master: "Exit Devices", sub: "Mortise Exit Lockbodies", form: "mortiseExitLockbodies" },
-      "Bored Lock Tailpieces": { master: "Bored Locks", sub: "Tailpieces", form: "tailpieces" },
-    };
-
-    if (category in formToTabMap) {
-      const { master, sub, form } = formToTabMap[category];
-      
-      resetAllForms(); // Clear all previous form data
-      
-      setActiveMasterTab(master);
-      setActiveSubTab(sub);
-
-      let prefillData = {};
-      // Logic to prepare prefillData based on the category
-      switch(category) {
-        case "Exit Device Chassis (Rail Head)":
-          prefillData = { device: subcategory };
-          break;
-        case "Exit Trims (Full Output)":
-        case "Exit Trims": {
-          const [series, device, functionCode] = (search_key.startsWith("F") ? description : search_key).split(/[\s-]+/);
-          prefillData = {
-            series: series || "",
-            device: device || "",
-            functionCode: functionCode ? functionCode.replace('F','') : "",
-          };
-          break;
-        }
-        case "Levers":
-          prefillData = { leverStyle: result.search_key };
-          break;
-        case "Bored Lock Latches":
-          prefillData = { series: subcategory, latchType: search_key };
-          break;
-        case "Mortise Lockbodies":
-          prefillData = { functionCode: search_key };
-          break;
-        case "Bored Lockbodies (10X)": {
-          const parts = description.split(' | ');
-          if (parts.length === 4) {
-              prefillData = {
-                  function: parts[0],
-                  type: parts[1],
-                  doorThickness: parts[2],
-                  leverType: parts[3].replace('Lever: ', ''),
-              };
-          }
-          break;
-        }
-        case "Mortise Spindles":
-          prefillData = { trimType: subcategory, doorThickness: search_key };
-          break;
-        case "Vertical Rod Device Internals":
-          prefillData = { device: search_key.split('_')[0] };
-          break;
-        case "Exit Device End Caps": {
-            const prefixCode = description.split(' - ')[0];
-            prefillData = { series: subcategory, prefix: prefixCode !== 'Standard' ? prefixCode : null };
-            break;
-        }
-        case "Mortise Exit Lockbodies (80/PE80)":
-          if (subcategory === 'Function') prefillData = { function: search_key };
-          if (subcategory === 'Devices') prefillData = { device: search_key };
-          if (subcategory === 'Prefixes') prefillData = { prefixes: [search_key] };
-          break;
-        case "Bored Lock Tailpieces":
-          if(path) {
-            prefillData = {
-                lockSeries: path[0],
-                cylinderType: path[1],
-                competitiveType: path[2] === "Mechanical Functions" || path[2] === "Electrified Functions" ? null : path[2],
-                brand: path[3] === "Mechanical Functions" || path[3] === "Electrified Functions" ? null : path[3],
-                functionType: path.find(p => p.includes("Functions")),
-                cylinderSubtype: path.find(p => !p.includes("Functions") && (p.includes("Pin") || p.includes("XC") || p.includes("Signature") || p.includes("Keso"))),
-                doorThickness: path[path.length -1],
-            };
-          }
-          break;
-        default:
-          break;
-      }
-      
-      // Update the centralized form data state
-      setFormData(prevData => ({ ...prevData, [form]: prefillData }));
-      
-    } else {
-      // Fallback for any unmapped categories if necessary
-      alert(`Configuration for "${category}" is not yet implemented.`);
-    }
-  };
-
   const renderContent = () => {
     if (!activeSubTab) {
       return (
@@ -255,7 +132,7 @@ const App = () => {
 
     switch (activeSubTab) {
       case "Rails/Crossbars":
-        return <Rails />; // <-- Rails form doesn't need pre-fill from search anymore
+        return <Rails />;
       case "Trims":
         return <Trims initialData={formData.trims} />;
       case "Lever Handles Only":
@@ -294,7 +171,7 @@ const App = () => {
           return <NinetyFourHundredParts />;
       case "Extension Rods":
           return <ExtensionRods />;
-      case "Aux Control Parts": // <--- NEW CASE
+      case "Aux Control Parts":
           return <AuxControlParts />;
       case "Cylinders":
         return (
@@ -322,7 +199,10 @@ const App = () => {
     <div className="app">
       <div className="header">
         <div className="navbar-top-section">
-          <img src={images.logo} alt="Company Logo" className="company-logo" />
+          <div className="logo-container">
+            <img src={images.logo} alt="Company Logo" className="company-logo" />
+            <h1 className="title">Sargent Part Number Lookup</h1>
+          </div>
           <div className="navbar-categories">
               {tabConfig.masterTabs.map(({ name }) => (
                   <button 
@@ -334,19 +214,16 @@ const App = () => {
                   </button>
               ))}
           </div>
-          <h1 className="title">Sargent Part Number Lookup Tool</h1>
         </div>
         <div className="navbar-messages-bar">
-           <h3 className="navbar-message-note">For best results, Verify Part #'s with Sargent Mechanical TPS</h3>
-           <h3 className="navbar-message-star">★ = Same Form Used Across All Device Platforms (Universal Form)</h3>
+           <h3 className="navbar-message-note">Verify Part #'s with Sargent Mechanical TPS</h3>
+           <h3 className="navbar-message-star">★ = Universal Form</h3>
         </div>
       </div>
-        <TechSupportHubBanner />
 
-      <GlobalSearch onSearchExecuted={handleSearchResultClick} />
+      <TechSupportHubBanner />
       
-      {/* NEW: Render the modal */}
-      <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)} data={modalData} />
+      {/* REMOVED: <Modal /> component */}
       
       {activeMasterTab && (
         <div className="tab-container sub-tabs-container" aria-live="polite">
@@ -366,6 +243,9 @@ const App = () => {
       )}
 
       <div className="content-container">{renderContent()}</div>
+      
+      {/* GLOBAL CHAT WIDGET - Primary AI Interface */}
+      <ChatWidget />
     </div>
   );
 };

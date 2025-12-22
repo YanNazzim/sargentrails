@@ -13,22 +13,22 @@ const slideIn = keyframes`
 const WidgetContainer = styled.div`
   position: fixed;
   bottom: 20px;
-  right: 20px;
-  z-index: 9999; /* High z-index to float over everything */
-  width: 320px;
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  left: 20px; /* MOVED TO BOTTOM LEFT */
+  z-index: 9999;
+  width: 300px;
+  background-color: #002d72; /* Sargent Blue background */
+  border: 1px solid #0046b3;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   padding: 20px;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
   animation: ${slideIn} 0.5s ease-out forwards;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 
-  /* Gradient border visual trick */
+  /* Gold top border accent */
   &::before {
     content: '';
     position: absolute;
@@ -36,75 +36,73 @@ const WidgetContainer = styled.div`
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    background: linear-gradient(90deg, #ffd700 0%, #ffaa00 100%);
     border-radius: 12px 12px 0 0;
   }
 
-  /* Mobile Optimization: Full width card at bottom */
   @media (max-width: 480px) {
     bottom: 10px;
     left: 10px;
     right: 10px;
-    width: auto; /* Auto width to fill available space minus margins */
+    width: auto;
   }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none;
-  color: #777;
+  color: #a0c4ff;
   cursor: pointer;
   font-size: 20px;
   line-height: 1;
   padding: 4px;
-  border-radius: 4px;
   transition: color 0.2s;
 
   &:hover {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
   }
 `;
 
 const Title = styled.h3`
-  color: #fff;
-  margin: 8px 0 0 0; /* Top margin for spacing from border */
+  color: #ffffff;
+  margin: 8px 0 0 0;
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.3;
 `;
 
 const Subtitle = styled.p`
-  color: #bdbdbd;
+  color: #e6f1ff;
   margin: 0;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.4;
+  opacity: 0.9;
 `;
 
 const HubLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white !important;
+  background: #ffd700; /* Gold Button */
+  color: #002d72 !important; /* Blue Text */
   text-decoration: none !important;
   padding: 10px 0;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 4px 12px rgba(37, 117, 252, 0.3);
-  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  margin-top: 4px;
+  margin-top: 8px;
+  text-transform: uppercase;
 
   &:hover {
+    background: #ffe033;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 117, 252, 0.5);
-    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   &:active {
@@ -126,9 +124,9 @@ const TechSupportHubBanner = () => {
         &times;
       </CloseButton>
       
-      <Title>Need Sargent Tools?</Title>
+      <Title>Need more Tools?</Title>
       <Subtitle>
-        Access the full suite of utilities at the Tech Support Gateway.
+        Access Templates, Cylinders, and more at the Tech Support Hub.
       </Subtitle>
       
       <HubLink 
