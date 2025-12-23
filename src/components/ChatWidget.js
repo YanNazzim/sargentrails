@@ -1,14 +1,18 @@
 // src/components/ChatWidget.js
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import "../components/ChatWidget.css";
+import "../components/style/ChatWidget.css";
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
+  // NEW: State for handling images
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hello! I am your AI Tech Support and Sargent Specialist. I can help with Part ID, Templates, and technical questions. What do you need?",
+      text: "Hello! I am your AI Tech Support and Sargent Specialist. I can help with Part ID, Templates, and technical questions. Upload a photo or ask a question!",
       sources: [],
     },
   ]);
@@ -18,6 +22,8 @@ const ChatWidget = () => {
   );
 
   const messagesEndRef = useRef(null);
+  const fileInputRef = useRef(null); // NEW: Reference for the hidden file input
+
   const toggleChat = useCallback(() => setIsOpen((prev) => !prev), []);
   const scrollToBottom = () =>
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,6 +31,35 @@ const ChatWidget = () => {
   useEffect(() => {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen]);
+
+  // NEW: Handle File Selection
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // 1. Create a preview URL for the UI
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
+
+      // 2. Convert to Base64 for the API
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // We strip the "data:image/xyz;base64," prefix here to send raw data
+        const base64String = reader.result.split(",")[1];
+        setSelectedImage({
+          mimeType: file.type,
+          data: base64String,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // NEW: Clear selected image
+  const clearImage = () => {
+    setSelectedImage(null);
+    setImagePreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   const parseSources = (citations) => {
     if (!citations || citations.length === 0) return [];
@@ -34,7 +69,7 @@ const ChatWidget = () => {
         if (src.uri && !uniqueMap.has(src.uri)) {
           let cleanTitle = src.title || "Sargent Documentation";
           if (cleanTitle.length > 50)
-            cleanTitle = cleanTitle.substring(0, 47) + "...";
+            cleanTitle = cleanTitle.substring(0, 47) + "Thinking...";
           uniqueMap.set(src.uri, {
             title: cleanTitle,
             uri: src.uri,
@@ -47,7 +82,10 @@ const ChatWidget = () => {
   };
 
   const formatMessageText = (text) => {
-    if (!text) return null;
+    // --- CRASH FIX: SAFETY CHECK ---
+    // If text is null, undefined, or NOT a string, return null to avoid crash
+    if (!text || typeof text !== "string") return null;
+
     const lines = text.split("\n");
     const formattedContent = [];
     let listBuffer = [];
@@ -56,7 +94,6 @@ const ChatWidget = () => {
       const parts = str.split(/(\*\*.*?\*\*)/g);
       return parts.map((part, i) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-          // Wrapped in yellow highlight class for the dark theme
           return (
             <span key={i} className="highlight-yellow">
               {part.slice(2, -2)}
@@ -69,11 +106,7 @@ const ChatWidget = () => {
 
     lines.forEach((line, index) => {
       const trimmed = line.trim();
-
-      // Skip bracketed system info
-      if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-        return;
-      }
+      if (trimmed.startsWith("[") && trimmed.endsWith("]")) return;
 
       if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
         listBuffer.push(<li key={index}>{parseBold(trimmed.substring(2))}</li>);
@@ -109,17 +142,30 @@ const ChatWidget = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    // Allow sending if there is text OR an image
+    if ((!input.trim() && !selectedImage) || isLoading) return;
 
     const userMessage = input.trim();
+    const currentImage = selectedImage; // Capture reference
+    const currentPreview = imagePreview; // Capture reference
+
+    // Optimistically update UI
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "user",
+        text: userMessage,
+        image: currentPreview, // Pass preview to render in chat
+      },
+    ]);
+
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
+    clearImage(); // Reset input immediately
     setIsLoading(true);
 
     const FUNCTION_URL = "/.netlify/functions/chat";
     const safeSessionId =
       typeof sessionId === "string" ? sessionId : sessionId.name;
-
     const answerGenerationSpec = {
       ignoreAdversarialQuery: true,
       ignoreNonAnswerSeekingQuery: true,
@@ -129,6 +175,13 @@ const ChatWidget = () => {
       promptSpec: {
         preamble: `AI Tech Support and Sargent Specialist
 Role: You are the AI Tech Support and Sargent Specialist. Provide fast, accurate, technical support and part identification.
+
+VISUAL ANALYSIS: If an image is provided, analyze the hardware. Look for:
+- Rail shape (Teardrop vs Crossbar vs Rectangular)
+- Chassis Width (Wide vs narrow) This chassis is at the end of the rail. thin is narrow wide is wide
+- End cap style (Flush 43- vs Standard)
+- Lock chassis (Mortise box vs Cylindrical latch)
+- Finish (US3, US32D, US10B)
 
 ## Prefix & Compatibility Rules for exit devices
 12-: UL Fire Rated. All devices. Conflict: 16- (Cylinder Dogging) or HK- (Hex Key Dogging).
@@ -152,6 +205,23 @@ LD-: Less Dogging. Used for non-fire-rated devices.
 AL-: Alarmed Exit (Min 36" door). Conflict: 16, 56, 59, BT, GL, HC, HC4, or WS.
 NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
 
+Sargent Exit Device function # 04 = Night Latch - Key Retracts Latch
+Sargent Exit Device function # 06 = Store Room - Key Unlocks Lever, Lever retracts latch, ALWAYS LOCKED
+Sargent Exit Device function # 10 = Exit Only - Can be blank or have a Dummy Pull/Escutcheon Trim
+Sargent Exit Device function # 13 = Class Room - Key Unlocks Lever, Lever retracts latch, CAN BE LEFT UNLOCKED
+Sargent Exit Device function # 15 = Passage - Lever always retracts latch. (Free Entry)
+Sargent Exit Device function # 16 = Classroom Security (Intruder) - Inside Key Locks/Unlocks outside trim, Outside key retracts latch
+Sargent Exit Device function # 40 = Exit Only (Freewheeling Lever) - Escutcheon Trim that Spins freely 
+Sargent Exit Device function # 43 = Class Room (Freewheeling Lever) - Key Unlocks Lever, Lever retracts latch, CAN BE LEFT UNLOCKED
+Sargent Exit Device function # 46 = Store Room (Freewheeling Lever) - Key Unlocks Lever, Lever retracts latch, ALWAYS LOCKED
+Sargent Exit Device function # 73 = Electrified Trim (Fail Safe - NO KEY) - Power on = Locked | Power off = Unlocked
+Sargent Exit Device function # 74 = Electrified Trim (Fail Secure - NO KEY) - Power on = Unlocked | Power off = Locked
+Sargent Exit Device function # 75 = Electrified Trim (Fail Safe - HAS KEY OVERRIDE) - Power on = Locked | Power off = Unlocked
+Sargent Exit Device function # 76 = Electrified Trim (Fail Secure - HAS KEY OVERRIDE) - Power on = Unlocked | Power off = Locked
+
+8816 cannot have dogging at all
+A cylinder on the panic bar's chassis usually indicates a 16 function
+
 ## Response Style: "Technical Brevity"
 - SINGLE PART NUMBER: Always provide the most accurate part number.
 - FORMATTING: Use **bold** for part numbers and templates.
@@ -163,8 +233,11 @@ NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
 
 ## Cylinder Rules
 - RIM EXITS: Uses **#34 Rim Cylinder**.
+- 8816: Inside 44 Mortise | Outside 34 Rim.
+- 8916: Inside 34 Mortise | Outside 46 Rim.
 - MORTISE EXITS: Uses **#46 Mortise Cylinder** (standard ET trim).
 - MORTISE PULLS (8904 MSL / 8904 FLL): Uses **#43 Mortise Cylinder**.
+
 
 ## Lockbodies
 - RIM DEVICES (8800, PE8800, 20, 30): DO NOT use lockbodies.
@@ -307,7 +380,11 @@ NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          query: { text: userMessage },
+          // MODIFIED: Send both text and image in the query object
+          query: {
+            text: userMessage || "Identify this Sargent product",
+            image: currentImage,
+          },
           session: safeSessionId,
           answerGenerationSpec: answerGenerationSpec,
         }),
@@ -321,7 +398,7 @@ NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
           ...prev,
           {
             role: "assistant",
-            text: data.answer.answerText,
+            text: data.answer.answerText || data.answer, // Handle potential structure diff
             sources: parseSources(data.answer.citations),
           },
         ]);
@@ -357,6 +434,20 @@ NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
             {messages.map((msg, i) => (
               <div key={i} className={`message-row ${msg.role}`}>
                 <div className="message-bubble">
+                  {/* NEW: Render user uploaded image if it exists */}
+                  {msg.image && (
+                    <img
+                      src={msg.image}
+                      alt="User upload"
+                      style={{
+                        maxWidth: "100%",
+                        borderRadius: "8px",
+                        marginTop: "5px",
+                        marginBottom: "5px",
+                        border: "1px solid #ddd",
+                      }}
+                    />
+                  )}
                   {msg.role === "assistant"
                     ? formatMessageText(msg.text)
                     : msg.text}
@@ -384,19 +475,116 @@ NB-: Less Bottom Rod & Bolt. ONLY for 84/86/87 series.
             ))}
             {isLoading && (
               <div className="message-row assistant">
-                <div className="message-bubble loading">...</div>
+                <div className="message-bubble loading">
+                  {/* MODIFIED: Replaced text with animated dots structure */}
+                  <div className="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
+
+          {/* NEW: Image Preview Area above input */}
+          {imagePreview && (
+            <div
+              style={{
+                padding: "5px 15px",
+                display: "flex",
+                alignItems: "center",
+                background: "#f9f9f9",
+                borderTop: "1px solid #eee",
+              }}
+            >
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  style={{
+                    height: "50px",
+                    borderRadius: "4px",
+                    border: "1px solid #ccc",
+                  }}
+                />
+                <button
+                  onClick={clearImage}
+                  style={{
+                    position: "absolute",
+                    top: "-8px",
+                    right: "-8px",
+                    background: "#ff4444",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "50%",
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    fontSize: "12px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+              <span
+                style={{
+                  marginLeft: "10px",
+                  fontSize: "0.8rem",
+                  color: "#666",
+                }}
+              >
+                Image attached
+              </span>
+            </div>
+          )}
+
           <form className="chat-input-area" onSubmit={handleSendMessage}>
+            {/* NEW: Hidden File Input */}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileSelect}
+            />
+
+            {/* NEW: Paperclip Button */}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current.click()}
+              style={{
+                marginRight: "8px",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "1.2rem",
+                padding: "0 5px",
+              }}
+              title="Attach Photo"
+            >
+              📎
+            </button>
+
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ex: 8813, SFIC core..."
+              placeholder={
+                imagePreview
+                  ? "Ask about this image..."
+                  : "Ex: 8813, SFIC core..."
+              }
               disabled={isLoading}
             />
-            <button type="submit" disabled={isLoading || !input.trim()}>
+            <button
+              type="submit"
+              disabled={isLoading || (!input.trim() && !selectedImage)}
+            >
               →
             </button>
           </form>
