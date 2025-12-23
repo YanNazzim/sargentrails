@@ -1,6 +1,6 @@
 // src/components/ChatWidget.js
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import "../components/style/ChatWidget.css";
+import "../components/ChatWidget.css";
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
