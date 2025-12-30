@@ -1,73 +1,79 @@
-/* src/App.css - Dark Navy & Grayish Purple Theme */
+/* src/App.css */
 
 :root {
-  /* --- Palette Definition --- */
-  --bg-dark: #0f172a;          /* Deepest Navy (Main Background) */
-  --bg-card: #1e293b;          /* Dark Slate Gray (Cards/Sections) */
-  --bg-input: #0b1120;         /* Very Dark Navy (Inputs) */
+  /* --- Palette & Theme --- */
+  --bg-dark: #020617;          /* Deepest Navy */
+  --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 60%);
   
-  --accent-purple: #a5b4fc;    /* Grayish Purple (Primary Highlight) */
-  --accent-purple-dim: #6366f1;/* Darker Purple (Borders/Active states) */
-  --accent-purple-glow: rgba(165, 180, 252, 0.15);
+  /* Glassmorphism */
+  --glass-bg: rgba(30, 41, 59, 0.7);
+  --glass-bg-hover: rgba(51, 65, 85, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
   
-  --text-primary: #f1f5f9;     /* Slate 100 (Main Text) */
-  --text-secondary: #94a3b8;   /* Slate 400 (Subtext) */
-  --text-muted: #64748b;       /* Slate 500 (Labels/Hints) */
+  /* Input Standardization */
+  --input-bg: rgba(2, 6, 23, 0.6);
+  --input-border: rgba(148, 163, 184, 0.2);
+  --input-height: 54px;        /* FIXED HEIGHT for all inputs */
   
-  --border-color: #334155;     /* Slate 700 (Borders) */
-  --border-focus: #818cf8;     /* Indigo/Purple Focus ring */
-
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  /* Typography & Accents */
+  --text-primary: #f8fafc;     
+  --text-secondary: #94a3b8;   
+  --text-muted: #64748b;       
+  
+  --accent-purple: #818cf8;    
+  --accent-cyan: #38bdf8;      
+  --accent-glow: rgba(129, 140, 248, 0.25);
+  
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
 }
 
 body {
   background-color: var(--bg-dark);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  background-size: cover;
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Modern font stack */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
-  padding: 0; /* Reset padding, we'll handle container spacing */
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  min-height: 100vh;
 }
 
 .app {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
 }
 
-/* --- Header Styling --- */
+/* --- Header & Nav --- */
 .header {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  margin-bottom: 2.5rem;
-  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 2rem;
   overflow: hidden;
   position: relative;
 }
 
-/* Top decorative accent line */
 .header::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-purple-dim), var(--accent-purple), var(--accent-purple-dim));
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
 }
 
 .navbar-top-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2.5rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
@@ -75,359 +81,284 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .company-logo {
-  width: 110px;
+  width: 90px;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: white;
-  padding: 8px;
-  box-shadow: var(--shadow-sm);
+  padding: 5px;
 }
 
 .title {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
+  font-weight: 800;
   color: var(--text-primary);
-  font-weight: 700;
   margin: 0;
   letter-spacing: -0.5px;
 }
 
-/* --- Master Tabs (Header) --- */
+/* Master Tabs (Pills) */
 .navbar-categories {
   display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(2, 6, 23, 0.3);
+  padding: 4px;
+  border-radius: 99px;
+  border: 1px solid var(--glass-border);
 }
 
 .navbar-category-button {
   background: transparent;
   color: var(--text-secondary);
-  border: 1px solid transparent;
+  border: none;
   padding: 0.6rem 1.25rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 9999px; /* Pill shape */
+  border-radius: 99px;
+  transition: all 0.2s;
 }
 
 .navbar-category-button:hover {
   color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.03);
+  background: rgba(255,255,255,0.05);
 }
 
 .navbar-category-button.active {
-  background-color: var(--accent-purple-glow);
-  color: var(--accent-purple);
-  border: 1px solid var(--accent-purple-dim);
-  box-shadow: 0 0 12px rgba(165, 180, 252, 0.1);
+  background: var(--accent-purple);
+  color: white;
+  box-shadow: 0 2px 10px var(--accent-glow);
 }
 
 .navbar-messages-bar {
   display: flex;
   justify-content: center;
-  gap: 3rem;
-  padding: 0.75rem 2rem;
-  background-color: rgba(15, 23, 42, 0.5); /* Slightly darker stripe */
-}
-
-.navbar-message-note, .navbar-message-star {
+  gap: 2rem;
+  padding: 0.6rem;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid var(--glass-border);
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin: 0;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.navbar-message-star {
-  color: var(--accent-purple);
-}
-
-/* --- Sub Tabs (Grid) --- */
-.sub-tabs-container {
-  margin-bottom: 2.5rem;
-  padding: 0;
-  background: transparent; /* Remove card bg from container to let pills float */
-  box-shadow: none;
-  border: none;
-}
-
+/* Sub Tabs (Grid) */
+.sub-tabs-container { margin-bottom: 2rem; }
 .sub-tabs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
 }
 
 .sub-tab {
-  padding: 14px 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  padding: 1rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
   text-align: left;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: var(--shadow-sm);
 }
 
 .sub-tab:hover {
   border-color: var(--accent-purple);
   color: var(--text-primary);
+  background: var(--glass-bg-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .sub-tab.active {
-  background: var(--bg-card);
+  background: rgba(129, 140, 248, 0.15);
   border-color: var(--accent-purple);
-  color: var(--accent-purple);
-  box-shadow: 0 0 0 1px var(--accent-purple), var(--shadow-md);
-  font-weight: 600;
+  color: white;
+  box-shadow: 0 0 0 1px var(--accent-purple);
 }
 
-.universal-tab .universal-star {
-  color: var(--accent-purple);
-  font-size: 1.1rem;
-}
-
-.sub-tab.active .universal-star {
-  filter: drop-shadow(0 0 2px var(--accent-purple));
-}
-
-/* --- Content Areas & Forms --- */
-.app-container, .form-group, .result-container, .parts-column, .part-form {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
+/* --- Content & Forms --- */
+.part-form, .app-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--glass-shadow);
 }
 
 .form-group {
-  margin-bottom: 2rem;
-  padding: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
-  color: var(--accent-purple);
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 0.75rem;
   display: block;
+  color: var(--accent-cyan);
+  font-size: 0.8rem;
   text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
 }
 
+/* --- UNIFIED INPUT STYLING --- */
+/* Matches standard Selects/Inputs with React Select */
+
 .form-group input[type="text"],
 .form-group select {
-  background-color: var(--bg-input);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 14px;
-  border-radius: 8px;
   width: 100%;
+  height: var(--input-height); /* 54px */
+  padding: 0 1rem;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.2s;
-  font-size: 1rem;
 }
 
 .form-group input[type="text"]:focus,
 .form-group select:focus {
   border-color: var(--accent-purple);
-  box-shadow: 0 0 0 3px var(--accent-purple-glow);
   outline: none;
+  background-color: rgba(2, 6, 23, 0.9);
 }
 
-/* React Select Overrides for Dark Mode */
+/* --- React Select Overrides --- */
+/* Forces React Select to look identical to the standard inputs above */
 .react-select__control {
-  background-color: var(--bg-input) !important;
-  border-color: var(--border-color) !important;
-  padding: 4px;
-  border-radius: 8px !important;
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: var(--radius-sm) !important;
+  min-height: var(--input-height) !important;
+  height: var(--input-height) !important;
   box-shadow: none !important;
 }
+
 .react-select__control--is-focused {
   border-color: var(--accent-purple) !important;
-  box-shadow: 0 0 0 3px var(--accent-purple-glow) !important;
+  background-color: rgba(2, 6, 23, 0.9) !important;
 }
-.react-select__menu {
-  background-color: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  box-shadow: var(--shadow-lg) !important;
-  border-radius: 8px !important;
-  padding: 0 !important;
-  overflow: hidden !important;
+
+.react-select__value-container {
+  padding: 0 1rem !important;
+  height: var(--input-height) !important;
+  display: flex !important;
+  align-items: center !important;
 }
-.react-select__option {
-  background-color: transparent !important;
-  color: var(--text-primary) !important;
-  cursor: pointer !important;
-}
-.react-select__option:hover {
-  background-color: var(--border-color) !important;
-}
-.react-select__option--is-focused {
-  background-color: rgba(255,255,255,0.05) !important;
-}
-.react-select__option--is-selected {
-  background-color: var(--accent-purple) !important;
-  color: var(--bg-dark) !important;
-}
+
 .react-select__single-value {
   color: var(--text-primary) !important;
 }
+
 .react-select__input-container {
-    color: var(--text-primary) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--text-primary) !important;
 }
-.react-select__indicator {
+
+.react-select__placeholder {
   color: var(--text-muted) !important;
 }
-.react-select__indicator:hover {
-  color: var(--accent-purple) !important;
+
+.react-select__indicator-separator {
+  display: none !important;
+}
+
+.react-select__menu {
+  background-color: #0f172a !important; /* Solid dark background */
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+  z-index: 9999 !important; /* High Z-Index */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+}
+
+.react-select__option {
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  padding: 10px 1rem !important;
+}
+
+.react-select__option:hover, 
+.react-select__option--is-focused {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.react-select__option--is-selected {
+  background-color: var(--accent-purple) !important;
+  color: white !important;
 }
 
 /* Buttons */
 .generate-button {
-  background: linear-gradient(135deg, var(--accent-purple-dim), var(--accent-purple));
-  color: #fff;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--accent-purple), #4f46e5);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: none;
-  padding: 1rem 3rem;
-  border-radius: 8px;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-  display: block;
-  width: 100%;
   margin-top: 1rem;
+  transition: transform 0.2s;
 }
 
 .generate-button:hover {
-  filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+  filter: brightness(1.1);
 }
 
 .reset-button {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
   width: 100%;
-  margin-top: 1rem;
+  padding: 0.8rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 .reset-button:hover {
-  border-color: var(--accent-purple);
-  color: var(--accent-purple);
-  background-color: rgba(165, 180, 252, 0.05);
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
 }
 
 /* Results */
 .result-container {
+  margin-top: 2rem;
   padding: 2rem;
   text-align: center;
-  margin-top: 2rem;
-  border: 1px solid var(--accent-purple-dim);
-  background: linear-gradient(180deg, rgba(165, 180, 252, 0.05) 0%, rgba(30, 41, 59, 0) 100%);
-}
-
-.result-container h2 {
-  color: var(--accent-purple);
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--glass-border);
 }
 
 .part-number {
-  color: var(--text-primary);
-  font-family: 'Consolas', 'Monaco', monospace;
-  font-size: 1.5rem;
-  background: var(--bg-input);
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  font-family: 'Consolas', monospace;
+  font-size: 1.8rem;
+  color: white;
   margin-top: 1rem;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  padding: 1rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-purple);
+  box-shadow: 0 0 15px rgba(129, 140, 248, 0.2);
 }
 
-.parts-column h3 {
-  color: var(--accent-purple);
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
-.parts-column li {
-  background-color: var(--bg-input);
-  border-color: var(--border-color);
-  margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 6px;
-}
-.parts-column li strong {
-  color: var(--accent-purple); /* Highlight codes in purple */
-}
-
-/* Initial Load Message */
-.initial-load-message {
-  background-color: var(--bg-card);
-  border: 1px dashed var(--border-color);
-  color: var(--text-secondary);
-  border-radius: 16px;
-  padding: 5rem 2rem;
-  text-align: center;
-}
-.initial-title {
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-.initial-instruction {
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--text-muted);
-}
-.initial-instruction strong {
-    color: var(--accent-purple);
-}
-
-/* Mobile Adjustments */
+/* Media Queries */
 @media (max-width: 768px) {
-  .app { padding: 1rem; }
-  .navbar-top-section {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: stretch;
-    padding: 1.5rem;
-  }
-  .navbar-categories {
-    justify-content: center;
-  }
-  .logo-container {
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-  }
-  .title {
-      font-size: 1.2rem;
-  }
-  .navbar-messages-bar {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
-      text-align: center;
-  }
+  .app { padding: 10px; }
+  .navbar-top-section { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .navbar-categories { flex-direction: column; background: transparent; border: none; padding: 0; }
+  .navbar-category-button { width: 100%; border: 1px solid var(--glass-border); background: var(--glass-bg); margin-bottom: 0.5rem; }
+  .navbar-category-button.active { background: var(--accent-purple); }
 }

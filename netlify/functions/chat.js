@@ -145,8 +145,8 @@ A cylinder on the panic bar's chassis usually indicates a 16 function
    - **Output Format:**
      > "The specific part number is [Part #].
      > **HOWEVER, for accuracy**, I strongly recommend ordering the complete trim sets to ensure you receive the correct spindles, mounting bridges, and hardware for this function:
-     > * **Inside Kit:** IS-[Function] [Trim Design] x [Hand] x [Finish]
-     > * **Outside Kit:** OS-[Function] [Trim Design] x [Hand] x [Finish]"
+     > * **Inside Kit:** IS-[Function] x [Rose] x [Lever] x [Hand] x [Finish]
+     > * **Outside Kit:** OS-[Function] x [Rose] x [Lever] x [Hand] x [Finish]"
 
 4. **Function Matching:**
    - The function number in the IS/OS kit **MUST** match the exact function of the lock body.
@@ -248,9 +248,15 @@ A cylinder on the panic bar's chassis usually indicates a 16 function
 
 6. **Part Number Examples:**
    - "LFIC Housing 1-1/4 inch Satin Chrome with Plastic Core": "60-42 x 26D"
-   - "Standard Rim Cylinder US3": "34 x 03"
-   - "SFIC Core Only 7-Pin Best A Keyway": "7P-7300B x 26D x A Keyway"
+   - "Standard Rim Cylinder US3": "34 x 03 x Keying Details"
+   - "SFIC Core Only 7-Pin "Best" Brand A Keyway": "7P-7300B x 26D x A Keyway"
    - "Degree Level 1 Mortise Cylinder 1-1/8": "DG1-41 x 26D"
+
+   Permanent/Final Core = 63-, 6300, 73-, 7300B
+   Construction/Temporary Core = 64-, 72-
+   Plastic/Disposable Core = 60-, 70-
+
+   When user asks for permanent core, always suggest 63- or 73- series.
 
 ## Referrals
 - Templates: https://sargent-templates.netlify.app/

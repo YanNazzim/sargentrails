@@ -19,7 +19,6 @@ import Strikes from "./components/Strikes";
 import EndCaps from "./components/EndCaps";
 import Tailpieces from "./components/Tailpieces";
 import CylindricalLockbodies from "./components/CylindricalLockbodies";
-// Removed unused Modal import
 import SpindleKits from "./components/SpindleKits"; 
 import LockingSlideKits from "./components/LockingSlideKits";
 import NinetyFourHundredParts from "./components/9400Parts";
@@ -27,7 +26,6 @@ import ExtensionRods from "./components/ExtensionRods";
 import AuxControlParts from "./components/AuxControlParts";
 import ChatWidget from "./components/ChatWidget"; 
 
-// Define the external tool URL
 const CYLINDERS_TOOL_URL = "https://sargent-cylinders.netlify.app/";
 
 const App = () => {
@@ -70,9 +68,6 @@ const App = () => {
   const [activeMasterTab, setActiveMasterTab] = useState(null);
   const [activeSubTab, setActiveSubTab] = useState(null);
   
-  // REMOVED: Unused Modal state (isModalOpen, modalData)
-
-  // Centralized state for form data
   const [formData, setFormData] = useState({
     rails: null,
     trims: null,
@@ -123,9 +118,12 @@ const App = () => {
   const renderContent = () => {
     if (!activeSubTab) {
       return (
-        <div className="initial-load-message content-transition">
-          <h2 className="initial-title">Welcome to the Sargent Part Number Lookup Tool.</h2>
-          <p className="initial-instruction">Please select a **Device Platform** first (e.g., "Exit Devices," "Mortise Locks") from the clickable categories in the header, and then select a **Specific Part** to get started.</p>
+        <div className="initial-load-message">
+          <h2 className="initial-title">Welcome to the Sargent Part Number Lookup.</h2>
+          <p className="initial-instruction">
+            Step 1: Select a <strong>Platform</strong> (e.g., Exit Devices) from the top menu.<br />
+            Step 2: Choose a <strong>Component</strong> to configure.
+          </p>
         </div>
       );
     }
@@ -174,15 +172,10 @@ const App = () => {
       case "Aux Control Parts":
           return <AuxControlParts />;
       case "Cylinders":
-        return (
-            <div className="initial-load-message content-transition">
-                <h2 className="initial-title">Redirecting to External Cylinders Tool...</h2>
-                <p className="initial-instruction">If your browser does not redirect automatically, please click <a href={CYLINDERS_TOOL_URL} target="_blank" rel="noopener noreferrer">here</a>.</p>
-            </div>
-        );
+        return null;
       default:
         return (
-            <div className="initial-load-message content-transition">
+            <div className="initial-load-message">
               <h2 className="initial-title">No matching component found for: {activeSubTab}</h2>
               <p className="initial-instruction">Please select a valid combination from the menus.</p>
             </div>
@@ -197,13 +190,13 @@ const App = () => {
 
   return (
     <div className="app">
-      <div className="header">
+      <header className="header">
         <div className="navbar-top-section">
           <div className="logo-container">
-            <img src={images.logo} alt="Company Logo" className="company-logo" />
-            <h1 className="title">Sargent Part Number Lookup</h1>
+            <img src={images.logo} alt="Sargent Logo" className="company-logo" />
+            <h1 className="title">Part Number Lookup</h1>
           </div>
-          <div className="navbar-categories">
+          <nav className="navbar-categories">
               {tabConfig.masterTabs.map(({ name }) => (
                   <button 
                       key={name} 
@@ -213,20 +206,18 @@ const App = () => {
                       {name}
                   </button>
               ))}
-          </div>
+          </nav>
         </div>
         <div className="navbar-messages-bar">
-           <h3 className="navbar-message-note">Verify Part #'s with Sargent Mechanical TPS</h3>
-           <h3 className="navbar-message-star">★ = Universal Form</h3>
+           <span className="navbar-message-note">Verify Part #'s with Sargent Mechanical TPS</span>
+           <span className="navbar-message-star">★ = Universal Form</span>
         </div>
-      </div>
+      </header>
 
       <TechSupportHubBanner />
       
-      {/* REMOVED: <Modal /> component */}
-      
       {activeMasterTab && (
-        <div className="tab-container sub-tabs-container" aria-live="polite">
+        <nav className="sub-tabs-container" aria-label="Component Selection">
           <div className="sub-tabs-grid">
               {allVisibleSubTabs.map((tab) => (
                 <button
@@ -234,15 +225,15 @@ const App = () => {
                   className={`sub-tab ${tab.type === 'universal' ? 'universal-tab' : ''} ${activeSubTab === tab.name ? 'active' : ''}`}
                   onClick={() => handleSubTabChange(tab.name)}
                 >
-                  {tab.type === 'universal' && <span className="universal-star">★</span>}
                   {tab.name}
+                  {tab.type === 'universal' && <span className="universal-star">★</span>}
                 </button>
               ))}
           </div>
-        </div>
+        </nav>
       )}
 
-      <div className="content-container">{renderContent()}</div>
+      <main className="content-container">{renderContent()}</main>
       
       {/* GLOBAL CHAT WIDGET - Primary AI Interface */}
       <ChatWidget />
