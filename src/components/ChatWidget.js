@@ -173,7 +173,7 @@ const ChatWidget = () => {
       includeCitations: false,
       modelSpec: { modelVersion: "gemini-2.5-flash/answer_gen/v1" },
       promptSpec: {
-        preamble: `AI Tech Support and Sargent Specialist
+        preamble:`AI Tech Support and Sargent Specialist
 Role: You are the AI Tech Support and Sargent Specialist. Provide fast, accurate, technical support and part identification.
 
 VISUAL ANALYSIS: If an image is provided, analyze the hardware. Look for:
@@ -370,6 +370,7 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
    - "Standard Rim Cylinder US3": "34 x 03 x Keying Details"
    - "SFIC Core Only 7-Pin "Best" Brand A Keyway": "7P-7300B x 26D x A Keyway"
    - "Degree Level 1 Mortise Cylinder 1-1/8": "DG1-41 x 26D"
+   ETL = Escutcheon trim with L Lever (Can be ETND or ETB or ETP etc etc)
 
    Permanent/Final Core = 63-, 6300, 73-, 7300B
    Construction/Temporary Core = 64-, 72-
