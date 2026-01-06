@@ -243,6 +243,9 @@ A cylinder on the panic bar's chassis usually indicates a 16 function
 - RIM DEVICES (8800, PE8800, 20, 30): DO NOT use lockbodies.
 - MORTISE EXITS: 9904 uses **904** lockbody. 89xx uses **915** lockbody.
 
+Lockbody only for 8200/7800 mortise locks is the function x hand x finish 
+For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure to leave out the trim callout)
+
 ### SARGENT MORTISE TRIM & PART NUMBER RULES (DUAL PATH STRATEGY)
 
 1. **Step 1: Identify & Provide Specific Component:**
