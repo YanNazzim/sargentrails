@@ -5,7 +5,7 @@ import "../components/ChatWidget.css";
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  // NEW: State for handling images
+  // State for handling images
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -22,7 +22,7 @@ const ChatWidget = () => {
   );
 
   const messagesEndRef = useRef(null);
-  const fileInputRef = useRef(null); // NEW: Reference for the hidden file input
+  const fileInputRef = useRef(null);
 
   const toggleChat = useCallback(() => setIsOpen((prev) => !prev), []);
   const scrollToBottom = () =>
@@ -32,18 +32,14 @@ const ChatWidget = () => {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen]);
 
-  // NEW: Handle File Selection
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // 1. Create a preview URL for the UI
+  // Helper to process files (used by both Paste and File Input)
+  const processFile = (file) => {
+    if (file && file.type.startsWith("image/")) {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
 
-      // 2. Convert to Base64 for the API
       const reader = new FileReader();
       reader.onloadend = () => {
-        // We strip the "data:image/xyz;base64," prefix here to send raw data
         const base64String = reader.result.split(",")[1];
         setSelectedImage({
           mimeType: file.type,
@@ -54,7 +50,25 @@ const ChatWidget = () => {
     }
   };
 
-  // NEW: Clear selected image
+  // Handle Ctrl+V Paste
+  const handlePaste = (e) => {
+    const items = e.clipboardData?.items;
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image") !== -1) {
+          const file = items[i].getAsFile();
+          processFile(file);
+        }
+      }
+    }
+  };
+
+  // Handle File Selection (Paperclip button)
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    processFile(file);
+  };
+
   const clearImage = () => {
     setSelectedImage(null);
     setImagePreview(null);
@@ -82,8 +96,6 @@ const ChatWidget = () => {
   };
 
   const formatMessageText = (text) => {
-    // --- CRASH FIX: SAFETY CHECK ---
-    // If text is null, undefined, or NOT a string, return null to avoid crash
     if (!text || typeof text !== "string") return null;
 
     const lines = text.split("\n");
@@ -142,25 +154,23 @@ const ChatWidget = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    // Allow sending if there is text OR an image
     if ((!input.trim() && !selectedImage) || isLoading) return;
 
     const userMessage = input.trim();
-    const currentImage = selectedImage; // Capture reference
-    const currentPreview = imagePreview; // Capture reference
+    const currentImage = selectedImage;
+    const currentPreview = imagePreview;
 
-    // Optimistically update UI
     setMessages((prev) => [
       ...prev,
       {
         role: "user",
         text: userMessage,
-        image: currentPreview, // Pass preview to render in chat
+        image: currentPreview,
       },
     ]);
 
     setInput("");
-    clearImage(); // Reset input immediately
+    clearImage();
     setIsLoading(true);
 
     const FUNCTION_URL = "/.netlify/functions/chat";
@@ -173,7 +183,7 @@ const ChatWidget = () => {
       includeCitations: false,
       modelSpec: { modelVersion: "gemini-2.5-flash/answer_gen/v1" },
       promptSpec: {
-        preamble:`AI Tech Support and Sargent Specialist
+        preamble: `AI Tech Support and Sargent Specialist
 Role: You are the AI Tech Support and Sargent Specialist. Provide fast, accurate, technical support and part identification.
 
 VISUAL ANALYSIS: If an image is provided, analyze the hardware. Look for:
@@ -390,7 +400,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          // MODIFIED: Send both text and image in the query object
           query: {
             text: userMessage || "Identify this Sargent product",
             image: currentImage,
@@ -408,7 +417,7 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
           ...prev,
           {
             role: "assistant",
-            text: data.answer.answerText || data.answer, // Handle potential structure diff
+            text: data.answer.answerText || data.answer,
             sources: parseSources(data.answer.citations),
           },
         ]);
@@ -425,7 +434,10 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
   };
 
   return (
-    <div className={`chat-widget-container ${isOpen ? "open" : ""}`}>
+    <div
+      className={`chat-widget-container ${isOpen ? "open" : ""}`}
+      onPaste={handlePaste}
+    >
       {!isOpen && (
         <div className="chat-launcher" onClick={toggleChat}>
           <div className="launcher-icon">💬</div>
@@ -444,7 +456,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
             {messages.map((msg, i) => (
               <div key={i} className={`message-row ${msg.role}`}>
                 <div className="message-bubble">
-                  {/* NEW: Render user uploaded image if it exists */}
                   {msg.image && (
                     <img
                       src={msg.image}
@@ -486,7 +497,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
             {isLoading && (
               <div className="message-row assistant">
                 <div className="message-bubble loading">
-                  {/* MODIFIED: Replaced text with animated dots structure */}
                   <div className="typing-indicator">
                     <span></span>
                     <span></span>
@@ -498,7 +508,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
             <div ref={messagesEndRef} />
           </div>
 
-          {/* NEW: Image Preview Area above input */}
           {imagePreview && (
             <div
               style={{
@@ -555,7 +564,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
           )}
 
           <form className="chat-input-area" onSubmit={handleSendMessage}>
-            {/* NEW: Hidden File Input */}
             <input
               type="file"
               accept="image/*"
@@ -564,7 +572,6 @@ For example, 8205 LNL RH 26D lockbody only would be 8205 x RH x 26D (Making sure
               onChange={handleFileSelect}
             />
 
-            {/* NEW: Paperclip Button */}
             <button
               type="button"
               onClick={() => fileInputRef.current.click()}
