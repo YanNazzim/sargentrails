@@ -104,20 +104,26 @@ Sargent Exit Device function # 74 = Electrified Trim (Fail Secure - NO KEY) - Po
 Sargent Exit Device function # 75 = Electrified Trim (Fail Safe - HAS KEY OVERRIDE) - Power on = Locked | Power off = Unlocked
 Sargent Exit Device function # 76 = Electrified Trim (Fail Secure - HAS KEY OVERRIDE) - Power on = Unlocked | Power off = Locked
 
-Exit Device Trim part numbers (All of the numbers are followed by ET x lever x hand x finsih for example 706-8 ETND RHR 26D): 
-704 (rim/Mortise) 
-706 (SVR/Mortise) | 706-4 (CVR) | 706-8 (Rim)
-710 (all)
-713 (SVR/Mortise) | 713-4 (CVR) | 713-8 (Rim)
-715 (SVR/Mortise) | 715-4 (CVR) | 715-8 (Rim)
-740 (all)
-743 (SVR/Mortise) | 743-4 (CVR) | 743-8 (Rim)
-744 (Rim/Mortise)
-746 (SVR/Mortise) | 746-4 (CVR) | 746-8 (Rim)
-773 (SVR/Mortise) | 773-4 (CVR) | 773-8 (Rim)
-774 (SVR/Mortise) | 774-4 (CVR) | 774-8 (Rim)
-775 (Mortise) | 775-8 (Rim)
-776 (Mortise) | 776-8 (Rim)
+Exit Device CLassifications:
+CVR = 9400/8400/8600/PE8400/PE8600
+SVR = 9700/2727/3727/8700/NB-8700/PE8700/NB-PE8700
+Mortise = 9900/8900/8300/PE8900/PE8300
+Rim = 2828/3828/9898/9800/8500/8800/PE8500/PE8800
+
+Exit Device Trim part numbers (All of the numbers are followed by ET x lever x hand x finsih for example 706-8 ETND RHR 26D -- For PE80 series just add a P in front of the 700 number and use NE or WE trim for example storeroom trim for PE8600 would be P706-4 NE x lever x hand x finish or P706-4 WE x lever x hand x finish): 
+704 = (rim/Mortise) 
+706 = (SVR/Mortise) | 706-4 = (CVR) | 706-8 = (Rim)
+710 = (all)
+713 = (SVR/Mortise) | 713-4 = (CVR) | 713-8 = (Rim)
+715 = (SVR/Mortise) | 715-4 = (CVR) | 715-8 = (Rim)
+740 = (all)
+743 = (SVR/Mortise) | 743-4 = (CVR) | 743-8 = (Rim)
+744 = (Rim/Mortise)
+746 = (SVR/Mortise) | 746-4 = (CVR) | 746-8 = (Rim)
+773 = (SVR/Mortise) | 773-4 = (CVR) | 773-8 = (Rim)
+774 = (SVR/Mortise) | 774-4 = (CVR) | 774-8 = (Rim)
+775 = (Mortise) | 775-8 = (Rim)
+776 = (Mortise) | 776-8 = (Rim)
 
 
 8816 cannot have dogging at all
