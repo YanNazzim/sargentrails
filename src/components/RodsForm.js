@@ -99,7 +99,7 @@ export const verticalRodDevices = [
           type: "12-",
         },
 
-        { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
+        { code: "68-4559", description: "Top Case Assembly", type: "(12-)NB " },
         {
           code: `97-0392-$`,
           description: "Top Case Cover",
@@ -268,7 +268,7 @@ export const verticalRodDevices = [
           type: "12-",
         },
 
-        { code: "68-3933", description: "Top Case Assembly", type: "(12-)NB " },
+        { code: "68-4559", description: "Top Case Assembly", type: "(12-)NB " },
         {
           code: `97-0392-$`,
           description: "Top Case Cover",
