@@ -118,12 +118,58 @@ const App = () => {
   const renderContent = () => {
     if (!activeSubTab) {
       return (
-        <div className="initial-load-message">
-          <h2 className="initial-title">Welcome to the Sargent Part Number Lookup.</h2>
-          <p className="initial-instruction">
-            Step 1: Select a <strong>Platform</strong> (e.g., Exit Devices) from the top menu.<br />
-            Step 2: Choose a <strong>Component</strong> to configure.
-          </p>
+        <div className="homepage-container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Sargent Part Number <span className="text-gradient">Lookup</span>
+            </h1>
+            <p className="hero-description">
+              Streamline your workflow. Identify parts, configure specs, and generate precise order strings for Sargent hardware.
+            </p>
+            
+            <div className="steps-grid">
+              <div className="step-card">
+                <div className="step-icon">1</div>
+                <h3>Select Platform</h3>
+                <p>Choose a category like <strong>Exit Devices</strong> from the top navigation bar.</p>
+              </div>
+              
+              <div className="step-arrow"></div>
+              
+              <div className="step-card">
+                <div className="step-icon">2</div>
+                <h3>Configure Component</h3>
+                <p>Select a specific part (e.g., <strong>Trims</strong>) to access its configuration form.</p>
+              </div>
+            </div>
+
+            {/* AI CHATBOT PROMO */}
+            <div className="ai-chatbot-promo">
+              <p className="promo-text">
+                Or give our <span className="text-gradient">AI Powered Tech Support Chatbot</span> a try!
+              </p>
+              <svg className="arrow-curve" viewBox="0 0 120 80">
+                <defs>
+                  <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: '#818cf8', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#38bdf8', stopOpacity: 1 }} />
+                  </linearGradient>
+                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8" />
+                  </marker>
+                </defs>
+                <path 
+                  d="M10,10 C60,10 90,30 110,70" 
+                  fill="none" 
+                  stroke="url(#grad1)" 
+                  strokeWidth="3" 
+                  strokeLinecap="round" 
+                  markerEnd="url(#arrowhead)" 
+                />
+              </svg>
+            </div>
+
+          </div>
         </div>
       );
     }
