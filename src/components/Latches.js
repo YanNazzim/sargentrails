@@ -1,76 +1,34 @@
-// Latches.js
+// src/components/Latches.js
 import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
-import images from "../images"; // Adjust path as needed
-import "../App.css"; // Import the main CSS file
+import images from "../images"; 
+import "../App.css"; 
 
-// Re-using custom components for Finish dropdown for consistency
-const FinishOption = (props) => {
-    return (
-        <components.Option {...props}>
-            <img
-                src={props.data.image}
-                alt={props.data.label}
-                style={{
-                    width: "30px",
-                    height: "auto",
-                    marginRight: "10px",
-                    verticalAlign: "middle",
-                    borderRadius: "25px",
-                }}
-            />
-            <span>{props.children}</span>
-        </components.Option>
-    );
-};
-
-const FinishSingleValue = (props) => {
-    return (
-        <components.SingleValue {...props}>
-            <img
-                src={props.data.image}
-                alt={props.data.label}
-                style={{
-                    width: "30px",
-                    height: "auto",
-                    marginRight: "10px",
-                    verticalAlign: "middle",
-                    borderRadius: "25px",
-                }}
-            />
-            <span>{props.children}</span>
-        </components.SingleValue>
-    );
-};
-
-// -----------------------------------------------------------
-// LATCH PART NUMBERS DATA STRUCTURE - EXPORTED
-// -----------------------------------------------------------
 export const boredLockLatchesData = {
     "6Line": {
-        type: "dimensions", // Indicates this series uses dimensions for latch selection
+        type: "dimensions", 
         options: {
             "2-3/8_Standard": {
                 label: '2-3/8" backset - 2-1/4" x 1" latch face width (Standard)',
-                base: `Guarded: 06-5083 <br/> Non-Guarded: 06-5225`, // Example with <br>
+                base: `Guarded: 06-5083 <br/> Non-Guarded: 06-5225`,
             },
             "2-3/8_RadiusCorner": {
                 label: '2-3/8" Radius Corner - 2-1/4" x 1" latch face width',
                 base: `Guarded: 06-5085 <br/> Unguarded: 06-5227`,
             },
-            "2-3/4_Standard": { // Changed name to remove spaces and use consistent underscore
+            "2-3/4_Standard": {
                 label: '2-3/4" backset - 2-1/4" x 1" latch face width (17- Option)',
                 base: `Guarded: 06-5094 <br/> Unguarded: 06-5231`,
             },
-            "2-3/4_Alt": { // Changed name to remove spaces and use consistent underscore
+            "2-3/4_Alt": {
                 label: '2-3/4" backset - 2-1/4" x 1-1/8" latch face width(24- Option)',
                 base: `Guarded: 06-5102 <br/> Unguarded: 06-5234`,
             },
-            "3-3/4_Standard": { // Changed name to remove spaces and use consistent underscore
+            "3-3/4_Standard": {
                 label: '3-3/4" backset - 2-1/4" x 1" latch face width',
                 base: `Guarded: 06-5096 <br/> Unguarded: 06-5232`,
             },
-            "Guarded_Drive_in": { // Changed name to remove spaces and use consistent underscore
+            "Guarded_Drive_in": {
                 label: 'Guarded Drive-In Latchbolt',
                 base: `06-5100`,
             },
@@ -79,11 +37,11 @@ export const boredLockLatchesData = {
     "6500Series": {
         type: "dimensions",
         options: {
-            "2-3/8 backset": { // Changed name to remove spaces and use consistent underscore
+            "2-3/8 backset": {
                 label: '2-3/8" backset - 1" latch face width (20- Option)',
                 base: `Guarded: 05-2184 <br/> Unguarded: 05-2185`,
             },
-            "2-3/4 backset": { // Changed name to remove spaces and use consistent underscore
+            "2-3/4 backset": {
                 label: '2-3/4" backset - 1-1/8" latch face width (Standard)',
                 base: `Guarded: 05-2182 <br/> Unguarded: 05-2183`,
             },
@@ -173,27 +131,24 @@ export const boredLockLatchesData = {
         options: {
             "Group B": {
                 label: "Functions 11G04, 11G05, 11G13, 11G15-3, 11G16, 11G17, 11G30, 11G37, 11G38, ",
-                base: `11-2106`, // Latch for functions 11G05, 11G37
+                base: `11-2106`, 
             },
             "Group A": {
                 label: "11U15 - Passage",
-                base: `11-2107`, // Latch for other 11 Line functions
+                base: `11-2107`, 
             },
-                                "Group D": {
-                    label: "Functions 11G44, 11G50, 11G54",
-                    base: `11-2110`, // Latch for other 11 Line functions
-                },
-                                                "Group K": {
-                    label: "11G24 - Entrance",
-                    base: `11-2108`, // Latch for other 11 Line functions
-                },
-            }
-        },
+            "Group D": {
+                label: "Functions 11G44, 11G50, 11G54",
+                base: `11-2110`, 
+            },
+            "Group K": {
+                label: "11G24 - Entrance",
+                base: `11-2108`, 
+            },
+        }
+    },
 };
 
-// -----------------------------------------------------------
-// Form Options - EXPORTED
-// -----------------------------------------------------------
 export const seriesOptions = [
     { value: "6Line", label: "6 Line Bored Lock" },
     { value: "6500Series", label: "6500 Series Bored Lock" },
@@ -204,140 +159,89 @@ export const seriesOptions = [
 ];
 
 export const finishOptions = [
-    {
-        value: "03",
-        label: "03 - Bright brass, clear coated",
-        image: images.finish03,
-    },
-    {
-        value: "04",
-        label: "04 - Satin brass, clear coated",
-        image: images.finish04,
-    },
-    {
-        value: "09",
-        label: "09 - Bright bronze, clear coated",
-        image: images.finish09,
-    },
-    {
-        value: "10",
-        label: "10 - Satin bronze, clear coated",
-        image: images.finish10,
-    },
-    {
-        value: "10B",
-        label: "10B - Dark oxidized satin bronze, oil rubbed",
-        image: images.finish10B,
-    },
-    {
-        value: "10BE",
-        label: "10BE - Dark oxidized satin bronze-equivalent",
-        image: images.finish10BE,
-    },
-    {
-        value: "10BL",
-        label: "10BL - Dark oxidized satin bronze, clear coated",
-        image: images.finish10BL,
-    },
-    {
-        value: "14",
-        label: "14 - Bright nickel plated, clear coated",
-        image: images.finish14,
-    },
-    {
-        value: "15",
-        label: "15 - Satin nickel plated, clear coated",
-        image: images.finish15,
-    },
-    {
-        value: "20D",
-        label: "20D - Dark oxidized statuary bronze, clear coated",
-        image: images.finish20D,
-    },
-    {
-        value: "26",
-        label: "26 - Bright chromium plated over nickel",
-        image: images.finish26,
-    },
-    {
-        value: "26D",
-        label: "26D - Satin chromium plated over nickel",
-        image: images.finish26D,
-    },
-    {
-        value: "32",
-        label: "32 - Bright Stainless Steel",
-        image: images.finish32,
-    },
-    {
-        value: "32D",
-        label: "32D - Satin Stainless Steel",
-        image: images.finish32D,
-    },
-    {
-        value: "BSP",
-        label: "BSP - Black suede powder coat, sprayed",
-        image: images.finishBSP,
-    },
-    {
-        value: "WSP",
-        label: "WSP - White suede powder coat, sprayed",
-        image: images.finishWSP,
-    },
+    { value: "03", label: "03 - Bright brass, clear coated", image: images.finish03 },
+    { value: "04", label: "04 - Satin brass, clear coated", image: images.finish04 },
+    { value: "09", label: "09 - Bright bronze, clear coated", image: images.finish09 },
+    { value: "10", label: "10 - Satin bronze, clear coated", image: images.finish10 },
+    { value: "10B", label: "10B - Dark oxidized satin bronze, oil rubbed", image: images.finish10B },
+    { value: "10BE", label: "10BE - Dark oxidized satin bronze-equivalent", image: images.finish10BE },
+    { value: "10BL", label: "10BL - Dark oxidized satin bronze, clear coated", image: images.finish10BL },
+    { value: "14", label: "14 - Bright nickel plated, clear coated", image: images.finish14 },
+    { value: "15", label: "15 - Satin nickel plated, clear coated", image: images.finish15 },
+    { value: "20D", label: "20D - Dark oxidized statuary bronze, clear coated", image: images.finish20D },
+    { value: "26", label: "26 - Bright chromium plated over nickel", image: images.finish26 },
+    { value: "26D", label: "26D - Satin chromium plated over nickel", image: images.finish26D },
+    { value: "32", label: "32 - Bright Stainless Steel", image: images.finish32 },
+    { value: "32D", label: "32D - Satin Stainless Steel", image: images.finish32D },
+    { value: "BSP", label: "BSP - Black suede powder coat, sprayed", image: images.finishBSP },
+    { value: "WSP", label: "WSP - White suede powder coat, sprayed", image: images.finishWSP },
 ];
-    
+
+// Custom components
+const FinishOption = (props) => {
+    return (
+        <components.Option {...props}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                    src={props.data.image}
+                    alt={props.data.label}
+                    style={{
+                        width: "24px",
+                        height: "24px",
+                        marginRight: "10px",
+                        borderRadius: "50%",
+                        objectFit: "cover"
+                    }}
+                />
+                <span>{props.children}</span>
+            </div>
+        </components.Option>
+    );
+};
+
+const FinishSingleValue = (props) => {
+    return (
+        <components.SingleValue {...props}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                    src={props.data.image}
+                    alt={props.data.label}
+                    style={{
+                        width: "20px",
+                        height: "20px",
+                        marginRight: "8px",
+                        borderRadius: "50%",
+                        objectFit: "cover"
+                    }}
+                />
+                <span>{props.children}</span>
+            </div>
+        </components.SingleValue>
+    );
+};
+
 const Latches = ({ initialData }) => {
     const [formData, setFormData] = useState({
         series: "",
         latchType: "",
         finish: null,
     });
-
     const [partNumber, setPartNumber] = useState("");
 
-    // NEW: useEffect to pre-fill form from search
     useEffect(() => {
         if (initialData) {
             setFormData(prev => ({
                 ...prev,
                 series: initialData.series || "",
                 latchType: initialData.latchType || "",
-                finish: null, // Reset finish
+                finish: null, 
             }));
         }
     }, [initialData]);
 
-    // Custom styles for react-select to ensure black text
-    const customSelectStyles = {
-        control: (provided) => ({
-            ...provided,
-            minHeight: "40px",
-            color: "black",
-        }),
-        singleValue: (provided) => ({
-            ...provided,
-            color: "black",
-        }),
-        option: (provided, state) => ({
-            ...provided,
-            color: "black",
-            backgroundColor: state.isFocused ? "#007bff20" : "white",
-                    borderRadius: "25px",
-            
-        }),
-        menuList: (provided) => ({
-            ...provided,
-            padding: '4px',
-        }),
-    };
-
-    // -----------------------------------------------------------
-    // Dynamic Latch Options and Label Logic
-    // -----------------------------------------------------------
     const getLatchOptions = (series) => {
         const seriesData = boredLockLatchesData[series];
         if (!seriesData || !seriesData.options) return [];
-
         return Object.keys(seriesData.options).map(key => ({
             value: key,
             label: seriesData.options[key].label,
@@ -347,37 +251,21 @@ const Latches = ({ initialData }) => {
     const getLatchLabel = (series) => {
         const seriesData = boredLockLatchesData[series];
         if (!seriesData) return "Latch Type:";
-
         switch (seriesData.type) {
-            case "dimensions":
-                return "Backset/Latch Dimensions:";
-            case "functions":
-                return "Function:";
-            case "backsetOnly":
-                return "Backset:";
-            default:
-                return "Latch Type:";
+            case "dimensions": return "Backset/Latch Dimensions:";
+            case "functions": return "Function:";
+            case "backsetOnly": return "Backset:";
+            default: return "Latch Type:";
         }
     };
 
-    // -----------------------------------------------------------
-    // Handlers
-    // -----------------------------------------------------------
-
     const handleSeriesChange = (e) => {
-        setFormData({
-            ...formData,
-            series: e.target.value,
-            latchType: "",
-        });
+        setFormData({ ...formData, series: e.target.value, latchType: "" });
         setPartNumber("");
     };
 
     const handleLatchTypeChange = (e) => {
-        setFormData({
-            ...formData,
-            latchType: e.target.value,
-        });
+        setFormData({ ...formData, latchType: e.target.value });
         setPartNumber("");
     };
 
@@ -388,9 +276,7 @@ const Latches = ({ initialData }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const { series, latchType, finish } = formData;
-
         if (!series || !latchType || !finish) {
             alert("Please fill out all required fields: Series, Latch Type, and Finish.");
             setPartNumber("");
@@ -410,64 +296,41 @@ const Latches = ({ initialData }) => {
         }
 
         let basePart = selectedLatchOption.base;
-
-        // Append finish to each line of the partToDisplay string if it contains <br/>
-        // This ensures the finish is added to each individual part number.
         const partsWithFinish = basePart.split('<br/>').map(part => `${part.trim()}-${finish.value}`).join('<br/>');
-
-        setPartNumber(partsWithFinish); // Set the part number with HTML
+        setPartNumber(partsWithFinish);
     };
 
     const handleReset = () => {
-        setFormData({
-            series: "",
-            latchType: "",
-            finish: null,
-        });
+        setFormData({ series: "", latchType: "", finish: null });
         setPartNumber("");
     };
 
     return (
         <div className="content-transition">
-            <h1 className="Heading">Bored Lock Latches</h1>
+            <h1 className="title">Bored Lock Latches</h1>
             <form onSubmit={handleSubmit} className="part-form">
-                {/* Device Series */}
                 <div className="form-group">
                     <label>Lock Series:</label>
-                    <select
-                        value={formData.series}
-                        onChange={handleSeriesChange}
-                        required
-                    >
+                    <select value={formData.series} onChange={handleSeriesChange} required>
                         <option value="">Select Series</option>
                         {seriesOptions.map((series) => (
-                            <option key={series.value} value={series.value}>
-                                {series.label}
-                            </option>
+                            <option key={series.value} value={series.value}>{series.label}</option>
                         ))}
                     </select>
                 </div>
 
-                {/* Latch Type (Backset/Dimensions/Function) - Conditional Label */}
                 {formData.series && (
                     <div className="form-group">
                         <label>{getLatchLabel(formData.series)}</label>
-                        <select
-                            value={formData.latchType}
-                            onChange={handleLatchTypeChange}
-                            required
-                        >
+                        <select value={formData.latchType} onChange={handleLatchTypeChange} required>
                             <option value="">Select {getLatchLabel(formData.series).replace(':', '')}</option>
                             {getLatchOptions(formData.series).map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
+                                <option key={option.value} value={option.value}>{option.label}</option>
                             ))}
                         </select>
                     </div>
                 )}
 
-                {/* Finish Selection */}
                 <div className="form-group">
                     <label>Finish:</label>
                     <Select
@@ -475,30 +338,21 @@ const Latches = ({ initialData }) => {
                         onChange={handleFinishChange}
                         value={formData.finish}
                         placeholder="Select Finish..."
-                        components={{
-                            Option: FinishOption,
-                            SingleValue: FinishSingleValue,
-                        }}
-                        styles={customSelectStyles}
+                        components={{ Option: FinishOption, SingleValue: FinishSingleValue }}
+                        classNamePrefix="react-select"
                         required
                     />
                 </div>
 
-                {/* Form Actions */}
                 <div className="form-actions">
-                    <button type="submit" className="generate-button">
-                        Find Part Number
-                    </button>
-                    <button type="button" onClick={handleReset} className="reset-button">
-                        Reset
-                    </button>
+                    <button type="submit" className="generate-button">Find Part Number</button>
+                    <button type="button" onClick={handleReset} className="reset-button">Reset</button>
                 </div>
             </form>
 
-            {/* Display Generated Part Number - IMPORTANT: using dangerouslySetInnerHTML */}
             {partNumber && (
                 <div className="result-container">
-                    <h2>Found Part Number:</h2>
+                    <h2 className="title" style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Found Part Number:</h2>
                     <div className="part-number" dangerouslySetInnerHTML={{ __html: partNumber }} />
                 </div>
             )}
