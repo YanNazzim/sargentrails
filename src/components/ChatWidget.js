@@ -5,14 +5,13 @@ import "../components/ChatWidget.css";
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  // State for handling images
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hello! I am your AI Tech Support and Sargent Specialist. I can help with Part ID, Templates, and technical questions. Upload a photo or ask a question!",
+      text: "Hello! I am your **Sargent Specialist**. I can help with Part ID, Templates, and technical questions. How can I assist you today?",
       sources: [],
       video: null,
     },
@@ -28,9 +27,8 @@ const ChatWidget = () => {
 
   useEffect(() => {
     if (isOpen) scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isLoading]); // Added isLoading to trigger scroll when "Thinking" starts
 
-  // Helper to process files (used by both Paste and File Input)
   const processFile = (file) => {
     if (file && file.type.startsWith("image/")) {
       const previewUrl = URL.createObjectURL(file);
@@ -48,7 +46,6 @@ const ChatWidget = () => {
     }
   };
 
-  // Handle Ctrl+V Paste
   const handlePaste = (e) => {
     const items = e.clipboardData?.items;
     if (items) {
@@ -61,7 +58,6 @@ const ChatWidget = () => {
     }
   };
 
-  // Handle File Selection (Paperclip button)
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     processFile(file);
@@ -81,11 +77,11 @@ const ChatWidget = () => {
         if (src.uri && !uniqueMap.has(src.uri)) {
           let cleanTitle = src.title || "Sargent Documentation";
           if (cleanTitle.length > 50)
-            cleanTitle = cleanTitle.substring(0, 47) + "Thinking...";
+            cleanTitle = cleanTitle.substring(0, 47) + "...";
           uniqueMap.set(src.uri, {
             title: cleanTitle,
             uri: src.uri,
-            type: src.uri.endsWith(".pdf") ? "PDF Document" : "Web Page",
+            type: src.uri.endsWith(".pdf") ? "PDF" : "WEB",
           });
         }
       });
@@ -123,10 +119,7 @@ const ChatWidget = () => {
       } else {
         if (listBuffer.length > 0) {
           formattedContent.push(
-            <ul
-              key={`ul-${index}`}
-              style={{ paddingLeft: "20px", margin: "5px 0" }}
-            >
+            <ul key={`ul-${index}`} className="chat-list">
               {listBuffer}
             </ul>
           );
@@ -134,7 +127,7 @@ const ChatWidget = () => {
         }
         if (trimmed)
           formattedContent.push(
-            <div key={index} style={{ marginBottom: "8px" }}>
+            <div key={index} className="text-paragraph">
               {parseBold(trimmed)}
             </div>
           );
@@ -143,7 +136,7 @@ const ChatWidget = () => {
 
     if (listBuffer.length > 0)
       formattedContent.push(
-        <ul key="ul-last" style={{ paddingLeft: "20px" }}>
+        <ul key="ul-last" className="chat-list">
           {listBuffer}
         </ul>
       );
@@ -175,9 +168,8 @@ const ChatWidget = () => {
     const FUNCTION_URL = "/.netlify/functions/chat";
 
     try {
-      // OPTIMIZATION: Prepare History
       const historyPayload = newMessages
-        .slice(1) // Skip the first message (Greeting)
+        .slice(1)
         .filter((msg) => msg.text && msg.role !== "system")
         .map((msg) => ({
           role: msg.role === "user" ? "user" : "model",
@@ -206,7 +198,7 @@ const ChatWidget = () => {
             role: "assistant",
             text: data.answer.answerText || data.answer,
             sources: parseSources(data.answer.citations),
-            video: data.answer.video || null, // Capture video data
+            video: data.answer.video || null,
           },
         ]);
       }
@@ -221,240 +213,142 @@ const ChatWidget = () => {
   };
 
   return (
-    <div
-      className={`chat-widget-container ${isOpen ? "open" : ""}`}
-      onPaste={handlePaste}
-    >
+    <div className={`chat-widget-container ${isOpen ? "open" : ""}`} onPaste={handlePaste}>
       {!isOpen && (
         <div className="chat-launcher" onClick={toggleChat}>
-          <div className="launcher-icon">💬</div>
-          <span className="launcher-text">Tech Support</span>
+          <div className="launcher-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+            </svg>
+          </div>
+          <span className="launcher-text">Support</span>
         </div>
       )}
+      
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
-            <div className="header-title">AI Tech Support</div>
+            <div className="header-info">
+              <div className="online-indicator"></div>
+              <div className="header-title">Sargent Support</div>
+            </div>
             <button className="close-btn" onClick={toggleChat}>
-              ×
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
+
           <div className="chat-messages">
             {messages.map((msg, i) => (
               <div key={i} className={`message-row ${msg.role}`}>
                 <div className="message-bubble">
                   {msg.image && (
-                    <img
-                      src={msg.image}
-                      alt="User upload"
-                      style={{
-                        maxWidth: "100%",
-                        borderRadius: "8px",
-                        marginTop: "5px",
-                        marginBottom: "5px",
-                        border: "1px solid #ddd",
-                      }}
-                    />
+                    <div className="message-image-container">
+                      <img src={msg.image} alt="User upload" />
+                    </div>
                   )}
-                  {msg.role === "assistant"
-                    ? formatMessageText(msg.text)
-                    : msg.text}
+                  <div className="message-text">
+                    {msg.role === "assistant" ? formatMessageText(msg.text) : msg.text}
+                  </div>
 
-                  {/* VIDEO DISPLAY COMPONENT */}
                   {msg.video && (
-                    <div
-                      className="video-card"
-                      style={{
-                        marginTop: "12px",
-                        borderRadius: "8px",
-                        overflow: "hidden",
-                        border: "1px solid #e0e0e0",
-                        backgroundColor: "#fff",
-                      }}
-                    >
-                      <div
-                        style={{
-                          padding: "8px 12px",
-                          backgroundColor: "#f5f5f5",
-                          borderBottom: "1px solid #e0e0e0",
-                          fontSize: "0.85rem",
-                          fontWeight: "bold",
-                          color: "#333",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                        }}
-                      >
-                        <span>📺</span> Recommended Video
+                    <div className="video-card">
+                      <div className="video-card-header">
+                        <span className="video-tag">PRO TIP</span>
+                        <span className="video-title-text">{msg.video.title}</span>
                       </div>
-                      <div
-                        style={{
-                          position: "relative",
-                          paddingBottom: "56.25%", // 16:9 Aspect Ratio
-                          height: 0,
-                        }}
-                      >
+                      <div className="video-frame-container">
                         <iframe
                           src={`https://www.youtube.com/embed/${msg.video.id}`}
                           title={msg.video.title}
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            border: "none",
-                          }}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                         />
-                      </div>
-                      <div
-                        style={{
-                          padding: "8px",
-                          fontSize: "0.8rem",
-                          color: "#666",
-                          textAlign: "center",
-                        }}
-                      >
-                        {msg.video.title}
                       </div>
                     </div>
                   )}
                 </div>
 
                 {msg.sources?.length > 0 && (
-                  <div className="sources-grid">
+                  <div className="sources-list">
                     {msg.sources.map((src, idx) => (
-                      <a
-                        key={idx}
-                        href={src.uri}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="source-card"
-                      >
-                        <span className="source-icon">📄</span>
-                        <div className="source-details">
-                          <span className="source-title">{src.title}</span>
-                          <span className="source-type">{src.type}</span>
-                        </div>
+                      <a key={idx} href={src.uri} target="_blank" rel="noreferrer" className="source-link">
+                        <span className="source-badge">{src.type}</span>
+                        <span className="source-label">{src.title}</span>
                       </a>
                     ))}
                   </div>
                 )}
               </div>
             ))}
+            
+            {/* IMPROVED THINKING STATE */}
             {isLoading && (
               <div className="message-row assistant">
-                <div className="message-bubble loading">
+                <div className="thinking-bubble">
                   <div className="typing-indicator">
                     <span></span>
                     <span></span>
                     <span></span>
                   </div>
+                  <span className="thinking-text">Sargent Specialist is thinking...</span>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {imagePreview && (
-            <div
-              style={{
-                padding: "5px 15px",
-                display: "flex",
-                alignItems: "center",
-                background: "#f9f9f9",
-                borderTop: "1px solid #eee",
-              }}
-            >
-              <div style={{ position: "relative", display: "inline-block" }}>
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  style={{
-                    height: "50px",
-                    borderRadius: "4px",
-                    border: "1px solid #ccc",
-                  }}
-                />
-                <button
-                  onClick={clearImage}
-                  style={{
-                    position: "absolute",
-                    top: "-8px",
-                    right: "-8px",
-                    background: "#ff4444",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "50%",
-                    width: "20px",
-                    height: "20px",
-                    cursor: "pointer",
-                    fontSize: "12px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                  }}
-                >
-                  ×
-                </button>
+          <div className="chat-footer">
+            {imagePreview && (
+              <div className="preview-bar">
+                <div className="preview-thumb">
+                  <img src={imagePreview} alt="Preview" />
+                  <button onClick={clearImage} className="clear-preview">×</button>
+                </div>
+                <span className="preview-status">Analyzing exit device...</span>
               </div>
-              <span
-                style={{
-                  marginLeft: "10px",
-                  fontSize: "0.8rem",
-                  color: "#666",
-                }}
+            )}
+
+            <form className="chat-input-area" onSubmit={handleSendMessage}>
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleFileSelect}
+              />
+
+              <button
+                type="button"
+                className="action-btn"
+                onClick={() => fileInputRef.current.click()}
+                title="Attach Photo"
               >
-                Image attached
-              </span>
-            </div>
-          )}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
+                </svg>
+              </button>
 
-          <form className="chat-input-area" onSubmit={handleSendMessage}>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleFileSelect}
-            />
-
-            <button
-              type="button"
-              onClick={() => fileInputRef.current.click()}
-              style={{
-                marginRight: "8px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "1.2rem",
-                padding: "0 5px",
-              }}
-              title="Attach Photo"
-            >
-              📎
-            </button>
-
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={
-                imagePreview
-                  ? "Ask about this image..."
-                  : "Ex: 8813, SFIC core..."
-              }
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              disabled={isLoading || (!input.trim() && !selectedImage)}
-            >
-              →
-            </button>
-          </form>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={imagePreview ? "Ask about this device..." : "Ask a Sargent question..."}
+                disabled={isLoading}
+              />
+              
+              <button
+                type="submit"
+                className="send-btn"
+                disabled={isLoading || (!input.trim() && !selectedImage)}
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
